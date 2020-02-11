@@ -19,6 +19,13 @@ class Produit
      */
     private $paniers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Marque")
+     * @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
+     */
+    private $marque;
+
+
     public function __construct() {
         $this->paniers = new \Doctrine\Common\Collections\ArrayCollection();
     }
