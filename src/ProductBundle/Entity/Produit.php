@@ -31,8 +31,44 @@ class Produit
     public function __construct() {
         $this->paniers = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    /**
+     * @ORM\ManyToOne(targetEntity="Promotion")
+     * @ORM\JoinColumn(name="promotion_id", referencedColumnName="id")
+     */
+    private $promotion;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Marque")
+     * @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
+     */
+    private $marque;
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+<<<<<<< HEAD
      * @return mixed
      */
     public function getPaniers()
@@ -46,6 +82,13 @@ class Produit
     public function setPaniers($paniers)
     {
         $this->paniers = $paniers;
+=======
+     * @param mixed $promotion
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+>>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
     }
 
     /**
@@ -63,7 +106,10 @@ class Produit
     {
         $this->marque = $marque;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
     /**
      * @var int
      *

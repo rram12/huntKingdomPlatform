@@ -1,0 +1,23 @@
+<h3>Liste des Promotion :</h3>
+<table border="1">
+    <th>taux</th>
+    <th>dateDebut</th>
+    <th>dateFin</th>
+    <th>active</th>
+    <th>action</th>
+    {% for promotion in promotions %}
+        <tr>
+            <td>{{ promotion.taux }}</td>
+            <td>{{ promotion.dateDebut |date }}</td>
+            <td>{{ promotion.dateFin|date }}</td>
+            {% if promotion.active == false %}
+                <td>NO</td>
+                {% else %}
+                 <td>YES</td>
+            {% endif %}
+            <td><a href="{{ path('delete_promotion',{'id': promotion.id}) }}">Delete</a>
+            <a href="{{ path('Modify_promotion',{'id': promotion.id}) }}">Modify</a></td>
+
+        </tr>
+    {% endfor %}
+</table>
