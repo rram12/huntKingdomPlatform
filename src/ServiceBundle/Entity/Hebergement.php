@@ -10,18 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="hebergement")
  * @ORM\Entity(repositoryClass="ServiceBundle\Repository\HebergementRepository")
  */
-class Hebergement extends Service
+class Hebergement
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="serviceId", referencedColumnName="id")
-     */
-    private $service;
-
-    public function __construct() {
-        parent::__construct();
-    }
-
     /**
      * @var int
      *
@@ -30,6 +20,34 @@ class Hebergement extends Service
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixParJour", type="float")
+     */
+    private $prixParJour;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="disponibilite", type="boolean")
+     */
+    private $disponibilite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
 
     /**
      * @var string
@@ -60,13 +78,91 @@ class Hebergement extends Service
     private $capacite;
 
     /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbChambre()
+    {
+        return $this->nbChambre;
+    }
+
+    /**
+     * @param int $nbChambre
+     */
+    public function setNbChambre($nbChambre)
+    {
+        $this->nbChambre = $nbChambre;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbLits()
+    {
+        return $this->nbLits;
+    }
+
+    /**
+     * @param int $nbLits
+     */
+    public function setNbLits($nbLits)
+    {
+        $this->nbLits = $nbLits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCapacite()
+    {
+        return $this->capacite;
+    }
+
+    /**
+     * @param int $capacite
+     */
+    public function setCapacite($capacite)
+    {
+        $this->capacite = $capacite;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
-
     /**
      * Get id
      *
@@ -78,123 +174,99 @@ class Hebergement extends Service
     }
 
     /**
-     * Set adresse
+     * Set type
      *
-     * @param string $adresse
+     * @param string $type
      *
-     * @return Hebergement
+     * @return Service
      */
-    public function setAdresse($adresse)
+    public function setType($type)
     {
-        $this->adresse = $adresse;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get adresse
+     * Get type
      *
      * @return string
      */
-    public function getAdresse()
+    public function getType()
     {
-        return $this->adresse;
+        return $this->type;
     }
 
     /**
-     * Set nbChambre
+     * Set prixParJour
      *
-     * @param integer $nbChambre
+     * @param float $prixParJour
      *
-     * @return Hebergement
+     * @return Service
      */
-    public function setNbChambre($nbChambre)
+    public function setPrixParJour($prixParJour)
     {
-        $this->nbChambre = $nbChambre;
+        $this->prixParJour = $prixParJour;
 
         return $this;
     }
 
     /**
-     * Get nbChambre
+     * Get prixParJour
      *
-     * @return int
+     * @return float
      */
-    public function getNbChambre()
+    public function getPrixParJour()
     {
-        return $this->nbChambre;
+        return $this->prixParJour;
     }
 
     /**
-     * Set nbLits
+     * Set disponibilite
      *
-     * @param integer $nbLits
+     * @param boolean $disponibilite
      *
-     * @return Hebergement
+     * @return Service
      */
-    public function setNbLits($nbLits)
+    public function setDisponibilite($disponibilite)
     {
-        $this->nbLits = $nbLits;
+        $this->disponibilite = $disponibilite;
 
         return $this;
     }
 
     /**
-     * Get nbLits
+     * Get disponibilite
      *
-     * @return int
+     * @return bool
      */
-    public function getNbLits()
+    public function getDisponibilite()
     {
-        return $this->nbLits;
+        return $this->disponibilite;
     }
 
     /**
-     * Set capacite
+     * Set image
      *
-     * @param integer $capacite
+     * @param string $image
      *
-     * @return Hebergement
+     * @return Service
      */
-    public function setCapacite($capacite)
+    public function setImage($image)
     {
-        $this->capacite = $capacite;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get capacite
-     *
-     * @return int
-     */
-    public function getCapacite()
-    {
-        return $this->capacite;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Hebergement
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
+     * Get image
      *
      * @return string
      */
-    public function getDescription()
+    public function getImage()
     {
-        return $this->description;
+        return $this->image;
     }
 }
 

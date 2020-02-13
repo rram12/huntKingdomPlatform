@@ -49,7 +49,120 @@ class Service
      */
     private $image;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255)
+     */
+    private $adresse;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbChambre", type="integer")
+     */
+    private $nbChambre;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbLits", type="integer")
+     */
+    private $nbLits;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="capacite", type="integer")
+     */
+    private $capacite;
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbChambre()
+    {
+        return $this->nbChambre;
+    }
+
+    /**
+     * @param int $nbChambre
+     */
+    public function setNbChambre($nbChambre)
+    {
+        $this->nbChambre = $nbChambre;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbLits()
+    {
+        return $this->nbLits;
+    }
+
+    /**
+     * @param int $nbLits
+     */
+    public function setNbLits($nbLits)
+    {
+        $this->nbLits = $nbLits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCapacite()
+    {
+        return $this->capacite;
+    }
+
+    /**
+     * @param int $capacite
+     */
+    public function setCapacite($capacite)
+    {
+        $this->capacite = $capacite;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
     /**
      * Get id
      *
