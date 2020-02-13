@@ -19,8 +19,8 @@ class Location
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="ServiceId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Hebergement")
+     * @ORM\JoinColumn(name="hebergementId", referencedColumnName="id")
      */
     private $service;
 
