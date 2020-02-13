@@ -45,7 +45,7 @@
     <div id="status"><img src="{{ asset('front/assets/images/logo/preloader.gif') }}" id="preloader_image" alt="loader">
     </div>
 </div>
-{% block header %}
+
     <header>
 
         <div class="container-fluid">
@@ -75,8 +75,8 @@
                                     <li>
                                         <a href="#">Events</a>
                                         <ul>
-                                            <li><a href="{{ path('list_event') }}">list_event</a></li>
-                                            <li><a href="{{ path('event-single') }}">event-single</a></li>
+                                            <li><a href="{{ path('list_event') }}">Competition</a></li>
+                                            <li><a href="{{ path('event-single') }}">Publicity</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -235,7 +235,7 @@
         </div>
         <!--Responsive Menu area End-->
     </header>
-{% endblock  %}
+
 
 
 {% block content %}

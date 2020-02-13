@@ -3,6 +3,7 @@
 namespace ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="ProductBundle\Repository\ProduitRepository")
  */
+
 class Produit
 {
     /**
@@ -28,6 +30,38 @@ class Produit
 
     public function __construct() {
         $this->paniers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param mixed $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * @param mixed $marque
+     */
+    public function setMarque($marque)
+    {
+        $this->marque = $marque;
     }
 
     /**
@@ -76,7 +110,7 @@ class Produit
 
     /**
      * @var string
-     *
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;

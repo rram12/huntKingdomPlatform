@@ -1,7 +1,26 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}ProductBundle:Marque:read{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Marque:read page</h1>
-{% endblock %}
+<html>
+<head>
+    <center> *****  Affichage des Marques  ***** </center><br><br><br><br>
+</head>
+<body>
+<center>
+    <table border="2">
+        <tr>
+            <th> Nom Du Marque </th>
+        </tr>
+        {% for m in marque  %}
+            <tr>
+                <td>
+                    {{ m.nomMarque }}
+                </td>
+                <td>
+                    <a href="{{ path('deletem', { 'id': m.id }) }}"> Remove </a>
+                </td>
+                <td>
+                    <a href="{{ path('updatem', { 'id': m.id }) }}"> Update </a>
+                </td>
+        {% endfor %}
+    </table>
+</center>
+</body>
+</html>
