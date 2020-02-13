@@ -347,7 +347,6 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="{{ path('list_promotion') }}">Promotion</a></li>
                         <li><a class="" href="{{ path('list_reparation') }}">Reparation</a></li>
                     </ul>
                 </li>
@@ -376,14 +375,19 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a class="" href="{{ path('list_product') }}">
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
                         <i class="icon_documents_alt"></i>
                         <span>Products</span>
-
+                        <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{ path('list_products') }}">Affect Promotion</a></li>
+                        <li><a class="" href="{{ path('list_promotion') }}">list Promotion</a></li>
 
+                    </ul>
                 </li>
+
 
             </ul>
             <!-- sidebar menu end-->
