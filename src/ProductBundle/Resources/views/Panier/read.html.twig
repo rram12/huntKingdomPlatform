@@ -1,7 +1,35 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}ProductBundle:Panier:read{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Panier:read page</h1>
-{% endblock %}
+<html>
+<head>
+    <center> *****  Affichage des panier  ***** </center><br><br><br><br>
+</head>
+<body>
+<center>
+    <table border="2">
+        <tr>
+            <th> Date Du danier   </th>
+            <th> Prix Total   </th>
+            <th> Nombre Des Articles   </th>
+        </tr>
+        {% for p in panier  %}
+        <tr>
+            <td>
+                {{ p.datePanier|date }}
+            </td>
+            <td>
+                {{ p.prixTotal }}
+            </td>
+            <td>
+                {{ p.nbArticles }}
+            </td>
+            <td>
+                <a href="{{ path('deletep', { 'id': p.id }) }}"> Remove </a>
+            </td>
+            <td>
+                <a href="{{ path('updatep', { 'id': p.id }) }}"> Update </a>
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+</center>
+</body>
+</html>

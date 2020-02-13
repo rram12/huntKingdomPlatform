@@ -33,6 +33,14 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
 
     /**
