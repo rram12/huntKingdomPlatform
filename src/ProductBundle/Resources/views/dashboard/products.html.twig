@@ -1,1 +1,14 @@
-{% extends 'dashboard/base.html.twig' %}
+<h1>product list : </h1>
+{% for produit in produits %}
+    <ul>
+
+        <li>{{ produit.libProd }}</li>
+        <li>{{ produit.prix }}</li>
+        <li>{{ produit.description }}</li>
+        <li>{{ produit.qteProd }}</li>
+        <li>{{ produit.dateAjout |date }}</li>
+        <li> {{ produit.image }}</li>
+        <li>{{ produit.type }}
+        </li><li><a href="{{ path('affect_promotion',{'id': produit.id}) }}">affect promotion</a></li>
+    </ul>
+{% endfor %}

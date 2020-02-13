@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
@@ -65,7 +65,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     *
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
      * @ORM\Column(name="picture", type="string", length=255 ,nullable=true)
      */
     protected $picture;

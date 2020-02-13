@@ -22,7 +22,65 @@ class Produit
     public function __construct() {
         $this->paniers = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    /**
+     * @ORM\ManyToOne(targetEntity="Promotion")
+     * @ORM\JoinColumn(name="promotion_id", referencedColumnName="id")
+     */
+    private $promotion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Marque")
+     * @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
+     */
+    private $marque;
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * @param mixed $promotion
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * @param mixed $marque
+     */
+    public function setMarque($marque)
+    {
+        $this->marque = $marque;
+    }
     /**
      * @var int
      *

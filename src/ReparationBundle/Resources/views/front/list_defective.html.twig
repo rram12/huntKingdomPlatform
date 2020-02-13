@@ -1,0 +1,19 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block content %}
+
+    <h1>List pieces</h1>
+    {% for piece in pieces %}
+        <ul>
+            <li>{{ piece.nom }}</li>
+            <li>{{ piece.categorie }}</li>
+            <li>{{ piece.description }}</li>
+            <img src="{{ asset('uploads/photos/' ~ piece.image) }}" height="250px" width="250px">
+            <li><a href="{{ path('reparation_front_repare',{'idP': piece.id,'idR': app.user.id}) }}">repare</a></li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}
+
+
+
