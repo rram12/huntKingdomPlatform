@@ -97,27 +97,27 @@
                                             <div class="content-wrapper">
                                                 <div class="feature-content">
                                                     <h4><a href="{#{{ path('detailed_post',{'id': posts.id}) }}#}">{{ post.title }}</a></h4>
-                                                    <p class="listing-tagline">{{ post.description|trim }}</p>
-                                                    <div class="meta-tag">
-                                                        <div class="listing-review">
-                                                            <span class="review-avg">4.5</span>
-                                                            2 Ratings
-                                                        </div>
-                                                        <div class="user-name">
-                                                            <a href="#"><i class="lni-user"></i>{{ post.user.username }}</a>
-                                                        </div>
-                                                        <div class="listing-category">
-                                                            <a href="#"><i class="lni-alarm-clock"></i>{{ post.publishedAt|date() }} </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-bottom clearfix">
-                                                    <div class="btn-group">
+                                                    {#            <p class="listing-tagline">{{ post.description|trim }}</p>
+                                                       #}        <div class="meta-tag">
+                                                                   <div class="listing-review">
+                                                                       <span class="review-avg">4.5</span>
+                                                                       2 Ratings
+                                                                   </div>
+                                                                   <div class="user-name">
+                                                                       <a href="#"><i class="lni-user"></i>{{ post.user.username }}</a>
+                                                                   </div>
+                                                                   <div class="listing-category">
+                                                                       <a href="#"><i class="lni-alarm-clock"></i>{{ post.publishedAt|date() }} </a>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                           <div class="listing-bottom clearfix">
+                                                               <div class="btn-group">
 
-                                                        <a href="{{ path('pub_update',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
-                                                        <a href="{{ path('pub_delete',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
-                                                        {# <a href="{{ path('detailed_post',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
-#}
+                                                                   <a href="{{ path('pub_update',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                                   <a href="{{ path('pub_delete',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                                                   {# <a href="{{ path('detailed_post',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+           #}
                                                     </div>
                                                 </div>
                                             </div>

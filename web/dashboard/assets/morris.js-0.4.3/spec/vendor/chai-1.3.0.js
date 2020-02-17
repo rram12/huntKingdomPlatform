@@ -184,7 +184,7 @@
       * ### Assertion.includeStack
       *
       * User configurable property, influences whether stack trace
-      * is included in Assertion error message. default of false
+      * is included in Assertion error message. Default of false
       * suppresses stack trace in the error message
       *
       *     Assertion.includeStack = true;  // enable stack on error
@@ -3101,9 +3101,9 @@
      * @param {Object} obj The object to print out.
      * @param {Boolean} showHidden Flag that shows hidden (not enumerable)
      *    properties of objects.
-     * @param {Number} depth Depth in which to descend in object. default is 2.
+     * @param {Number} depth Depth in which to descend in object. Default is 2.
      * @param {Boolean} colors Flag to turn on ANSI escape codes to color the
-     *    output. default is false (no coloring).
+     *    output. Default is false (no coloring).
      */
     function inspect(obj, showHidden, depth, colors) {
       var ctx = {

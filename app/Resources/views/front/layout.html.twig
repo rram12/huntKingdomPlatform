@@ -88,10 +88,10 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">blog</a>
+                                        <a href="{{ path('blog') }}">blog</a>
                                         <ul>
-                                            <li><a href="{{ path('blog') }}">blog page</a></li>
-                                            <li><a href="{{ path('blog-single') }}">blog single</a></li>
+                                            <li><a href="{{ path('blog') }}">Posts</a></li>
+                                            <li><a href="{{ path('list_complaint') }}">Complains</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -240,7 +240,7 @@
 
 {% block content %}
 
-{% endblock content %}
+
 <footer class="jarallax">
     <div class="footer-top section">
         <div class="container">
@@ -261,7 +261,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <h2>latest News</h2>
+                    <h2>latest Posts</h2>
                     <div class="foo-news">
                         <div class="newslists">
                             <div class="dbox">
@@ -278,42 +278,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="newslists">
-                            <div class="dbox">
-                                <div class="dleft">
-                                    <figure><img src="{{ asset('front/assets/images/blog/sm-2.jpg') }}" alt="" /></figure>
-                                </div>
-                                <div class="dright">
-                                    <div class="content">
-                                        <h4><a href="#">Weapons 2018</a></h4>
-                                        <p>Weaponts can apprecie
-                                            <br> our broad services.</p>
-                                        <span><i class="fas fa-calendar"></i> 12 Jan 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <h2>Product Shop</h2>
-                    <div class="products-foo">
-                        <ul>
-                            <li>
-                                <a href="#"><img src="{{ asset('front/assets/images/products/sm1.jpg') }}" alt="" /></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('front/assets/images/products/sm2.jpg') }}" alt="" /></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('front/assets/images/products/sm3.jpg') }}" alt="" /></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('front/assets/images/products/sm4.jpg') }}" alt="" /></a>
-                            </li>
-                        </ul>
-                        <p>For More Products and Gun Click Here!</p>
-                        <a href="#" class="btn1">Our Shop</a>
+
                     </div>
                 </div>
             </div>
@@ -340,7 +305,7 @@
         </div>
     </div>
 </footer>
-
+{% endblock content %}
 <!-- jQuery latest version -->
 <script src="{{ asset('front/assets/js/vendor/jquery-3.2.1.min.js') }}"></script>
 <!-- tether JavaScript -->

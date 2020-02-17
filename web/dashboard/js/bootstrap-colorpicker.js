@@ -2163,7 +2163,7 @@ function tinycolor (color, opts) {
     this._format = opts.format || rgb.format;
     this._gradientType = opts.gradientType;
 
-    // Don't let the range of [0,255] come dashboard in [0,1].
+    // Don't let the range of [0,255] come back in [0,1].
     // Potentially lose a little bit of precision here, but will fix issues where
     // .5 gets interpreted as half of the total, instead of half of 1
     // If it was supposed to be 128, this was already taken care of by `inputToRgb`

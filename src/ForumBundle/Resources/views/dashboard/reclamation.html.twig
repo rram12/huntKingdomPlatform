@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <h1>List of Posts !</h1>
+    <h1>List of Complaints !</h1>
 
     <div class="album py-5 bg-light">
         <div class="container">
@@ -80,49 +80,46 @@
                         <div class="col-2 text-center">
                             <div class="heading">
                                 <h1 class="section-title">Complaints</h1>
-                                <h4 class="sub-title">You can <a href="{{ path('add_rec') }}">add</a> a complaint here</h4>
+                                <h4 class="sub-title">You can add a complaint here</h4>
                             </div>
                         </div>
 
                         {% for rec in recs %}
-
+                            {% if not rec.handled  %}
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="featured-box">
-                                    <figure>
-                                        <div class="homes-tag featured">Forum</div>
-                                        <div class="homes-tag rent"><i class="lni-heart"></i> 202</div>
 
-                                        <a href="{#{{ path('detailed_post',{'id': posts.id}) }}#}"><img class="img-fluid" src="{{ asset('uploads/' ~ post.image) }}" alt="{{ post.title }}"></a>
-                                    </figure>
+
                                     <div class="content-wrapper">
                                         <div class="feature-content">
                                             <h4><a href="{#{{ path('detailed_post',{'id': posts.id}) }}#}">{{ rec.title }}</a></h4>
-                                            <p class="listing-tagline">{{ rec.description|trim }}</p>
-                                            <div class="meta-tag">
-                                                <div class="listing-review">
-                                                    <span class="review-avg">4.5</span>
-                                                    2 Ratings
-                                                </div>
-                                                <div class="user-name">
-                                                    <a href="#"><i class="lni-user"></i>{{ rec.user.username }}</a>
-                                                </div>
-                                                <div class="listing-category">
-                                                    <a href="#"><i class="lni-alarm-clock"></i>{{ rec.dateRec|date() }} </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="listing-bottom clearfix">
-                                            <div class="btn-group">
+                                            {#            <p class="listing-tagline">{{ rec.descriptionRec|trim }}</p>
+                                               #}        <div class="meta-tag">
+                                                           <div class="listing-review">
+                                                               <span class="review-avg">4.5</span>
+                                                               2 Ratings
+                                                           </div>
+                                                           <div class="user-name">
+                                                               <a href="#"><i class="lni-user"></i>{{ rec.user.username }}</a>
+                                                           </div>
+                                                           <div class="listing-category">
+                                                               <a href="#"><i class="lni-alarm-clock"></i>{{ rec.dateRec|date() }} </a>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                                   <div class="listing-bottom clearfix">
+                                                       <div class="btn-group">
 
-                                                <a href="{{ path('rec_update2',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
-                                                <a href="{{ path('rec_delete',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
-                                                <a href="{{ path('handled_rec',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+                                                           {#<a href="{{ path('rec_update2',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                           <a href="{{ path('rec_delete',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+           #}                                                <a href="{{ path('handled_rec2',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">handle</button></a>
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                         {% endfor %}
 
                     </div>

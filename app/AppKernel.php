@@ -1,5 +1,6 @@
 <?php
 
+use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;

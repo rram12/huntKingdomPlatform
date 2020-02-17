@@ -1361,7 +1361,7 @@ var Chart = function(context){
 	function Min( array ){
 		return Math.min.apply( Math, array );
 	};
-	//default if undefined
+	//Default if undefined
 	function Default(userDeclared,valueIfFalse){
 		if(!userDeclared){
 			return valueIfFalse;
