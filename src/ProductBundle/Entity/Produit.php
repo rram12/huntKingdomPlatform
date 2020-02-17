@@ -38,12 +38,6 @@ class Produit
     private $promotion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Marque")
-     * @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
-     */
-    private $marque;
-
-    /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getPaniers()
@@ -67,35 +61,9 @@ class Produit
         return $this->promotion;
     }
 
-    /**
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> cd632fb19fe9895ce75aa3632f089c8cac797dd7
-     * @return mixed
-     */
-    public function getPaniers()
-    {
-        return $this->paniers;
-    }
 
-    /**
-     * @param mixed $paniers
-     */
-    public function setPaniers($paniers)
-    {
-        $this->paniers = $paniers;
-<<<<<<< HEAD
-=======
-=======
-     * @param mixed $promotion
-     */
-    public function setPromotion($promotion)
-    {
-        $this->promotion = $promotion;
->>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
->>>>>>> cd632fb19fe9895ce75aa3632f089c8cac797dd7
-    }
+
+
 
     /**
      * @return mixed
@@ -112,14 +80,7 @@ class Produit
     {
         $this->marque = $marque;
     }
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
->>>>>>> cd632fb19fe9895ce75aa3632f089c8cac797dd7
     /**
      * @var int
      *
@@ -179,182 +140,5 @@ class Produit
     private $type;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set libProd
-     *
-     * @param string $libProd
-     *
-     * @return Product
-     */
-    public function setLibProd($libProd)
-    {
-        $this->libProd = $libProd;
-
-        return $this;
-    }
-
-    /**
-     * Get libProd
-     *
-     * @return string
-     */
-    public function getLibProd()
-    {
-        return $this->libProd;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return Product
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Product
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set qteProd
-     *
-     * @param integer $qteProd
-     *
-     * @return Product
-     */
-    public function setQteProd($qteProd)
-    {
-        $this->qteProd = $qteProd;
-
-        return $this;
-    }
-
-    /**
-     * Get qteProd
-     *
-     * @return int
-     */
-    public function getQteProd()
-    {
-        return $this->qteProd;
-    }
-
-    /**
-     * Set dateAjout
-     *
-     * @param \DateTime $dateAjout
-     *
-     * @return Product
-     */
-    public function setDateAjout($dateAjout)
-    {
-        $this->dateAjout = $dateAjout;
-
-        return $this;
-    }
-
-    /**
-     * Get dateAjout
-     *
-     * @return \DateTime
-     */
-    public function getDateAjout()
-    {
-        return $this->dateAjout;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Product
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Product
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 }
 

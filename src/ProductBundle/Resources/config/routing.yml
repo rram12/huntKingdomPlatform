@@ -11,10 +11,7 @@ shop-single:
     path:     /shop-single
     defaults: { _controller: ProductBundle:Default:frontshopsingle}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> cd632fb19fe9895ce75aa3632f089c8cac797dd7
+
 readm:
     path:     /readm
     defaults: { _controller: ProductBundle:Marque:read }
@@ -66,9 +63,7 @@ addtopanierpr:
     path:     /addpr/{id}
     defaults: { _controller: ProductBundle:Panier:addtopanier }
 
-<<<<<<< HEAD
-=======
-=======
+
 list_products:
     path:     /productList
     defaults: { _controller: ProductBundle:Default:productList }
@@ -88,5 +83,4 @@ delete_promotion:
 Modify_promotion:
     path:     /modifierPromotion/{id}
     defaults: { _controller: ProductBundle:Default:modifierPromotion }
->>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
->>>>>>> cd632fb19fe9895ce75aa3632f089c8cac797dd7
+

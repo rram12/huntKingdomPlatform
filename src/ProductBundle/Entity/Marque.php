@@ -12,10 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Marque
 {
-<<<<<<< HEAD
-=======
 
->>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
     /**
      * @var int
      *
