@@ -3,7 +3,7 @@ list_locations:
     defaults: { _controller: ServiceBundle:Default:location }
 list_accommodation:
     path:     /hebergement
-    defaults: { _controller: ServiceBundle:Default:hebergement }
+    defaults: { _controller: ServiceBundle:Service:afficherhebergement }
 list_transport:
     path:     /transport
     defaults: { _controller: ServiceBundle:Default:transport }

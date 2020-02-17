@@ -1,13 +1,19 @@
 list_reparation:
     path:     /reparation
     defaults: { _controller: ReparationBundle:Default:reparation }
-list_promotion:
-    path:     /promotion
-    defaults: { _controller: ReparationBundle:Default:promotion }
 
-reparation_front:
-    path:     /reparation_front
-    defaults: { _controller: ReparationBundle:Default:frontreparation }
+
+reparation_front_add_defective:
+    path:     /add_defective
+    defaults: { _controller: ReparationBundle:Default:add_defective }
+reparation_front_list_defective:
+    path:     /consult_defective
+    defaults: { _controller: ReparationBundle:Default:list_defective }
+
 promotion_front:
     path:     /promotion_front
     defaults: { _controller: ReparationBundle:Default:frontpromotion }
+
+reparation_front_repare:
+    path:     /repare/{idP}/{idR}
+    defaults: { _controller: ReparationBundle:Default:repare }

@@ -12,12 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Marque
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumn(name="produitId", referencedColumnName="id")
-     */
-    private $produit;
+<<<<<<< HEAD
+=======
 
+>>>>>>> d760c12d393209ce4400e6bf243e8f20373fd436
     /**
      * @var int
      *

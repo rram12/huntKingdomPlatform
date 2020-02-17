@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reparation
 {
+
+
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
@@ -19,10 +21,27 @@ class Reparation
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Repairer")
-     * @ORM\JoinColumn(name="reparateurId", referencedColumnName="id")
+     * @return mixed
      */
-    private $reparateur;
+    public function getReparateur()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $reparateur
+     */
+    public function setReparateur($reparateur)
+    {
+        $this->user = $reparateur;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Piecesdefectueuses")
+     * @ORM\JoinColumn(name="Piecesdefectueuses_id", referencedColumnName="id")
+     */
+    private $piecedefectueuse;
+
 
     /**
      * @var int
@@ -60,6 +79,22 @@ class Reparation
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @return mixed
+     */
+    public function getPiecedefectueuse()
+    {
+        return $this->piecedefectueuse;
+    }
+
+    /**
+     * @param mixed $piecedefectueuse
+     */
+    public function setPiecedefectueuse($piecedefectueuse)
+    {
+        $this->piecedefectueuse = $piecedefectueuse;
+    }
 
 
     /**

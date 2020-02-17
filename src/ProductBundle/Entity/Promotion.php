@@ -3,6 +3,7 @@
 namespace ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Promotion
@@ -13,12 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Promotion
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumn(name="produitId", referencedColumnName="id")
-     */
-    private $produit;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -28,11 +23,33 @@ class Promotion
     private $id;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="nomMarque", type="string", length=255)
+     * @ORM\Column(name="taux", type="float")
      */
-    private $nomMarque;
+    private $taux;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="date")
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="date")
+     */
+    private $dateFin;
+
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
 
 
     /**
@@ -46,27 +63,99 @@ class Promotion
     }
 
     /**
-     * Set nomMarque
+     * Set taux
      *
-     * @param string $nomMarque
+     * @param float $taux
      *
-     * @return Marque
+     * @return Promotion
      */
-    public function setNomMarque($nomMarque)
+    public function setTaux($taux)
     {
-        $this->nomMarque = $nomMarque;
+        $this->taux = $taux;
 
         return $this;
     }
 
     /**
-     * Get nomMarque
+     * Get taux
      *
-     * @return string
+     * @return float
      */
-    public function getNomMarque()
+    public function getTaux()
     {
-        return $this->nomMarque;
+        return $this->taux;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return Promotion
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return Promotion
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Promotion
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }
 
