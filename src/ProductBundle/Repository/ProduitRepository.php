@@ -10,4 +10,15 @@ namespace ProductBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findProduit($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM ProductBundle:Produit p
+                WHERE p.promotion =:id '
+            )
+            ->setParameter('id',$id)
+            ->getSingleResult();
+    }
 }

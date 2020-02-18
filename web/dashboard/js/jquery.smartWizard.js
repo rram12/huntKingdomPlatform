@@ -454,7 +454,7 @@ function SmartWizard(target, options) {
         }
     };
 
-// default Properties and Events
+// Default Properties and Events
     $.fn.smartWizard.defaults = {
         selected: 0,  // Selected Step, 0 = first step
         keyNavigation: true, // Enable/Disable key navigation(left and right keys are used if enabled)

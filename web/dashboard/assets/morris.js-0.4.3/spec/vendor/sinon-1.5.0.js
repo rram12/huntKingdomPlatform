@@ -4070,7 +4070,7 @@ if (typeof module == "object" && typeof require == "function") {
                     expected = [].join.call(arguments, ", ");
                     actual = sinon.orderByFirstCall(slice.call(arguments)).join(", ");
                 } catch (e) {
-                    // If this fails, we'll just fall dashboard to the blank string
+                    // If this fails, we'll just fall back to the blank string
                 }
 
                 failAssertion(this, "expected " + expected + " to be " +

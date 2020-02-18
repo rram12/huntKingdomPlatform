@@ -10,3 +10,77 @@ shop:
 shop-single:
     path:     /shop-single
     defaults: { _controller: ProductBundle:Default:frontshopsingle}
+
+
+readm:
+    path:     /readm
+    defaults: { _controller: ProductBundle:Marque:read }
+
+createm:
+    path:     /createm
+    defaults: { _controller: ProductBundle:Marque:create }
+
+updatem:
+    path:     /updatem/{id}
+    defaults: { _controller: ProductBundle:Marque:update }
+
+deletem:
+    path:     /delete/{id}
+    defaults: { _controller: ProductBundle:Marque:delete }
+
+readp:
+    path:     /readp
+    defaults: { _controller: ProductBundle:Panier:read }
+
+createp:
+    path:     /createp
+    defaults: { _controller: ProductBundle:Panier:create }
+
+deletep:
+    path:     /deletep/{id}
+    defaults: { _controller: ProductBundle:Panier:delete }
+
+updatep:
+    path:     /updatep/{id}
+    defaults: { _controller: ProductBundle:Panier:update }
+
+readpr:
+    path:     /readpr
+    defaults: { _controller: ProductBundle:Product:read }
+
+createpr:
+    path:     /createpr
+    defaults: { _controller: ProductBundle:Product:create }
+
+deletepr:
+    path:     /deletepr/{id}
+    defaults: { _controller: ProductBundle:Product:delete }
+
+updatepr:
+    path:     /updatepr/{id}
+    defaults: { _controller: ProductBundle:Product:update }
+addtopanierpr:
+    path:     /addpr/{id}
+    defaults: { _controller: ProductBundle:Panier:addtopanier }
+
+
+list_products:
+    path:     /productList
+    defaults: { _controller: ProductBundle:Default:productList }
+
+affect_promotion:
+    path:     /affectPromotion/{id}
+    defaults: { _controller: ProductBundle:Default:affectPromotion }
+
+list_promotion:
+    path:     /listPromotion
+    defaults: { _controller: ProductBundle:Default:listPromotion }
+
+delete_promotion:
+    path:     /deletePromotion/{id}
+    defaults: { _controller: ProductBundle:Default:deletePromotion }
+
+Modify_promotion:
+    path:     /modifierPromotion/{id}
+    defaults: { _controller: ProductBundle:Default:modifierPromotion }
+

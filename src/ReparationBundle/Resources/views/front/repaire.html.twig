@@ -1,0 +1,28 @@
+{% extends 'front/formLayout.html.twig' %}
+{% block registerName %}
+reparation
+{% endblock %}
+{% block content %}
+    <div class="col-md-8 col-md-offset-2">
+
+        {{ form_start(form, {'method': 'post', 'action': path('reparation_front_repare',{'idP': idP,'idR':idR }) }) }}
+
+        <div class="register_wrapper_box">
+            <div class="register_left_form">
+                <div class="row clearfix">
+
+                    {{ form_widget(form) }}
+
+                </div>
+
+                <div class="login_btn_wrapper register_btn_wrapper login_wrapper register_wrapper_btn">
+                    <input type="submit" value="Repare" class="btn1" name="repare"/>
+                </div>
+                {{ form_end(form) }}
+
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

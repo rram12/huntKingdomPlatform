@@ -8,15 +8,15 @@ class DefaultController extends Controller
 {
     public function locationAction()
     {
-        return $this->render('@Service/location.html.twig');
+        return $this->render('@Service/dashboard/location.html.twig');
     }
     public function hebergementAction()
     {
-        return $this->render('@Service/hebergement.html.twig');
+        return $this->render('@Service/dashboard/hebergement.html.twig');
     }
     public function transportAction()
     {
-        return $this->render('@Service/transport.html.twig');
+        return $this->render('@Service/dashboard/transport.html.twig');
     }
     public function frontlocationAction()
     {

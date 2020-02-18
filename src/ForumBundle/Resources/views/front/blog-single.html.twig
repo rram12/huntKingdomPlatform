@@ -1,5 +1,81 @@
 {% extends 'front/layout.html.twig' %}
+
+
 {% block content %}
 
 
+    <footer class="jarallax">
+        <div class="footer-top section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="foo-about">
+                            <figure><img src="{{ asset('front/assets/images/logo/logo.png') }}" alt="" /></figure>
+                            <div class="contents">
+                                <h4 class="sub-title">You can send us your complaints.</h4>
+                                <a href="{{ path('blog-single') }}" class="btn3">send from here <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <ul class="foo-social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <h2>Your complaints</h2>
+                        <div class="foo-news">
+                            {% for rec in recs |reverse %}
+                                {% if not rec.handled  %}
+                                <div class="newslists">
+                                    <div class="dbox">
+                                        <div class="dright">
+                                            <div class="content">
+                                               <h4><a href="#">{{ rec.title }}</a></h4>
+                                                {#      <p>{{ rec.descriptionRec|trim }}</p>
+                                                 #}    <span><i class="fas fa-calendar"></i> {{ rec.dateRec|date() }}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="listing-bottom clearfix">
+                                        <div class="btn-group">
+
+                                            <a href="{{ path('rec_update',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                            <a href="{{ path('rec_delete',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                           {#  <a href="{{ path('handled_rec',{'id': rec.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">handle</button></a>
+#}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="copyright sm-t-center">
+                            <p>Copyright © 2018 <a href="#"><span>Gun</span> </a>Shop. Design by <a href="#"><span>Webstrot</span></a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="foo-links sm-t-center">
+                            <ul>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Copyright Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock content %}

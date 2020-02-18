@@ -2055,7 +2055,7 @@ function configFromArray (config) {
         config._a[DATE] = date.getUTCDate();
     }
 
-    // default to current date.
+    // Default to current date.
     // * if no year, month, day of month are given, default to today
     // * if day of month is given, default month and year
     // * if month is given, default only year
@@ -2123,7 +2123,7 @@ function dayOfYearFromWeekInfo(config) {
 
         weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
 
-        // default to current week.
+        // Default to current week.
         week = defaults(w.w, curWeek.week);
 
         if (w.d != null) {
@@ -2367,7 +2367,7 @@ function configFromString(config) {
 }
 
 hooks.createFromInputFallback = deprecate(
-    'value provided is not in a recognized RFC2822 or ISO format. moment construction falls dashboard to js Date(), ' +
+    'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
     'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
     'discouraged and will be removed in an upcoming major release. Please refer to ' +
     'http://momentjs.com/guides/#/warnings/js-date/ for more info.',

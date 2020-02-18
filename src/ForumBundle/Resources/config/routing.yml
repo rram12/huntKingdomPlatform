@@ -1,12 +1,68 @@
 list_publication:
-    path:     /publication
-    defaults: { _controller: ForumBundle:Default:publication }
+    path:     /publications
+    defaults: { _controller: ForumBundle:Publication:listPub }
+
 list_complaint:
-    path:     /complaint
-    defaults: { _controller: ForumBundle:Default:reclamation }
+    path:     /complaints
+    defaults: { _controller: ForumBundle:Reclamation:recList }
+
+list_complaint2:
+  path:     /complaintsDash
+  defaults: { _controller: ForumBundle:Reclamation:listRec }
+
 blog:
     path:     /blog
-    defaults: { _controller: ForumBundle:Default:frontblog }
+    defaults: { _controller: ForumBundle:Publication:frontBlog }
+
 blog-single:
     path:     /blog-single
-    defaults: { _controller: ForumBundle:Default:frontblogsingle }
+    defaults: { _controller: ForumBundle:Reclamation:addRecFront }
+
+pub_add:
+    path:     /addPub
+    defaults: { _controller: ForumBundle:Publication:addPub }
+
+blog_add:
+    path:     /addPubF
+    defaults: { _controller: ForumBundle:Publication:addPubFront }
+
+pub_update:
+    path:     /updatePub/{id}
+    defaults: { _controller: ForumBundle:Publication:updatePub }
+
+pub_detailed:
+  path:     /detailedPub/{id}
+  defaults: { _controller: ForumBundle:Publication:showPub }
+
+pub_delete:
+    path:     /deletePub/{id}
+    defaults: { _controller: ForumBundle:Publication:deletePub }
+
+blog_update:
+  path:     /updateblog/{id}
+  defaults: { _controller: ForumBundle:Publication:updatePubFront }
+
+blog_delete:
+  path:     /deleteblog/{id}
+  defaults: { _controller: ForumBundle:Publication:deletePubFront }
+
+rec_update:
+  path:     /updateRec/{id}
+  defaults: { _controller: ForumBundle:Reclamation:updateRecFront }
+
+rec_delete:
+  path:     /deleteRec/{id}
+  defaults: { _controller: ForumBundle:Reclamation:deleteRecFront }
+
+
+handled_rec:
+  path:     /handleRec/{id}
+  defaults: { _controller: ForumBundle:Reclamation:handledFront }
+
+handled_rec2:
+  path:     /handle/{id}
+  defaults: { _controller: ForumBundle:Reclamation:handled }
+
+add_rec:
+  path:     /addRec
+  defaults: { _controller: ForumBundle:Reclamation:addRec }

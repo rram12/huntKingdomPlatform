@@ -12,7 +12,9 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    media_directory: '%kernel.root_dir%/../web/uploads/'
     locale: en
+    photos_directory: '%kernel.root_dir%/../web/uploads/photos'
 
 framework:
     #esi: ~
@@ -86,4 +88,5 @@ fos_user:
 sensio_framework_extra:
    router:
         annotations: false
+
 

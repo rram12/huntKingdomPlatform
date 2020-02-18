@@ -3,6 +3,7 @@
 namespace EventsBundle\Controller;
 
 use EventsBundle\Entity\Competition;
+<<<<<<< HEAD
 use EventsBundle\Entity\Publicity;
 use EventsBundle\Form\CompetitionType;
 use EventsBundle\Form\PublicityType;
@@ -14,11 +15,20 @@ class EventController extends Controller
     public function affichercompetitionAction()
     {
         $Competition = new Competition();
+=======
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class EventController extends Controller
+{
+    public function affichercompetitionAction() {
+        $Article = new Competition();
+>>>>>>> 3b06f85ee52bf7b8beae829bd173eb21b1399ca7
         $em = $this->getDoctrine()->getManager();
         $competitions = $em->getRepository('EventsBundle:Competition')->findAll();
 
         return $this->render('@Events/dashboard/competition.html.twig', array('competitions' => $competitions));
     }
+<<<<<<< HEAD
 
     public function competitionajoutAction(Request $request)
     {
@@ -148,3 +158,6 @@ class EventController extends Controller
 }
 
 
+=======
+}
+>>>>>>> 3b06f85ee52bf7b8beae829bd173eb21b1399ca7
