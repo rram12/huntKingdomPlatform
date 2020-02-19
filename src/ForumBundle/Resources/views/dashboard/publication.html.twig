@@ -1,15 +1,10 @@
 {% extends 'dashboard/base.html.twig' %}
 
-{% block sidebar %}
 
-{% endblock %}
 
 {% block content %}
 
-    <h1>List of Posts !</h1>
 
-    <div class="album py-5 bg-light">
-        <div class="container">
 
           {#  <div class="sidebar-search">
 
@@ -70,72 +65,81 @@
                     });
                 });
             </script> #}
+
+
+
+
+    <section id="main-content">
+        <section class="wrapper">
+
+            <!-- page start-->
             <div class="content-center">
 
 
 
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-2 text-center">
-                                    <div class="heading">
-                                        <h1 class="section-title">Latest Posts</h1>
-                                        <h4 class="sub-title">You can also <a href="{{ path('pub_add') }}">share</a> your own experience, thoughts, questions...</h4>
-                                    </div>
-                                </div>
-
-                                {% for post in posts %}
-
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-                                        <div class="featured-box">
-                                            <figure>
-                                                <div class="homes-tag featured">Forum</div>
-                                                <div class="homes-tag rent"><i class="lni-heart"></i> 202</div>
-
-                                                <a href="{#{{ path('detailed_post',{'id': posts.id}) }}#}"><img class="img-fluid" src="{{ asset('uploads/' ~ post.image) }}" alt="{{ post.title }}"></a>
-                                            </figure>
-                                            <div class="content-wrapper">
-                                                <div class="feature-content">
-                                                    <h4><a href="{#{{ path('detailed_post',{'id': posts.id}) }}#}">{{ post.title }}</a></h4>
-                                                    {#            <p class="listing-tagline">{{ post.description|trim }}</p>
-                                                       #}        <div class="meta-tag">
-                                                                   <div class="listing-review">
-                                                                       <span class="review-avg">4.5</span>
-                                                                       2 Ratings
-                                                                   </div>
-                                                                   <div class="user-name">
-                                                                       <a href="#"><i class="lni-user"></i>{{ post.user.username }}</a>
-                                                                   </div>
-                                                                   <div class="listing-category">
-                                                                       <a href="#"><i class="lni-alarm-clock"></i>{{ post.publishedAt|date() }} </a>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                           <div class="listing-bottom clearfix">
-                                                               <div class="btn-group">
-
-                                                                   <a href="{{ path('pub_update',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
-                                                                   <a href="{{ path('pub_delete',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
-                                                                   {# <a href="{{ path('detailed_post',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
-           #}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <div class="heading">
+                                <h1 class="section-title">Latest Posts</h1>
+                                <h4 class="sub-title">You can also <a href="{{ path('pub_add') }}">share</a> your own experience, thoughts, questions...</h4>
                             </div>
                         </div>
 
-                    </section>
+                        {% for post in posts %}
 
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="featured-box">
+                                    <figure>
+                                        <div class="homes-tag featured">Forum</div>
+                                        <div class="homes-tag rent"><i class="lni-heart"></i> 202</div>
 
+                                        <a href="{{ path('pub_detailedDash',{'id': post.id}) }}"><img class="img-fluid" src="{{ asset('uploads/' ~ post.image) }}" alt="{{ post.title }}"></a>
+                                    </figure>
+                                    <div class="content-wrapper">
+                                        <div class="feature-content">
+                                            <h4><a href="{{ path('pub_detailedDash',{'id': post.id}) }}">{{ post.title }}</a></h4>
+                                            {% if post.description | length > 45 %}
+                                                <p>{{post.description | slice(0,42)}} {{ '...' }}</p>
+                                            {% else %}
+                                                <p>{{post.description}} </p>
+                                            {% endif %}
+                                                       <div class="meta-tag">
+                                                <div class="listing-review">
+                                                    <span class="review-avg">4.5</span>
+                                                    2 Ratings
+                                                </div>
+                                                <div class="user-name">
+                                                    <a href="#"><i class="lni-user"></i>{{ post.user.username }}</a>
+                                                </div>
+                                                <div class="listing-category">
+                                                    <a href="#"><i class="lni-alarm-clock"></i>{{ post.publishedAt|date() }} </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="listing-bottom clearfix">
+                                            <div class="btn-group">
 
+                                                <a href="{{ path('pub_update',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                <a href="{{ path('pub_delete',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                                {# <a href="{{ path('detailed_post',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
                 </div>
-
             </div>
-        </div>
+        </section>
+
+
+</section>
+
 
 
 {% endblock %}

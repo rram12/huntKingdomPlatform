@@ -34,6 +34,10 @@ pub_detailed:
   path:     /detailedPub/{id}
   defaults: { _controller: ForumBundle:Publication:showPub }
 
+pub_detailedDash:
+  path:     /detailedPubDash/{id}
+  defaults: { _controller: ForumBundle:Publication:showPubDash }
+
 pub_delete:
     path:     /deletePub/{id}
     defaults: { _controller: ForumBundle:Publication:deletePub }
@@ -66,3 +70,15 @@ handled_rec2:
 add_rec:
   path:     /addRec
   defaults: { _controller: ForumBundle:Reclamation:addRec }
+
+more_pub:
+  path:     /morePubs/{user}
+  defaults: { _controller: ForumBundle:Publication:morePubs }
+
+add_comment:
+  path:     /addComment
+  defaults: { _controller: ForumBundle:Publication:addComment }
+
+delete_comment:
+  path:     /deleteComment/{id}
+  defaults: { _controller: ForumBundle:Publication:deleteComment }

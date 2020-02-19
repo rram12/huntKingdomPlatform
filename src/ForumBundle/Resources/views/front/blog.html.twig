@@ -24,27 +24,41 @@
     <section class="blog-pages section">
         <div class="container">
             <div class="row">
-
+                <div class="blogs">
+                <div class="content-post">
+                <div class="content">
+                <h4 class="sub-title">You can also <a href="{{ path('blog_add') }}">share</a> your own experience, thoughts, questions...</h4>
+                </div>
+                </div>
+                </div>
                 <div class="col-sm-9 pd-0">
                     {% for p in posts %}
                         <div class="col-sm-6">
                             <div class="blog-list">
                                 <figure>
-                                    <img src="{{ asset('uploads/' ~ p.image) }}" width="150" height="150" alt="" />
+                                    <a href="{{ path('pub_detailed',{'id': p.id}) }} "> <img src="{{ asset('uploads/' ~ p.image) }}" width="150" height="150" alt="" /> </a>
                                     <div class="date">
                                         <span>{{p.user.username}}</span>
-                                        <img src="{{ asset('uploads/' ~ p.image) }}" width="10%" height="10%" alt="{{p.user.username}} picture" />
+                                        <a href="{{ path('more_pub',{'user': p.user.id}) }}">        <img src="{{ asset('uploads/' ~ p.user.picture) }}" width="10%" height="10%" alt="{{p.user.username}} picture" /> </a>
                                     </div>
                                 </figure>
                                 <div class="content">
                                     <h3>{{p.title}}</h3>
                                     <h4>{{p.publishedAt | date}}</h4>
-                                    {% if p.description | length > 20%}
-                                        <p>{{p.description | slice(0,17)}} {{ '...' }}</p>
+                                    {% if p.description | length > 45 %}
+                                        <p>{{p.description | slice(0,42)}} {{ '...' }}</p>
                                     {% else %}
                                         <p>{{p.description}} </p>
                                     {% endif %}
-                                        <a href="" class="btn3">Read More <i class="fa fa-angle-double-right"></i></a>
+                                        <a href="{{ path('pub_detailed',{'id': p.id}) }}" class="btn3">Read More <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="listing-bottom clearfix">
+                                <div class="btn-group">
+{% if p.user.id == app.user.id or is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('blog_update',{'id': p.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                    <a href="{{ path('blog_delete',{'id': p.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+{% endif %}
                                 </div>
                             </div>
                         </div>

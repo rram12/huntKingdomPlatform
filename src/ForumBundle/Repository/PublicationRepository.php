@@ -2,6 +2,8 @@
 
 namespace ForumBundle\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+
 /**
  * PublicationRepository
  *
@@ -10,4 +12,18 @@ namespace ForumBundle\Repository;
  */
 class PublicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPostById($id)
+    {
+        try {
+            return $this->getEntityManager()
+                ->createQuery(
+                    "SELECT p
+                FROM ForumBundle:Publication
+                p WHERE p.id =:id"
+                )
+                ->setParameter('id', $id)
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
 }

@@ -5,7 +5,7 @@ namespace ReparationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-    /**
+/**
  * Piecesdefectueuses
  *
  * @ORM\Table(name="piecesdefectueuses")

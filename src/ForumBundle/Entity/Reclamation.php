@@ -13,6 +13,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Reclamation
 {
     /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */

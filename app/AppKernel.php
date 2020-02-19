@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new ForumBundle\ForumBundle(),
             new ProductBundle\ProductBundle(),
             new ReparationBundle\ReparationBundle(),
+            new Oneup\FlysystemBundle\OneupFlysystemBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

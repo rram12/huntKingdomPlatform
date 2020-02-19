@@ -35,11 +35,80 @@ class Publication
     private $image;
 
     /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClosed()
+    {
+        return $this->closed;
+    }
+
+    /**
+     * @param int $closed
+     */
+    public function setClosed($closed)
+    {
+        $this->closed = $closed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param int $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post",cascade={"remove"}, orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
      * @return string
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
     /**
@@ -56,6 +125,20 @@ class Publication
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="closed", type="integer")
+     */
+    private $closed;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinned", type="integer")
+     */
+    private $pinned;
 
     /**
      * @var string

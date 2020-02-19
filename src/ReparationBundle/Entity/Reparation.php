@@ -21,22 +21,6 @@ class Reparation
     private $user;
 
     /**
-     * @return mixed
-     */
-    public function getReparateur()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $reparateur
-     */
-    public function setReparateur($reparateur)
-    {
-        $this->user = $reparateur;
-    }
-
-    /**
      * @ORM\ManyToOne(targetEntity="Piecesdefectueuses")
      * @ORM\JoinColumn(name="Piecesdefectueuses_id", referencedColumnName="id")
      */
