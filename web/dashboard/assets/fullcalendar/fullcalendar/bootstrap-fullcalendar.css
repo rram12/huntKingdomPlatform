@@ -81,11 +81,11 @@ html .fc,
   }
   
 .fc-header .fc-corner-right {
-  margin-right: 1px; /* dashboard to normal */
+  margin-right: 1px; /* back to normal */
   }
   
 .fc-header .ui-corner-right {
-  margin-right: 0; /* dashboard to normal */
+  margin-right: 0; /* back to normal */
   }
   
 /* button layering (for border precedence) */

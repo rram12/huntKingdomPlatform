@@ -10,18 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="moyen_de_transport")
  * @ORM\Entity(repositoryClass="ServiceBundle\Repository\MoyenDeTransportRepository")
  */
-class MoyenDeTransport extends Service
+class MoyenDeTransport
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="Service")
-     * @ORM\JoinColumn(name="serviceId", referencedColumnName="id")
-     */
-    private $service;
-
-    public function __construct() {
-        parent::__construct();
-    }
-
     /**
      * @var int
      *
@@ -30,6 +20,104 @@ class MoyenDeTransport extends Service
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrixParJour()
+    {
+        return $this->prixParJour;
+    }
+
+    /**
+     * @param float $prixParJour
+     */
+    public function setPrixParJour($prixParJour)
+    {
+        $this->prixParJour = $prixParJour;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisponibilite()
+    {
+        return $this->disponibilite;
+    }
+
+    /**
+     * @param bool $disponibilite
+     */
+    public function setDisponibilite($disponibilite)
+    {
+        $this->disponibilite = $disponibilite;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixParJour", type="float")
+     */
+    private $prixParJour;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="disponibilite", type="boolean")
+     */
+    private $disponibilite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255)
+     */
 
 
     /**

@@ -4134,7 +4134,7 @@ function AgendaEventRenderer() {
 			timeElement.text(formatDates(newStart, newEnd, opt('timeFormat')));
 		}
 		function resetElement() {
-			// convert dashboard to original slot-event
+			// convert back to original slot-event
 			if (allDay) {
 				timeElement.css('display', ''); // show() was causing display=inline
 				eventElement.draggable('option', 'grid', [colWidth, slotHeight]);
@@ -4185,7 +4185,7 @@ function AgendaEventRenderer() {
 				}else{
 					eventElement.css('z-index', 8);
 					showEvents(event, eventElement);
-					// BUG: if event was really short, need to put title dashboard in span
+					// BUG: if event was really short, need to put title back in span
 				}
 			}
 		});

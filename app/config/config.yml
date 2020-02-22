@@ -12,10 +12,24 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    media_directory: '%kernel.root_dir%/../web/uploads/'
     locale: en
     photos_directory: '%kernel.root_dir%/../web/uploads/photos'
     app.path.piece_images: /uploads/photos
     app.path.user_contracts: /uploads/files/contracts
+
+oneup_flysystem:
+    adapters:
+        my_adapter:
+            local:
+                directory: "%kernel.root_dir%/cache"
+
+    filesystems:
+        my_filesystem:
+            adapter: my_adapter
+
+            # optional - defines the default visibility of the filesystem: `public` or `private`(default)
+            visibility: private
 
 framework:
     #esi: ~
@@ -90,6 +104,7 @@ sensio_framework_extra:
    router:
         annotations: false
 
+<<<<<<< HEAD
 vich_uploader:
     db_driver: orm
     mappings:
@@ -97,3 +112,6 @@ vich_uploader:
             uri_prefix: /contract
             upload_destination: '%kernel.root_dir%/../web/contract/'
             namer: vich_uploader.namer_uniqid
+=======
+
+>>>>>>> 90920294bd42021d73e6c83d332ea8d055c60adb

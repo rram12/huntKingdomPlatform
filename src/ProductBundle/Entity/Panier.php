@@ -21,7 +21,10 @@ class Panier
     public function __construct() {
         $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    public function addtopanier($produit) {
+        $this->produits->add($produit);
 
+    }
     /**
      * @var int
      *
@@ -87,26 +90,6 @@ class Panier
     /**
      * @return string
      */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param string $etat
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-    }
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string")
-     */
-    private $etat;
-
 
     /**
      * Get id
@@ -132,6 +115,9 @@ class Panier
         return $this;
     }
 
+    /**
+     * @return string
+     */
     /**
      * Get datePanier
      *

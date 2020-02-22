@@ -1357,7 +1357,7 @@ exports = module.exports = Base;
 exports.useColors = isatty;
 
 /**
- * default color map.
+ * Default color map.
  */
 
 exports.colors = {

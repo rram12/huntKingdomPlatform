@@ -1,0 +1,89 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block content %}
+
+
+    <section class="breadcumb-area jarallax bg-img af">
+        <div class="breadcumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="content">
+                            <h2>Add your post</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="javascript:void(0)">Post</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Breadcumb area end here-->
+    <!--Contact area start here-->
+    <section class="contact-area section">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-heading">
+                        <h2>Please share with us</h2>
+                        <p>You can also share your own experience, thoughts, questions...</p>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-area">
+                        {{ form_start(Form) }}
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-4 col-xs-12 feld">
+                                        {{ form_widget(Form.title,{'attr':{'type':'text','class':'col-sm-4 col-xs-12 feld','placeholder':'Subject'}}) }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="feld">
+                                    {{ form_widget(Form.description,{'attr':{'type':'textarea','class':'feld','placeholder':'Description...'}}) }}
+                                </div>
+                            </fieldset>
+                        <fieldset>
+                            <div class="row">
+                                <div class="">
+                                    {{ form_widget(Form.image) }}
+                                </div>
+                            </div>
+                        </fieldset>
+                            <div class="btn-area text-center">
+                                {{ form_widget(Form.validate,{'attr':{'class':'btn-area text-center'}}) }}
+                            </div>
+                        {{ form_end(Form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Contact area end here-->
+    <!--Subscribe area start here-->
+    <section class="subscribe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="subscribe">
+                        <span class="ico"><i class="far fa-envelope"></i></span>
+                        <div class="conts">
+                            <h2>Get Our Latest News</h2>
+                            <p>Subscribe our Newsletter Now !</p>
+                        </div>
+                        <form>
+                            <input type="email" placeholder="Email Address">
+                            <button type="submit" class="btn1">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

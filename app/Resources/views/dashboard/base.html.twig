@@ -10,7 +10,7 @@
         <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
         <link rel="shortcut icon" href="img/favicon.png">
 
-        <title>{% block titre %} Welcome{% endblock %}</title>
+        <title>{% block titre %} {% endblock %}</title>
 
         <!-- Bootstrap CSS -->
         <link href="{{asset('dashboard/css/bootstrap.min.css') }}" rel="stylesheet" >
@@ -35,6 +35,19 @@
         <link href="{{ asset('dashboard/css/style-responsive.css') }}" rel="stylesheet" />
         <link href="{{ asset('dashboard/css/xcharts.min.css') }}" rel=" stylesheet">
         <link href="{{ asset('dashboard/css/jquery-ui-1.10.4.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/bootstrap.min.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/fonts/line-icons.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/slicknav.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/animate.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/owl.carousel.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/main.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/responsive.css')}}">
 
     </head>
 
@@ -306,7 +319,7 @@
     </header>
 
 
-
+{% block sidebar %}
     <aside>
         <!-- sidebar menu start-->
         <div id="sidebar" class="nav-collapse ">
@@ -325,7 +338,7 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="{{ path('list_publication') }}">Publication</a></li>
-                        <li><a class="" href="{{ path('list_complaint') }}">complaint</a></li>
+                        <li><a class="" href="{{ path('list_complaint2') }}">complaint</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -410,6 +423,7 @@
     </aside>
     </aside>
     <!--sidebar end-->
+{% endblock %}
 
 {% block content %}
 

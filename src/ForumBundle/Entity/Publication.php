@@ -3,6 +3,7 @@
 namespace ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Publication
@@ -16,7 +17,7 @@ class Publication
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
-    private $user;
+    public $user;
 
     /**
      * @var int
@@ -28,25 +29,130 @@ class Publication
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=500)
+     * @Assert\File(maxSize="999k", mimeTypes={"image/jpeg", "image/jpg", "image/png"})
      */
-    private $titre;
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClosed()
+    {
+        return $this->closed;
+    }
+
+    /**
+     * @param int $closed
+     */
+    public function setClosed($closed)
+    {
+        $this->closed = $closed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param int $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post",cascade={"remove"}, orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contenuPub", type="text")
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $contenuPub;
+    private $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="closed", type="integer")
+     */
+    private $closed;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinned", type="integer")
+     */
+    private $pinned;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePub", type="date")
+     * @ORM\Column(name="publishedAt", type="datetime")
      */
-    private $datePub;
+    private $publishedAt;
 
 
     /**
@@ -60,75 +166,52 @@ class Publication
     }
 
     /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Publication
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
      * @return string
      */
-    public function getTitre()
+    public function getTitle()
     {
-        return $this->titre;
+        return $this->title;
     }
 
     /**
-     * Set contenuPub
-     *
-     * @param string $contenuPub
-     *
-     * @return Publication
+     * @param string $title
      */
-    public function setContenuPub($contenuPub)
+    public function setTitle($title)
     {
-        $this->contenuPub = $contenuPub;
-
-        return $this;
+        $this->title = $title;
     }
 
     /**
-     * Get contenuPub
-     *
      * @return string
      */
-    public function getContenuPub()
+    public function getDescription()
     {
-        return $this->contenuPub;
+        return $this->description;
     }
 
     /**
-     * Set datePub
-     *
-     * @param \DateTime $datePub
-     *
-     * @return Publication
+     * @param string $description
      */
-    public function setDatePub($datePub)
+    public function setDescription($description)
     {
-        $this->datePub = $datePub;
-
-        return $this;
+        $this->description = $description;
     }
 
     /**
-     * Get datePub
-     *
      * @return \DateTime
      */
-    public function getDatePub()
+    public function getPublishedAt()
     {
-        return $this->datePub;
+        return $this->publishedAt;
     }
+
+    /**
+     * @param \DateTime $publishedAt
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+    }
+
 }
 

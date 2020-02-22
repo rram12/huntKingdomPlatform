@@ -118,6 +118,8 @@ class User extends BaseUser
      */
     private $confirmed =false ;
 
+
+
     /**
      * @return bool
      */

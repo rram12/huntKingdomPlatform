@@ -1,5 +1,6 @@
 <?php
 
+use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -26,7 +27,7 @@ class AppKernel extends Kernel
             new ProductBundle\ProductBundle(),
             new ReparationBundle\ReparationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-
+            new Oneup\FlysystemBundle\OneupFlysystemBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

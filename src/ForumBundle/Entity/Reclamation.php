@@ -13,10 +13,25 @@ use Doctrine\ORM\Mapping as ORM;
 class Reclamation
 {
     /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
-    private $user;
+    public $user;
 
     /**
      * @var int
@@ -30,9 +45,9 @@ class Reclamation
     /**
      * @var string
      *
-     * @ORM\Column(name="contenuRec", type="text")
+     * @ORM\Column(name="descriptionRec", type="text")
      */
-    private $contenuRec;
+    private $descriptionRec;
 
     /**
      * @var \DateTime
@@ -44,9 +59,16 @@ class Reclamation
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $titre;
+    private $title;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="handled", type="boolean", length=255)
+     */
+    private $handled;
 
 
     /**
@@ -59,29 +81,7 @@ class Reclamation
         return $this->id;
     }
 
-    /**
-     * Set contenuRec
-     *
-     * @param string $contenuRec
-     *
-     * @return Reclamation
-     */
-    public function setContenuRec($contenuRec)
-    {
-        $this->contenuRec = $contenuRec;
 
-        return $this;
-    }
-
-    /**
-     * Get contenuRec
-     *
-     * @return string
-     */
-    public function getContenuRec()
-    {
-        return $this->contenuRec;
-    }
 
     /**
      * Set dateRec
@@ -108,27 +108,53 @@ class Reclamation
     }
 
     /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Reclamation
+     * @return string
      */
-    public function setTitre($titre)
+    public function getDescriptionRec()
     {
-        $this->titre = $titre;
-
-        return $this;
+        return $this->descriptionRec;
     }
 
     /**
-     * Get titre
-     *
+     * @param string $descriptionRec
+     */
+    public function setDescriptionRec($descriptionRec)
+    {
+        $this->descriptionRec = $descriptionRec;
+    }
+
+    /**
      * @return string
      */
-    public function getTitre()
+    public function getTitle()
     {
-        return $this->titre;
+        return $this->title;
     }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHandled()
+    {
+        return $this->handled;
+    }
+
+    /**
+     * @param bool $handled
+     */
+    public function setHandled($handled)
+    {
+        $this->handled = $handled;
+    }
+
+
 }
 
