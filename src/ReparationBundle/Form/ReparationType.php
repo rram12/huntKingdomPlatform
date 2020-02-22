@@ -15,8 +15,7 @@ class ReparationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('prixRep')
-            ->add('etat')
-            ->add('duree')
+            ->add('dateFin')
             ->add('description')
         ;
     }/**

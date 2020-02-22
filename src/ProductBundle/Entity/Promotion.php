@@ -44,12 +44,7 @@ class Promotion
     private $dateFin;
 
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="active", type="boolean")
-     */
-    private $active;
+
 
 
     /**
@@ -134,28 +129,6 @@ class Promotion
         return $this->dateFin;
     }
 
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     *
-     * @return Promotion
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
 
-        return $this;
-    }
-
-    /**
-     * Get active
-     *
-     * @return bool
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
 }
 

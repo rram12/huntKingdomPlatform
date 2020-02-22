@@ -8,9 +8,12 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -32,8 +35,104 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @ORM\Column(type="string", length=255 ,nullable=true )
+     * @var string
+     */
+    private $contract = null;
 
+    /**
+     * @return string
+     */
+    public function getContract()
+    {
+        return $this->contract;
+    }
 
+    /**
+     * @param string $contract
+     */
+    public function setContract($contract)
+    {
+        $this->contract = $contract;
+    }
+
+    /**
+     * @return File
+     */
+    public function getContractFile()
+    {
+        return $this->contractFile;
+    }
+
+    /**
+     * @param File $contractFile
+     */
+    public function setContractFile($contractFile)
+    {
+        $this->contractFile = $contractFile;
+    }
+
+    /**
+     * @Vich\UploadableField(mapping="user_contracts", fileNameProperty="contract")
+     * @var File
+     */
+    private $contractFile;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCompetitions()
+    {
+        return $this->competitions;
+    }
+
+    /**
+     * @param ArrayCollection $competitions
+     */
+    public function setCompetitions($competitions)
+    {
+        $this->competitions = $competitions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmed", type="boolean",options={"default": false})
+     */
+    private $confirmed =false ;
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     * @param bool $confirmed
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+    }
 
     /**
      * @var string

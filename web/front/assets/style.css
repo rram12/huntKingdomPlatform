@@ -606,6 +606,66 @@ h4 {
   color: #fff;
 }
 
+
+.btn5 {
+    display: inline-block;
+    position: relative;
+    padding: 0 60px;
+    line-height: 46px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fea526;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    text-transform: capitalize;
+    -webkit-clip-path: polygon(12% 0%, 100% 0, 88% 100%, 0% 100%);
+    clip-path: polygon(12% 0%, 100% 0, 88% 100%, 0% 100%);
+}
+@media only screen and (max-width: 320px) {
+    .btn5 {
+        clip-path: none;
+        padding: 0 30px;
+    }
+}
+.btn5:after {
+    content: '';
+    position: absolute;
+    right: 11px;
+    top: -5px;
+    bottom: -5px;
+    width: 2px;
+    transform: rotate(27deg);
+    background: #fea526;
+}
+@media only screen and (max-width: 320px) {
+    .btn5:after {
+        display: none;
+    }
+}
+.btn5:before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: -5px;
+    bottom: -5px;
+    width: 2px;
+    transform: rotate(27.8deg);
+    background: #fea526;
+}
+@media only screen and (max-width: 320px) {
+    .btn5:before {
+        display: none;
+    }
+}
+.btn5:hover {
+    background: #fea526;
+    color: #fff;
+}
+
+
+
 /*** Reset ***/
 .login_wrapper #fb_btn{
 	background:#5872ab !important;
@@ -4628,7 +4688,13 @@ margin-top:50px;
 .product-details .single-product-content .buttons a.btn4 {
   border: 1px solid #e5e5e5;
 }
+.product-details .single-product-content .buttons a.btn5 {
+  border: 1px solid #e5e5e5;
+}
 .product-details .single-product-content .buttons a.btn4:hover {
+  border: 1px solid #fea526;
+}
+.product-details .single-product-content .buttons a.btn5:hover {
   border: 1px solid #fea526;
 }
 .product-details .single-product-content .buttons a.heart {

@@ -10,4 +10,5 @@ namespace ProductBundle\Repository;
  */
 class PromotionRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

@@ -53,25 +53,53 @@ class Reparation
     private $id;
 
     /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * @param \DateTime $dateFin
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    }
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="datetime")
+     */
+    private $dateFin;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="prixRep", type="float")
      */
     private $prixRep;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="etat", type="string", length=255)
-     */
-    private $etat;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="duree", type="time")
-     */
-    private $duree;
+
+
 
     /**
      * @var string
@@ -131,53 +159,10 @@ class Reparation
         return $this->prixRep;
     }
 
-    /**
-     * Set etat
-     *
-     * @param string $etat
-     *
-     * @return Reparation
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
 
-        return $this;
-    }
 
-    /**
-     * Get etat
-     *
-     * @return string
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
 
-    /**
-     * Set duree
-     *
-     * @param \DateTime $duree
-     *
-     * @return Reparation
-     */
-    public function setDuree($duree)
-    {
-        $this->duree = $duree;
 
-        return $this;
-    }
-
-    /**
-     * Get duree
-     *
-     * @return \DateTime
-     */
-    public function getDuree()
-    {
-        return $this->duree;
-    }
 
     /**
      * Set description
@@ -202,5 +187,8 @@ class Reparation
     {
         return $this->description;
     }
+
+
+
 }
 

@@ -18,6 +18,31 @@ class Piecesdefectueuses
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="etat", type="boolean",options={"default": false})
+     */
+    private $etat =false ;
+
+    /**
+     * @return bool
+     */
+    public function isEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param bool $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
+
+
     /**
      * @var bool
      *

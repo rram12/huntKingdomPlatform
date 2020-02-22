@@ -21,4 +21,16 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('id',$id)
             ->getSingleResult();
     }
+
+    public function findProduitWithFineshed($date){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM ProductBundle:Produit p
+                INNER JOIN ProductBundle:promotion m
+                WHERE p.promotion=m.id AND m.dateFin<=:current'
+            )
+            ->setParameter('current', $date)
+            ->getResult();
+    }
 }

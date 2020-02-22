@@ -25,6 +25,8 @@ class AppKernel extends Kernel
             new ForumBundle\ForumBundle(),
             new ProductBundle\ProductBundle(),
             new ReparationBundle\ReparationBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -60,7 +62,7 @@ class AppKernel extends Kernel
     {
         $loader->load(function (ContainerBuilder $container) {
             $container->setParameter('container.autowiring.strict_mode', true);
-            $container->setParameter('container.dumper.inline_class_loader', true);
+            $container->setParameter('container.dumper.inline_class_loader', false);
 
             $container->addObjectResource($this);
         });

@@ -1,17 +1,28 @@
 {% extends 'front/formLayout.html.twig' %}
 {% block registerName %}
-reparation
+new reparation registred here
 {% endblock %}
 {% block content %}
     <div class="col-md-8 col-md-offset-2">
 
-        {{ form_start(form, {'method': 'post', 'action': path('reparation_front_repare',{'idP': idP,'idR':idR }) }) }}
+        {{ form_start(form, {'method': 'post', 'action': path('reparation_front_repare',{'idP': idP,'idR':idR }),'attr': {'novalidate': 'novalidate','id':'formRepaire'} }       ) }}
 
         <div class="register_wrapper_box">
             <div class="register_left_form">
                 <div class="row clearfix">
 
-                    {{ form_widget(form) }}
+                    <b> Price</b>    {{ form_widget(form.prixRep, { 'id': 'prixRep'} ) }}
+                    <div class="alert alert-danger" id="errorprixRep" hidden>
+                        Enter Price
+                    </div>
+                   <b> End reparation date </b>{{ form_widget(form.dateFin, { 'id': 'dateFin'} ) }}
+                    <div class="alert alert-danger" id="errordateFin" hidden>
+                         end reparation date > current date
+                    </div>
+                    <b> Description</b> {{ form_widget(form.description, { 'id': 'description'} ) }}
+                    <div class="alert alert-danger" id="errordescription" hidden>
+                        Enter description
+                    </div>
 
                 </div>
 

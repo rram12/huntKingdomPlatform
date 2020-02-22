@@ -1,0 +1,21 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+  entities:
+    User:
+      list:
+        fields:
+          - contract
+          - { property: 'contract', template: 'contract.html.twig' }
+
+    Piecesdefectueuses:
+      class: ReparationBundle\Entity\Piecesdefectueuses
+      form:
+        fields:
+          - { property: 'imageFile', type: 'vich_image' }
+      list:
+        fields:
+          - { property: 'image', type: 'image', base_path: '%app.path.product_images%',template: 'vich_uploader_image.html.twig' }
+      # ...
+      show:
+        fields:
+          - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }

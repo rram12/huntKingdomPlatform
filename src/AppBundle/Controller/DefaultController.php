@@ -41,4 +41,9 @@ class DefaultController extends Controller
     {
         return $this->render('front/about.html.twig');
     }
+
+    public function please_waitAction()
+    {
+        return $this->render('front/please_wait.html.twig');
+    }
 }

@@ -386,6 +386,21 @@
                         <li><a class="" href="{{ path('list_promotion') }}">list Promotion</a></li>
 
                     </ul>
+
+
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_documents_alt"></i>
+                        <span>recrutements</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{ path('list_condidates') }}">List condidates</a></li>
+                    </ul>
+
+
                 </li>
 
 
@@ -489,5 +504,48 @@
     </script>
         </section>
 </body>
+
+<script type="text/javascript">
+    $("#formPromotion").submit(function(e) {
+
+            /****  Taux *****/
+            $taux = parseInt($("#taux").val()) ;
+            if ( $taux>1 || $taux<0 ) {
+                $("#errorTaux").show();
+                e.preventDefault();
+
+            } else {
+                $("#errorTaux").hide();
+            }
+
+
+            /****  dateFin *****/
+
+            if ($("#dateFin").val() == "") {
+                $("#errordateFin").show();
+                e.preventDefault();
+
+            } else {
+                $("#errordateFin").hide();
+            }
+
+
+            /****  Decription *****/
+
+            if ($("#descriptionD").val() == "") {
+                $("#errordescriptionD").show();
+                e.preventDefault();
+            } else {
+                $("#errordescriptionD").hide();
+            }
+
+
+        });
+
+
+
+
+</script>
+
 
 </html>

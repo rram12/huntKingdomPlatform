@@ -1,0 +1,65 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content %}
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa-table"></i> products</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="{{path('main_dashboard')}}">Home</a></li>
+                        <li><i class="fa fa-table"></i>products</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+
+
+                        <table class="table table-striped table-advance table-hover">
+                            <tbody>
+                            <tr>
+                                <th><i class="icon_profile"></i> first Name</th>
+                                <th><i class="icon_box-checked"></i> last Name</th>
+                                <th><i class="icon_box-checked"></i> email</th>
+                                <th><i class="icon_mail_alt"></i> roles</th>
+                                <th><i class="icon_gift_alt"></i> address</th>
+                                <th><i class="icon_mobile"></i> phoneNumber</th>
+                                <th><i class="icon_image"></i> picture</th>
+                                <th><i class="icon_image"></i> Licence</th>
+                                <th><i class="icon_cogs"></i> Action</th>
+                            </tr>
+                            {% for condidate in condidates %}
+                                <tr>
+                                    <td>{{ condidate.firstName }}</td>
+                                    <td>{{ condidate.lastName }}</td>
+                                    <td>{{ condidate.email }}</td>
+                                    <td>{{ condidate.roles[0] }}</td>
+                                    <td>{{ condidate.address }}</td>
+                                    <td>{{ condidate.phoneNumber}}</td>
+                                    <td><img src="{{ asset('uploads/photos/' ~ condidate.picture) }}" height="100px" width="100px"></td>
+                                         <td>  <a href="{{ app.request.scheme }}://{{ app.request.httpHost ~ app.request.basePath ~ vich_uploader_asset(condidate, 'contractFile') }}" />Check licence</a> </td>
+
+                                         <td>
+                                             <div class="btn-group">
+                                                <a class="btn btn-success" href="{{ path('accept_condidate',{'id': condidate.id}) }}">Accept Condidate</a>
+                                                 <a class="btn btn-danger" href="{{ path('reject_condidate',{'id': condidate.id}) }}">Reject Condidate</a>
+                                             </div>
+                                        </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+{% endblock %}
+
+
+

@@ -1,3 +1,55 @@
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content %}
+
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Form validations
+                        </header>
+                        <div class="panel-body">
+                            <div class="form">
+                                <div class="form-validate form-horizontal" id="feedback_form" method="get" action="">
+                                    {{ form_start(form,{'attr': {'novalidate': 'novalidate','id':'formPromotion'} }       ) }}
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Taux <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                                {{ form_widget(form.taux,{'attr':{'type':'text','class':'form-control'}, 'id':'taux' }) }}
+                                            <div class="alert alert-danger" id="errorTaux" hidden>
+                                                 Taux between 0 and 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="control-label col-lg-2">dateFin <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                              {{ form_widget(form.dateFin,{'attr':{'type':'text','class':'form-control'}, 'id':'dateFin' }) }}
+                                            <div class="alert alert-danger" id="errordateFin" hidden>
+                                                Enter end date
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            {{ form_widget(form.confirm, {'attr': {'class': 'btn btn-primary'}})}}
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+{% endblock %}

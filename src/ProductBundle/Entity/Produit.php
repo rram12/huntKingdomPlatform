@@ -105,6 +105,29 @@ class Produit
     private $prix;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="prixFinale", type="float")
+     */
+    private $prixFinale;
+
+    /**
+     * @return float
+     */
+    public function getPrixFinale()
+    {
+        return $this->prixFinale;
+    }
+
+    /**
+     * @param float $prixFinale
+     */
+    public function setPrixFinale($prixFinale)
+    {
+        $this->prixFinale = $prixFinale;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")

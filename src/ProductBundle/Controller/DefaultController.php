@@ -39,12 +39,14 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $promotion->setActive(true);
             $promotion->setDateDebut($date);
             $produit->setPromotion($promotion);
+            $produit->setPrixFinale($produit->getPrix() - $produit->getPrix() * $promotion->getTaux() ) ;
             $em->persist($promotion);
             $em->persist($produit);
             $em->flush();
+            return $this->redirectToRoute('list_products');
+
         }
 
 
@@ -78,8 +80,6 @@ class DefaultController extends Controller
     {
         $promotion = $this->getDoctrine()->getRepository('ProductBundle:Promotion')->find($id);
         $form = $this->createForm(PromotionType::class, $promotion);
-        $form->remove('confirm');
-        $form->add('Modify', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $promotion = $form->getData();

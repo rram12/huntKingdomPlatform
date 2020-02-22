@@ -1,3 +1,60 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content %}
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa-table"></i> promotions</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="{{path('main_dashboard')}}">Home</a></li>
+                        <li><i class="fa fa-table"></i>promotions</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+
+
+                        <table class="table table-striped table-advance table-hover">
+                            <tbody>
+                            <tr>
+                                <th><i class="icon_profile"></i> taux</th>
+                                <th><i class="icon_box-checked"></i> dateDebut</th>
+                                <th><i class="icon_wallet"></i> dateFin</th>
+                                <th><i class="icon_cogs"></i> Action</th>
+                            </tr>
+                            {% for promotion in promotions %}
+                                <tr>
+                                    <td>{{ promotion.taux }}</td>
+                                    <td>{{ promotion.dateDebut|date }}</td>
+                                    <td>{{ promotion.dateFin|date }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-primary" href="{{ path('Modify_promotion',{'id': promotion.id}) }}"><i class="icon_pencil-edit_alt"></i>modify</a>
+                                            <a class="btn btn-danger" href="{{ path('delete_promotion',{'id': promotion.id}) }}">delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+{% endblock %}
+
+
+
+
+
+{#
 <h3>Liste des Promotion :</h3>
 <table border="1">
     <th>taux</th>
@@ -21,3 +78,4 @@
         </tr>
     {% endfor %}
 </table>
+#}

@@ -2,3 +2,15 @@ user_homepage:
     path:     /
     defaults: { _controller: UserBundle:Default:index }
 
+list_condidates:
+    path:     /list_condidates
+    defaults: { _controller: UserBundle:Default:list_condidates }
+
+accept_condidate:
+    path:     /accept_condidate/{id}
+    defaults: { _controller: UserBundle:Default:accept_condidate }
+
+
+reject_condidate:
+    path:     /reject_condidate/{id}
+    defaults: { _controller: UserBundle:Default:reject_condidate }

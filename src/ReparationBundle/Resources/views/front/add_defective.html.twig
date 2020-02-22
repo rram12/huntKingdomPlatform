@@ -1,28 +1,45 @@
 {% extends 'front/formLayout.html.twig' %}
 
 {% block content %}
-<div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
 
-                {{ form_start(form, {'method': 'post', 'action': path('reparation_front_add_defective'), }) }}
+        {{ form_start(form, {'method': 'post', 'action': path('reparation_front_add_defective'),'attr': {'novalidate': 'novalidate','id':'formDefective'} }       ) }}
 
-                <div class="register_wrapper_box">
-                    <div class="register_left_form">
-                        <div class="row clearfix">
+        <div class="register_wrapper_box">
+            <div class="register_left_form">
+                <div class="row clearfix">
 
-                            {{ form_widget(form) }}
+                    <b> Name</b>{{ form_widget(form.nom, { 'id': 'nom'} ) }}
+                    <div class="alert alert-danger" id="errorNom" hidden>
+                        Enter name
+                    </div>
+                   <b> Category</b>{{ form_widget(form.categorie, { 'id': 'categorie'} ) }}
+                    <div class="alert alert-danger" id="errorCategorie" hidden>
+                        Choose Category
+                    </div>
 
-                        </div>
+                    <b> Description</b> {{ form_widget(form.description, { 'id': 'descriptionD'} ) }}
+                    <div class="alert alert-danger" id="errordescriptionD" hidden>
+                        Enter description
+                    </div>
+                    <b> Image</b> {{ form_widget(form.image, { 'id': 'image'} ) }}
 
-                        <div class="login_btn_wrapper register_btn_wrapper login_wrapper register_wrapper_btn">
-                            <input type="submit" value="Send" class="btn1" name="Send"/>
-                        </div>
-                        {{ form_end(form) }}
-
-
+                    <div class="alert alert-danger" id="errorImage" hidden>
+                        Choose image
                     </div>
 
                 </div>
+
+                <div class="login_btn_wrapper register_btn_wrapper login_wrapper register_wrapper_btn">
+                    <input type="submit" value="Send" class="btn1" name="Send" id="submit"/>
+                </div>
+                {{ form_end(form) }}
+
+
             </div>
+
+        </div>
+    </div>
 {% endblock %}
 
 

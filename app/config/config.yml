@@ -14,6 +14,8 @@ imports:
 parameters:
     locale: en
     photos_directory: '%kernel.root_dir%/../web/uploads/photos'
+    app.path.piece_images: /uploads/photos
+    app.path.user_contracts: /uploads/files/contracts
 
 framework:
     #esi: ~
@@ -88,3 +90,10 @@ sensio_framework_extra:
    router:
         annotations: false
 
+vich_uploader:
+    db_driver: orm
+    mappings:
+        user_contracts:
+            uri_prefix: /contract
+            upload_destination: '%kernel.root_dir%/../web/contract/'
+            namer: vich_uploader.namer_uniqid
