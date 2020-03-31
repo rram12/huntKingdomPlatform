@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="mainpane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MoyenDeTransportController">
+    <children>
+        <Button id="addTransport" fx:id="addTransport" layoutX="98.0" layoutY="525.0" mnemonicParsing="false" onAction="#goToAdd" style="-fx-background-color: orange;" text="Add Mean of Transportation" textFill="WHITE">
+            <styleClass>
+                <String fx:value="success" />
+                <String fx:value="btn" />
+            </styleClass>
+        </Button>
+        <TableView fx:id="table" layoutX="336.0" layoutY="74.0" opacity="0.89" prefHeight="476.0" prefWidth="676.0">
+            <columns>
+                <TableColumn id="ID" fx:id="ID" prefWidth="63.0" text="ID" />
+                <TableColumn id="Type" fx:id="Type" prefWidth="127.0" text="Type" />
+                <TableColumn id="Mark" fx:id="Mark" prefWidth="127.0" text="Mark" />
+                <TableColumn id="Category" fx:id="Category" prefWidth="138.0" text="Category" />
+                <TableColumn id="PricePerDay" fx:id="PricePerDay" prefWidth="155.0" text="Price/Day" />
+                <TableColumn id="Capacity" fx:id="col_action" prefWidth="65.0" text="Action" />
+            </columns>
+      </TableView>
+      <Group fx:id="ajout" visible="false">
+         <children>
+            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="242.0" />
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="63.0" layoutY="293.0" text="Mark" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="203.0" text="Type" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="marque" layoutX="154.0" layoutY="289.0" />
+            <Label layoutX="63.0" layoutY="245.0" text="Price Per Day" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="chooserFile" layoutX="154.0" layoutY="382.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
+            <TextField fx:id="categorie" layoutX="155.0" layoutY="335.0" />
+            <Label layoutX="61.0" layoutY="339.0" text="Category" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="update" layoutX="154.0" layoutY="458.0" mnemonicParsing="false" onAction="#updateTransport" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+            <ComboBox fx:id="type" layoutX="153.0" layoutY="199.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+            <TextField fx:id="listView" disable="true" layoutX="155.0" layoutY="420.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <Label layoutX="60.0" layoutY="385.0" text="Image" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <TextField fx:id="search" layoutX="10.0" layoutY="-65.0" opacity="0.39" promptText="Search For Accommodation" styleClass="btn" />
+   </children>
+</AnchorPane>

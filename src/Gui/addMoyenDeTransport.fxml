@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.89" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddMoyenDeTransportController">
+   <children>
+       <Label layoutX="189.0" layoutY="119.0" text="Type" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <ComboBox fx:id="type" layoutX="299.0" layoutY="115.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+      <Label layoutX="500.0" layoutY="119.0" text="Price Per Day" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="prixParJour" layoutX="582.0" layoutY="115.0" />
+      <Label layoutX="186.0" layoutY="188.0" text="Image" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="image" layoutX="300.0" layoutY="184.0" />
+      <Label layoutX="500.0" layoutY="188.0" text="Mark" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="marque" layoutX="582.0" layoutY="184.0" />
+      <Label layoutX="185.0" layoutY="260.0" text="Category" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="categorie" layoutX="300.0" layoutY="256.0" />
+         <Button fx:id="add" layoutX="582.0" layoutY="256.0" mnemonicParsing="false" onAction="#AddTransport" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+      <Button fx:id="chooserFile" layoutX="299.0" layoutY="184.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
+      <ListView fx:id="listV" layoutX="300.0" layoutY="222.0" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: none;" />
+      <TextField fx:id="listView" disable="true" layoutX="300.0" layoutY="222.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Label disable="true" layoutX="300.0" layoutY="218.0" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </Label>
+    </children>
+</AnchorPane>

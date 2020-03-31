@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="mainpane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ServiceController">
+   <children>
+        <Button id="addHebergement" fx:id="addHebergement" layoutX="147.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToAdd" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="Add Accommodation" textFill="WHITE">
+         <styleClass>
+            <String fx:value="success" />
+            <String fx:value="btn" />
+         </styleClass>
+        </Button>
+        <TableView fx:id="table" layoutX="336.0" layoutY="74.0" opacity="0.89" prefHeight="476.0" prefWidth="676.0">
+            <columns>
+                <TableColumn id="ID" fx:id="ID" prefWidth="34.0" text="ID" />
+                <TableColumn id="Type" fx:id="Category" prefWidth="67.0" text="Category" />
+                <TableColumn id="PricePerDay" fx:id="PricePerDay" prefWidth="77.0" text="Price/Day" />
+                <TableColumn id="Address" fx:id="Address" prefWidth="119.0" text="Address" />
+                <TableColumn id="NbRooms" fx:id="NbRooms" prefWidth="69.0" text="Nb Rooms" />
+                <TableColumn id="Capacity" fx:id="Capacity" prefWidth="54.0" text="Capacity" />
+                <TableColumn id="Capacity" fx:id="Description" prefWidth="180.0" text="Description" />
+                <TableColumn id="Capacity" fx:id="col_action" prefWidth="75.0" text="Action" />
+            </columns>
+      </TableView>
+      <Group fx:id="ajout" layoutX="-7.0" layoutY="45.0" visible="false">
+         <children>
+            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="202.0" />
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="63.0" layoutY="245.0" text="Adress" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="167.0" text="Type" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="adresse" layoutX="154.0" layoutY="241.0" />
+            <Label layoutX="63.0" layoutY="205.0" text="Price Per Day" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="chooserFile" layoutX="154.0" layoutY="314.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
+            <TextField fx:id="nbChambre" layoutX="154.0" layoutY="278.0" />
+            <Label layoutX="60.0" layoutY="282.0" text="Nb Rooms" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="update" layoutX="233.0" layoutY="458.0" mnemonicParsing="false" onAction="#updateHebergement" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #e78d70;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+            <ComboBox fx:id="type" layoutX="153.0" layoutY="163.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+            <TextField fx:id="listView" disable="true" layoutX="154.0" layoutY="339.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <Label layoutX="60.0" layoutY="317.0" text="Image" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="60.0" layoutY="377.0" text="Capacity" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="capacite" layoutX="154.0" layoutY="373.0" />
+            <Label layoutX="60.0" layoutY="415.0" text="Description" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="description" layoutX="153.0" layoutY="411.0" prefHeight="26.0" prefWidth="150.0" />
+         </children>
+      </Group>
+      <TextField fx:id="search" layoutX="10.0" layoutY="-65.0" opacity="0.39" promptText="Search For Accommodation" styleClass="btn" />
+   </children>
+</AnchorPane>
