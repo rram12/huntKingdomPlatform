@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TrainingController">
+   <children>
+      <Pane layoutX="7.0" layoutY="85.0" prefHeight="602.0" prefWidth="1056.0">
+         <children>
+            <Pane fx:id="last" layoutX="52.0" layoutY="8.0" prefHeight="295.0" prefWidth="485.0">
+               <children>
+                  <Pane layoutX="-1.0" opacity="0.49" prefHeight="296.0" prefWidth="487.0" style="-fx-background-color: #8A5548;" />
+                  <Pane layoutX="255.0" layoutY="10.0" prefHeight="265.0" prefWidth="208.0">
+                     <children>
+                        <Label fx:id="catlast" layoutX="28.0" layoutY="14.0" text="Training for Hunting" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <Label fx:id="hnlast" layoutX="22.0" layoutY="51.0" text="Hours number : 5" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label fx:id="pricelast" layoutX="22.0" layoutY="80.0" text="Price : 200 Dt" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label fx:id="tdlast" layoutX="22.0" layoutY="109.0" text="Training Date : 25/09/1996" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <Label fx:id="tplast" layoutX="22.0" layoutY="145.0" text="Training Place : Hammamet" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                        <ImageView fx:id="acceptlast" fitHeight="71.0" fitWidth="82.0" layoutX="56.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+                  <ImageView fx:id="animallast" fitHeight="127.0" fitWidth="145.0" layoutX="51.0" layoutY="21.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../../../../../../../wamp64/www/HuntKingdom/web/front/assets/images/animals/ours_noir.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="produitlast" fitHeight="127.0" fitWidth="145.0" layoutX="51.0" layoutY="156.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../../../../../../../wamp64/www/HuntKingdom/web/front/assets/images/banner/1.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <HBox fx:id="tcontainer" layoutX="126.0" layoutY="312.0" prefHeight="240.0" prefWidth="1240.0" spacing="50.0">
+               <children>
+                  <ScrollBar prefHeight="20.0" prefWidth="834.0" />
+               </children>
+               <padding>
+                  <Insets bottom="100.0" left="20.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Pane fx:id="examplePane" layoutX="724.0" layoutY="21.0" prefHeight="270.0" prefWidth="230.0">
+               <children>
+                  <Label layoutY="-20.0" prefHeight="20.0" prefWidth="225.0" text="     Training For Hunting" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="95.0" fitWidth="86.0" layoutX="13.0" layoutY="19.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Uploads/ours_noir.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="95.0" fitWidth="87.0" layoutX="124.0" layoutY="16.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Uploads/image.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="21.0" layoutY="135.0" text="Hours Number : 5 ">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="160.0" text="Price : 200 DT">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="187.0" text="Training Date : 25/09/1996">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="214.0" text="Training Place : Hammamet">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="45.0" layoutX="183.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Button fx:id="Add" layoutX="994.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnAddAction" text="Add" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
