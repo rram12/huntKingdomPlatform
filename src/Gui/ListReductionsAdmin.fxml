@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ListReductionsAdminController">
+   <children>
+      <TextField fx:id="rateText" layoutX="61.0" layoutY="125.0" prefHeight="25.0" prefWidth="174.0" promptText="rate ..." />
+      <TableView fx:id="table" layoutX="336.0" layoutY="74.0" opacity="0.89" prefHeight="476.0" prefWidth="403.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="rate" prefWidth="75.0" text="rate" />
+            <TableColumn fx:id="start" prefWidth="97.0" text="START DATE" />
+            <TableColumn fx:id="end" prefWidth="79.0" text="END DATE" />
+            <TableColumn fx:id="col_action" prefWidth="75.0" text="ACTION" />
+         </columns>
+      </TableView>
+      <DatePicker fx:id="endDateText" layoutX="61.0" layoutY="199.0" promptText="End date .." />
+      <JFXButton layoutX="103.0" layoutY="294.0" onAction="#editPromotionAction" prefHeight="36.0" prefWidth="91.0" ripplerFill="BLACK" style="-fx-background-color: chocolate;" text="Edit" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="51.0" layoutY="486.0" onAction="#OnReturnAction" ripplerFill="WHITE" style="-fx-background-color: blue;" text="Return" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
