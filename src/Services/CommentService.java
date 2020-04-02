@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.huntkingdom.services;
+package Services;
 import edu.huntkingdom.entities.Publication;
 import edu.huntkingdom.entities.User;
 import edu.huntkingdom.entities.Comment;
-import edu.huntkingdom.tools.MyConnection;
+import Utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
