@@ -7,6 +7,7 @@ package Controllers;
 
 import Entities.PiecesDefectueuses;
 import Services.PieceService;
+import Services.ReparationService;
 import Utils.MyConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -24,7 +25,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,11 +69,18 @@ public class ReparationController implements Initializable {
     private Tab progressPane;
     @FXML
     private Tab readyPane;
+   
     @FXML
-    private Label labelReady;
+    private Label LabelHours;
 
+      @FXML
+    private Label labelMonth;
+      
     @FXML
-    private Label labelProgress;
+    private Label labelDays;
+    
+    @FXML
+    private Label labelYear;
     @FXML
     private StackPane stack;
 
@@ -91,7 +103,7 @@ public class ReparationController implements Initializable {
 
     @FXML
     private Pane listPane;
-    private int current_id;
+    private PiecesDefectueuses current_piece;
     ObservableList<String> list = FXCollections.observableArrayList("Hunting", "Fishing");
     ArrayList<PiecesDefectueuses> pieces = new ArrayList<>();
 
@@ -186,7 +198,7 @@ public class ReparationController implements Initializable {
                     Pane root = loader.load(getClass().getResource("/Gui/SinglePiece.fxml").openStream());
                     SinglePieceController single = (SinglePieceController) loader.getController();
                     single.getInfo(pieces.get(i));
-                    int id1 = single.getCurrentId();
+                     PiecesDefectueuses p1 = pieces.get(i);
                     JFXButton button = single.getButton();
                     
                     if (pieces.get(i).isEtat()) {
@@ -195,21 +207,39 @@ public class ReparationController implements Initializable {
                         button.setStyle("-fx-background-color: green;");
 
                         button.setOnAction(e -> {
-                            this.current_id = id1;
+                            //this.current_piece = p1;
                             SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
                             selectionModel.select(2); //select by index starting with 0
                             System.out.println("ready");
-                            String str1 = Integer.toString(this.current_id);
-                            labelReady.setText(labelReady.getText() + str1);
+                           // String str1 = this.current_piece.getNom();
+                            System.out.println(p1.getNom());
+                            //labelReady.setText(labelReady.getText() + str1);
                         });
                     } else {
                         button.setOnAction(e -> {
-                            this.current_id = id1;
+                            this.current_piece = p1;
                             SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
                             selectionModel.select(3); //select by index starting with 0
                             System.out.println("not ready");
-                            String str1 = Integer.toString(this.current_id);
-                            labelProgress.setText(labelProgress.getText() + str1);
+                            //String str1 = this.current_piece.getNom();
+                           // labelProgress.setText(labelProgress.getText() + str1);
+                           System.out.println(p1.getNom());
+                           Date currentDate1 = new Date();
+                           
+                           LocalDate currentDate = currentDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                           ReparationService rs = new ReparationService();
+                           Date dateFin1 =  rs.getDateFin(p1.getId());
+                           
+                           LocalDate dateFin = dateFin1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                          System.out.println("current_date : "+currentDate + "datefin : "+dateFin );
+
+                           Period diff = Period.between( currentDate,dateFin);
+                           System.out.printf("Difference is %d years, %d months and %d days old", 
+                             diff.getYears(), diff.getMonths(), diff.getDays());
+                           labelYear.setText(Integer.toString(diff.getYears()) );
+                           labelMonth.setText(Integer.toString(diff.getMonths()) );
+                           labelDays.setText(Integer.toString(diff.getDays()) );
+                           
                         });
 
                     }

@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/huntkingdom/HuntKingdom.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/ReparationController.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Services/PieceService.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/SinglePieceController.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Services/ReparationService.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Style/bootstrap3.css</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Services/ProduitService.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/AdminHomeController.java</file>
+            <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/HomeController.java</file>
         </group>
     </open-files>
 </project-private>

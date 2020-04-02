@@ -53,8 +53,26 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="labelReady" layoutX="336.0" layoutY="198.0" prefHeight="41.0" prefWidth="119.0" text="Piece N : " />
-                        <Label layoutX="413.0" layoutY="198.0" prefHeight="41.0" prefWidth="119.0" text="is Ready" />
+                        <ImageView fitHeight="204.0" fitWidth="442.0" layoutX="587.0" layoutY="161.0" opacity="0.59" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Uploads/ready.JPG" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="62.0" layoutY="284.0" prefHeight="58.0" prefWidth="267.0" text="to ge it back" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="60.0" layoutY="211.0" prefHeight="76.0" prefWidth="527.0" text="You can contact your reparer " textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="62.0" layoutY="150.0" prefHeight="70.0" prefWidth="481.0" text="Your piece is ready" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
               </content>
@@ -63,8 +81,41 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="labelProgress" layoutX="363.0" layoutY="182.0" prefHeight="41.0" prefWidth="119.0" text="Piece N : " />
-                        <Label layoutX="423.0" layoutY="182.0" prefHeight="41.0" prefWidth="119.0" text="in progress" />
+                        <ImageView fitHeight="381.0" fitWidth="464.0" layoutX="587.0" layoutY="81.0" opacity="0.59" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Uploads/difference.JPG" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="labelYear" layoutX="687.0" layoutY="144.0" prefHeight="42.0" prefWidth="71.0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMonth" layoutX="875.0" layoutY="144.0" prefHeight="42.0" prefWidth="71.0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelDays" layoutX="680.0" layoutY="324.0" prefHeight="42.0" prefWidth="71.0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="LabelHours" layoutX="868.0" layoutY="324.0" prefHeight="42.0" prefWidth="71.0" text="0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="62.0" layoutY="150.0" prefHeight="70.0" prefWidth="481.0" text="Your piece is getting fixed" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="60.0" layoutY="211.0" prefHeight="76.0" prefWidth="527.0" text="Your reparer is working..." textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>

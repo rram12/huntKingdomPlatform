@@ -6,11 +6,19 @@
 package Services;
 
 import Entities.PiecesDefectueuses;
+import Entities.Produit;
 import Entities.Reparation;
 import Utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -41,7 +49,32 @@ public class ReparationService {
         }
 
     }
-    
+    public Date getDateFin(int id_piece){     
+        Date d = new Date();
+        try {
+            Statement pst = cnx2.createStatement();
+            String requete = "SELECT dateFin FROM reparation where Piecesdefectueuses_id ='"+id_piece+"'";
+            
+            ResultSet rs = pst.executeQuery(requete);
+            
+            
+            while (rs.next()) {
+                
+                
+                d = rs.getDate(1);
+                
+                
+                
+            }
+            
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        java.util.Date utilDate = new java.util.Date(d.getTime());
+         return utilDate;
+    }
+
     
     
 }

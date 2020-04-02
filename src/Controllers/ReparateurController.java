@@ -88,7 +88,7 @@ public class ReparateurController implements Initializable {
                 Pane root = loader.load(getClass().getResource("/Gui/SinglePiece.fxml").openStream());
                  SinglePieceController single = (SinglePieceController)loader.getController();
                  single.getInfo(pieces.get(i));
-                  int id1 = single.getCurrentId();
+                  int id1 = pieces.get(i).getId();
                  JFXButton button = single.getButton();
                  button.setText("Repare");
                  button.setOnAction(e->{

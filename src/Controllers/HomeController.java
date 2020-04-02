@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controllers;
+import Services.PieceService;
 import huntkingdom.HuntKingdom;
 import java.io.IOException;
 import java.net.URL;
@@ -20,11 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -104,7 +107,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void btnreparationAction(ActionEvent event) throws IOException {
+    private void btnreparationAction() throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
         mainpane.getChildren().setAll(pane);
     }
@@ -146,7 +149,31 @@ public class HomeController implements Initializable {
         fadeOut.setOnFinished((e) -> {
             try {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
-                 mainPane.getChildren().setAll(pane);
+                 mainPane.getChildren().setAll(pane);  
+                 PieceService ps = new PieceService();
+                 int i = ps.countPieceReady();
+                 
+                 if(i>0){
+                 String nb =Integer.toString(i);
+                 Image img = new Image("/Uploads/accept.png");
+                ImageView imgV = new ImageView(img);
+                imgV.setFitHeight(100);
+                imgV.setFitWidth(100);
+                
+                  Notifications notif = Notifications.create()
+                .title("pieces")
+                .text(nb+" pieces are ready, you can consult all pieces in reparation")
+                .graphic(imgV)
+                .hideAfter(Duration.seconds(8))
+                .position(Pos.BOTTOM_RIGHT)
+                .darkStyle()
+                          .onAction(s->{
+                          System.out.println("notif clicked");
+                          });
+        notif.show();
+                 
+                 }
+                
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }

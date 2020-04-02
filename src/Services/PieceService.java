@@ -156,5 +156,23 @@ public class PieceService {
 
         return myList;
     }
+       public int countPieceReady() {
+            int nb = 0;
+        try {
+            Statement st = cnx2.createStatement();
+            String requete = "SELECT count(*)as count FROM piecesdefectueuses where etat=true";
+            //executeQuery seulement pour select 
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+              nb =  rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+       
+
+        return nb;
+    }
 }
 

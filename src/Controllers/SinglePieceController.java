@@ -69,10 +69,10 @@ public class SinglePieceController implements Initializable{
     JFXButton getButton(){
         return showBtn;
     }
-    int getCurrentId(){
-        return this.piece.getId();
+  
+    
+    PiecesDefectueuses getCurrentPiece(){
+        return this.piece;
     }
-    
-    
 
 }
