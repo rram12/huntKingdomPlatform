@@ -74,6 +74,48 @@ public class ReparationService {
         java.util.Date utilDate = new java.util.Date(d.getTime());
          return utilDate;
     }
+    
+        public Double getPrixReparation(int id_piece){     
+        Double d =0.0;
+        try {
+            Statement pst = cnx2.createStatement();
+            String requete = "SELECT prixRep FROM reparation where Piecesdefectueuses_id ='"+id_piece+"'";
+            
+            ResultSet rs = pst.executeQuery(requete);
+            
+            
+            while (rs.next()) {
+                
+                
+                d = rs.getDouble(1);
+                
+                
+                
+            }
+            
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+         return d;
+    }
+
+         public void deleteReparation(int id_piece){
+         try {
+            String requete = "delete FROM reparation where Piecesdefectueuses_id ='"+id_piece+"'";
+               PreparedStatement pst = cnx2.prepareStatement(requete);
+            int nb = pst.executeUpdate();
+            if (nb > 0) {
+            System.out.println("reparation deleted succesfully ! ");}
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        
+    }
+    
 
     
     

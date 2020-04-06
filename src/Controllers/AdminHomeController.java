@@ -103,4 +103,9 @@ public class AdminHomeController implements Initializable {
         mainpane.getChildren().setAll(pane);
     }
     
+    @FXML
+    void btnRecruitmentsAction(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Recruitments.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
 }

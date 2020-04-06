@@ -58,21 +58,34 @@
                               <Image url="@../Uploads/ready.JPG" />
                            </image>
                         </ImageView>
-                        <Label layoutX="62.0" layoutY="284.0" prefHeight="58.0" prefWidth="267.0" text="to ge it back" textFill="WHITE">
+                        <JFXTextField fx:id="cvc" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="366.0" prefHeight="45.0" prefWidth="206.0" promptText="cvc" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
                            <font>
-                              <Font name="Arial Black" size="26.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Label>
-                        <Label layoutX="60.0" layoutY="211.0" prefHeight="76.0" prefWidth="527.0" text="You can contact your reparer " textFill="WHITE">
+                        </JFXTextField>
+                        <JFXTextField fx:id="annee_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="279.0" prefHeight="45.0" prefWidth="206.0" promptText="expired year" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
                            <font>
-                              <Font name="Arial Black" size="26.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Label>
-                        <Label layoutX="62.0" layoutY="150.0" prefHeight="70.0" prefWidth="481.0" text="Your piece is ready" textFill="WHITE">
+                        </JFXTextField>
+                        <JFXTextField fx:id="moix_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="204.0" prefHeight="45.0" prefWidth="206.0" promptText="expired month" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
                            <font>
-                              <Font name="Arial Black" size="26.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
-                        </Label>
+                        </JFXTextField>
+                        <JFXTextField fx:id="num_carte" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="129.0" prefHeight="45.0" prefWidth="206.0" promptText="credit card number" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <StackPane fx:id="stackPay" layoutX="35.0" layoutY="433.0" prefHeight="173.0" prefWidth="448.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#onPayAction" prefHeight="46.0" prefWidth="141.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Pay" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></StackPane>
                      </children>
                   </AnchorPane>
               </content>

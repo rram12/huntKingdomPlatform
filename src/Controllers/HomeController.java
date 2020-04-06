@@ -127,13 +127,13 @@ public class HomeController implements Initializable {
         mainPane.getChildren().setAll(panee);
  
         //Load splash screen with fade in effect
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), panee);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), panee);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.setCycleCount(1);
  
         //Finish splash with fade out effect
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), panee);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), panee);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
         fadeOut.setCycleCount(1);
@@ -151,6 +151,7 @@ public class HomeController implements Initializable {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
                  mainPane.getChildren().setAll(pane);  
                  PieceService ps = new PieceService();
+                 ps.updateEtat();
                  int i = ps.countPieceReady();
                  
                  if(i>0){
@@ -164,11 +165,11 @@ public class HomeController implements Initializable {
                 .title("pieces")
                 .text(nb+" pieces are ready, you can consult all pieces in reparation")
                 .graphic(imgV)
-                .hideAfter(Duration.seconds(8))
+                .hideAfter(Duration.seconds(5))
                 .position(Pos.BOTTOM_RIGHT)
                 .darkStyle()
                           .onAction(s->{
-                          System.out.println("notif clicked");
+                         // System.out.println("notif clicked");
                           });
         notif.show();
                  

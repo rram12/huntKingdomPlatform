@@ -174,5 +174,19 @@ public class PieceService {
 
         return nb;
     }
+        public void deletePiece(int id_piece){
+         try {
+            String requete = "delete FROM piecesdefectueuses where id ='"+id_piece+"'";
+               PreparedStatement pst = cnx2.prepareStatement(requete);
+            int nb = pst.executeUpdate();
+            if (nb > 0) {
+            System.out.println("piece deleted succesfully ! ");}
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        
+    }
 }
 
