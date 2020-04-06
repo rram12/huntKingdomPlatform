@@ -10,6 +10,8 @@
  */
 package Services;
 import Entities.User;
+import Services.BCrypt;
+
 import Utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,13 +33,14 @@ public class UserService {
         cnx2 = MyConnection.getInstance().getCnx();
     }
     
-  /*  public boolean addUser(User u){
+  public boolean addUser(User u){
         if(verifyUsername(u.getUsername())){
             System.err.println("This username is taken! You can choose from these usernames");
             System.err.println(suggestUsername(u.getUsername()));
             return false;
         }
         try {
+            
             String encryptedPW = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(12));
             String requete="INSERT INTO fos_user (username, username_canonical, email, email_canonical, enabled,"
                     + " password, roles, firstName, lastName, address, phoneNumber, picture, gender, contract) "
@@ -65,37 +68,6 @@ public class UserService {
         }
         return true;
     }
-    */
-    public ArrayList<User> showAll(){
-        ArrayList<User> usersList = new ArrayList();
-        try {            
-            Statement st = cnx2.createStatement();
-            String requete = "SELECT * FROM fos_user";
-            ResultSet rs = st.executeQuery(requete);
-            while(rs.next()){
-                User u = new User();
-                u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString(2));
-                u.setEmail(rs.getString(4));
-                u.setPassword(rs.getString(8));
-                u.setLast_login(rs.getString(9));
-                u.setRoles(rs.getString(12));
-                u.setFirstName(rs.getString(13));
-                u.setLastName(rs.getString(14));
-                u.setAddress(rs.getString(15));
-                u.setPhoneNumber(rs.getLong(16));
-                u.setPicture(rs.getString(17));
-                u.setGender(rs.getInt(18));
-                u.setContract(rs.getString(19));
-                u.setConfirmed(rs.getBoolean(20));
-                usersList.add(u);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return usersList;
-    }
-    
     public boolean verifyUsername(String username){
         ArrayList<User> usersList = new ArrayList();
         try {            
@@ -263,3 +235,4 @@ public class UserService {
     }
     
 }
+    

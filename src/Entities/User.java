@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Entities;
+
+
 
 /**
  *
@@ -22,6 +25,7 @@ public class User {
     private String picture;
     private int gender;
     private String contract;
+
     private boolean confirmed;
     private String last_login;
 
@@ -45,6 +49,7 @@ public class User {
         this.contract = contract;
     }
 
+
     public boolean isConfirmed() {
         return confirmed;
     }
@@ -52,6 +57,8 @@ public class User {
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
     }
+
+
     
     public User(String username, String email, String password, String roles, String firstName, String lastName, String address, long phoneNumber, String picture, int gender, String contract) {
         this.username = username;
@@ -175,9 +182,10 @@ public class User {
         this.contract = contract;
     }
 
+
     
 
-   
+
 
     public String getLast_login() {
         return last_login;
@@ -187,4 +195,6 @@ public class User {
         this.last_login = last_login;
     }
     
+
 }
+

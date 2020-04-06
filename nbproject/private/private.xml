@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/AdminProductController.java</file>
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/ReparationController.java</file>
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Services/UserService.java</file>
@@ -11,6 +12,14 @@
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Controllers/RecruitmentsController.java</file>
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Entities/User.java</file>
             <file>file:/E:/roadToInfini/java/projet/final/git/HuntKingdom/src/Services/PromotionService.java</file>
+=======
+            <file>file:/D:/hk/huntkingdom/src/Controllers/ReparateurController.java</file>
+            <file>file:/D:/hk/huntkingdom/src/Services/PublicationService.java</file>
+            <file>file:/D:/hk/huntkingdom/src/Services/UserService.java</file>
+            <file>file:/D:/hk/huntkingdom/src/Services/CommentService.java</file>
+            <file>file:/D:/hk/huntkingdom/src/Controllers/SinglePieceController.java</file>
+            <file>file:/D:/hk/huntkingdom/src/Controllers/AdminProductController.java</file>
+>>>>>>> a642b899ba71f11b2ca50de2910bdf3c3e190189
         </group>
     </open-files>
 </project-private>
