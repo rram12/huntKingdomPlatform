@@ -10,6 +10,7 @@ import Services.JavaMail;
 import Services.PieceService;
 import Services.ReparationService;
 import Utils.MyConnection;
+import Utils.copyFiles;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jfoenix.controls.JFXButton;
@@ -299,17 +300,12 @@ public class ReparationController implements Initializable {
         return flow;
     }
 
-    private void copyFile(File file) {
-        try {
-            File dest = new File("E:\\roadToInfini\\java\\projet\\final\\HuntKingdom\\src\\Uploads\\" + file.getName()); //any location
-            Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }
+  
 
     @FXML
     void chooseImage(ActionEvent event) {
+        
+        System.out.println("choose image...");
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
         FileChooser fc = new FileChooser();
         fc.setTitle("Select an image");
@@ -318,8 +314,11 @@ public class ReparationController implements Initializable {
         File selectedFile = fc.showOpenDialog(null);
         if (selectedFile != null) {
             listView.getItems().add(selectedFile.getName());
-            copyFile(selectedFile);
-            absolutePath = selectedFile.getAbsolutePath();
+            String oldPath = selectedFile.getAbsolutePath();
+            
+            absolutePath = "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + selectedFile.getName() ;
+            copyFiles.deplacerVers( oldPath, "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\");
+
         } else {
             System.out.println("file is not valid !");
         }
