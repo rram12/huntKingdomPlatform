@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AnimalsController">
    <children>
-      <ScrollPane fx:id="scrol" layoutX="162.0" layoutY="93.0" prefHeight="428.0" prefWidth="660.0">
+      <ScrollPane fx:id="scrol" layoutX="162.0" layoutY="93.0" prefHeight="428.0" prefWidth="669.0" stylesheets="@../StyleSheets/style.css">
          <content>
             <HBox fx:id="hbox" prefHeight="419.0" prefWidth="817.0" spacing="30.0" style="-fx-background-color: blue;">
                <children>

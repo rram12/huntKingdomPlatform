@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package Controllers;
-import Services.PieceService;
+import Entities.User;
+import Services.UserService;
+import Utils.MyConnection;
 import huntkingdom.HuntKingdom;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javafx.util.Duration;
 import java.util.ResourceBundle;
@@ -21,13 +25,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -35,6 +37,19 @@ import org.controlsfx.control.Notifications;
  * @author tibh
  */
 public class HomeController implements Initializable {
+    private Connection cnx;
+    private Statement st;
+    private PreparedStatement pst;
+    private PreparedStatement pst1;
+    private ResultSet rs;
+    public static int test ;
+    
+
+    public HomeController() {
+        cnx = MyConnection.getInstance().getCnx();
+        
+
+    }
 
     @FXML
     private AnchorPane mainpane;
@@ -56,6 +71,8 @@ public class HomeController implements Initializable {
     private AnchorPane mainPane;
     @FXML
     private ImageView img;
+    @FXML
+    private Button btnLogout;
 
     /**
      * Initializes the controller class.
@@ -72,6 +89,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
+         btntraining.setStyle("-fx-background-color:transparent");
+         btnanimals.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Animals.fxml"));
         mainpane.getChildren().setAll(pane);
     }
@@ -101,20 +120,28 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void btntrainingAction(ActionEvent event) throws IOException {
+    private void btntrainingAction(ActionEvent event) throws IOException, SQLException {
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+         Services.UserService SU = new UserService();
+        int idU=SU.getConnectedUser();
+        String username = SU.getUserByIdFos(idU);
+        
+        if("toutou".equals(username)==true)
+        {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
+        else if("khaled".equals(username)==true)
+        {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
         mainpane.getChildren().setAll(pane);
     }
+    }
 
     @FXML
-    private void btnreparationAction() throws IOException {
+    private void btnreparationAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
-        mainpane.getChildren().setAll(pane);
-    }
-    
-    @FXML
-    void btnreparateurAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparateur.fxml"));
         mainpane.getChildren().setAll(pane);
     }
       private void loadSplashScreen() {
@@ -127,13 +154,13 @@ public class HomeController implements Initializable {
         mainPane.getChildren().setAll(panee);
  
         //Load splash screen with fade in effect
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), panee);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), panee);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.setCycleCount(1);
  
         //Finish splash with fade out effect
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), panee);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), panee);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
         fadeOut.setCycleCount(1);
@@ -149,32 +176,7 @@ public class HomeController implements Initializable {
         fadeOut.setOnFinished((e) -> {
             try {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
-                 mainPane.getChildren().setAll(pane);  
-                 PieceService ps = new PieceService();
-                 ps.updateEtat();
-                 int i = ps.countPieceReady();
-                 
-                 if(i>0){
-                 String nb =Integer.toString(i);
-                 Image img = new Image("/Uploads/accept.png");
-                ImageView imgV = new ImageView(img);
-                imgV.setFitHeight(100);
-                imgV.setFitWidth(100);
-                
-                  Notifications notif = Notifications.create()
-                .title("pieces")
-                .text(nb+" pieces are ready, you can consult all pieces in reparation")
-                .graphic(imgV)
-                .hideAfter(Duration.seconds(5))
-                .position(Pos.BOTTOM_RIGHT)
-                .darkStyle()
-                          .onAction(s->{
-                         // System.out.println("notif clicked");
-                          });
-        notif.show();
-                 
-                 }
-                
+                 mainPane.getChildren().setAll(pane);
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -183,5 +185,20 @@ public class HomeController implements Initializable {
         Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
+
+    @FXML
+    private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
+        String query = "update fos_user set etat=0";
+        
+                st = cnx.createStatement();
+                
+
+                st.executeUpdate(query);
+                
+        
+      AnchorPane pane;
+         pane = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
+        mainPane.getChildren().setAll(pane);
+    }
     
 }

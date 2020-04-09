@@ -8,6 +8,7 @@ package Controllers;
 import Entities.Entrainement;
 import Services.AnimalService;
 import Services.TrainingService;
+import Services.UserService;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -73,18 +75,24 @@ public class TrainingController implements Initializable {
     private Button Add;
     @FXML
     private AnchorPane main;
+    @FXML
+    private ImageView imageAdd;
+    @FXML
+    private ScrollPane scrol;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
         Services.TrainingService SEntr = new TrainingService();
         Services.AnimalService SA = new AnimalService();
+        Services.UserService SU = new UserService();
 
         globalCurrent = new Entrainement();
         examplePane.setVisible(false);
-
+        imageAdd.setImage(new Image("/Uploads/blog.png"));
         try {
 
             Entrainement elast = SEntr.getById(SEntr.getLastTraining());
@@ -130,13 +138,14 @@ public class TrainingController implements Initializable {
                 });
 
                 last.getChildren().add(supprimer);
-            List<Entrainement> e = SEntr.getTrainings();
+            List<Entrainement> e = SEntr.getTrainingsUser(SU.getConnectedUser());
             System.out.println(e);
             afficher(e);
 
         } catch (SQLException ex) {
             Logger.getLogger(TrainingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
 
     }
 
@@ -270,6 +279,8 @@ public class TrainingController implements Initializable {
             }
            
             tcontainer.getChildren().add(entpane);
+             tcontainer.setStyle("-fx-background-color: transparent;");
+            scrol.setStyle("-fx-background-color: transparent;");
 
         }
     }

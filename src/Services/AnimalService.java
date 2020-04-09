@@ -71,7 +71,7 @@ public class AnimalService implements IServiceAnimal {
     @Override
     public Animal getById(int id) throws SQLException {
         Statement stm = cnx.createStatement();
-        String query = "select id,image_animal from `animal` where id= '" + id + "'";
+        String query = "select id,nom,image_animal from `animal` where id= '" + id + "'";
         ResultSet rst = stm.executeQuery(query);
 
         Animal a = new Animal();
@@ -79,7 +79,9 @@ public class AnimalService implements IServiceAnimal {
         while (rst.next()) {
 
             a.setId(rst.getInt(1));
-            a.setImage_animal(rst.getString(2));
+            a.setNom(rst.getString(2));
+            a.setImage_animal(rst.getString(3));
+            
 
         }
         return a;
@@ -155,6 +157,56 @@ public class AnimalService implements IServiceAnimal {
     @Override
     public void SearchAnimals(String character) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<Animal> getAnimalsCategory(String categorie){
+        List<Animal> myList = new ArrayList();
+        try {
+            Statement st = cnx.createStatement();
+            String requete = "SELECT * FROM animal where categorie='"+categorie+"' ";
+            //executeQuery seulement pour select 
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                Animal a = new Animal();
+                 a.setId(rs.getInt(1));
+            a.setCategorie(rs.getString(2));
+            a.setNom(rs.getString(3));
+            a.setDescription(rs.getString(4));
+            a.setImage_animal(rs.getString(5));
+            a.setDebutSaison(rs.getInt(6));
+            a.setFinSaison(rs.getInt(7));
+                myList.add(a);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return myList;
+    }
+    
+      public List<Animal> getAnimalsOfMonth(int month){
+        List<Animal> myList = new ArrayList();
+        try {
+            Statement st = cnx.createStatement();
+            String requete = "SELECT nom,image_animal FROM animal where debutSaison='"+month+"'";
+            //executeQuery seulement pour select 
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                Animal a = new Animal();
+                 
+            a.setNom(rs.getString(1));
+            
+            a.setImage_animal(rs.getString(2));
+            
+                myList.add(a);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return myList;
     }
 
 }

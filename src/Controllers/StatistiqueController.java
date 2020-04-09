@@ -51,7 +51,7 @@ public class StatistiqueController implements Initializable {
     public void loadData() {
      
    
-    String query="Select entrainement.categorie ,SUM(entrainement.id)*100/Tot.total as pourcentage from entrainement ,(select SUM(id) as total from entrainement) as Tot Group By entrainement.categorie";
+    String query="Select entrainement.categorie ,CONVERT(SUM(entrainement.id)*100/Tot.total,decimal(10,2)) as pourcentage from entrainement ,(select SUM(id) as total from entrainement) as Tot Group By entrainement.categorie";
  
     piechartdata = FXCollections.observableArrayList();
 

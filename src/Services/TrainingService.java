@@ -28,10 +28,10 @@ public class TrainingService implements IServiceTraining {
         cnx = MyConnection.getInstance().getCnx();
     }
 
-    @Override
-    public List<Entrainement> getTrainings() throws SQLException {
+    
+    public List<Entrainement> getTrainingsUser(int id) throws SQLException {
         Statement stm = cnx.createStatement();
-        String query = "select * from `entrainement` where categorie='Hunting' ";
+        String query = "select * from `entrainement` where userid='"+id+"' ";
 
         ResultSet rst = stm.executeQuery(query);
         List<Entrainement> entr = new ArrayList<>();
@@ -82,7 +82,7 @@ public class TrainingService implements IServiceTraining {
     
     public int getLastTraining() throws SQLException {
         Statement stm = cnx.createStatement();
-        String query = "select max(id) as idLast from `entrainement` where categorie='hunting'";
+        String query = "select max(id) as idLast from `entrainement` where userid=5";
         ResultSet rst = stm.executeQuery(query);
         int id=0;
         while (rst.next()) {            
@@ -113,5 +113,70 @@ public class TrainingService implements IServiceTraining {
 
         }
     }
+    public List<Entrainement> getTrainings() throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "select * from `entrainement` where accepter='encours' ";
+
+        ResultSet rst = stm.executeQuery(query);
+        List<Entrainement> entr = new ArrayList<>();
+        while (rst.next()) {
+            Entrainement e = new Entrainement();
+
+            e.setId(rst.getInt(1)); 
+            e.setCategorie(rst.getString(2));
+            e.setNbHeures(rst.getInt(3));
+            e.setDateEnt(rst.getDate(4));
+            e.setPrix(rst.getDouble(5));
+            e.setLieu(rst.getString(6));
+            e.setUserId(rst.getInt(7));
+            e.setEntraineurId(rst.getInt(8));
+            e.setAnimalId(rst.getInt(9));
+            e.setProduitId(rst.getInt(10));
+            e.setAccepter(rst.getString(11));
+
+            entr.add(e);
+        }
+        return entr;
+    }
+    public List<Entrainement> getTrainingsAccepted() throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "select * from `entrainement` where accepter='oui' ";
+
+        ResultSet rst = stm.executeQuery(query);
+        List<Entrainement> entr = new ArrayList<>();
+        while (rst.next()) {
+            Entrainement e = new Entrainement();
+
+            e.setId(rst.getInt(1)); 
+            e.setCategorie(rst.getString(2));
+            e.setNbHeures(rst.getInt(3));
+            e.setDateEnt(rst.getDate(4));
+            e.setPrix(rst.getDouble(5));
+            e.setLieu(rst.getString(6));
+            e.setUserId(rst.getInt(7));
+            e.setEntraineurId(rst.getInt(8));
+            e.setAnimalId(rst.getInt(9));
+            e.setProduitId(rst.getInt(10));
+            e.setAccepter(rst.getString(11));
+
+            entr.add(e);
+        }
+        return entr;
+    }
+    
+    public void updateTraining(int idE,int idT)  {
+       try {
+            String requete = "UPDATE `entrainement` SET `entraineurId`='"+idE+"',`accepter`='oui' WHERE id='"+idT+"'";
+               PreparedStatement pst = cnx.prepareStatement(requete);
+            
+            pst.executeUpdate();
+            System.out.println("Training updated succesfully ! ");
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+ 
 
 }

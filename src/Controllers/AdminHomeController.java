@@ -5,14 +5,19 @@
  */
 package Controllers;
 
+import Utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -29,7 +32,19 @@ import org.controlsfx.control.Notifications;
  * @author tibh
  */
 public class AdminHomeController implements Initializable {
+     private Connection cnx;
+    private Statement st;
+    private PreparedStatement pst;
+    private PreparedStatement pst1;
+    private ResultSet rs;
+    public static int test ;
+    
 
+    public AdminHomeController() {
+        cnx = MyConnection.getInstance().getCnx();
+        
+
+    }
     @FXML
     private AnchorPane mainpane;
     @FXML
@@ -50,18 +65,21 @@ public class AdminHomeController implements Initializable {
     private AnchorPane mainPane;
     @FXML
     private ImageView img;
+    @FXML
+    private Button btnLogout;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        
+        img.setImage(new Image("/Uploads/dash.jpg"));
     }    
 
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
+         btntraining.setStyle("-fx-background-color:transparent");
+         btnanimals.setStyle("-fx-background-color:transparent;-fx-text-fill:#f55e57");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ListAnimalAdmin.fxml"));
         mainpane.getChildren().setAll(pane);
     }
@@ -93,6 +111,8 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btntrainingAction(ActionEvent event) throws IOException {
+         btnanimals.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent;-fx-text-fill:#f55e57");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Statistique.fxml"));
         mainpane.getChildren().setAll(pane);
     }
@@ -102,10 +122,20 @@ public class AdminHomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
         mainpane.getChildren().setAll(pane);
     }
-    
+
     @FXML
-    void btnRecruitmentsAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Recruitments.fxml"));
-        mainpane.getChildren().setAll(pane);
+    private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
+          String query = "update fos_user set etat=0";
+        
+                st = cnx.createStatement();
+                
+
+                st.executeUpdate(query);
+                
+        
+      AnchorPane pane;
+         pane = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
+        mainPane.getChildren().setAll(pane);
     }
+    
 }

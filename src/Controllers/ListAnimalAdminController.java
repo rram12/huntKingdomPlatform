@@ -10,17 +10,11 @@ import Services.AnimalService;
 import Utils.MyConnection;
 import com.sun.prism.impl.Disposer;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +38,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,16 +48,10 @@ import javafx.scene.image.Image;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.Date;
-import java.util.Locale;
  
 
 
@@ -152,10 +139,7 @@ public class ListAnimalAdminController implements Initializable {
         ObservableList<Animal> obsl = FXCollections.observableArrayList(a);
        
       
-        Date date=new Date();
-               SimpleDateFormat dateFormat = new SimpleDateFormat("MM");
-                int m=Integer.parseInt(dateFormat.format(date));
-                System.out.println("the month is : " +m);
+     
         tableAnimal.setItems(obsl);
       
         categorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
@@ -165,12 +149,7 @@ public class ListAnimalAdminController implements Initializable {
         
         debut_saison.setCellValueFactory(new PropertyValueFactory<>("debutSaison"));
         fin_saison.setCellValueFactory(new PropertyValueFactory<>("finSaison"));
-        if(an.getDebutSaison()==m)
-        {
-            debut_saison.setStyle("-fx-background-color: white");
-        }
-        else
-            debut_saison.setStyle("-fx-background-color: none");
+        
         action.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Disposer.Record, Boolean>, ObservableValue<Boolean>>() {
 

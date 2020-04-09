@@ -28,6 +28,7 @@ public class User {
 
     private boolean confirmed;
     private String last_login;
+    private int etat;
 
     public User() {
     }
@@ -193,6 +194,14 @@ public class User {
 
     public void setLast_login(String last_login) {
         this.last_login = last_login;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
     }
     
 

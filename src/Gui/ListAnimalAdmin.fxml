@@ -29,24 +29,24 @@
          <children>
             <Label layoutX="6.0" layoutY="111.0" prefHeight="51.0" prefWidth="99.0" text="Name : " textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="nomtxt" layoutX="121.0" layoutY="126.0" />
             <Label layoutX="3.0" layoutY="58.0" prefHeight="51.0" prefWidth="99.0" text="Category : " textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <ComboBox fx:id="categorietxt" layoutX="121.0" layoutY="72.0" prefWidth="150.0" />
-            <Label layoutX="3.0" layoutY="157.0" prefHeight="51.0" prefWidth="99.0" text="Description : " textFill="WHITE">
+            <Label layoutX="3.0" layoutY="157.0" prefHeight="51.0" prefWidth="107.0" text="Description : " textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <Label layoutX="9.0" layoutY="263.0" prefHeight="51.0" prefWidth="99.0" text="Image : " textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <Button fx:id="editButton" layoutX="132.0" layoutY="456.0" mnemonicParsing="false" onAction="#EditAnimal" prefHeight="46.0" prefWidth="134.0" style="-fx-background-color: #f55e57;" text="Edit" textFill="WHITE" visible="false">
@@ -58,13 +58,13 @@
             <TextArea fx:id="descriptiontxt" layoutX="121.0" layoutY="170.0" prefHeight="90.0" prefWidth="154.0" />
             <Label layoutX="7.0" layoutY="354.0" prefHeight="51.0" prefWidth="111.0" text="Debut Saison :" textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="debut_saisontxt" layoutX="125.0" layoutY="364.0" />
             <Label layoutX="6.0" layoutY="386.0" prefHeight="51.0" prefWidth="111.0" text="Fin Saison :" textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TextField fx:id="fin_saisontxt" layoutX="126.0" layoutY="400.0" />

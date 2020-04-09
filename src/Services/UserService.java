@@ -233,6 +233,66 @@ public class UserService {
         }
 
     }
+      public int authentification(User u){
+        int test = 0;
+          try {
+          String req="select `id`,`username` from fos_user";
+          
+             Statement stm = cnx2.createStatement();
+              
+          ResultSet rs=  stm.executeQuery(req);
+
+          while (rs.next() && (test==0)) {
+            if (u.getUsername().equals((rs.getString("username")))  ){
+                System.out.println("asasasas");
+                 test=rs.getInt(1);
+                 System.out.println(test);
+            }
+            
+            else{
+           System.out.println("erreur");
+
+            test=0;
+            }
+         
+    
+         
+          }
+    }   catch (SQLException ex) {
+              System.out.println("erreur de test");
+        }
+        return test;
+        }
+     public int getConnectedUser() throws SQLException {
+        Statement stm = cnx2.createStatement();
+        String query = "select id  from `fos_user` where etat='1'";
+        ResultSet rst = stm.executeQuery(query);
+        int id = 0;
+        while (rst.next()) {
+            id = rst.getInt("id");
+        }
+        return id;
+    }
+     public String getUserByIdFos(int id) throws SQLException {
+       Statement stm = cnx2.createStatement();
+        String query = "select username  from `fos_user` where id = '"+id+"'";
+        ResultSet rst = stm.executeQuery(query);
+        String username = "";
+        while (rst.next()) {
+            username= rst.getString("username");
+        }
+        return username;
+    }
+      public String getUserByRole(String username) throws SQLException {
+       Statement stm = cnx2.createStatement();
+        String query = "select roles  from `fos_user` where username = '"+username+"'";
+        ResultSet rst = stm.executeQuery(query);
+        String role = "";
+        while (rst.next()) {
+            role= rst.getString("roles");
+        }
+        return username;
+    }
     
 }
     
