@@ -102,7 +102,7 @@ public class LoginController implements Initializable {
         else   if(txtusername.getText().equals("khaled")==true)
         {
         
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
         
         mainPane.getChildren().setAll(pane);
         }

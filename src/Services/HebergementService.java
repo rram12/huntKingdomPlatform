@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Services;
-import Interfaces.IServiceHebergement;
 import Entities.Hebergement;
 import Utils.MyConnection;
 import java.sql.Connection;
@@ -53,7 +52,7 @@ public class HebergementService {
         }    
              return myList;
     }
-    public void addHebergement(Hebergement h){
+    public boolean addHebergement(Hebergement h){
         try {
             String requete="INSERT INTO hebergement(type,prixParJour,image,adresse,nbChambre,nbLits,capacite,description) "
                     + "values(?,?,?,?,?,?,?,?)";
@@ -68,11 +67,13 @@ public class HebergementService {
             pst.setString(8, h.getDescription());
             pst.executeUpdate();
             System.out.println("Accommodation added succesfully");
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
     }
-    public void updateHebergement(Hebergement h) {
+    public boolean updateHebergement(Hebergement h) {
         try {
             String requete = "UPDATE Hebergement SET type = ?, prixParJour = ?, image = ?, adresse = ?, NbChambre = ?, nbLits = ?, capacite = ?, description = ? WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
@@ -87,24 +88,24 @@ public class HebergementService {
             pst.setInt(9, h.getId());
             pst.executeUpdate();
             System.out.println("Accommodation succesfully updated ! ");
-        
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
+            return false;
         }
 
     }
-    public void deleteHebergement(int id) {
+    public boolean deleteHebergement(int id) {
         try {
             String requete = "DELETE FROM Hebergement WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);//index starts with 1 for the first value
             pst.executeUpdate();
             System.out.println("Accommodation succesfully deleted ! ");
-        
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
+            return false;
         }
 
     }

@@ -105,7 +105,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnservicesAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/MoyenDeTransport.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Service.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 

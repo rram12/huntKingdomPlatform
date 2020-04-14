@@ -51,7 +51,7 @@ public class MoyenDeTransportService {
         }    
              return myList;
     }
-    public void addMoyenDeTransport(MoyenDeTransport h){
+    public boolean addMoyenDeTransport(MoyenDeTransport h){
         try {
             String requete="INSERT INTO moyen_de_transport(type,prixParJour,image,categorie,marque) "
                     + "values(?,?,?,?,?)";
@@ -63,11 +63,13 @@ public class MoyenDeTransportService {
             pst.setString(5, h.getMarque());
             pst.executeUpdate();
             System.out.println("Mean of transport succesfully added");
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
     }
-    public void updateMoyenDeTransport(MoyenDeTransport p) {
+    public boolean updateMoyenDeTransport(MoyenDeTransport p) {
         try {
             String requete = "UPDATE moyen_de_transport SET type = ?, prixParJour = ?, image = ?, categorie = ?, marque = ? WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
@@ -79,24 +81,24 @@ public class MoyenDeTransportService {
             pst.setInt(6, p.getId());
             pst.executeUpdate();
             System.out.println("Mean of Transport succesfully updated ! ");
-        
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
+            return false;
         }
 
     }
-    public void deleteMoyenDeTransport(int id) {
+    public boolean deleteMoyenDeTransport(int id) {
         try {
             String requete = "DELETE FROM moyen_de_transport WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);//index starts with 1 for the first value
             pst.executeUpdate();
             System.out.println("Mean of Transport succesfully deleted ! ");
-        
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
+            return false;
         }
 
     }

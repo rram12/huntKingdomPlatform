@@ -5,8 +5,8 @@
  */
 package Services;
 import Entities.Publication;
+import Entities.Comment;
 import Entities.User;
-import edu.huntkingdom.entities.Comment;
 import Utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

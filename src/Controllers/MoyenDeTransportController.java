@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,6 +50,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -105,7 +107,7 @@ public class MoyenDeTransportController implements Initializable {
     private TextField prixParJour;
 
     @FXML
-    private TextField categorie;
+    private ComboBox<String> categorie;
 
     @FXML
     private ComboBox<String> type;
@@ -116,6 +118,7 @@ public class MoyenDeTransportController implements Initializable {
     @FXML
     private TextField marque;
     ObservableList<String>list = FXCollections.observableArrayList("battery","gasoline","diesel");
+    ObservableList<String>list1 = FXCollections.observableArrayList("Vehicule","motorCycle","Truck","Bike");
     @FXML
     private ImageView imageView;
     @FXML
@@ -210,7 +213,7 @@ public class MoyenDeTransportController implements Initializable {
 
         });
         type.setItems(list);
-        
+        categorie.setItems(list1);
         
         table.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN) {
@@ -222,7 +225,7 @@ public class MoyenDeTransportController implements Initializable {
 
                 prixParJour.setText(Float.toString(rowData.getPrixParJour()));
                 marque.setText(rowData.getMarque());
-                categorie.setText(rowData.getCategorie());
+                categorie.setValue(rowData.getCategorie());
                 absolutePath = rowData.getImage();
                 listView.clear();
                 listView.setText(absolutePath.substring(absolutePath.lastIndexOf(("\\")) + 1));
@@ -251,7 +254,7 @@ public class MoyenDeTransportController implements Initializable {
                      */
                     prixParJour.setText(Float.toString(rowData.getPrixParJour()));
                     marque.setText(rowData.getMarque());
-                    categorie.setText(rowData.getCategorie());
+                    categorie.setValue(rowData.getCategorie());
                     absolutePath = rowData.getImage();
                     listView.clear();
                     listView.setText(absolutePath.substring(absolutePath.lastIndexOf(("\\")) + 1));
@@ -294,9 +297,16 @@ public class MoyenDeTransportController implements Initializable {
                         //MyConnection mc = MyConnection.getInstance();
                         MoyenDeTransportService ps = new MoyenDeTransportService();
                         //Piecesdefectueuses p = new Piecesdefectueuses(nom.getText(), combobox.getValue(), description.getText(), image.getText(), 1);
-                        ps.deleteMoyenDeTransport(selectedMoyenDeTransport.getId());
-                        //remove it from the tableView
-                        obsl.remove(selectedMoyenDeTransport);
+                        if(ps.deleteMoyenDeTransport(selectedMoyenDeTransport.getId())){
+                            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                            alert1.setTitle("Mean of Transport");
+                            alert1.setHeaderText(null);
+                            alert1.setContentText("Mean of transport succesfully deleted");
+                            alert1.showAndWait();
+                            //remove it from the tableView
+                            obsl.remove(selectedMoyenDeTransport);
+                            
+                        }
 
                     }
                 }
@@ -316,22 +326,83 @@ public class MoyenDeTransportController implements Initializable {
     }
     @FXML
     public void goToAdd(ActionEvent event) throws IOException {
-          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Service.fxml"));
+          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addMoyenDeTransport.fxml"));
           mainpane.getChildren().setAll(pane);
     }
     
     public void updateTransport(ActionEvent event) throws IOException {
+        if(controleDeSaisie()){
         MyConnection mc = MyConnection.getInstance();
         MoyenDeTransportService ps = new MoyenDeTransportService();
-        MoyenDeTransport mt = new MoyenDeTransport(current_id, type.getValue(),Float.parseFloat(prixParJour.getText()) , absolutePath, marque.getText(), categorie.getText());
-        ps.updateMoyenDeTransport(mt);
+        MoyenDeTransport mt = new MoyenDeTransport(current_id, type.getValue(),Float.parseFloat(prixParJour.getText()) , absolutePath, marque.getText(), categorie.getValue());
+        if(ps.updateMoyenDeTransport(mt)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mean of Transport");
+            alert.setHeaderText(null);
+            alert.setContentText("Mean of transport succesfully updated");
+            alert.showAndWait();
+            obsl.clear();
+            obsl = FXCollections.observableArrayList(ps.afficher());
+            table.setItems(obsl);
+            }
+        
             /**
              * refreshing the table view *
              */
-        obsl.clear();
-        obsl = FXCollections.observableArrayList(ps.afficher());
-        table.setItems(obsl);
+        
 //        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/MoyenDeTransport.fxml"));
 //        mainpane.getChildren().setAll(pane);
+        }
+    }
+    
+    
+    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+
+    }
+    private boolean controleDeSaisie() {
+        
+        if (prixParJour.getText().isEmpty() || marque.getText().isEmpty() 
+                || type.getValue().isEmpty() || categorie.getValue().isEmpty() || absolutePath==null) {
+            if (marque.getText().isEmpty()){
+                marque.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (prixParJour.getText().isEmpty()){
+                prixParJour.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (type.getValue()==null){
+                type.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (categorie.getValue()==null){
+                categorie.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (absolutePath==null){
+                chooserFile.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Please Fill all the fields !");
+            return false;
+        } 
+
+           if (!Pattern.matches("^[\\p{L} .'-]+$", marque.getText()) ) {
+               showAlert(Alert.AlertType.ERROR,"Invalid data", "Verify your fields", "Verify the field Mark ! ");
+                marque.requestFocus();
+                marque.selectEnd();
+                marque.setStyle("-fx-border-color: red; -fx-background-color: white;");
+//                marque.setFocusColor(color);
+                return false;
+            }
+            if (!Pattern.matches("^[0-9]*\\.?[0-9]+$", prixParJour.getText())) {
+                showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Vérifiez The price Per Day field!");
+                prixParJour.requestFocus();
+                prixParJour.selectEnd();
+                prixParJour.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+        
+        return true;
     }
 }

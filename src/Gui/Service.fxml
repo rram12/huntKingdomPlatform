@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
@@ -32,55 +33,55 @@
       </TableView>
       <Group fx:id="ajout" layoutX="-7.0" layoutY="45.0" visible="false">
          <children>
-            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="202.0" />
             <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="63.0" layoutY="245.0" text="Adress" textFill="WHITE">
+            <Label layoutX="50.0" layoutY="167.0" text="Type" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="167.0" text="Type" textFill="WHITE">
+            <ComboBox fx:id="type" layoutX="153.0" layoutY="163.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+            <Label layoutX="50.0" layoutY="205.0" text="Price Per Day" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="adresse" layoutX="154.0" layoutY="241.0" />
-            <Label layoutX="63.0" layoutY="205.0" text="Price Per Day" textFill="WHITE">
+            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="202.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="50.0" layoutY="245.0" text="Adress" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="adresse" layoutX="154.0" layoutY="241.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="50.0" layoutY="282.0" text="Rooms" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nbChambre" layoutX="154.0" layoutY="278.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="50.0" layoutY="317.0" text="Image" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
             <Button fx:id="chooserFile" layoutX="154.0" layoutY="314.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
-            <TextField fx:id="nbChambre" layoutX="154.0" layoutY="278.0" />
-            <Label layoutX="60.0" layoutY="282.0" text="Nb Rooms" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Button fx:id="update" layoutX="233.0" layoutY="458.0" mnemonicParsing="false" onAction="#updateHebergement" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #e78d70;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
-            <ComboBox fx:id="type" layoutX="153.0" layoutY="163.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
-            <TextField fx:id="listView" disable="true" layoutX="154.0" layoutY="339.0">
+            <TextField fx:id="listView" disable="true" layoutX="154.0" layoutY="339.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <Label layoutX="60.0" layoutY="317.0" text="Image" textFill="WHITE">
+            <Label layoutX="50.0" layoutY="377.0" text="Capacity" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="60.0" layoutY="377.0" text="Capacity" textFill="WHITE">
+            <TextField fx:id="capacite" layoutX="154.0" layoutY="373.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="50.0" layoutY="415.0" text="Description" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="capacite" layoutX="154.0" layoutY="373.0" />
-            <Label layoutX="60.0" layoutY="415.0" text="Description" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="description" layoutX="153.0" layoutY="411.0" prefHeight="26.0" prefWidth="150.0" />
+            <TextArea fx:id="description" layoutX="153.0" layoutY="411.0" maxHeight="37.0" minHeight="30.0" prefHeight="37.0" prefWidth="150.0" />
+            <Button fx:id="update" layoutX="233.0" layoutY="458.0" mnemonicParsing="false" onAction="#updateHebergement" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #e78d70;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
          </children>
       </Group>
       <TextField fx:id="search" layoutX="10.0" layoutY="-65.0" opacity="0.39" promptText="Search For Accommodation" styleClass="btn" />

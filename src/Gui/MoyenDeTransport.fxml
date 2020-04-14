@@ -29,41 +29,41 @@
       </TableView>
       <Group fx:id="ajout" visible="false">
          <children>
-            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="242.0" />
+            <TextField fx:id="prixParJour" layoutX="154.0" layoutY="242.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
             <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="63.0" layoutY="293.0" text="Mark" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
             <Label layoutX="65.0" layoutY="203.0" text="Type" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="marque" layoutX="154.0" layoutY="289.0" />
+            <ComboBox fx:id="type" layoutX="154.0" layoutY="199.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" prefHeight="25.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+            <TextField fx:id="marque" layoutX="154.0" layoutY="289.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
             <Label layoutX="63.0" layoutY="245.0" text="Price Per Day" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="chooserFile" layoutX="154.0" layoutY="382.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
-            <TextField fx:id="categorie" layoutX="155.0" layoutY="335.0" />
+            <Button fx:id="chooserFile" layoutX="154.0" layoutY="382.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="choose a file" />
             <Label layoutX="61.0" layoutY="339.0" text="Category" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
+            <ComboBox fx:id="categorie" layoutX="154.0" layoutY="335.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Select..." style="-fx-background-color: white;" />
             <Button fx:id="update" layoutX="154.0" layoutY="458.0" mnemonicParsing="false" onAction="#updateTransport" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
-            <ComboBox fx:id="type" layoutX="153.0" layoutY="199.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
-            <TextField fx:id="listView" disable="true" layoutX="155.0" layoutY="420.0">
+            <TextField fx:id="listView" disable="true" layoutX="155.0" layoutY="408.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
             <Label layoutX="60.0" layoutY="385.0" text="Image" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font>
             </Label>
          </children>
