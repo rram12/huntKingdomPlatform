@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,33 +14,57 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F6EAE4;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F6EAE4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
-      <Pane prefHeight="768.0" prefWidth="768.0">
+      <ImageView fx:id="imglogin" fitHeight="768.0" fitWidth="1372.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Uploads/2020-04-14.jpg" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.72" prefHeight="768.0" prefWidth="1372.0" style="-fx-background-color: black;" />
+      <Pane layoutX="269.0" layoutY="162.0" prefHeight="446.0" prefWidth="829.0" style="-fx-background-color: white;">
          <children>
-            <ImageView fx:id="imglogin" fitHeight="768.0" fitWidth="1372.0" opacity="0.49" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../../../ThinkstockPhotos-942157916-e1534865738428.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="logoimg" fitHeight="256.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="144.0" layoutY="410.0" text="Username : ">
+            <Label layoutX="446.0" layoutY="281.0" text="Password : ">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="144.0" layoutY="483.0" text="Password : ">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtusername" layoutX="318.0" layoutY="414.0" prefHeight="37.0" prefWidth="181.0" />
-            <TextField fx:id="txtpassword" layoutX="320.0" layoutY="481.0" prefHeight="37.0" prefWidth="181.0" />
-            <Button fx:id="btnLogin" layoutX="375.0" layoutY="555.0" mnemonicParsing="false" onAction="#btnLoginAction" style="-fx-background-color: Black;" text="Login" textFill="WHITE">
+            <TextField fx:id="txtusername" layoutX="620.0" layoutY="212.0" prefHeight="37.0" prefWidth="181.0" />
+            <Button fx:id="btnLogin" layoutX="677.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnLoginAction" style="-fx-background-color: Black;" text="Login" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label layoutX="446.0" layoutY="208.0" text="Username : ">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtpassword" layoutX="622.0" layoutY="279.0" prefHeight="37.0" prefWidth="181.0" />
+            <ImageView fitHeight="26.0" fitWidth="326.0" layoutX="462.0" layoutY="116.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Uploads/login.PNG" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="446.0" prefWidth="415.0" style="-fx-background-color: fea526;">
+               <children>
+                  <ImageView fitHeight="203.0" fitWidth="206.0" layoutX="106.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Uploads/logo2.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="130.0" layoutY="225.0" text="Enjoy The Best">
+                     <font>
+                        <Font name="Andalus" size="27.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="33.0" layoutY="276.0" text="Hunting &amp; Fishing Experience.">
+                     <font>
+                        <Font name="Andalus" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
