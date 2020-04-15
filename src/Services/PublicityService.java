@@ -54,7 +54,7 @@ public class PublicityService {
         }    
              return myList;
     }
-     public void addPublicity(Publicity o){
+     public boolean addPublicity(Publicity o){
         try {
             String requete="INSERT INTO publicity(dateDebut,dateFin,compagnie,prix,description,image,titre) "
                     + "values(?,?,?,?,?,?,?)";
@@ -70,21 +70,25 @@ public class PublicityService {
           
             pst.executeUpdate();
             System.out.println("Publicity added succesfully");
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
+        
     }
-      public void deletePublicity(int id) {
+      public boolean deletePublicity(int id) {
         try {
             String requete = "DELETE FROM publicity WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);//index starts with 1 for the first value
             pst.executeUpdate();
             System.out.println("publicity deleted succesfully ! ");
+            return true;
         
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-
+          return false;
         }
 
     }

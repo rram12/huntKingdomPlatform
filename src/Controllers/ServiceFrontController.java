@@ -13,6 +13,7 @@ import Services.HebergementService;
 import Services.LocationService;
 import Services.MoyenDeTransportService;
 import Services.ReservationService;
+import Services.UserService;
 import Utils.MyConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -24,11 +25,14 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -142,12 +146,21 @@ public class ServiceFrontController implements Initializable {
 
     @FXML
     private JFXListView<Location> listLocations;
+    private int idU;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Services.UserService SU = new UserService();
+        try {
+            idU = SU.getConnectedUser();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceFrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         flow.getChildren().clear();
         displayAccommodations();
         flow1.getChildren().clear();
@@ -334,7 +347,7 @@ public class ServiceFrontController implements Initializable {
             LocationService ps = new LocationService();
             int nbj = Integer.parseInt(nbJours1.getText());
             float price = Float.parseFloat(prixParJour.getText()) * nbj;
-            Location l = new Location(nbj, price, java.sql.Date.valueOf(dateArrivee1.getValue().toString()), 3, id);
+            Location l = new Location(nbj, price, java.sql.Date.valueOf(dateArrivee1.getValue().toString()), idU, id);
             if (ps.ajouterLocation(l)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Rent");
@@ -359,7 +372,7 @@ public class ServiceFrontController implements Initializable {
             ReservationService ps = new ReservationService();
             int nbj = Integer.parseInt(nbJours.getText());
             float price = Float.parseFloat(prixParJourHeb.getText()) * nbj;
-            Reservation r = new Reservation(nbj, price, java.sql.Date.valueOf(dateArrivee.getValue().toString()), 3, id);
+            Reservation r = new Reservation(nbj, price, java.sql.Date.valueOf(dateArrivee.getValue().toString()), idU, id);
             if (ps.ajouterReservation(r)) {
 //                ps.afficherReservations(id);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

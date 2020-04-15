@@ -37,7 +37,7 @@ public class ReservationService {
             pst.setInt(4, r.getUserId());
             pst.setInt(5, r.getHebergementId());
             pst.executeUpdate();
-            System.out.println("Rent succesfully added ! ");
+            System.out.println("Reservation succesfully added ! ");
             return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -49,7 +49,7 @@ public class ReservationService {
     public List<Reservation> afficherReservations(int id) {
         List<Reservation> myList = new ArrayList();
         try {
-            String requete = "SELECT * FROM Reservation where Hebergementid=? and dateArrivee > SYSDATE() order by dateArrivee";
+            String requete = "SELECT * FROM Reservation where Hebergementid=? and DATE_ADD(dateArrivee, INTERVAL nbJours DAY)> SYSDATE() order by dateArrivee";
             PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
@@ -67,7 +67,7 @@ public class ReservationService {
             }
 
         } catch (SQLException ex) {
-            System.err.println("error d affichage");
+            System.err.println("error displaying the list of reservations");
 
         }
         System.out.println(myList);

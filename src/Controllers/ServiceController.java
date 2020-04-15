@@ -365,7 +365,12 @@ public class ServiceController implements Initializable {
     }
 
     public void goToAdd(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addMoyenDeTransport.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addHebergement.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
+    
+    public void goToMoyenDeTransport(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/MoyenDeTransport.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 

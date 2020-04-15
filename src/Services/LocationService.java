@@ -48,7 +48,7 @@ public class LocationService {
     public List<Location> afficherLocations(int id) {
         List<Location> myList = new ArrayList();
         try {
-            String requete = "SELECT * FROM Location where MoyenDeTransportId=? and dateArrivee > SYSDATE() order by dateArrivee";
+            String requete = "SELECT * FROM Location where MoyenDeTransportId=? and DATE_ADD(dateArrivee, INTERVAL nbJours DAY)> SYSDATE() order by dateArrivee";
             PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();

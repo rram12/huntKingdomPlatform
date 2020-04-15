@@ -29,7 +29,7 @@ public class CompetitionService {
          List<Competition> myList= new ArrayList();
         try {
            
-            String requete = "SELECT * FROM Competition ";
+            String requete = "SELECT * FROM Competition where dateDebut > SYSDATE() ";
             PreparedStatement pst = cnx2.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

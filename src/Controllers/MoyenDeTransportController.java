@@ -330,6 +330,12 @@ public class MoyenDeTransportController implements Initializable {
           mainpane.getChildren().setAll(pane);
     }
     
+    @FXML
+    public void goToAccommodations(ActionEvent event) throws IOException {
+          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Service.fxml"));
+          mainpane.getChildren().setAll(pane);
+    }
+    
     public void updateTransport(ActionEvent event) throws IOException {
         if(controleDeSaisie()){
         MyConnection mc = MyConnection.getInstance();

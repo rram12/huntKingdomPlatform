@@ -182,8 +182,7 @@ public class EventController implements Initializable {
         
         table.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN) {
-                TableRow<Competition> row = new TableRow<>();
-                Competition rowData = row.getItem();
+                Competition rowData = table.getSelectionModel().getSelectedItem();
                 /**
                  * fill the fields with the selected data *
                  */
@@ -269,7 +268,7 @@ public class EventController implements Initializable {
                 public void handle(ActionEvent t) {
                     //confirmation alert 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Validate Fields");
+                    alert.setTitle("Delete confirmation");
                     alert.setHeaderText(null);
                     alert.setContentText("are you sure ?");
 
@@ -282,7 +281,6 @@ public class EventController implements Initializable {
                         //remove it from the database
                         //MyConnection mc = MyConnection.getInstance();
                         CompetitionService ps = new CompetitionService();
-                        //Piecesdefectueuses p = new Piecesdefectueuses(nom.getText(), combobox.getValue(), description.getText(), image.getText(), 1);
                         ps.deleteCompetition(currentComp.getId());
          
                         

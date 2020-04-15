@@ -13,13 +13,16 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainpane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PublicityController">
    <children>
-       <Button id="addCompetition" fx:id="addPublicity" layoutX="602.0" layoutY="563.0" mnemonicParsing="false" onAction="#goToAddP" style="-fx-background-color: orange;" text="Add Publicity" textFill="WHITE">
+       <Button id="addCompetition" fx:id="addPublicity" layoutX="661.0" layoutY="513.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAddP" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="Add Publicity" textFill="WHITE">
          <styleClass>
             <String fx:value="success" />
             <String fx:value="btn" />
          </styleClass>
+         <font>
+            <Font size="14.0" />
+         </font>
       </Button>
-      <TableView fx:id="table" layoutX="313.0" layoutY="87.0" prefHeight="400.0" prefWidth="645.0">
+      <TableView fx:id="table" layoutX="425.0" layoutY="87.0" prefHeight="400.0" prefWidth="601.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="starts" prefWidth="75.0" text="Starts" />
@@ -33,58 +36,53 @@
       </TableView>
       <Group fx:id="modif">
          <children>
-            <TextField fx:id="es" layoutX="154.0" layoutY="199.0" />
+            <TextField fx:id="es" layoutX="154.0" layoutY="199.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
             <ImageView fx:id="imageView" fitHeight="112.0" fitWidth="200.0" layoutX="65.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="63.0" layoutY="244.0" text="Company" textFill="WHITE">
+            <Label layoutX="63.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Company" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="160.0" text="Starts" textFill="WHITE">
+            <Label layoutX="65.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Starts" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="compagnie" layoutX="154.0" layoutY="241.0" />
-            <Label layoutX="63.0" layoutY="202.0" text="Ends" textFill="WHITE">
+            <TextField fx:id="compagnie" layoutX="154.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
+            <Label layoutX="63.0" layoutY="202.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Ends" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="chooserFile" layoutX="154.0" layoutY="363.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: white;" text="choose a file" />
-            <TextField fx:id="pe" layoutX="155.0" layoutY="284.0" />
-            <Label layoutX="61.0" layoutY="339.0" text="Category" textFill="WHITE">
+            <Button fx:id="chooserFile" layoutX="154.0" layoutY="368.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="149.0" text="choose a file" />
+            <TextField fx:id="pe" layoutX="155.0" layoutY="284.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
+            <Button fx:id="update" layoutX="154.0" layoutY="477.0" mnemonicParsing="false" onAction="#updatePublicity" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+            <Label layoutX="62.0" layoutY="368.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Image" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="update" layoutX="154.0" layoutY="465.0" mnemonicParsing="false" onAction="#updatePublicity" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
-            <Label layoutX="60.0" layoutY="368.0" text="Image" textFill="WHITE">
+            <TextField fx:id="ss" layoutX="154.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="descrip" layoutX="154.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="titr" layoutX="154.0" layoutY="435.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
+            <Label layoutX="63.0" layoutY="287.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Price" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="ss" layoutX="154.0" layoutY="158.0" />
-            <TextField fx:id="descrip" layoutX="154.0" layoutY="326.0" />
-            <TextField fx:id="titr" layoutX="154.0" layoutY="427.0" />
-            <Label layoutX="68.0" layoutY="292.0" text="Price" textFill="WHITE">
+            <Label layoutX="62.0" layoutY="327.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Description" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="331.0" text="Description" textFill="WHITE">
+            <Label layoutX="64.0" layoutY="435.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Title" textFill="WHITE">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Black" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="68.0" layoutY="434.0" text="Title" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="listView" layoutX="154.0" layoutY="388.0" />
+            <TextField fx:id="listView" layoutX="154.0" layoutY="394.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
          </children>
       </Group>
-         <TextField fx:id="search" layoutX="313.0" layoutY="37.0" promptText="Search For Publicity" />
+         <TextField fx:id="search" layoutX="424.0" layoutY="37.0" promptText="Search For Publicity ..." />
    </children>
 </AnchorPane>

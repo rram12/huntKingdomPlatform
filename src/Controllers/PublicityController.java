@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Controllers.ListAnimalAdminController.showAlert;
 import Entities.Publicity;
 import Services.PublicityService;
 import Utils.MyConnection;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -282,6 +284,51 @@ public class PublicityController implements Initializable {
           AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addPublicity.fxml"));
           mainpane.getChildren().setAll(pane);
     }
+
+    private boolean validateFields() {
+                
+        
+        if (pe.getText().isEmpty() || titr.getText().isEmpty() 
+                || compagnie.getText().isEmpty() || descrip.getText().isEmpty() || absolutePath==null) {
+            if (titr.getText().isEmpty()){
+                titr.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (pe.getText().isEmpty()){
+                pe.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (compagnie.getText().isEmpty()){
+                compagnie.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (descrip.getText().isEmpty()){
+                descrip.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (absolutePath==null){
+                chooserFile.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Please Fill all the fields !");
+            return false;
+        } 
+
+           if (!Pattern.matches("^[\\p{L} .'-]+$", titr.getText()) ||pe.getText().isEmpty() ) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field title ! ");
+                titr.requestFocus();
+                titr.selectEnd();
+                titr.setStyle("-fx-border-color: red; -fx-background-color: white;");
+//                marque.setFocusColor(color);
+                return false;
+            }
+            if (!Pattern.matches("^[0-9]*\\.?[0-9]+$", pe.getText())) {
+                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez The price field!");
+                pe.requestFocus();
+                pe.selectEnd();
+                pe.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+        
+        return true;
+    
+        
+    }
      
       private class ButtonCell extends TableCell<Disposer.Record, Boolean> {
 
@@ -304,16 +351,23 @@ public class PublicityController implements Initializable {
                     if (action.get() == ButtonType.OK) {
                         // get Selected Item
                         Publicity currentPub = (Publicity) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-                        //remove it from the tableView
-                        pub.remove(currentPub);
+
                         //remove it from the database
                         //MyConnection mc = MyConnection.getInstance();
                         PublicityService ps = new PublicityService();
                         //Piecesdefectueuses p = new Piecesdefectueuses(nom.getText(), combobox.getValue(), description.getText(), image.getText(), 1);
-                        ps.deletePublicity(currentPub.getId());
-         
                         
-
+                          if(ps.deletePublicity(currentPub.getId())){
+                            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                            alert1.setTitle("Mean of Transport");
+                            alert1.setHeaderText(null);
+                            alert1.setContentText("Mean of transport succesfully deleted");
+                            alert1.showAndWait();
+                            //remove it from the tableView
+                            pub.remove(currentPub);
+                            
+                        
+                          }
                   }
                     
                 }
@@ -332,6 +386,7 @@ public class PublicityController implements Initializable {
         }
     }
       public void updatePublicity(ActionEvent event) {
+        if(validateFields()){  
         MyConnection mc = MyConnection.getInstance();
         PublicityService ps = new PublicityService();
         float price=Float.parseFloat(pe.getText());
@@ -342,9 +397,18 @@ public class PublicityController implements Initializable {
         pub.clear();
         pub= FXCollections.observableArrayList(ps.afficher());
         table.setItems(pub);
-
-    } 
+        }
+    }
       
+    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+
+    }
+
       
 
     

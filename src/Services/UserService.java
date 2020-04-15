@@ -263,6 +263,33 @@ public class UserService {
         }
         return test;
         }
+        public User getConnectedUser1() {
+        User u = new User();
+        try {
+            String req = "select * from `fos_user` where etat='1'";
+            Statement st = cnx2.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            if (rs.next()) {
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString(2));
+                u.setEmail(rs.getString(4));
+                u.setPassword(rs.getString(8));
+                u.setLast_login(rs.getString(9));
+                u.setRoles(rs.getString(12));
+                u.setFirstName(rs.getString(13));
+                u.setLastName(rs.getString(14));
+                u.setAddress(rs.getString(15));
+                u.setPhoneNumber(rs.getLong(16));
+                u.setPicture(rs.getString(17));
+                u.setGender(rs.getInt(18));
+                u.setContract(rs.getString(19));
+                u.setConfirmed(rs.getBoolean(20));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return u;
+    }
      public int getConnectedUser() throws SQLException {
         Statement stm = cnx2.createStatement();
         String query = "select id  from `fos_user` where etat='1'";

@@ -76,7 +76,7 @@ public class AddMoyenDeTransportController implements Initializable {
 
     private void copyFile(File file) {
         try {
-            File dest = new File("C:\\Users\\ASUS1\\Desktop\\java projects\\Nerds Java\\HuntKingdom\\Uploads\\" + file.getName()); //any location
+            File dest = new File("E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + file.getName()); //any location
             Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             System.out.println(ex);

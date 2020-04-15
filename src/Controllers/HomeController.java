@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Controllers;
+import Entities.Publicity;
 import Entities.User;
+import Services.PublicityService;
 import Services.UserService;
 import Utils.MyConnection;
 import huntkingdom.HuntKingdom;
@@ -15,20 +17,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javafx.util.Duration;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -75,6 +82,17 @@ public class HomeController implements Initializable {
     private ImageView img;
     @FXML
     private Button btnLogout;
+    
+         @FXML
+    private Pane pane;
+    
+    
+    MyConnection mc = MyConnection.getInstance();
+    PublicityService ps = new PublicityService();
+    ArrayList<Publicity> trans = (ArrayList<Publicity>) ps.afficher();
+    public ObservableList<Publicity> obsl = FXCollections.observableArrayList(trans);
+    Node[] nodes = new Node[obsl.size()];
+    int i=0;
 
     /**
      * Initializes the controller class.
@@ -87,39 +105,88 @@ public class HomeController implements Initializable {
         }
         img.setImage(new Image("/Uploads/2.jpg"));
         logoimg.setImage(new Image("/Uploads/logo.png"));
-        
+        pane.getChildren().clear();
+        i=0;
+        displayPub(i);
     }    
 
+    private void displayPub(int i) {
+            try {
+
+                FXMLLoader loader = new FXMLLoader();
+
+                Pane root = loader.load(getClass().getResource("/Gui/AffichageHomePublicity.fxml").openStream());
+                AffichageHomePublicityController single = (AffichageHomePublicityController) loader.getController();
+                single.getInfo(trans.get(i));
+                int id1 = single.getCurrentId();
+                Publicity m = trans.get(i);
+
+                nodes[i] = root;
+                pane.getChildren().add(nodes[i]);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+     @FXML
+     void nextPub(ActionEvent event) {
+         if(i==obsl.size()-1){
+             i=0;
+         }else{
+             i++;
+         }
+         pane.getChildren().clear();
+         displayPub(i);
+
+    }
+
+     @FXML
+     void previousPub(ActionEvent event) {
+         if(i==0){
+             i=obsl.size()-1;
+         }else{
+             i--;
+         }
+         pane.getChildren().clear();
+         displayPub(i);
+
+    }
+    
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
          btntraining.setStyle("-fx-background-color:transparent");
          btnanimals.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Animals.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     @FXML
     private void btneventsAction(ActionEvent event)throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Event.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/consultCompetition.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Shop.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     @FXML
     private void btnhomeAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
         mainPane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     @FXML
     private void btnservicesAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ServiceFront.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     @FXML
@@ -134,12 +201,14 @@ public class HomeController implements Initializable {
        
          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
        else if((role.equals("TRAINER")==true))
         {
         
          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
     }
 
@@ -148,6 +217,7 @@ public class HomeController implements Initializable {
     private void btnreparationAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
       private void loadSplashScreen() {
     try {

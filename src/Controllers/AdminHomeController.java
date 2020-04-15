@@ -89,6 +89,11 @@ public class AdminHomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Event.fxml"));
         mainpane.getChildren().setAll(pane);
     }
+    @FXML
+    private void btnpublicityAction(ActionEvent event)throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Publicity.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
