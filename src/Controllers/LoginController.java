@@ -42,8 +42,6 @@ public class LoginController implements Initializable {
     private ResultSet rs;
     public static int test ;
     @FXML
-    private ImageView logoimg;
-    @FXML
     private Button btnLogin;
     @FXML
     private ImageView imglogin;

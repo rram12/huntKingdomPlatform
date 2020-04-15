@@ -10,9 +10,11 @@ import Services.AnimalService;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +32,10 @@ public class AnimalsController implements Initializable {
     private HBox hbox;
     @FXML
     private ScrollPane scrol;
+    @FXML
+    private RadioButton filterhunting;
+    @FXML
+    private RadioButton filterFishing;
     /**
      * Initializes the controller class.
      */
@@ -107,6 +113,26 @@ public class AnimalsController implements Initializable {
             
         }    
     
+    }
+
+    @FXML
+    private void filterHuntinkAction(ActionEvent event) {
+         AnimalService SA = new AnimalService();
+            hbox.getChildren().clear();
+               
+                        
+        afficher(SA.getAnimalsCategory("hunting"));
+        filterFishing.setSelected(false);
+    }
+
+    @FXML
+    private void filterFishingAction(ActionEvent event) {
+         AnimalService SA = new AnimalService();
+            hbox.getChildren().clear();
+               
+                        
+        afficher(SA.getAnimalsCategory("fishing"));
+        filterhunting.setSelected(false);
     }
     
 }
