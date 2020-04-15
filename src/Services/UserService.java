@@ -275,21 +275,43 @@ public class UserService {
     }
      public String getUserByIdFos(int id) throws SQLException {
        Statement stm = cnx2.createStatement();
-        String query = "select username  from `fos_user` where id = '"+id+"'";
+        String query = "select roles  from `fos_user` where id = '"+id+"'";
         ResultSet rst = stm.executeQuery(query);
-        String username = "";
+        String role = "";
+        String r="";
         while (rst.next()) {
-            username= rst.getString("username");
+            role= rst.getString("roles");
+            role = role.substring(20, role.length());
+            r=role.substring(0, role.length()-3);
+            
         }
-        return username;
+        return r;
     }
       public String getUserByRole(String username) throws SQLException {
        Statement stm = cnx2.createStatement();
-        String query = "select roles  from `fos_user` where username = '"+username+"'";
+        String query = "select roles  from `fos_user` where username='"+username+"'";
         ResultSet rst = stm.executeQuery(query);
         String role = "";
+        String r="";
         while (rst.next()) {
             role= rst.getString("roles");
+            role = role.substring(20, role.length());
+            r=role.substring(0, role.length()-3);
+            
+        }
+        return r;
+    }
+     
+      public String getUsername(int id) throws SQLException {
+       Statement stm = cnx2.createStatement();
+        String query = "select username  from `fos_user` where id='"+id+"'";
+        ResultSet rst = stm.executeQuery(query);
+        String username = "";
+       
+        while (rst.next()) {
+            username= rst.getString("username");
+            
+            
         }
         return username;
     }

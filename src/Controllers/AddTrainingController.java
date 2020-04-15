@@ -157,7 +157,7 @@ public class AddTrainingController implements Initializable {
             prix.setText(answer);
 
             Entrainement e = new Entrainement(categorieComb, parseInt(nh.getText()), java.sql.Date.valueOf(dT.getValue().toString()), Double.parseDouble(prix.getText()), comboPlace.getValue(), idU, idAnimal, idProduit);
-
+            showAlert(Alert.AlertType.INFORMATION, "", "", "Training Added Successfully !");
             try {
                 SEntr.addTraining(e);
                 AnchorPane main = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
@@ -187,12 +187,12 @@ public class AddTrainingController implements Initializable {
         
        
         if (nh.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Veuillez bien remplir tous les champs !");
+            showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Please fill in all the fields !");
             return false;
         } else {
 
             if (!Pattern.matches("^[0-9]*$", nh.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez nombre des heures  !");
+                showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Check number of hours !");
                 nh.requestFocus();
                 nh.selectEnd();
                 return false;
@@ -203,7 +203,7 @@ public class AddTrainingController implements Initializable {
               Date datee;
             datee = java.sql.Date.valueOf(dT.getValue());
             if(d.compareTo(datee)==1) {
-                 showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Date > Date courante !");
+                 showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Date > System Date !");
                 dT.requestFocus();
                 
                 return false;

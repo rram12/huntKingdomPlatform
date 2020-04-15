@@ -235,6 +235,7 @@ public class ListAnimalAdminController implements Initializable {
             AnimalService ps = new AnimalService();
             //Animal a = new Animal(current_id, categorietxt.getValue(),nomtxt.getText(),descriptiontxt.getText(), imagetxt.getText(),debut_saisontxt.getText(),fin_saisontxt.getText());
             Animal a =new Animal(current_id, categorietxt.getValue(), nomtxt.getText(),descriptiontxt.getText(),imagetxt.getText(),parseInt(debut_saisontxt.getText()),parseInt(fin_saisontxt.getText()));
+             showAlert(Alert.AlertType.INFORMATION, "", "", "Animal Updated Successfully !");
             ps.updateAnimal(a,current_id);
             AnchorPane redirected;
                         redirected = FXMLLoader.load(getClass().getResource("/Gui/ListAnimalAdmin.fxml")); 
@@ -331,12 +332,13 @@ public class ListAnimalAdminController implements Initializable {
              {
         Services.AnimalService SA = new AnimalService();
         String categorieComb=categorietxt.getValue();
-        
-        Animal a =new Animal(categorietxt.getValue(), nomtxt.getText(),descriptiontxt.getText(),imagetxt.getText(),parseInt(debut_saisontxt.getText()),parseInt(fin_saisontxt.getText()));
        
+        Animal a =new Animal(categorietxt.getValue(), nomtxt.getText(),descriptiontxt.getText(),imagetxt.getText(),parseInt(debut_saisontxt.getText()),parseInt(fin_saisontxt.getText()));
+                  showAlert(Alert.AlertType.INFORMATION, "", "", "Animal Added Successfully !");
                  try {
              
             SA.addAnimal(a);
+            
             AnchorPane redirected;
                         redirected = FXMLLoader.load(getClass().getResource("/Gui/ListAnimalAdmin.fxml")); 
                         anchorPane.getChildren().setAll(redirected);
@@ -359,32 +361,32 @@ public class ListAnimalAdminController implements Initializable {
 
         if (nomtxt.getText().isEmpty() || descriptiontxt.getText().isEmpty() || imagetxt.getText().isEmpty()
                 || debut_saisontxt.getText().isEmpty() || fin_saisontxt.getText().isEmpty() ) {
-            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Veuillez bien remplir tous les champs !");
+            showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Please fill in all the fields !");
             return false;
         } else {
 
            if (!Pattern.matches("^[\\p{L} .'-]+$", nomtxt.getText())) {
-               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez le nom de l'animal ! ");
+               showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Check the animal's name ! ");
                 nomtxt.requestFocus();
                 nomtxt.selectEnd();
                 return false;
             }
 
             if (!Pattern.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$", descriptiontxt.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez la description du produit ! ");
+                showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Check Animal's Description  ! ");
                 descriptiontxt.requestFocus();
                 descriptiontxt.selectEnd();
                 return false;
             }
 
             if (!Pattern.matches("^[0-9]*$", debut_saisontxt.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez debut saison  !");
+                showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Check early season  !");
                 debut_saisontxt.requestFocus();
                 debut_saisontxt.selectEnd();
                 return false;
             }
              if (!Pattern.matches("^[0-9]*$", fin_saisontxt.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Vérifiez fin saison !");
+                showAlert(Alert.AlertType.ERROR, "Wrong Data", "Check the data", "Check end of season !");
                 fin_saisontxt.requestFocus();
                 fin_saisontxt.selectEnd();
                 return false;

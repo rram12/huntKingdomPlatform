@@ -3,25 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/CoordonneesGPS.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/MoyenDeTransport.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Utils/map.html</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Controllers/MapEvent.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Utils/ReverseGeoCoding.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/Reservation.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Services/LocationService.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Services/MoyenDeTransportService.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Utils/GoogleMapsAPI.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/Comment.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/Hebergement.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Controllers/SingleMoyenDeTransportController.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Services/HebergementService.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Services/ReservationService.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Controllers/AddMoyenDeTransportController.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Services/CommentService.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Controllers/ServiceController.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Entities/Location.java</file>
-            <file>file:/C:/Users/ASUS1/Desktop/Projet%20Pi/huntkingdom/src/Controllers/SingleHebergementController.java</file>
+            <file>file:/C:/Users/tibh/Desktop/Pidev2020/copieJava/huntkingdom/src/Controllers/HomeController.java</file>
+            <file>file:/C:/Users/tibh/Desktop/Pidev2020/copieJava/huntkingdom/src/Controllers/TrainingController.java</file>
+            <file>file:/C:/Users/tibh/Desktop/Pidev2020/copieJava/huntkingdom/src/Controllers/AnimalsController.java</file>
+            <file>file:/C:/Users/tibh/Desktop/Pidev2020/copieJava/huntkingdom/src/Controllers/LoginController.java</file>
         </group>
     </open-files>
 </project-private>

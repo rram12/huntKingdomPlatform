@@ -177,6 +177,76 @@ public class TrainingService implements IServiceTraining {
 
         }
     }
+    
+     public void updateLike(String note,int idT)  {
+       try {
+            String requete = "UPDATE `entrainement` SET `likeTrainer`='"+note+"' WHERE id='"+idT+"'";
+               PreparedStatement pst = cnx.prepareStatement(requete);
+            
+            pst.executeUpdate();
+            System.out.println("Trainer Liked  succesfully ! ");
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
  
+  public int Test(int idT){
+        int test = 0;
+          try {
+          String req="select likeTrainer  from `entrainement` where id='"+idT+"'";
+          
+             Statement stm = cnx.createStatement();
+              
+          ResultSet rs=  stm.executeQuery(req);
+
+          while (rs.next() && (test==0)) {
+            if ("heart".equals((rs.getString("likeTrainer")))  ){
+                test=1;
+                 System.out.println(test);
+            }
+            
+            else if ("unheart".equals((rs.getString("likeTrainer")))  ){
+                test=2;
+                 System.out.println(test);
+            }
+            else{
+            test=0;
+            }
+           
+         
+    
+         
+          }
+    }   catch (SQLException ex) {
+              System.out.println("erreur de test");
+        }
+        return test;
+        }
+  
+  
+        public int getNnLike(int idu) throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "select COUNT(entrainement.likeTrainer) as nb , entrainement.entraineurId FROM entrainement,fos_user WHERE entrainement.entraineurId=fos_user.id and entrainement.likeTrainer='heart' and fos_user.id='"+idu+"' GROUP BY entrainement.entraineurId";
+        ResultSet rst = stm.executeQuery(query);
+        int nb=0;
+        while (rst.next()) {            
+            nb=rst.getInt("nb");
+        }
+     return nb;
+    }
+        
+        public int getNnDisLike(int idu) throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "select COUNT(entrainement.likeTrainer) as nb , entrainement.entraineurId FROM entrainement,fos_user WHERE entrainement.entraineurId=fos_user.id and entrainement.likeTrainer='unheart' and fos_user.id='"+idu+"' GROUP BY entrainement.entraineurId";
+        ResultSet rst = stm.executeQuery(query);
+        int nb=0;
+        while (rst.next()) {            
+            nb=rst.getInt("nb");
+        }
+     return nb;
+    }
+        
 
 }

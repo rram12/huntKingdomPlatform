@@ -66,10 +66,10 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        logoimg.setImage(new Image("/Uploads/logo2.png"));
-        imglogin.setImage(new Image("/Uploads/backgrounLogin.jpg"));
+       
     }    
 
+   
     @FXML
     private void btnLoginAction(ActionEvent event) throws IOException, SQLException {
          System.out.println("aaa");
@@ -92,24 +92,27 @@ public class LoginController implements Initializable {
                 st.executeUpdate(query);
                 if(test!=0){
                     String role = sp.getUserByRole(txtusername.getText());
-        if(txtusername.getText().equals("salsa")==true)
+                    System.out.println(role);
+        //if(txtusername.getText().equals("salsa")==true)
+        if(role.equals("ADMIN")==true)
         {
         
          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
          
         mainPane.getChildren().setAll(pane);
         }
-        else   if(txtusername.getText().equals("khaled")==true)
-        {
-        
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
-        
-        mainPane.getChildren().setAll(pane);
-        }
-        else if(txtusername.getText().equals("toutou")==true)
+       
+        else if(role.equals("TRAINER")==true)
         {
         
          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+        mainPane.getChildren().setAll(pane);
+        }
+         else if(role.equals("CLIENT")==true)
+        {
+        
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+        
         mainPane.getChildren().setAll(pane);
         }
     }

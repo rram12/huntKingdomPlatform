@@ -43,6 +43,8 @@ public class HomeController implements Initializable {
     private PreparedStatement pst1;
     private ResultSet rs;
     public static int test ;
+    @FXML
+    private ImageView logoimg;
     
 
     public HomeController() {
@@ -84,6 +86,7 @@ public class HomeController implements Initializable {
                     loadSplashScreen();
         }
         img.setImage(new Image("/Uploads/2.jpg"));
+        logoimg.setImage(new Image("/Uploads/logo.png"));
         
     }    
 
@@ -125,19 +128,21 @@ public class HomeController implements Initializable {
         btntraining.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
          Services.UserService SU = new UserService();
         int idU=SU.getConnectedUser();
-        String username = SU.getUserByIdFos(idU);
+        String role = SU.getUserByIdFos(idU);
+       if((role.equals("CLIENT")==true))
+        {
+       
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
+       else if((role.equals("TRAINER")==true))
+        {
         
-        if("toutou".equals(username)==true)
-        {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
-        mainpane.getChildren().setAll(pane);
-    }
-        else if("khaled".equals(username)==true)
-        {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
         mainpane.getChildren().setAll(pane);
     }
     }
+
 
     @FXML
     private void btnreparationAction(ActionEvent event) throws IOException {

@@ -7,8 +7,10 @@ package Controllers;
 
 
 
+import static Controllers.AddTrainingController.showAlert;
 import Entities.Entrainement;
 import Services.AnimalService;
+import Services.JavaMail;
 import Services.TrainingService;
 import Services.UserService;
 import java.io.IOException;
@@ -29,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -53,6 +56,7 @@ public class TrainingListController implements Initializable {
     private ScrollPane scrollTraining;
     
     TrainingService ST = new TrainingService();
+     Services.UserService SU = new UserService();
     
     @FXML
     private VBox vbox;
@@ -64,6 +68,16 @@ public class TrainingListController implements Initializable {
     private Pane paneReminder;
     @FXML
     private ImageView imgclose;
+    @FXML
+    private ImageView imgCertif;
+    @FXML
+    private ImageView like;
+    @FXML
+    private ImageView dislike;
+    @FXML
+    private Label nbLike;
+    @FXML
+    private Label nbdislike;
     
    
     /**
@@ -81,8 +95,17 @@ public class TrainingListController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TrainingListController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("dfvdfhvbhs");
-         calendar.setImage(new Image("/Uploads/calendar.png"));
+        
+         calendar.setImage(new Image("Uploads/calendar.png"));
+         like.setImage(new Image("Uploads/hearted.png"));
+         dislike.setImage(new Image("Uploads/broken-heart.png"));
+        try {
+            nbLike.setText(Integer.toString(ST.getNnLike(SU.getConnectedUser())));
+            nbdislike.setText(Integer.toString(ST.getNnDisLike(SU.getConnectedUser())));
+        } catch (SQLException ex) {
+            Logger.getLogger(TrainingListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
          
           
         Date now = new Date();
@@ -123,10 +146,17 @@ public class TrainingListController implements Initializable {
             int diff = (int)getDaysBetweenDates(date1,entr.getDateEnt());
             if(diff==0)
             {
-                  remind.setText("Training For " + SU.getUserByIdFos(entr.getUserId())+" Today");
+                  remind.setText("Training For " + SU.getUsername(entr.getUserId())+" Today");
             }
+            else if(diff<0)
+            {
+                 
+             remind.setText(" Finished Training For " + SU.getUsername(entr.getUserId()));
+                
+            }
+            
             else 
-              remind.setText("Training For " + SU.getUserByIdFos(entr.getUserId())+" After "+diff+" Days");
+              remind.setText("Training For " + SU.getUsername(entr.getUserId())+" After "+diff+" Days");
                 remind.setLayoutX(1);
                 remind.setLayoutY(1);
                  vb.getChildren().add(remind);
@@ -140,7 +170,19 @@ public class TrainingListController implements Initializable {
             vb.setLayoutY(-new_val.doubleValue());
       });
         paneReminder.setVisible(false);
-        
+        try {
+            if(ST.getNnLike(SU.getConnectedUser())>=3)
+            {
+            imgCertif.setImage(new Image("/Uploads/medal.png"));
+            }
+            else 
+                imgCertif.setVisible(false);
+            
+                
+                } catch (SQLException ex) {
+            Logger.getLogger(TrainingListController.class.getName()).log(Level.SEVERE, null, ex);
+           
+                }
 
     } 
     public static double getDaysBetweenDates(Date theEarlierDate, Date theLaterDate) {
@@ -168,7 +210,7 @@ public class TrainingListController implements Initializable {
             
             String nomA= SA.getById(current.getAnimalId()).getNom();
             
-            String usernameUser = SU.getUserByIdFos(current.getUserId());
+            String usernameUser = SU.getUsername(current.getUserId());
             Pane pane = new Pane();
             pane.setPrefWidth(694);
             pane.setPrefHeight(284);
@@ -292,6 +334,7 @@ public class TrainingListController implements Initializable {
                 Accept.setOnMouseClicked((MouseEvent e) -> { 
                     Services.TrainingService ST = new TrainingService();
                     try {
+                        showAlert(Alert.AlertType.INFORMATION, "", "", "Training Accepted !");
                         ST.updateTraining(idU,current.getId()); 
                         AnchorPane redirected;
                         redirected = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml")); 
@@ -304,6 +347,7 @@ public class TrainingListController implements Initializable {
                 Refuse.setOnMouseClicked((MouseEvent e) -> { 
                     Services.TrainingService ST = new TrainingService();
                     try {
+                        showAlert(Alert.AlertType.INFORMATION, "", "", "Training Canceled !");
                         ST.deleteTraining(current.getId()); 
                         AnchorPane redirected;
                         redirected = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml")); 
