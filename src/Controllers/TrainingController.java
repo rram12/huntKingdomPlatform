@@ -148,8 +148,8 @@ public class TrainingController implements Initializable {
                     Logger.getLogger(TrainingController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+            
             String format = "dd/MM/yyyy";
-
                 java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
                 Date date = new Date();
                 Date d = formater.parse(formater.format(date));
@@ -181,7 +181,7 @@ public class TrainingController implements Initializable {
                         heartImage.setPreserveRatio(false);
                         Image hh = new Image("Uploads/hearted.png");
                         heartImage.setImage(hh);
-                        
+                       
 
                         heartImage.setLayoutX(370);
                         heartImage.setLayoutY(225);
@@ -196,14 +196,14 @@ public class TrainingController implements Initializable {
                         heartImage.setPreserveRatio(false);
                         Image hh = new Image("Uploads/broken-heart.png");
                         heartImage.setImage(hh);
-                        
+                       
 
                         heartImage.setLayoutX(370);
                         heartImage.setLayoutY(225);
                          last.getChildren().add(heartImage);
                      }
 
-                        
+                       
                          Like.setOnMouseClicked((MouseEvent e) -> {
                         Pane flou = new Pane();
                         flou.setPrefHeight(200);
@@ -230,7 +230,7 @@ public class TrainingController implements Initializable {
                             try {
                                  
                                 Services.TrainingService ST = new TrainingService();
-                                
+                               
                                 ST.updateLike("heart", elast.getId());
                                 flou.setVisible(false);
                                  
@@ -242,7 +242,7 @@ public class TrainingController implements Initializable {
                             }
 
                         });
-                    
+                   
                         ImageView unheartImage = new ImageView();
                         unheartImage.setFitHeight(40);
                         unheartImage.setFitWidth(40);
@@ -294,7 +294,7 @@ public class TrainingController implements Initializable {
                     });
                      
                 }
-                
+               
             last.getChildren().add(supprimer);
             List<Entrainement> e = SEntr.getTrainingsUser(SU.getConnectedUser());
             System.out.println(e);
@@ -463,12 +463,12 @@ public class TrainingController implements Initializable {
 
                         Like.setLayoutX(135);
                         Like.setLayoutY(226);
-                  
+                 
 
                    
-                        
-                      
-                    
+                       
+                     
+                   
                     Like.setOnMouseClicked((MouseEvent e) -> {
                         Pane flou = new Pane();
                         flou.setPrefHeight(200);
@@ -495,7 +495,7 @@ public class TrainingController implements Initializable {
                             try {
                                  
                                 Services.TrainingService ST = new TrainingService();
-                                
+                               
                                 ST.updateLike("heart", current.getId());
                                 flou.setVisible(false);
                                  
@@ -507,7 +507,7 @@ public class TrainingController implements Initializable {
                             }
 
                         });
-                    
+                   
                         ImageView unheartImage = new ImageView();
                         unheartImage.setFitHeight(40);
                         unheartImage.setFitWidth(40);
@@ -569,11 +569,11 @@ public class TrainingController implements Initializable {
                         heartImage.setPreserveRatio(false);
                         Image hh = new Image("Uploads/hearted.png");
                         heartImage.setImage(hh);
-                        
+                       
 
                         heartImage.setLayoutX(135);
                         heartImage.setLayoutY(226);
-                    
+                   
                          entpane.getChildren().add(heartImage);
                      }
                       else if(SEntr.Test(current.getId())==2)
@@ -585,7 +585,7 @@ public class TrainingController implements Initializable {
                         heartImage.setPreserveRatio(false);
                         Image hh = new Image("Uploads/broken-heart.png");
                         heartImage.setImage(hh);
-                        
+                       
 
                         heartImage.setLayoutX(135);
                         heartImage.setLayoutY(226);
@@ -612,7 +612,7 @@ public class TrainingController implements Initializable {
         }
     }
 
-    
+   
 
-    
+   
 }

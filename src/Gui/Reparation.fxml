@@ -86,6 +86,16 @@
                                  </font>
                               </JFXButton>
                            </children></StackPane>
+                        <Label layoutX="587.0" layoutY="80.0" prefHeight="62.0" prefWidth="72.0" text="Price : ">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelPirx" layoutX="652.0" layoutY="81.0" prefHeight="60.0" prefWidth="75.0">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
               </content>

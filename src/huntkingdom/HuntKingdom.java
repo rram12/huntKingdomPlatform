@@ -23,7 +23,7 @@ public class HuntKingdom extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
         Scene scene = new Scene(root);
-        
+         scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
         //stage.setFullScreen(true);

@@ -83,6 +83,9 @@ import javax.imageio.ImageIO;
 public class ReparationController implements Initializable {
 
     @FXML
+    private Label labelPirx;
+
+    @FXML
     private JFXTextField moix_exp;
     @FXML
     private StackPane stackPay;
@@ -253,6 +256,9 @@ public class ReparationController implements Initializable {
                             selectionModel.select(2); //select by index starting with 0
                             readyPane.setDisable(false);
                             this.current_piece = p1;
+                            ReparationService rs = new ReparationService();
+                            Double prixRep = rs.getPrixReparation(current_piece.getId());
+                            labelPirx.setText(Double.toString(prixRep));
 
                         });
                     } else {
@@ -300,11 +306,9 @@ public class ReparationController implements Initializable {
         return flow;
     }
 
-  
-
     @FXML
     void chooseImage(ActionEvent event) {
-        
+
         System.out.println("choose image...");
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
         FileChooser fc = new FileChooser();
@@ -315,9 +319,9 @@ public class ReparationController implements Initializable {
         if (selectedFile != null) {
             listView.getItems().add(selectedFile.getName());
             String oldPath = selectedFile.getAbsolutePath();
-            
-            absolutePath = "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + selectedFile.getName() ;
-            copyFiles.deplacerVers( oldPath, "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\");
+
+            absolutePath = "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + selectedFile.getName();
+            copyFiles.deplacerVers(oldPath, "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\");
 
         } else {
             System.out.println("file is not valid !");

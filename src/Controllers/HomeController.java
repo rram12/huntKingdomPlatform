@@ -6,6 +6,7 @@
 package Controllers;
 import Entities.Publicity;
 import Entities.User;
+import Services.PieceService;
 import Services.PublicityService;
 import Services.UserService;
 import Utils.MyConnection;
@@ -30,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -37,6 +39,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -85,6 +88,8 @@ public class HomeController implements Initializable {
     
          @FXML
     private Pane pane;
+             @FXML
+    private Button btnreparateur;
     
     
     MyConnection mc = MyConnection.getInstance();
@@ -154,7 +159,13 @@ public class HomeController implements Initializable {
     
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
-         btntraining.setStyle("-fx-background-color:transparent");
+           btnshop.setStyle("-fx-background-color:transparent");
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
          btnanimals.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Animals.fxml"));
         mainpane.getChildren().setAll(pane);
@@ -163,6 +174,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btneventsAction(ActionEvent event)throws IOException {
+              btnanimals.setStyle("-fx-background-color:transparent");
+        btnevents.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/consultCompetition.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
@@ -170,6 +190,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Shop.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
@@ -177,6 +206,14 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnhomeAction(ActionEvent event) throws IOException {
+        btnshop.setStyle("-fx-background-color:transparent");
+        btnhome.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
         mainPane.getChildren().setAll(pane);
         this.pane.setVisible(false);
@@ -184,6 +221,14 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnservicesAction(ActionEvent event) throws IOException {
+           btnhome.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ServiceFront.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
@@ -191,8 +236,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btntrainingAction(ActionEvent event) throws IOException, SQLException {
-        btnanimals.setStyle("-fx-background-color:transparent");
+        btnhome.setStyle("-fx-background-color:transparent");
         btntraining.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
          Services.UserService SU = new UserService();
         int idU=SU.getConnectedUser();
         String role = SU.getUserByIdFos(idU);
@@ -215,9 +267,30 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnreparationAction(ActionEvent event) throws IOException {
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+    }
+      @FXML
+    void btnreparateurAction(ActionEvent event) throws IOException {
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparateur.fxml"));
+        mainpane.getChildren().setAll(pane);
     }
       private void loadSplashScreen() {
     try {
@@ -229,13 +302,13 @@ public class HomeController implements Initializable {
         mainPane.getChildren().setAll(panee);
  
         //Load splash screen with fade in effect
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), panee);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), panee);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.setCycleCount(1);
  
         //Finish splash with fade out effect
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), panee);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), panee);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
         fadeOut.setCycleCount(1);
@@ -251,7 +324,32 @@ public class HomeController implements Initializable {
         fadeOut.setOnFinished((e) -> {
             try {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
-                 mainPane.getChildren().setAll(pane);
+                 mainPane.getChildren().setAll(pane);  
+                 PieceService ps = new PieceService();
+                 ps.updateEtat();
+                 int i = ps.countPieceReady();
+                 
+                 if(i>0){
+                 String nb =Integer.toString(i);
+                 Image img = new Image("/Uploads/accept.png");
+                ImageView imgV = new ImageView(img);
+                imgV.setFitHeight(100);
+                imgV.setFitWidth(100);
+                
+                  Notifications notif = Notifications.create()
+                .title("pieces")
+                .text(nb+" pieces are ready, you can consult all pieces in reparation")
+                .graphic(imgV)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.BOTTOM_RIGHT)
+                .darkStyle()
+                          .onAction(s->{
+                         // System.out.println("notif clicked");
+                          });
+        notif.show();
+                 
+                 }
+                
             } catch (IOException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -260,6 +358,8 @@ public class HomeController implements Initializable {
         Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
+    
+
 
     @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {

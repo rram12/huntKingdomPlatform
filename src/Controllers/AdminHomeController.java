@@ -59,14 +59,17 @@ public class AdminHomeController implements Initializable {
     private Button btnservices;
     @FXML
     private Button btntraining;
-    @FXML
-    private Button btnreparation;
+
     @FXML
     private AnchorPane mainPane;
     @FXML
     private ImageView img;
     @FXML
     private Button btnLogout;
+        @FXML
+    private Button btnRecruitments;
+            @FXML
+    private Button btnPub;
 
     /**
      * Initializes the controller class.
@@ -74,29 +77,70 @@ public class AdminHomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         img.setImage(new Image("/Uploads/dash.jpg"));
+                btnhome.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
     }    
 
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
-         btntraining.setStyle("-fx-background-color:transparent");
-         btnanimals.setStyle("-fx-background-color:transparent;-fx-text-fill:#f55e57");
+    btnanimals.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ListAnimalAdmin.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btneventsAction(ActionEvent event)throws IOException {
+            btnevents.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+        btnPub.setStyle("-fx-border-color: none;");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Event.fxml"));
         mainpane.getChildren().setAll(pane);
     }
     @FXML
     private void btnpublicityAction(ActionEvent event)throws IOException {
+        btnPub.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Publicity.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
+          btnshop.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
       AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Shop.fxml"));
         mainpane.getChildren().setAll(pane);
         
@@ -104,27 +148,62 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnhomeAction(ActionEvent event) throws IOException {
+          btnhome.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btnservicesAction(ActionEvent event) throws IOException {
+               btnservices.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Service.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btntrainingAction(ActionEvent event) throws IOException {
-         btnanimals.setStyle("-fx-background-color:transparent");
-        btntraining.setStyle("-fx-background-color:transparent;-fx-text-fill:#f55e57");
+                btntraining.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btnRecruitments.setStyle("-fx-border-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Statistique.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 
-    @FXML
-    private void btnreparationAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
+   
+     @FXML
+    void btnRecruitmentsAction(ActionEvent event) throws IOException {
+        btnRecruitments.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
+        btnhome.setStyle("-fx-background-color: none;");
+        btnanimals.setStyle("-fx-background-color: none;");
+        btnevents.setStyle("-fx-background-color: none;");
+        btnshop.setStyle("-fx-background-color: none;");
+        btnservices.setStyle("-fx-background-color: none;");
+        btntraining.setStyle("-fx-background-color: none;");
+                btnPub.setStyle("-fx-border-color: none;");
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Recruitments.fxml"));
         mainpane.getChildren().setAll(pane);
     }
 
