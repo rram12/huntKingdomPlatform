@@ -98,6 +98,38 @@ public class AnimalService {
         
         return animals;
     }
+    public ArrayList<Animal> getAllAnimalsHunting(){
+        
+        String url = BASE_URL+"animalsListHunting";
+        req.setUrl(url);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                animals = parseAnimalList(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return animals;
+    }
+    public ArrayList<Animal> getAllAnimalsFishing(){
+        
+        String url = BASE_URL+"animalsListFishing";
+        req.setUrl(url);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                animals = parseAnimalList(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return animals;
+    }
     public ArrayList<Animal> getAllAnimalsT(String nom){
         
         String url = BASE_URL+"animalsTraining/"+nom;
@@ -113,6 +145,25 @@ public class AnimalService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         
         return animals;
+    }
+    public ArrayList<Animal> getAllAnimalsTr(int id){
+        
+        String url = BASE_URL+"animalsTrainingId/"+id;
+        req.setUrl(url);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                animals = parseAnimalList(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+                //System.out.println("AAAAA"+animals);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return animals;
+       
+        
     }
 
     

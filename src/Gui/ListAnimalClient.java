@@ -7,16 +7,22 @@ package Gui;
 
 import Entities.Animal;
 import Services.AnimalService;
+import Services.TrainingService;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
+import com.codename1.ui.ButtonGroup;
+import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.RadioButton;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -29,11 +35,10 @@ import java.util.List;
  *
  * @author tibh
  */
-public class ListAnimalForm extends BaseForm{
-    public ListAnimalForm(Resources res)
+public class ListAnimalClient extends BaseForm{
+    public ListAnimalClient(Resources res)
     {
-     
-      super(new BorderLayout());
+     super(new BorderLayout());
      
          Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -43,17 +48,42 @@ public class ListAnimalForm extends BaseForm{
         
         super.addSideMenu(res);
        
+//     RadioButton Hunting = new RadioButton("Hunting");
+//     RadioButton Fishing = new RadioButton("Fishing");
+//     new ButtonGroup(Hunting, Fishing);
+//      
+//     if(Hunting.isSelected())
+//     {
+//          Hunting.addActionListener(new ActionListener() {
+//              
+//
+//                @Override
+//                public void actionPerformed(ActionEvent evt) {
+//        lb=AnimalService.getInstance().getAllAnimalsHunting();
+//         System.out.println("lb");
+//    new ListAnimalClient(res).show();
+//
+//                }
+//
+//            });
+//     
+//     }
+//     else if(Fishing.isSelected())
+//     {
+//     lb=AnimalService.getInstance().getAllAnimalsFishing();
+//     System.out.println("lb");
+//     //new ListAnimalClient(res).show();
+//     }
+//     else 
+      List<Animal>  lb=AnimalService.getInstance().getAllAnimals();  
      
-     List<Animal> lb = AnimalService.getInstance().getAllAnimals();
+    
      
      Container animals = new Container(BoxLayout.y());
      animals.setScrollableY(true);
      if (lb != null) {
             Form hi = new Form("Animals",new GridLayout(2, 2));
-            Button Add = new Button("Add Animal");
-     Add.addActionListener(b->new AddAnimalForm(res).show());
-     Button Stat = new Button("Stat");
-     Stat.addActionListener(b->new StatistiquePieForm().show());
+            
             MultiButton mb = null;
              for (Animal a : lb) {
       String url ="http://localhost/HuntKingdom/web/uploads/photos/Liza_saliens1.jpg";
@@ -80,18 +110,15 @@ public class ListAnimalForm extends BaseForm{
 //                    
 //                     mb.setTextLine2(a.getDescription());
 Label nom =new Label(a.getNom());
-Button modify = new Button("");
- FontImage.setMaterialIcon(modify, FontImage.MATERIAL_UPDATE);
+
 nom.getAllStyles().setFgColor(16777215);  
 nom.getAllStyles().setBgColor(16691263);                  
  
 hi.add(LayeredLayout.encloseIn(imgC,
-        FlowLayout.encloseBottom(nom),FlowLayout.encloseRight(modify)));
-modify.addActionListener(e->new ModifyAnimalForm(a,res).show());
+        FlowLayout.encloseBottom(nom)));
 
     }
-             animals.add(FlowLayout.encloseRight(Add));
-             animals.add(FlowLayout.encloseRight(Stat));
+         
              animals.add(FlowLayout.encloseCenter(hi));
      }
        this.add(CENTER, animals);

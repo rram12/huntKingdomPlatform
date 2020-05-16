@@ -13,6 +13,7 @@ package Entities;
  * @author L
  */
 public class User {
+    private static User instance;
     private int id;
     private String username;
     private String email;
@@ -25,6 +26,7 @@ public class User {
     private String picture;
     private int gender;
     private String contract;
+
     private boolean confirmed;
     private String last_login;
     private int etat;
@@ -49,7 +51,20 @@ public class User {
         this.contract = contract;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+    
 
+    public static User getInstace(String username) {
+        if(instance == null) {
+            instance = new User(username);
+        }
+        return instance;
+    }
+    public void cleanUserSession() {
+        instance = null;
+    }
     public boolean isConfirmed() {
         return confirmed;
     }

@@ -19,6 +19,7 @@
 
 package Gui;
 
+import Entities.User;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Component;
 import com.codename1.ui.Display;
@@ -67,8 +68,8 @@ public class BaseForm extends Form {
     }
 
     protected void addSideMenu(Resources res) {
-        String username = SignInForm.userConnected;
-        System.out.println(username);
+        
+        
         Toolbar tb = getToolbar();
 //        Image img = res.getImage("profile-background.jpg");
 //        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
@@ -88,9 +89,19 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
         tb.addMaterialCommandToSideMenu("reparation", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
+         User u =User.getInstace("dhbjd");
+        if(u.getUsername().equals("khaled"))
+        {
         tb.addMaterialCommandToSideMenu("Add Training", FontImage.MATERIAL_ADD, e -> new AddTrainingForm(res).show());
         tb.addMaterialCommandToSideMenu("Training", FontImage.MATERIAL_BOOK, e -> new ListTrainingForm(res).show());
+        tb.addMaterialCommandToSideMenu("ListAnimal", FontImage.MATERIAL_ALBUM, e -> new ListAnimalClient(res).show());
+        
+        }
+        else 
+        {
         tb.addMaterialCommandToSideMenu("ListAnimal", FontImage.MATERIAL_ALBUM, e -> new ListAnimalForm(res).show());
+        tb.addMaterialCommandToSideMenu("ListTrainer", FontImage.MATERIAL_BOOK, e -> new ListTrainer(res).show());
+        }
         tb.addMaterialCommandToSideMenu("List defective Parts", FontImage.MATERIAL_ALBUM, e -> new ListDefective(res).show());
         tb.addMaterialCommandToSideMenu("List your pieces", FontImage.MATERIAL_ALBUM, e -> new ListYourPieces(res).show());
         tb.addMaterialCommandToSideMenu("reparation", FontImage.MATERIAL_ADD, e -> new PieceForm(res).show());
