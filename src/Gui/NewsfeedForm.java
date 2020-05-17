@@ -19,9 +19,11 @@
 
 package Gui;
 
+import Services.PieceService;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
@@ -57,6 +59,23 @@ public class NewsfeedForm extends BaseForm {
         getTitleArea().setUIID("Container");
         setTitle("Newsfeed");
         getContentPane().setScrollVisible(false);
+          int constId = 3;
+        int nbReady = PieceService.getInstance().getYourReady(constId);
+        System.out.println("nbReady : "+nbReady);
+        
+         LocalNotification n = new LocalNotification();
+        n.setId("demo-notification");
+        n.setAlertBody("you have "+Integer.toString(nbReady)+" ready pieces");
+        n.setAlertTitle("check them out !");
+        n.setAlertSound("/notification_sound_bells.mp3"); //file name must begin with notification_sound
+
+        Display.getInstance().scheduleLocalNotification(
+                n,
+                System.currentTimeMillis() + 10 * 1000, // fire date/time
+                LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
+        );
+        
+        PieceService.getInstance().deleteFinishedPromotion();
         
         super.addSideMenu(res);
         tb.addSearchCommand(e -> {});

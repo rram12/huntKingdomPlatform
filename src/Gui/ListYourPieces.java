@@ -154,14 +154,27 @@ EncodedImage enc;
         SpanLabel desc = new SpanLabel("description: " + c.getDescription());
         Label lid= new Label(Integer.toString(c.getId()));
         lid.setHidden(true);
-        Button repareBtn;
+        Button repareBtn = null;
+        
+         int height = Display.getInstance().convertToPixels(8.5f);
+        int width = Display.getInstance().convertToPixels(25f);
+        
         if(c.isEtat()){
-         repareBtn = new Button("Ready");
+          Image img = null;
+           try {
+               img = Image.createImage("/CaptureReady.JPG");
+           } catch (IOException ex) {
+           }
+         repareBtn = new Button(img.fill(width, height));
+         repareBtn.setUIID("qsdq");
+            
+        // repareBtn = new Button("Ready");
          
          
-    /*  repareBtn.getUnselectedStyle().setBgColor(0x1A6A12);
+      /*repareBtn.getUnselectedStyle().setBgColor(0x1A6A12);
         repareBtn.getUnselectedStyle().setBgTransparency(255);
         repareBtn.setShowEvenIfBlank(true);*/
+      
         
         
         
@@ -170,7 +183,21 @@ EncodedImage enc;
             new Ready(res,lid.getText()).show();
         });
        }else{
-         repareBtn = new Button("Show Progress");
+             Image img = null;
+           try {
+               img = Image.createImage("/CaptureShow.JPG");
+           } catch (IOException ex) {
+           }
+         repareBtn = new Button(img.fill(width, height)); 
+           repareBtn.setUIID("qsdq");
+            
+            
+            
+            
+            
+            
+            
+        // repareBtn = new Button("Show Progress");
         //repareBtn.getStyle().setBgColor(0xC89527);
         repareBtn.addActionListener(e->{
           System.out.println("Piece in progress : "+c);
@@ -192,6 +219,7 @@ EncodedImage enc;
         return c1;
  
     }
+    
  private void addStringValue(String s, Component v) {
         add(BorderLayout.west(new Label(s, "PaddedLabel")).
                 add(BorderLayout.CENTER, v));

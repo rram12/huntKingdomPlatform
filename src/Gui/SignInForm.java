@@ -52,7 +52,7 @@ public class SignInForm extends BaseForm {
             bl.defineLandscapeSwap(BorderLayout.SOUTH, BorderLayout.CENTER);
         }
         getTitleArea().setUIID("Container");
-        setUIID("SignIn");
+        
         
         add(BorderLayout.NORTH, new Label(res.getImage("logosite.png"), "LogoLabel"));
          
