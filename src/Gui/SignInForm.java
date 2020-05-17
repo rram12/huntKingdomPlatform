@@ -1,5 +1,4 @@
-/*
- * Copyright (c) 2016, Codename One
+/* Copyright (c) 2016, Codename One
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
@@ -19,6 +18,7 @@
 
 package Gui;
 
+import Entities.User;
 import com.codename1.components.FloatingHint;
 import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
@@ -29,6 +29,8 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -41,7 +43,7 @@ import javafx.scene.layout.BackgroundImage;
  * @author Shai Almog
  */
 public class SignInForm extends BaseForm {
-    public static String userConnected = null;
+    
 
     public SignInForm(Resources res) {
         super(new BorderLayout());
@@ -52,7 +54,7 @@ public class SignInForm extends BaseForm {
             bl.defineLandscapeSwap(BorderLayout.SOUTH, BorderLayout.CENTER);
         }
         getTitleArea().setUIID("Container");
-        
+        setUIID("SignIn");
         
         add(BorderLayout.NORTH, new Label(res.getImage("logosite.png"), "LogoLabel"));
          
@@ -80,9 +82,19 @@ public class SignInForm extends BaseForm {
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
         signIn.requestFocus();
-        userConnected=username.getText();
-        System.out.println(userConnected);
-        signIn.addActionListener(e -> new NewsfeedForm(res).show());
+        
+        
+        signIn.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                   
+                    User u =User.getInstace(username.getText());
+                     System.out.println(u);
+                    new NewsfeedForm(res).show();
+                }
+
+            });
     }
     
 }

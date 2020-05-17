@@ -40,43 +40,197 @@ public class ModifyAnimalForm extends BaseForm{
          ComboBox<String>categorie = new ComboBox<> ("Hunting","Fishing");
      TextField nom = new TextField();
      TextField description = new TextField();
-     TextField DebutSaison = new TextField();
-     TextField FinSaison = new TextField();
+    
+     ComboBox<String>Debut = new ComboBox<> ("January","February","March","April","May","June","July","August","September","October","November","December");
+    ComboBox<String>Fin = new ComboBox<> ("January","February","March","April","May","June","July","August","September","October","November","December");
          nom.setText(a.getNom());
          description.setText(a.getDescription());
-         DebutSaison.setText(Integer.toString(a.getDebutSaison()));
-         FinSaison.setText(Integer.toString(a.getFinSaison()));
+         
          categorie.setSelectedItem(a.getCategorie());
         Button btnValider = new Button("Modify");
-
+switch (a.getDebutSaison()) {
+                       
+  case 1:
+    Debut.setSelectedItem("January");
+    break;
+  case 2:
+    Debut.setSelectedItem("February");
+    break;
+  case 3:
+    Debut.setSelectedItem("March");
+    break;
+  case 4:
+   Debut.setSelectedItem("April");
+    break;
+  case 5:
+    Debut.setSelectedItem("May");
+    break;
+  case 6:
+   Debut.setSelectedItem("June");
+    break;
+  case 7:
+   Debut.setSelectedItem("July");
+    break;
+    case 8:
+    Debut.setSelectedItem("August");
+    break;
+    case 9:
+    Debut.setSelectedItem("September");
+    break;
+    case 10:
+    Debut.setSelectedItem("October");
+    break;
+    case 11:
+    Debut.setSelectedItem("November");
+    break;
+    case 12:
+    Debut.setSelectedItem("December");
+    break;
+}
+switch (a.getFinSaison()) {
+                       
+  case 1:
+    Fin.setSelectedItem("January");
+    break;
+  case 2:
+    Fin.setSelectedItem("February");
+    break;
+  case 3:
+    Fin.setSelectedItem("March");
+    break;
+  case 4:
+   Fin.setSelectedItem("April");
+    break;
+  case 5:
+    Fin.setSelectedItem("May");
+    break;
+  case 6:
+   Fin.setSelectedItem("June");
+    break;
+  case 7:
+   Fin.setSelectedItem("July");
+    break;
+    case 8:
+    Fin.setSelectedItem("August");
+    break;
+    case 9:
+    Fin.setSelectedItem("September");
+    break;
+    case 10:
+    Fin.setSelectedItem("October");
+    break;
+    case 11:
+    Fin.setSelectedItem("November");
+    break;
+    case 12:
+    Fin.setSelectedItem("December");
+    break;
+}
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((nom.getText().length() == 0) || (description.getText().length() == 0) || (DebutSaison.getText().length() == 0)|| (FinSaison.getText().length() == 0)) {
+                if ((nom.getText().length() == 0) || (description.getText().length() == 0) ) {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } else {
-                    try {
-                             
+                    int DS = 0;
+                       int FS=0;
+                   switch (Debut.getSelectedItem()) {
                        
-                        Animal an=new Animal( Integer.parseInt(DebutSaison.getText()),Integer.parseInt(FinSaison.getText()),a.getId() ,categorie.getSelectedItem(),nom.getText(), description.getText() );
+  case "January":
+    DS=1;
+    break;
+  case "February":
+    DS=2;
+    break;
+  case "March":
+    DS=3;
+    break;
+  case "April":
+   DS=4;
+    break;
+  case "May":
+    DS=5;
+    break;
+  case "June":
+   DS=6;
+    break;
+  case "July":
+    DS=7;
+    break;
+    case "August":
+    DS=8;
+    break;
+    case "September":
+    DS=9;
+    break;
+    case "October":
+    DS=10;
+    break;
+    case "November":
+    DS=11;
+    break;
+    case "December":
+    DS=12;
+    break;
+}
+                      switch (Fin.getSelectedItem()) {
+  case "January":
+    FS=1;
+    break;
+  case "February":
+    FS=2;
+    break;
+  case "March":
+    FS=3;
+    break;
+  case "April":
+   FS=4;
+    break;
+  case "May":
+    FS=5;
+    break;
+  case "June":
+   FS=6;
+    break;
+  case "July":
+    FS=7;
+    break;
+    case "August":
+    FS=8;
+    break;
+    case "September":
+    FS=9;
+    break;
+    case "October":
+    FS=10;
+    break;
+    case "November":
+    FS=11;
+    break;
+    case "December":
+    FS=12;
+    break;
+}
+                     
+                        Animal an=new Animal(DS,FS,a.getId() ,categorie.getSelectedItem(),nom.getText(), description.getText() );
                         if (!AnimalService.getInstance().modifyAnimal(an)) {
-                            Dialog.show("Success", "Connection accepted", new Command("OK"));
-                            new ListAnimalForm(res).show();
+                             Dialog.show("Error", "", new Command("OK"));
+                           
+                            
                         } else {
-                            Dialog.show("Success", "Connection accepted", new Command("OK"));
+                           
+                             Dialog.show("Success", "Animal Modifided", new Command("OK"));
                             new ListAnimalForm(res).show();
                         }
 
-                    } catch (NumberFormatException e) {
-                        Dialog.show("ERROR", "DebutSaison and FinSaison must be a number", new Command("OK"));
-                    }
-
+                    
                 }
+                
             }
 
         });
 
-        addAll(categorie,nom, description,DebutSaison,FinSaison, btnValider);
+        addAll(categorie,nom, description,Debut,Fin, btnValider);
     
     }
     

@@ -8,20 +8,20 @@ package Gui;
 import Entities.Animal;
 import Entities.Entrainement;
 import Entities.Produit;
+import Entities.User;
 import Services.AnimalService;
 import Services.ProduitService;
 import Services.TrainingService;
+import Services.UserService;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.SOUTH;
 import com.codename1.ui.ComboBox;
-import com.codename1.ui.Command;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
@@ -29,12 +29,8 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
-import com.codename1.ui.validation.GroupConstraint;
-import com.codename1.ui.validation.LengthConstraint;
-import com.codename1.ui.validation.RegexConstraint;
-import com.codename1.ui.validation.Validator;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -117,13 +113,17 @@ public class AddTrainingForm extends BaseForm{
         ArrayList<Produit> lp= ProduitService.getInstance().getAllProductsT(produit.getSelectedItem());
         Produit p = lp.get(0);
         System.out.println(p);
+         int user = RecupereUser();
+         
                 submit.addActionListener(e -> {
                    
-             if ((nbHeures.getText().length() == 0) || (prix.getText().length() == 0) ) {
-                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-                } else {
-                Entrainement b = new Entrainement(categorie.getSelectedItem(),Integer.parseInt(nbHeures.getText()),TrainingDate,Double.valueOf(prix.getText()),lieu.getSelectedItem(),5,a.getId(),p.getId(),"encours");
+             if (validateFields(prix, nbHeures, dateEnt)) {
+                
+                Entrainement b = new Entrainement(categorie.getSelectedItem(),Integer.parseInt(nbHeures.getText()),TrainingDate,Double.valueOf(prix.getText()),lieu.getSelectedItem(),user,a.getId(),p.getId(),"encours");
                 Entrainement EntrainementAjoutee = TrainingService.getInstance().add(b);
+                
+               Dialog.show("ok", "Training added !", "OK", "Cancel");
+              
 
                 new ListTrainingForm(res).show();
              }
@@ -132,20 +132,53 @@ public class AddTrainingForm extends BaseForm{
 
         this.add(CENTER, content);
         this.add(SOUTH, submit);
-      Validator val = new Validator();
-        val.setShowErrorMessageForFocusedComponent(true);
-        val.addConstraint(nbHeures,
-                new GroupConstraint(
-                      
-                        new RegexConstraint("^[0-9]*$", "Check number of hours !")));
-       
-        val.addConstraint(prix,
-                new GroupConstraint(
-                      
-                        new RegexConstraint("^[0-9]*$", "Check price number !")));
+     
 
 
   
 }
+      private boolean validateFields(TextField prix, TextField nh, Picker datePicker) {
+        if (prix.getText().isEmpty() || nh.getText().isEmpty() || datePicker.getDate() == null) {
+            Dialog.show("Error", "Please fill all the fields !", "OK", "Cancel");
+            return false;
+        }
+        try {
+            int n = Integer.parseInt(nh.getText());
+        } catch (NumberFormatException nfe) {
+            Dialog.show("Error", "HoursNumber must be numeric !", "OK", "Cancel");
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(prix.getText());
+        } catch (NumberFormatException nfe) {
+            Dialog.show("Error", "Price must be numeric !", "OK", "Cancel");
+            return false;
+        }
+        
+       Date d1 = new Date();
+       Date d2 = datePicker.getDate();
+                    Calendar debut = Calendar.getInstance();
+                    Calendar now=Calendar.getInstance();
+                    now.setTime(d1);
+                    debut.setTime(d2);
+                    if (debut.before(now)||debut.equals(now)) {
+                        Dialog.show("Invalid date", "Oups !!\nPlease check Training Date \n(must be after the current date)!", "OK", "Cancel");
+                        return false;
+         }
+                    
+        
+        return true;
+    }
+      private int RecupereUser()
+      {
+      User u =User.getInstace("dhbjd");
+                 System.out.println("User connecte: "+u.getUsername());
+                 ArrayList<User> lu = UserService.getInstance().getUserConnected(u.getUsername());
+         User user = lu.get(0);
+         System.out.println("User bkollou :"+user);
+         System.out.println("Id user : "+user.getId());
+         return user.getId();
+      
+      }
     
 }

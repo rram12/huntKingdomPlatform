@@ -8,8 +8,10 @@ package Gui;
 
 import Entities.Animal;
 import Entities.Entrainement;
+import Entities.User;
 import Services.AnimalService;
 import Services.TrainingService;
+import Services.UserService;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
@@ -24,6 +26,7 @@ import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,11 +45,9 @@ public class ListTrainingForm  extends BaseForm {
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
-        tb.addSearchCommand(e -> {});
-        List<Entrainement> lb = TrainingService.getInstance().getAllTrainingUser();
-        
-        
-
+        int user = RecupereUser();
+        List<Entrainement> lb = TrainingService.getInstance().getAllTrainingUser(user);
+     
         Container entrainements = new Container(BoxLayout.y());
      entrainements.setScrollableY(true);
        
@@ -80,6 +81,7 @@ public class ListTrainingForm  extends BaseForm {
                      MultiButton mb = new MultiButton(e.getCategorie());
                      mb.setUIID("ListItem");  
                      mb.setTextLine2(e.getLieu());
+                     mb.setTextLine3(e.getDateEnt());
                      
                      
                      Button bouton2 = new Button("Delete");
@@ -108,5 +110,16 @@ public class ListTrainingForm  extends BaseForm {
         
         }
         }
+    private int RecupereUser()
+      {
+      User u =User.getInstace("dhbjd");
+                 System.out.println("User connecte: "+u.getUsername());
+                 ArrayList<User> lu = UserService.getInstance().getUserConnected(u.getUsername());
+         User user = lu.get(0);
+         System.out.println("User bkollou :"+user);
+         System.out.println("Id user : "+user.getId());
+         return user.getId();
+      
+      }
             
 }

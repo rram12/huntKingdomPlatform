@@ -115,36 +115,20 @@ public class ProduitService {
         
         return produits;
     }
-    
-//     public Produit getProduitT(String nom){
-//
-//      Produit pr = new Produit();
-//        try {
-//           
-//           
-//            String url = BASE_URL+"productsTraining"+nom;
-//            req.setUrl(url);
-//
-//           
-//
-//            Map<String, Object> p= (Map<String, Object>) new JSONParser().parseJSON(
-//                    new InputStreamReader(new ByteArrayInputStream(req.getResponseData()), "UTF-8"));
-//
-//            float idP = Float.parseFloat(p.get("id").toString());
-//                pr.setId((int)idP);
-//                pr.setLib_prod(p.get("libProd").toString());
-//                Double lo = (Double) p.get("prix");
-//                pr.setPrix(lo);
-//                pr.setDescription(p.get("description").toString());
-//                float qte = Float.parseFloat(p.get("qteProd").toString());
-//                pr.setQte_prod((int)qte);
-//                pr.setImage(p.get("image").toString());
-//                pr.setType(p.get("type").toString());
-//        } catch (IOException err) {
-//            Log.e(err);
-//            return null;
-//        }
-//
-//        return pr;
-//    }
+    public ArrayList<Produit> getAllProductsTr(int id){
+        
+        String url = BASE_URL+"productsTrainingId/"+id;
+        req.setUrl(url);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                produits = parseProductList(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+        return produits;
+    }
 }

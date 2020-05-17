@@ -61,21 +61,23 @@ public class TrainingService {
             for(Map<String,Object> obj : list){
                 Entrainement t = new Entrainement();
                 Map<String, Object> a = (Map<String, Object>) obj.get("animal");
+                Map<String, Object> p = (Map<String, Object>) obj.get("produit");
                 Animal an = new Animal();
                 float idA = Float.parseFloat(a.get("id").toString());
                 an.setId((int)idA);
-                
-               
+                Produit pr = new Produit();
+                float idP = Float.parseFloat(p.get("id").toString());
+                pr.setId((int)idP);
                 float id = Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
                 t.setCategorie(obj.get("categorie").toString());
+                t.setDateEnt(obj.get("dateEnt").toString());
                 t.setNbHeures(((int)Float.parseFloat(obj.get("nbHeures").toString())));
-                
                 t.setLieu(obj.get("lieu").toString());
+                
                 //t.setUserId(5);
                 t.setAnimalId(an.getId());
-               
-                
+                t.setProduitId(pr.getId());
                 t.setAccepter(obj.get("accepter").toString());
                 entrainements.add(t);
             }
@@ -88,8 +90,22 @@ public class TrainingService {
     }
     
 
-    public ArrayList<Entrainement> getAllTrainingUser(){
-        String url = BASE_URL+"training_user/"+5;
+    public ArrayList<Entrainement> getAllTrainingUser(int id){
+        String url = BASE_URL+"training_user/"+id;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                entrainements = parseTraining(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return entrainements;
+    }
+    public ArrayList<Entrainement> getAllTraining(){
+        String url = BASE_URL+"training";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -214,5 +230,20 @@ public class TrainingService {
         }
         return li;
     }
+     public boolean modifyTraining(Entrainement e , int id)
+     {
+       String url = BASE_URL+"recupererEntraineur/"+e.getId()+"/"+id;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+     
+     }
  
 }

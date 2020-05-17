@@ -32,8 +32,17 @@ import java.util.List;
 public class ListAnimalForm extends BaseForm{
     public ListAnimalForm(Resources res)
     {
-     super(new BorderLayout());
-      
+     
+      super(new BorderLayout());
+     
+         Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        
+        getContentPane().setScrollVisible(false);
+        
+        super.addSideMenu(res);
+       
      
      List<Animal> lb = AnimalService.getInstance().getAllAnimals();
      
