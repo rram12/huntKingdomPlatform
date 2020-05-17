@@ -46,7 +46,7 @@ public class LocationForm extends BaseForm {
 
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
-
+    String LastDay="1";
     public LocationForm(Resources res, MoyenDeTransport M, Image img) {
         /*
         Le paramètre previous définit l'interface(Form) précédente.
@@ -74,33 +74,41 @@ public class LocationForm extends BaseForm {
         Label lDays = new Label("Days");
         Label lCategory = new Label("Category:");
         Label lPricePerDay = new Label("Price Per Day:");
+        Label lFinalPrice = new Label("Total Price");
         TextField Mark = new TextField(M.getMarque(), "Brand", 20, TextField.UNEDITABLE);
         TextField Category = new TextField(M.getCategorie(), "Category", 20, TextField.UNEDITABLE);
         TextField PricePerDay = new TextField(Float.toString(M.getPrixParJour()) + "Dt", "Price", 20, TextField.UNEDITABLE);
+        TextField FinalPrice = new TextField(Float.toString(M.getPrixParJour()) + "Dt", "Price", 10, TextField.UNEDITABLE);
         TextField Days = new TextField("1", "Days", 20, TextField.ANY);
         Mark.setSingleLineTextArea(false);
         Category.setSingleLineTextArea(false);
         PricePerDay.setSingleLineTextArea(false);
+        FinalPrice.setSingleLineTextArea(false);
         Days.setSingleLineTextArea(false);
         Mark.setEditable(false);
         Category.setEditable(false);
         PricePerDay.setEditable(false);
+        FinalPrice.setEditable(false);
         start.getAllStyles().setFgColor(0xFFFFFF, true);
         lDays.getAllStyles().setFgColor(0xFFFFFF, true);
         lMark.getAllStyles().setFgColor(0xFFFFFF, true);
         lCategory.getAllStyles().setFgColor(0xFFFFFF, true);
         lPricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
+        lFinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
         Mark.getAllStyles().setFgColor(0xFFFFFF, true);
         Category.getAllStyles().setFgColor(0xFFFFFF, true);
         PricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
+        FinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
         Days.getAllStyles().setFgColor(0xFFFFFF, true);
         tfArrival.getAllStyles().setFgColor(0xFFFFFF, true);
         Category.getAllStyles().setAlignment(TextField.CENTER);
         PricePerDay.getAllStyles().setAlignment(TextField.CENTER);
+        FinalPrice.getAllStyles().setAlignment(TextField.CENTER);
         Days.getAllStyles().setAlignment(TextField.CENTER);
         tfArrival.getAllStyles().setAlignment(TextField.CENTER);
         Category.getAllStyles().setBorder(Border.createEmpty());
         PricePerDay.getAllStyles().setBorder(Border.createEmpty());
+        FinalPrice.getAllStyles().setBorder(Border.createEmpty());
 //        Days.getAllStyles().setBorder(Border.createEmpty());
 //        tfArrival.getAllStyles().setBorder(Border.createEmpty());
         Button next = new Button("Confirm");
@@ -108,6 +116,19 @@ public class LocationForm extends BaseForm {
         signIn.getAllStyles().setBorder(Border.createEmpty());
         signIn.getAllStyles().setTextDecoration(Style.TEXT_DECORATION_UNDERLINE);
         signIn.addActionListener(e -> new CalendarForm(res,new ArrayList<Reservation>(), ls).show());
+        Days.addDataChangedListener((i1,i2) -> {
+            if (Days.getText().length() != 0) {
+                try {
+            FinalPrice.setText(Float.toString((float) (Integer.parseInt(Days.getText())*M.getPrixParJour())));
+            LastDay=Days.getText();
+        } catch (NumberFormatException nfe) {
+            Days.stopEditing();
+            Days.setText(LastDay);
+            Days.startEditingAsync();
+        }
+            }
+            System.out.println(Days.getText());
+        });
         Container content = BoxLayout.encloseYCenter(
                 createLineSeparator(),
                 iv,
@@ -120,6 +141,8 @@ public class LocationForm extends BaseForm {
                 BoxLayout.encloseXCenter(lDays), Days,
                 createLineSeparator(),
                 BoxLayout.encloseXCenter(start), tfArrival,
+                createLineSeparator(),
+                BoxLayout.encloseXCenter(lFinalPrice),FinalPrice,
                 createLineSeparator()
         );
         content.getAllStyles().setFgColor(0xFFFFFF, true);

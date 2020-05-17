@@ -105,4 +105,17 @@ public class HebergementService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return Hebergements;
     }
+    public ArrayList<Hebergement> getSearched(String search) {
+        String url = BASE_URL + "searchHebergement/" + search;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                Hebergements = parseAccommodations(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return Hebergements;
+    }
 }

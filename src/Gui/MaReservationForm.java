@@ -47,6 +47,7 @@ public class MaReservationForm extends BaseForm {
 
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
+    String LastDay = "";
 
     public MaReservationForm(Resources res, Hebergement M, Image img, Reservation r) {
         /*
@@ -67,7 +68,7 @@ public class MaReservationForm extends BaseForm {
         getAllStyles().setBgImage(imgs);
         ImageViewer iv = new ImageViewer(img);
         Label start = new Label("Arrival Date");
-        TextField TfArrival1 = new TextField(formatter.format(r.Arrivaldate()),"Arrival Date", 20, TextField.ANY);
+        TextField TfArrival1 = new TextField(formatter.format(r.Arrivaldate()), "Arrival Date", 20, TextField.ANY);
         TfArrival1.setSingleLineTextArea(false);
         TfArrival1.setEditable(false);
         Picker tfArrival = new Picker();
@@ -75,30 +76,39 @@ public class MaReservationForm extends BaseForm {
 //        tfArrival.setType(Display.PICKER_TYPE_DATE);
         tfArrival.setDate(r.Arrivaldate());
 //        tfArrival.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
-Label lAddress=new Label("Address");
+        Label lAddress = new Label("Address");
         lAddress.setTextPosition(LEFT);
         FontImage.setMaterialIcon(lAddress, FontImage.MATERIAL_LOCATION_CITY);
         Label lMark = new Label("Make Your Reservation");
-        Label lType=new Label("Type");
+        Label oups =new Label("You cannot update your Reservation due to delay constraints ");
+        Label lType = new Label("Type");
         Label lDays = new Label("Days");
         Label lPricePerDay = new Label("Price Per Day");
+        Label lFinalPrice = new Label("New Total Price");
         TextField Address = new TextField(M.getAdresse(), "Address", 20, TextField.UNEDITABLE);
         TextField Type = new TextField(M.getType(), "Type", 20, TextField.UNEDITABLE);
         TextField PricePerDay = new TextField(Float.toString(M.getPrixParJour()) + "Dt", "Price", 20, TextField.UNEDITABLE);
+        TextField FinalPrice = new TextField(Float.toString(r.getPrixTot()) + "Dt", "Price", 10, TextField.UNEDITABLE);
         TextField Days = new TextField(Integer.toString(r.getNbJours()), "Days", 20, TextField.DECIMAL);
+        LastDay=Integer.toString(r.getNbJours());
         Address.setSingleLineTextArea(false);
         Type.setSingleLineTextArea(false);
         PricePerDay.setSingleLineTextArea(false);
+        FinalPrice.setSingleLineTextArea(false);
         Days.setSingleLineTextArea(false);
         Address.setEditable(false);
         Type.setEditable(false);
         PricePerDay.setEditable(false);
+        FinalPrice.setEditable(false);
+        oups.getAllStyles().setFgColor(0xFFFFFF, true);
         lMark.getAllStyles().setFgColor(0xFFFFFF, true);
         start.getAllStyles().setFgColor(0xFFFFFF, true);
         lDays.getAllStyles().setFgColor(0xFFFFFF, true);
         lType.getAllStyles().setFgColor(0xFFFFFF, true);
         lAddress.getAllStyles().setFgColor(0xFFFFFF, true);
         lPricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
+        lFinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
+        FinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
         Address.getAllStyles().setFgColor(0xFFFFFF, true);
         Type.getAllStyles().setFgColor(0xFFFFFF, true);
         PricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
@@ -108,99 +118,116 @@ Label lAddress=new Label("Address");
         Address.getAllStyles().setAlignment(TextField.CENTER);
         Type.getAllStyles().setAlignment(TextField.CENTER);
         PricePerDay.getAllStyles().setAlignment(TextField.CENTER);
+        FinalPrice.getAllStyles().setAlignment(TextField.CENTER);
         Days.getAllStyles().setAlignment(TextField.CENTER);
         tfArrival.getAllStyles().setAlignment(TextField.CENTER);
         TfArrival1.getAllStyles().setAlignment(TextField.CENTER);
         Address.getAllStyles().setBorder(Border.createEmpty());
         Type.getAllStyles().setBorder(Border.createEmpty());
         PricePerDay.getAllStyles().setBorder(Border.createEmpty());
+        FinalPrice.getAllStyles().setBorder(Border.createEmpty());
         Button next = new Button("Confirm");
         Button delete = new Button("Cancel");
         Button signIn = new Button("See Reservations");
         signIn.getAllStyles().setBorder(Border.createEmpty());
         signIn.getAllStyles().setTextDecoration(Style.TEXT_DECORATION_UNDERLINE);
         signIn.addActionListener(e -> new CalendarForm(res, ls, new ArrayList<Location>()).show());
+        Days.addDataChangedListener((i1,i2) -> {
+            if (Days.getText().length() != 0) {
+                try {
+            FinalPrice.setText(Float.toString((float) (Integer.parseInt(Days.getText())*M.getPrixParJour())));
+            LastDay=Days.getText();
+        } catch (NumberFormatException nfe) {
+            Days.stopEditing();
+            Days.setText(LastDay);
+            Days.startEditingAsync();
+        }
+            }
+            System.out.println(Days.getText());
+        });
         Calendar debut1 = Calendar.getInstance();
         Calendar now1 = Calendar.getInstance();
         debut1.setTime(r.Arrivaldate());
         now1.setTime(date);
         long diff = r.Arrivaldate().getTime() - date.getTime();
         int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-        if (now1.before(debut1)&&diffDays>7)
-            {
+        if (now1.before(debut1) && diffDays > 7) {
             Container content = BoxLayout.encloseYCenter(
-                new Label(""),
+                    new Label(""),
+                    createLineSeparator(),
+                    iv,
+                    BoxLayout.encloseXCenter(lAddress), Address,
+                    BoxLayout.encloseXCenter(lType), Type,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(lPricePerDay), PricePerDay,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(lMark),
+                    BoxLayout.encloseXCenter(lDays), Days,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(start), tfArrival,
                 createLineSeparator(),
-                iv,
-                BoxLayout.encloseXCenter(lAddress),Address,
-                BoxLayout.encloseXCenter(lType),Type,
-                createLineSeparator(),
-                BoxLayout.encloseXCenter(lPricePerDay),PricePerDay,
-                createLineSeparator(),
-                BoxLayout.encloseXCenter(lMark),
-                BoxLayout.encloseXCenter(lDays),Days,
-                createLineSeparator(),
-                BoxLayout.encloseXCenter(start), tfArrival,
-                createLineSeparator()
-        );
-        content.getAllStyles().setFgColor(0xFFFFFF, true);
+                BoxLayout.encloseXCenter(lFinalPrice),FinalPrice,
+                    createLineSeparator()
+            );
+            content.getAllStyles().setFgColor(0xFFFFFF, true);
             content.setScrollableY(true);
             add(BorderLayout.NORTH, BoxLayout.encloseXCenter(new Label("Accommodation")));
-        add(BorderLayout.CENTER, content);
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(
-                BoxLayout.encloseXCenter(next,delete), signIn
-        ));
-        }
-        else{
+            add(BorderLayout.CENTER, content);
+            add(BorderLayout.SOUTH, BoxLayout.encloseY(
+                    BoxLayout.encloseXCenter(next, delete), signIn
+            ));
+        } else {
             Days.setEditable(false);
             Container content = BoxLayout.encloseYCenter(
-                new Label(""),
+                    new Label(""),
+                    createLineSeparator(),
+                    iv,
+                    BoxLayout.encloseXCenter(lAddress), Address,
+                    BoxLayout.encloseXCenter(lType), Type,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(lPricePerDay), PricePerDay,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(oups),
+                    BoxLayout.encloseXCenter(lDays), Days,
+                    createLineSeparator(),
+                    BoxLayout.encloseXCenter(start), tfArrival,
                 createLineSeparator(),
-                iv,
-                BoxLayout.encloseXCenter(lAddress),Address,
-                BoxLayout.encloseXCenter(lType),Type,
-                createLineSeparator(),
-                BoxLayout.encloseXCenter(lPricePerDay),PricePerDay,
-                createLineSeparator(),
-                new Label("You cannot change neither delete your Reservation due to delay constraints ", "LogoLabel"),
-                BoxLayout.encloseXCenter(lDays),Days,
-                createLineSeparator(),
-                BoxLayout.encloseXCenter(start), tfArrival,
-                createLineSeparator()
-        );
+                BoxLayout.encloseXCenter(lFinalPrice),FinalPrice,
+                    createLineSeparator()
+            );
             content.setScrollableY(true);
-        add(BorderLayout.CENTER, content);
+            add(BorderLayout.CENTER, content);
 //        add(BorderLayout.SOUTH, BoxLayout.encloseY(
 //                signIn
 //        ));
         }
         delete.requestFocus();
         delete.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        try {
-                            if (ReservationService.getInstance().deleteReservation(r.getId())) {
-                                Dialog.show("Success", "Reservation successfully deleted", new Command("OK"));
-                                new ServicesForm(res).show();
-                            } else {
-                                Dialog.show("ERROR", "Server error", new Command("OK"));
-                            }
-                        } catch (NumberFormatException e) {
-                            Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                        }
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    if (ReservationService.getInstance().deleteReservation(r.getId())) {
+                        Dialog.show("Success", "Reservation successfully deleted", new Command("OK"));
+                        new ServicesForm(res).show();
+                    } else {
+                        Dialog.show("ERROR", "Server error", new Command("OK"));
                     }
-                });
+                } catch (NumberFormatException e) {
+                    Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                }
+            }
+        });
         next.requestFocus();
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (validateFields(Days, tfArrival, ls,r)) {
+                if (validateFields(Days, tfArrival, ls, r)) {
                     try {
 
-                        Reservation t = new Reservation(r.getId(),Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate());
+                        Reservation t = new Reservation(r.getId(), Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate());
 //                        System.out.println(t);
                         if (ReservationService.getInstance().modifyReservation(t)) {
-                            Dialog.show("Success", "Reservation successfully modified", new Command("OK"));
+                            Dialog.show("Success", "Reservation successfully updated", new Command("OK"));
                             previous.showBack();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -214,30 +241,30 @@ Label lAddress=new Label("Address");
         });
     }
 
-    private boolean validateFields(TextField Days, Picker Arrival, List<Reservation> ls,Reservation r) {
+    private boolean validateFields(TextField Days, Picker Arrival, List<Reservation> ls, Reservation r) {
         System.out.println(Days.getText());
         if (Float.parseFloat(Days.getText()) < 1) {
             Dialog.show("Error", "Please fill all the fields !", "OK", "Cancel");
             return false;
         } else {
             for (Reservation l : ls) {
-                if(l.getId()!=r.getId()){
-                for (int i = 0; i < Integer.parseInt(Days.getText()); i++) {
-                    Date d = datePlusOne(i, Arrival.getDate());
-                    Calendar debut = Calendar.getInstance();
-                    Calendar fin = Calendar.getInstance();
-                    Calendar entre = Calendar.getInstance();
-                    Calendar now = Calendar.getInstance();
-                    debut.setTime(l.Arrivaldate());
-                    fin.setTime(l.finaldate());
-                    now.setTime(date);
-                    entre.setTime(d);
-                    if ((debut.before(entre) && entre.before(fin)) || debut.equals(entre) || entre.before(now) || entre.equals(now)) {
-                        Dialog.show("Invalid date", "Oups !!\nPlease check the list of Reservations for available date !", "OK", "Cancel");
-                        return false;
+                if (l.getId() != r.getId()) {
+                    for (int i = 0; i < Integer.parseInt(Days.getText()); i++) {
+                        Date d = datePlusOne(i, Arrival.getDate());
+                        Calendar debut = Calendar.getInstance();
+                        Calendar fin = Calendar.getInstance();
+                        Calendar entre = Calendar.getInstance();
+                        Calendar now = Calendar.getInstance();
+                        debut.setTime(l.Arrivaldate());
+                        fin.setTime(l.finaldate());
+                        now.setTime(date);
+                        entre.setTime(d);
+                        if ((debut.before(entre) && entre.before(fin)) || debut.equals(entre) || entre.before(now) || entre.equals(now)) {
+                            Dialog.show("Invalid date", "Oups !!\nPlease check the list of Reservations for available date !", "OK", "Cancel");
+                            return false;
+                        }
                     }
                 }
-            }
             }
         }
         return true;

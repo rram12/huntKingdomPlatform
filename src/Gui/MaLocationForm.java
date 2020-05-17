@@ -9,7 +9,6 @@ import Entities.Location;
 import Entities.MoyenDeTransport;
 import Entities.Reservation;
 import Services.LocationService;
-import com.codename1.components.FloatingHint;
 import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
@@ -43,7 +42,7 @@ public class MaLocationForm extends BaseForm {
 
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
-
+    String LastDay="";
     public MaLocationForm(Resources res, MoyenDeTransport M, Image img, Location r) {
         /*
         Le paramètre previous définit l'interface(Form) précédente.
@@ -71,41 +70,65 @@ public class MaLocationForm extends BaseForm {
 //        tfArrival.setType(Display.PICKER_TYPE_DATE);
         tfArrival.setDate(r.Arrivaldate());
 //        tfArrival.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
+        Label oups =new Label("You cannot update your Rent due to delay constraints ");
         Label lMark = new Label("Make Your Rent");
         Label lDays = new Label("Days");
         Label lCategory = new Label("Category:");
         Label lPricePerDay = new Label("Price Per Day:");
+        Label lFinalPrice = new Label("New Total Price");
         TextField Mark = new TextField(M.getMarque(), "Brand", 20, TextField.UNEDITABLE);
         TextField Category = new TextField(M.getCategorie(), "Category", 20, TextField.UNEDITABLE);
         TextField PricePerDay = new TextField(Float.toString(M.getPrixParJour()) + "Dt", "Price", 20, TextField.UNEDITABLE);
+        TextField FinalPrice = new TextField(Float.toString(r.getPrixTot()) + "Dt", "Price", 10, TextField.UNEDITABLE);
         TextField Days = new TextField(Integer.toString(r.getNbJours()), "Days", 20, TextField.ANY);
+        LastDay=Integer.toString(r.getNbJours());
         Mark.setSingleLineTextArea(false);
         Category.setSingleLineTextArea(false);
         PricePerDay.setSingleLineTextArea(false);
+        FinalPrice.setSingleLineTextArea(false);
         Days.setSingleLineTextArea(false);
         Mark.setEditable(false);
         Category.setEditable(false);
         PricePerDay.setEditable(false);
+        FinalPrice.setEditable(false);
+        oups.getAllStyles().setFgColor(0xFFFFFF, true);
         start.getAllStyles().setFgColor(0xFFFFFF, true);
         lDays.getAllStyles().setFgColor(0xFFFFFF, true);
         lMark.getAllStyles().setFgColor(0xFFFFFF, true);
         lCategory.getAllStyles().setFgColor(0xFFFFFF, true);
         lPricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
+        lFinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
+        FinalPrice.getAllStyles().setFgColor(0xFFFFFF, true);
         Mark.getAllStyles().setFgColor(0xFFFFFF, true);
         Category.getAllStyles().setFgColor(0xFFFFFF, true);
         PricePerDay.getAllStyles().setFgColor(0xFFFFFF, true);
         Days.getAllStyles().setFgColor(0xFFFFFF, true);
         tfArrival.getAllStyles().setFgColor(0xFFFFFF, true);
+        FinalPrice.getAllStyles().setAlignment(TextField.CENTER);
         Category.getAllStyles().setAlignment(TextField.CENTER);
         PricePerDay.getAllStyles().setAlignment(TextField.CENTER);
         Days.getAllStyles().setAlignment(TextField.CENTER);
         tfArrival.getAllStyles().setAlignment(TextField.CENTER);
         Category.getAllStyles().setBorder(Border.createEmpty());
         PricePerDay.getAllStyles().setBorder(Border.createEmpty());
+        FinalPrice.getAllStyles().setBorder(Border.createEmpty());
         Button next = new Button("Confirm");
         Button delete = new Button("Cancel");
         Button signIn = new Button("See Rents");
         signIn.addActionListener(e -> new CalendarForm(res,new ArrayList<Reservation>(), ls).show());
+        Days.addDataChangedListener((i1,i2) -> {
+            if (Days.getText().length() != 0) {
+                try {
+            FinalPrice.setText(Float.toString((float) (Integer.parseInt(Days.getText())*M.getPrixParJour())));
+            LastDay=Days.getText();
+        } catch (NumberFormatException nfe) {
+            Days.stopEditing();
+            Days.setText(LastDay);
+            Days.startEditingAsync();
+        }
+            }
+            System.out.println(Days.getText());
+        });
         signIn.getAllStyles().setBorder(Border.createEmpty());
         signIn.getAllStyles().setTextDecoration(Style.TEXT_DECORATION_UNDERLINE);
         Calendar debut1 = Calendar.getInstance();
@@ -128,6 +151,8 @@ public class MaLocationForm extends BaseForm {
                 BoxLayout.encloseXCenter(lDays), Days,
                 createLineSeparator(),
                 BoxLayout.encloseXCenter(start), tfArrival,
+                createLineSeparator(),
+                BoxLayout.encloseXCenter(lFinalPrice),FinalPrice,
                 createLineSeparator()
         );
             content.getAllStyles().setFgColor(0xFFFFFF, true);
@@ -146,10 +171,12 @@ public class MaLocationForm extends BaseForm {
                 createLineSeparator(),
                 BoxLayout.encloseXCenter(lPricePerDay), PricePerDay,
                 createLineSeparator(),
-                new Label("You cannot change neither delete your Reservation due to time constraints ", "LogoLabel"),
+                BoxLayout.encloseXCenter(oups),
                 BoxLayout.encloseXCenter(lDays), Days,
                 createLineSeparator(),
                 BoxLayout.encloseXCenter(start), tfArrival,
+                createLineSeparator(),
+                BoxLayout.encloseXCenter(lFinalPrice),FinalPrice,
                 createLineSeparator()
         );
             content.setScrollableY(true);

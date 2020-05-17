@@ -72,8 +72,6 @@ public class ServicesForm extends BaseForm {
         getContentPane().setScrollVisible(false);
 
         super.addSideMenu(res);
-        tb.addSearchCommand(e -> {
-        });
 
         Tabs swipe = new Tabs();
 
@@ -121,12 +119,12 @@ public class ServicesForm extends BaseForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
 
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton accommodations = RadioButton.createToggle("Accommodation", barGroup);
-        accommodations.setUIID("SelectBar");
-        RadioButton Transports = RadioButton.createToggle("Transportation", barGroup);
-        Transports.setUIID("SelectBar");
-        RadioButton my = RadioButton.createToggle("My Reservations", barGroup);
-        my.setUIID("SelectBar");
+        RadioButton accommodations = RadioButton.createToggle("Accommods", barGroup);
+        accommodations.setUIID("TextField");
+        RadioButton Transports = RadioButton.createToggle("  Transports", barGroup);
+        Transports.setUIID("TextField");
+        RadioButton my = RadioButton.createToggle("   My Rents", barGroup);
+        my.setUIID("TextField");
         Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
 
         add(LayeredLayout.encloseIn(
@@ -137,6 +135,9 @@ public class ServicesForm extends BaseForm {
         accommodations.setSelected(true);
         arrow.setVisible(false);
         Container List = new Container();
+//        Image imgs = res.getImage("bg1.jpg");
+//        getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+//        getAllStyles().setBgImage(imgs);
         if (lh != null) {
             for (Hebergement h : lh) {
                 addButton(res, List, h);
@@ -192,13 +193,13 @@ public class ServicesForm extends BaseForm {
                 Container OldReserv = new Container();
                 Container NewLocat = new Container();
                 Container OldLocat = new Container();
-                List.add(BoxLayout.encloseY(new Label("\n                                          !!Recently Made!!\n")));
+                List.add(BoxLayout.encloseY(new Label("\n                            !!Recently Made!!\n")));
                 if (rs != null || ls != null) {
                     if (rs != null) {
                         for (int j = 0; j < rs.size(); j++) {
                             for (int i = 0; i < lh.size(); i++) {
                                 if (lh.get(i).getId() == rs.get(j).getHebergementId()) {
-                                    
+
                                     finald.setTime(rs.get(j).finaldate());
                                     if (now.before(finald)) {
                                         addButton2(res, List, rs.get(j), lh.get(i));
@@ -208,7 +209,6 @@ public class ServicesForm extends BaseForm {
 
                         }
                     }
-                    
 
                     if (ls != null) {
                         for (int j = 0; j < ls.size(); j++) {
@@ -222,14 +222,14 @@ public class ServicesForm extends BaseForm {
                             }
                         }
                     }
-                                    List.add(BoxLayout.encloseY(new Label("\n                                          !!Once Made!!\n")));
+                    List.add(BoxLayout.encloseY(new Label("\n                            !!Once Made!!\n")));
                     if (rs != null) {
                         for (int j = 0; j < rs.size(); j++) {
                             for (int i = 0; i < lh.size(); i++) {
                                 if (lh.get(i).getId() == rs.get(j).getHebergementId()) {
-                                    
+
                                     finald.setTime(rs.get(j).finaldate());
-                                    if (now.after(finald)||now.equals(finald)) {
+                                    if (now.after(finald) || now.equals(finald)) {
                                         addButton2(res, List, rs.get(j), lh.get(i));
                                     }
                                 }
@@ -242,7 +242,7 @@ public class ServicesForm extends BaseForm {
                             for (int i = 0; i < lM.size(); i++) {
                                 if (lM.get(i).getId() == ls.get(j).getMoyenDeTransportId()) {
                                     finald.setTime(ls.get(j).finaldate());
-                                    if (now.after(finald)||now.equals(finald)) {
+                                    if (now.after(finald) || now.equals(finald)) {
                                         addButton3(res, List, ls.get(j), lM.get(i));
                                     }
                                 }
@@ -268,6 +268,74 @@ public class ServicesForm extends BaseForm {
         addOrientationListener(e -> {
             updateArrowPosition(barGroup.getRadioButton(barGroup.getSelectedIndex()), arrow);
         });
+        tb.addSearchCommand(e -> {
+            String text = (String) e.getSource();
+            if (!my.isSelected()) {
+                if (text == null || text.length() == 0) {
+                    // clear search
+                    List.removeAll();
+                    if (accommodations.isSelected()) {
+
+                if (lh != null) {
+                    for (Hebergement h : lh) {
+                        addButton(res, List, h);
+                        System.out.println(h);
+                    }
+                } else {
+                    System.out.println("No Accommodations available\nPlease Try later !! ");
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n     for new Accommodations   !! ");
+
+                }
+                refreshTheme();
+            }
+                    else{
+                        if (Transports.isSelected()) {
+                if (lM != null) {
+                    for (MoyenDeTransport m : lM) {
+                        addButton1(res, List, m);
+                    }
+                } else {
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n    for new Means of transport   !! ");
+
+                }
+                refreshTheme();
+            }
+                    }
+                } else {
+                    List.removeAll();
+                    text = text.toLowerCase();
+                    if (accommodations.isSelected()) {
+        List<Hebergement> sh = HebergementService.getInstance().getSearched(text);
+                if (sh != null) {
+                    for (Hebergement h : sh) {
+                        addButton(res, List, h);
+                        System.out.println(h);
+                    }
+                } else {
+                    System.out.println("No Accommodations available\nPlease Try later !! ");
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n     for new Accommodations   !! ");
+
+                }
+                refreshTheme();
+            }
+                    else{
+                        if (Transports.isSelected()) {
+                        List<MoyenDeTransport> sM = MoyenDeTransportService.getInstance().getSearched(text);
+                if (sM != null) {
+                    for (MoyenDeTransport m : sM) {
+                        addButton1(res, List, m);
+                    }
+                } else {
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n    for new Means of transport   !! ");
+
+                }
+                refreshTheme();
+            }
+                    }
+                }
+            }
+
+        });
         add(LayeredLayout.encloseIn(List));
     }
 
@@ -281,13 +349,14 @@ public class ServicesForm extends BaseForm {
     private void addTab(Tabs swipe, Hebergement h, Label spacer) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
         String url = "http://localhost/HuntKingdom/web/uploads/" + h.getImage();
-        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 3, 0xFFFFFFFF), true);
+        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
 //        if (img.getHeight() < size) {
 //            System.out.println("height asgher");
 //            img = img.scaledHeight(size);
 //        }
         Label likes = new Label(h.getNbChambre() + " Rooms ");
+        likes.getAllStyles().setFgColor(0xFFFFFF, true);
         Style heartStyle = new Style(likes.getUnselectedStyle());
         heartStyle.setFgColor(0xff2d55);
         FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_NEW_RELEASES, heartStyle);
@@ -295,6 +364,7 @@ public class ServicesForm extends BaseForm {
         likes.setTextPosition(RIGHT);
 
         Label comments = new Label(h.getCapacite() + " People Max");
+        comments.getAllStyles().setFgColor(0xFFFFFF, true);
         FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
 //        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
 //            System.out.println("akber ");
@@ -302,7 +372,7 @@ public class ServicesForm extends BaseForm {
 //        }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
-        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FIT);
         Label overlay = new Label(" ", "ImageOverlay");
 
         Container page1
@@ -324,12 +394,13 @@ public class ServicesForm extends BaseForm {
     private void addTab1(Tabs swipe, MoyenDeTransport mdt, Label spacer) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
         String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
-        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 3, 0xFFFFFFFF), true);
+        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
 //        if (img.getHeight() < size) {
 //            img = img.scaledHeight(size);
 //        }
         Label likes = new Label(mdt.getType() + " ");
+        likes.getAllStyles().setFgColor(0xFFFFFF, true);
         Style heartStyle = new Style(likes.getUnselectedStyle());
         heartStyle.setFgColor(0xff2d55);
         FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_RECOMMEND, heartStyle);
@@ -337,13 +408,14 @@ public class ServicesForm extends BaseForm {
         likes.setTextPosition(RIGHT);
 
         Label comments = new Label(mdt.getCategorie());
+        comments.getAllStyles().setFgColor(0xFFFFFF, true);
         FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
 //        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
 //            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
 //        }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
-        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FIT);
         Label overlay = new Label(" ", "ImageOverlay");
 
         Container page1
@@ -443,10 +515,10 @@ public class ServicesForm extends BaseForm {
 
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(
-                        ta,likes, comments, price
+                        ta, likes, comments, price
                 ));
         a.add(cnt);
-        image.addActionListener(e -> new MaReservationForm(res, h, img,r).show());
+        image.addActionListener(e -> new MaReservationForm(res, h, img, r).show());
     }
 
     private void addButton3(Resources res, Container a, Location l, MoyenDeTransport mdt) {
@@ -472,10 +544,10 @@ public class ServicesForm extends BaseForm {
 
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(
-                        ta,likes, comments, price
+                        ta, likes, comments, price
                 ));
         a.add(cnt);
-        image.addActionListener(e -> new MaLocationForm(res, mdt, img,l).show());
+        image.addActionListener(e -> new MaLocationForm(res, mdt, img, l).show());
     }
 
     private void bindButtonSelection(Button b, Label arrow) {

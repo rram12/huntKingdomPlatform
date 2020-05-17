@@ -186,4 +186,17 @@ public class MoyenDeTransportService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    public ArrayList<MoyenDeTransport> getSearched(String search) {
+        String url = BASE_URL + "searchTransport/" + search;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                Mts = parseTransports(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return Mts;
+    }
 }

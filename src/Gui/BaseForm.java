@@ -85,6 +85,7 @@ public class BaseForm extends Form {
                         new Label(res.getImage("logosite.png"), "PictureWhiteBackgrond"))
         ));
         
+tb.addMaterialCommandToSideMenu("Services", FontImage.MATERIAL_APARTMENT, e -> new ServicesForm(res).show());
         tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
