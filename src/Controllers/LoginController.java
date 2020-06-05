@@ -8,6 +8,8 @@ package Controllers;
 import Entities.User;
 import Services.UserService;
 import Utils.MyConnection;
+import Utils.Session;
+import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -22,6 +24,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -70,50 +74,66 @@ public class LoginController implements Initializable {
    
     @FXML
     private void btnLoginAction(ActionEvent event) throws IOException, SQLException {
-         System.out.println("aaa");
-        
         User p = new User();
         p.setUsername(txtusername.getText());
-       
-        
-        
         UserService sp = new UserService();
-        test=sp.authentification(p);
-        
-        
-          System.out.println(test);
-          
-          String query = "update fos_user set etat=1 where id="+test;
-       
+        User trieduser=sp.verifyLogin(txtusername.getText());
+        System.out.println("trieduser : "+trieduser);    
+                if(trieduser.getId()!=0){
+                    if(trieduser.isConfirmed()){
+                    UserSession.getInstace(trieduser.getUsername(),trieduser.getId(), trieduser.getEmail(), trieduser.getRoles(), trieduser.getAddress(), trieduser.getPhoneNumber());
+                     System.out.println(UserSession.getInstace("",0, "", "", "", 0)); 
+                     String query = "update fos_user set etat=1 where id="+trieduser.getId();
                 st = cnx.createStatement();
-
                 st.executeUpdate(query);
-                if(test!=0){
-                    String role = sp.getUserByRole(txtusername.getText());
-                    System.out.println(role);
+                    Session.current_user=trieduser;
+//                    String role = sp.getUserByRole(txtusername.getText());
+//                    System.out.println(role);
         //if(txtusername.getText().equals("salsa")==true)
-        if(role.equals("ADMIN")==true)
+        if(trieduser.getRoles().equals("ADMIN")==true)
         {
         
          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
-         
         mainPane.getChildren().setAll(pane);
         }
        
-        else if(role.equals("TRAINER")==true)
+        else 
         {
         
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
         mainPane.getChildren().setAll(pane);
         }
-         else if(role.equals("CLIENT")==true)
-        {
-        
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
-        
-        mainPane.getChildren().setAll(pane);
-        }
-    }
+        }else{
+       /* AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Wait.fxml"));
+        mainPane.getChildren().setAll(pane);    */
+       Stage stage = (Stage) btnLogin.getScene().getWindow();
+    // do what you have to do
+         
+            Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/Gui/Wait.fxml"));
+        Scene scene = new Scene(root);
+         scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+         primaryStage.setTitle("not Confirmed Account !");
+                 primaryStage.setTitle("HuntKingdom");
+        Image ico = new Image("Uploads/logo2.png");
+        primaryStage.getIcons().add(ico);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+       stage.close();
+       
+       
+       
+                    }
+    }else{
+Alert alert = new Alert(AlertType.ERROR);
+alert.setTitle("Error");
+alert.setHeaderText("Login failed");
+alert.setContentText("username does not exist !");
+
+alert.showAndWait();    
+                
+                
+                }
     }
     
     

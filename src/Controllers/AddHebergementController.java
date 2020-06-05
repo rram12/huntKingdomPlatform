@@ -96,7 +96,8 @@ public class AddHebergementController implements Initializable {
 
     private void copyFile(File file) {
         try {
-            File dest = new File("E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + file.getName()); //any location
+            String DynamicPath =System.getProperty("user.dir");
+            File dest = new File(DynamicPath+"\\src\\Uploads\\" + file.getName()); //any location
             Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             System.out.println(ex);
@@ -218,5 +219,10 @@ public class AddHebergementController implements Initializable {
             }
 
         return true;
+    }
+    
+    public void goBack(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Service.fxml"));
+        mainpane.getChildren().setAll(pane);
     }
 }

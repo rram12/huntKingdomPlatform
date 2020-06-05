@@ -73,4 +73,65 @@ public class ReservationService {
         System.out.println(myList);
         return myList;
     }
+    
+    public boolean updateReservation(Reservation l) {
+        try {
+            String requete = "UPDATE Reservation SET nbJours = ?, prixTot = ?, dateArrivee = ? WHERE id = ?";
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, l.getNbJours());
+            pst.setFloat(2, l.getPrixTot());
+            pst.setDate(3, (Date) l.getDateArrivee());
+            pst.setInt(4, l.getId());
+            pst.executeUpdate();
+            System.out.println("Reservation succesfully updated ! ");
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+    }
+
+    public List<Reservation> afficherMesReservations(int id) {
+        List<Reservation> myList = new ArrayList();
+        try {
+            String requete = "SELECT * FROM Reservation where UserId=? order by dateArrivee";
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation();
+
+                r.setId(rs.getInt(1));
+                r.setNbJours(rs.getInt(2));
+                r.setDateArrivee(rs.getDate(3));
+                r.setPrixTot(rs.getFloat(4));
+                r.setUserId(rs.getInt(5));
+                r.setHebergementId(rs.getInt(6));
+                myList.add(r);
+
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("error d affichage");
+
+        }
+        System.out.println(myList);
+        return myList;
+    }
+
+    public boolean supprimerReservation(int idl) {
+        String requete = "DELETE FROM Reservation where id=?";
+        try {
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, idl);
+            pst.executeUpdate();
+            System.out.println("Reservation succesfully cancelled ! ");
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+    }
 }

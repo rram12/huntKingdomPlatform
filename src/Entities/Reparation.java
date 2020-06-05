@@ -14,6 +14,15 @@ import java.util.Date;
 public class Reparation {
     private int id;
     private Date dateFin;
+    private Date dateDebut;
+
+    public Date getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
     private Double prixRep;
     private String description;
     private int userId;
@@ -22,16 +31,17 @@ public class Reparation {
     public Reparation() {
     }
 
-    public Reparation(int id, Date dateFin, Double prixRep, String description, int userId, int Piecesdefectueuses_id) {
+    public Reparation(int id,Date dateDebut, Date dateFin, Double prixRep, String description, int userId, int Piecesdefectueuses_id) {
         this.id = id;
+        this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.prixRep = prixRep;
         this.description = description;
         this.userId = userId;
         this.Piecesdefectueuses_id = Piecesdefectueuses_id;
     }
-       public Reparation( Date dateFin, Double prixRep, String description, int userId, int Piecesdefectueuses_id) {
-        
+       public Reparation( Date dateDebut,Date dateFin, Double prixRep, String description, int userId, int Piecesdefectueuses_id) {
+        this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.prixRep = prixRep;
         this.description = description;

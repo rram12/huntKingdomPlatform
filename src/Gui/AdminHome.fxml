@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -37,6 +38,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnshop" mnemonicParsing="false" onAction="#btnshopAction" prefHeight="62.0" prefWidth="305.0" style="-fx-background-color: transparent;" text="Shop" textFill="WHITE">
                <font>
@@ -49,6 +53,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnevents" mnemonicParsing="false" onAction="#btneventsAction" prefHeight="62.0" prefWidth="320.0" style="-fx-background-color: none;" text="Events" textFill="WHITE">
                <font>
@@ -61,6 +68,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btntraining" mnemonicParsing="false" onAction="#btntrainingAction" prefHeight="62.0" prefWidth="307.0" style="-fx-background-color: none;" text="Training" textFill="WHITE">
                <font>
@@ -73,6 +83,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnservices" mnemonicParsing="false" onAction="#btnservicesAction" prefHeight="62.0" prefWidth="305.0" style="-fx-background-color: none;" text="Services" textFill="WHITE">
                <font>
@@ -85,6 +98,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnanimals" mnemonicParsing="false" onAction="#btnanimalsAction" prefHeight="62.0" prefWidth="311.0" style="-fx-background-color: none;" text="Animals" textFill="WHITE">
                <font>
@@ -97,6 +113,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnRecruitments" layoutX="10.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnRecruitmentsAction" prefHeight="62.0" prefWidth="309.0" style="-fx-background-color: none;" text="Recruitments" textFill="WHITE">
                <font>
@@ -109,6 +128,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="btnPub" layoutX="10.0" layoutY="444.0" mnemonicParsing="false" onAction="#btnpublicityAction" prefHeight="62.0" prefWidth="309.0" style="-fx-background-color: none;" text="Publicity" textFill="WHITE">
                <font>
@@ -121,6 +143,9 @@
                   <String fx:value="btn" />
                   <String fx:value="warning" />
                </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </VBox>

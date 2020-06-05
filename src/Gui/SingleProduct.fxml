@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SingleProductController">
+   <children>
+      <ImageView fx:id="img_produit" fitHeight="117.0" fitWidth="186.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+      <Separator layoutY="112.0" prefHeight="38.0" prefWidth="200.0" />
+      <GridPane layoutY="131.0" prefHeight="83.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="55.0" prefWidth="100.0" text="    Name : ">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="56.0" prefWidth="97.0" text="   Category : " GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelNom" prefHeight="40.0" prefWidth="100.0" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelCategory" prefHeight="38.0" prefWidth="99.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label text="    Price  :" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelPrice" prefHeight="25.0" prefWidth="91.0" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <JFXButton fx:id="addTocardBtn" layoutX="41.0" layoutY="248.0" prefHeight="38.0" prefWidth="119.0" ripplerFill="#463a1f" style="-fx-background-color: orange;" text="add to card" textFill="WHITE" />
+      <Separator layoutY="234.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

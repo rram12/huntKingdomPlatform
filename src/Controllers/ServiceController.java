@@ -8,6 +8,7 @@ package Controllers;
 import Entities.Hebergement;
 import Services.HebergementService;
 import Utils.MyConnection;
+import Utils.Session;
 import com.sun.prism.impl.Disposer;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -135,6 +138,9 @@ public class ServiceController implements Initializable {
 
     @FXML
     private TableColumn col_action;//delete column
+    
+    @FXML
+    private TableColumn col_action1;//details column
 
     //end table columns
     public void chooseFileAction() {
@@ -221,6 +227,14 @@ public class ServiceController implements Initializable {
                 return new SimpleBooleanProperty(p.getValue() != null);
             }
         });
+        col_action1.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Disposer.Record, Boolean>, ObservableValue<Boolean>>() {
+
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Disposer.Record, Boolean> p) {
+                return new SimpleBooleanProperty(p.getValue() != null);
+            }
+        });
 
         //Adding the Button to the cell
         col_action.setCellFactory(
@@ -229,6 +243,16 @@ public class ServiceController implements Initializable {
             @Override
             public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
                 return new ButtonCell();
+            }
+
+        });
+        //Adding the Button to the cell
+        col_action1.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCell2();
             }
 
         });
@@ -335,14 +359,12 @@ public class ServiceController implements Initializable {
                         // get Selected Item
                         Hebergement selectedH = (Hebergement) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
                         //remove it from the database
-                        //MyConnection mc = MyConnection.getInstance();
                         HebergementService ps = new HebergementService();
-                        //Piecesdefectueuses p = new Piecesdefectueuses(nom.getText(), combobox.getValue(), description.getText(), image.getText(), 1);
                         if (ps.deleteHebergement(selectedH.getId())) {
                             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                             alert1.setTitle("Accommodation");
                             alert1.setHeaderText(null);
-                            alert1.setContentText("Accommodation succesfully updated");
+                            alert1.setContentText("Accommodation succesfully deleted");
                             alert1.showAndWait();
                             //remove it from the tableView
                             obsl.remove(selectedH);
@@ -357,12 +379,58 @@ public class ServiceController implements Initializable {
         protected void updateItem(Boolean t, boolean empty) {
             super.updateItem(t, empty);
             if (!empty) {
+                cellButton.setStyle("-fx-background-color: crimson;"
+                    + "    -fx-text-fill: WHITE;");
                 setGraphic(cellButton);
             } else {
                 setGraphic(null);
             }
         }
+        
+        
     }
+    private class ButtonCell2 extends TableCell<Disposer.Record, Boolean> {
+
+        final Button cellButton2 = new Button("Show");
+
+        ButtonCell2() {
+
+            //Action when the button is pressed
+            cellButton2.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent t) {
+                    
+                        // get Selected Item
+                        Hebergement selectedH = (Hebergement) ButtonCell2.this.getTableView().getItems().get(ButtonCell2.this.getIndex());
+                        Session.current_hebergement=selectedH;
+                        AnchorPane pane;
+                    try {
+                        pane = FXMLLoader.load(getClass().getResource("/Gui/UnHebergement.fxml"));
+                        mainpane.getChildren().setAll(pane);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ServiceController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                }
+            });
+        }
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                cellButton2.setStyle("-fx-background-color: lightblue;"
+                    + "    -fx-text-fill: WHITE;");
+                setGraphic(cellButton2);
+            } else {
+                setGraphic(null);
+            }
+        }
+        }
+    
+    
+    
 
     public void goToAdd(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addHebergement.fxml"));

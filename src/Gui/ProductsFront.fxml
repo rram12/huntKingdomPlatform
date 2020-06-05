@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="752.0" prefWidth="1086.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductsFrontController">
+   <children>
+      <JFXTabPane fx:id="tabPane" layoutY="6.0" prefHeight="752.0" prefWidth="1086.0">
+         <tabs>
+            <Tab text="Products">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane fx:id="anchor" layoutY="87.0" prefHeight="628.0" prefWidth="1086.0" />
+                        <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="850.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Uploads/images.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="759.0" layoutY="29.0" prefHeight="54.0" prefWidth="67.0" text="cart : ">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="23.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelCart" layoutX="819.0" layoutY="29.0" prefHeight="54.0" prefWidth="31.0">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="23.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Card">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutY="21.0" opacity="0.6" prefHeight="85.0" prefWidth="836.0" style="-fx-background-color: white;">
+                           <children>
+                              <AnchorPane id="AnchorPane" layoutX="7.0" layoutY="20.0" prefHeight="64.0" prefWidth="735.0" style="-fx-border-color: black; fx-border-insets: 5; fx-border-width: 3;">
+                                 <children>
+                                    <Label fx:id="libelleTxt" layoutX="110.0" layoutY="9.0" prefHeight="40.0" prefWidth="71.0" text="libelle">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="marqueTxt" layoutX="194.0" layoutY="9.0" prefHeight="40.0" prefWidth="78.0" text="marque">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="priceTxt" layoutX="293.0" layoutY="10.0" prefHeight="40.0" prefWidth="78.0" text="Price">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="typeTxt" layoutX="395.0" layoutY="11.0" prefHeight="40.0" prefWidth="78.0" text="Type">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalTxt" layoutX="562.0" layoutY="13.0" prefHeight="40.0" prefWidth="78.0" text="Total">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="181.0" orientation="VERTICAL" prefHeight="59.0" prefWidth="7.0" />
+                                    <Separator layoutX="272.0" layoutY="1.0" orientation="VERTICAL" prefHeight="59.0" prefWidth="7.0" />
+                                    <Separator layoutX="364.0" layoutY="7.0" orientation="VERTICAL" prefHeight="54.0" prefWidth="7.0" />
+                                    <Separator layoutX="469.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="59.0" prefWidth="7.0" />
+                                    <Separator layoutX="541.0" layoutY="4.0" orientation="VERTICAL" prefHeight="59.0" prefWidth="7.0" />
+                                    <Separator layoutX="640.0" layoutY="6.0" orientation="VERTICAL" prefHeight="54.0" prefWidth="7.0" />
+                                    <Separator layoutX="92.0" layoutY="2.0" orientation="VERTICAL" prefHeight="59.0" prefWidth="7.0" />
+                                    <Label fx:id="typeTxt1" layoutX="476.0" layoutY="14.0" prefHeight="40.0" prefWidth="78.0" text="Quantity">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalTxt1" layoutX="647.0" layoutY="14.0" prefHeight="40.0" prefWidth="78.0" text="Action">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="libelleTxt1" layoutX="14.0" layoutY="10.0" prefHeight="40.0" prefWidth="71.0" text="Image">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </Pane>
+                        <ScrollPane layoutY="104.0" opacity="0.6" prefHeight="552.0" prefWidth="836.0">
+                          <content>
+                            <AnchorPane fx:id="anchorCart" minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox fx:id="vBox" layoutX="4.0" layoutY="4.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                        <Label layoutX="836.0" layoutY="56.0" prefHeight="48.0" prefWidth="142.0" text="Total Price : ">
+                           <font>
+                              <Font name="Bodoni MT" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="LabelTotalPrice" layoutX="978.0" layoutY="56.0" prefHeight="48.0" prefWidth="76.0">
+                           <font>
+                              <Font name="Bodoni MT" size="26.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="893.0" layoutY="163.0" onAction="#checkOutAction" prefHeight="38.0" prefWidth="104.0" ripplerFill="WHITE" style="-fx-background-color: chocolate;" text="CheckOut" textFill="WHITE" />
+                        <FontAwesomeIcon fill="CHOCOLATE" iconName="CHECK" layoutX="1016.0" layoutY="186.0" size="2em" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="paymentPane" disable="true" text="Payment">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextField fx:id="cvc" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="366.0" prefHeight="45.0" prefWidth="206.0" promptText="cvc" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="annee_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="279.0" prefHeight="45.0" prefWidth="206.0" promptText="expired year" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="moix_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="204.0" prefHeight="45.0" prefWidth="206.0" promptText="expired month" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="num_carte" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="129.0" prefHeight="45.0" prefWidth="206.0" promptText="credit card number" style="-fx-text-inner-color: white;" unFocusColor="YELLOW">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <StackPane fx:id="stackPay" layoutX="35.0" layoutY="433.0" prefHeight="173.0" prefWidth="448.0">
+                                 <children>
+                                    <JFXButton buttonType="RAISED" onAction="#onPayAction" prefHeight="46.0" prefWidth="141.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Pay" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </StackPane>
+                              <Label layoutX="587.0" layoutY="80.0" prefHeight="62.0" prefWidth="72.0" text="Price : ">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelPirx" layoutX="652.0" layoutY="81.0" prefHeight="60.0" prefWidth="75.0">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

@@ -22,7 +22,7 @@ public class ParticipationService {
     public ParticipationService(){
     cnx2 = MyConnection.getInstance().getCnx();}
     
-    public void addParticipation(Participation p){
+    public boolean addParticipation(Participation p){
         try {
             String requete="INSERT INTO competition_user(competition_id,user_id) "
                     + "values(?,?)";
@@ -33,8 +33,10 @@ public class ParticipationService {
           
             pst.executeUpdate();
             System.out.println("Participation added succesfully");
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
         
     }

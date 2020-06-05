@@ -10,6 +10,7 @@ import Entities.Reparation;
 import Services.PieceService;
 import Services.ProduitService;
 import Services.ReparationService;
+import Utils.UserSession;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -141,7 +142,8 @@ public class ReparateurController implements Initializable {
                       ZoneId defaultZoneId = ZoneId.systemDefault();
                     Date date = Date.from( endDateText.getValue().atStartOfDay(defaultZoneId).toInstant());
                     Double price = Double.parseDouble(priceText.getText());
-                    Reparation rep = new Reparation(date,price,descriptionText.getText(),1,id);
+                           int UserId =  UserSession.getInstace("",0, "", "", "", 0).getId();
+                    Reparation rep = new Reparation(new Date(),date,price,descriptionText.getText(),UserId,id);
                     ps.ajouterReparation(rep);
                     PieceService prs = new PieceService();
                     prs.updateReserved(id);

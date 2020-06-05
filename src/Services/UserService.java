@@ -342,6 +342,36 @@ public class UserService {
         }
         return username;
     }
-    
+    public User verifyLogin(String username){
+        User u = new User();
+        try {            
+            Statement st = cnx2.createStatement();
+            String requete = "SELECT * FROM fos_user where fos_user.username = '"+username+"'";
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString(2));
+                u.setEmail(rs.getString(4));
+                u.setPassword(rs.getString(8));
+                u.setLast_login(rs.getString(9));
+                 String role= rs.getString(12);
+                 role = role.substring(20, role.length());
+                u.setRoles(role.substring(0, role.length()-3));
+//                u.setRoles(rs.getString(12));
+                u.setFirstName(rs.getString(13));
+                u.setLastName(rs.getString(14));
+                u.setAddress(rs.getString(15));
+                u.setPhoneNumber(rs.getLong(16));
+                u.setPicture(rs.getString(17));
+                u.setGender(rs.getInt(18));
+                u.setContract(rs.getString(19));
+                u.setConfirmed(rs.getBoolean(20));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return u;
+    }
 }
     

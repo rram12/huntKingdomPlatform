@@ -95,21 +95,8 @@ public List<Produit> getProduit() throws SQLException {
         return myList;
     }
 
-    /*
-     public void supprimerPersonne(int id) {
-        try {
-            String requete = "DELETE FROM piecesdefectueuses WHERE id = ?";
-               PreparedStatement pst = cnx2.prepareStatement(requete);
-            pst.setInt(1, id);//index starts with 1 for the first value
-            pst.executeUpdate();
-            System.out.println("piece deleted succesfully ! ");
-        
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-
-        }
-
-    }*/
+    
+    
  /*
      public void modifierPiece(Piecesdefectueuses p) {
         try {
@@ -165,7 +152,7 @@ public List<Produit> getProduit() throws SQLException {
 
     public void deletePromotion(int id) {
         try {
-            String requete = "UPDATE produit SET promotion_id = -1,prixFinale = prix WHERE id = ?";
+            String requete = "UPDATE produit SET promotion_id = null ,prixFinale = prix WHERE id = ?";
             PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, id);
             pst.executeUpdate();
@@ -182,7 +169,7 @@ public List<Produit> getProduit() throws SQLException {
         Date current_date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(current_date.getTime());
         try {
-            String requete = "UPDATE produit SET prixFinale = prix,promotion_id = -1 where promotion_id = (select id from promotion where dateFin < ?) ";
+            String requete = "UPDATE produit SET prixFinale = prix,promotion_id = null where promotion_id = (select id from promotion where dateFin < ?) ";
             PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setDate(1, sqlDate);
             int nb = pst.executeUpdate();
@@ -196,7 +183,62 @@ public List<Produit> getProduit() throws SQLException {
         }
 
     }
-   
+    
+     public void deleteProduit(int id) {
+        try {
+            String requete = "DELETE FROM produit WHERE id = ?";
+               PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, id);//index starts with 1 for the first value
+            pst.executeUpdate();
+            System.out.println("product deleted succesfully ! ");
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+
+    }
+     public void modifierProduit(Produits p) {
+        try {
+            String requete = "UPDATE produit SET  lib_prod = ?, prix = ?, description = ?, qte_prod = ?, image = ?,  type = ?, marque = ? WHERE id = ?";
+               PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setString(1, p.getLib_prod());
+            pst.setDouble(2, p.getPrix()); 
+            pst.setString(3, p.getDescription());
+            pst.setInt(4, p.getQte_prod());
+            pst.setString(5, p.getImage());
+            pst.setString(6, p.getType());
+            pst.setString(7, p.getMarque());
+            pst.setInt(8, p.getId());
+            pst.executeUpdate();
+            System.out.println("product updated succesfully ! ");
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
  
+}
+       public void ajouterProduit(Produits p) {
+        String requete = "INSERT INTO produit (promotion_id,lib_prod,prix,prixFinale,description,qte_prod,date_ajout,image,type,marque) values(?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, p.getPromotion_id());//index starts with 1 for the first value
+            pst.setString(2, p.getLib_prod());
+            pst.setDouble(3, p.getPrix());
+            pst.setDouble(4, p.getPrixFinale());
+            pst.setString(5, p.getDescription());
+            pst.setInt(6, p.getQte_prod());
+            pst.setDate(7, (java.sql.Date) p.getDate_ajout());
+            pst.setString(8, p.getImage());
+            pst.setString(9, p.getType());
+            pst.setString(10, p.getMarque());
+            pst.executeUpdate();
+            System.out.println("product added succesfully ! ");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
 }
 

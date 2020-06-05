@@ -25,14 +25,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXTextArea fx:id="descriptionText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="187.0" prefHeight="95.0" prefWidth="261.0" promptText="Description" unFocusColor="YELLOW">
+                        <JFXTextArea fx:id="descriptionText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="187.0" prefHeight="95.0" prefWidth="261.0" promptText="Description" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
                            <font>
-                              <Font size="17.0" />
+                              <Font size="18.0" />
                            </font>
                         </JFXTextArea>
-                        <JFXTextField fx:id="priceText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="106.0" prefHeight="34.0" prefWidth="184.0" promptText="Price" unFocusColor="YELLOW">
+                        <JFXTextField fx:id="priceText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="106.0" prefHeight="34.0" prefWidth="184.0" promptText="Price" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
                            <font>
-                              <Font size="17.0" />
+                              <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXTextField>
                         <DatePicker fx:id="endDateText" layoutX="305.0" layoutY="364.0" promptText="End date..." />

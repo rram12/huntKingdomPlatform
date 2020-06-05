@@ -5,14 +5,12 @@
  */
 package Services;
 
-import Entities.Hebergement;
 import Entities.MoyenDeTransport;
 import Utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -37,9 +35,9 @@ public class MoyenDeTransportService {
                 a.setId(rs.getInt(1));
                 a.setType(rs.getString(2));
                 a.setPrixParJour(rs.getFloat(3));
-                a.setMarque(rs.getString(4));
-                a.setCategorie(rs.getString(5));
-                a.setImage(rs.getString(6));
+                a.setMarque(rs.getString(5));
+                a.setCategorie(rs.getString(6));
+                a.setImage(rs.getString(4));
                 myList.add(a);
                 
             }

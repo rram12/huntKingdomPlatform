@@ -188,5 +188,32 @@ public class PieceService {
         }
         
     }
+        
+       public boolean exists(PiecesDefectueuses p ) {
+            int nb = 0;
+        try {
+            String requete = "SELECT count(*)as count FROM piecesdefectueuses where etat=? and reserved=? and nom=? and categorie=? and description=? and image=? and userId=?";
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setBoolean(1, p.isEtat());
+            pst.setBoolean(2, p.isReserved());
+            pst.setString(3, p.getNom());
+            pst.setString(4, p.getCategorie());
+            pst.setString(5, p.getDescription());
+            pst.setString(6, p.getImage());
+            pst.setInt(7, p.getUserId());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                nb =  rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return nb>0;
+    }  
+        
+        
+        
 }
 

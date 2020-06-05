@@ -42,5 +42,6 @@
          </font>
       </JFXTextField>
       <FontAwesomeIcon iconName="SEARCH" layoutX="973.0" layoutY="-35.0" size="2em" text="" wrappingWidth="25.0" />
+      <JFXButton fx:id="ajouterBtn2" buttonType="RAISED" layoutX="904.0" layoutY="567.0" onAction="#OnAjouterAction" prefHeight="46.0" prefWidth="107.0" ripplerFill="#feffaf" style="-fx-background-color: blue;" text="Product" textFill="WHITE" />
    </children>
 </AnchorPane>

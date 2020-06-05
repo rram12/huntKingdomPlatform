@@ -82,7 +82,7 @@ public class TrainingService implements IServiceTraining {
     
     public int getLastTraining() throws SQLException {
         Statement stm = cnx.createStatement();
-        String query = "select max(id) as idLast from `entrainement` where userid=5";
+        String query = "select max(id) as idLast from `entrainement` where userid=15";
         ResultSet rst = stm.executeQuery(query);
         int id=0;
         while (rst.next()) {            

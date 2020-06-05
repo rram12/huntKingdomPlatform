@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.WaitController">
+   <children>
+      <ImageView fitHeight="693.0" fitWidth="890.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Uploads/wait.JPG" />
+         </image>
+      </ImageView>
+      <Button fx:id="logOutBtn" layoutX="45.0" layoutY="466.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="70.0" prefWidth="218.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="351.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Uploads/waiting.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

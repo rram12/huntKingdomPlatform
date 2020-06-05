@@ -88,9 +88,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="12.0" />
                </padding>
             </Button>
-            <HBox fx:id="hbox" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hbox" prefHeight="77.0" prefWidth="304.0">
                <children>
-                  <Button fx:id="btnreparation" mnemonicParsing="false" onAction="#btnreparationAction" prefHeight="64.0" prefWidth="238.0" style="-fx-background-color: none;" text="Reparation" textFill="WHITE">
+                  <Button fx:id="btnreparation" mnemonicParsing="false" onAction="#btnreparationAction" prefHeight="64.0" prefWidth="355.0" style="-fx-background-color: none;" text="Reparation" textFill="WHITE">
                      <font>
                         <Font name="Monospaced Regular" size="35.0" />
                      </font>
@@ -120,12 +120,12 @@
             </Button>
          </children>
       </VBox>
-      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="30.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="30.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Uploads/93516884_3010112525719313_1967261868162547712_n.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnLogout" layoutX="30.0" layoutY="718.0" mnemonicParsing="false" onAction="#btnLogoutAction" prefHeight="37.0" prefWidth="54.0" style="-fx-background-color: none;" />
+      <Button fx:id="btnLogout" layoutX="30.0" layoutY="709.0" mnemonicParsing="false" onAction="#btnLogoutAction" prefHeight="37.0" prefWidth="54.0" style="-fx-background-color: none;" />
       <ImageView fx:id="logoimg" fitHeight="150.0" fitWidth="200.0" layoutY="2.0" pickOnBounds="true" />
       <Pane fx:id="pane" layoutX="419.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="811.0" />
    </children>

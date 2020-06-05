@@ -39,6 +39,14 @@ public class Location {
         this.MoyenDeTransportId = MoyenDeTransportId;
     }
 
+    public Location(int id, int nbJours, float prixTot, Date dateArrivee) {
+        this.id = id;
+        this.nbJours = nbJours;
+        this.prixTot = prixTot;
+        this.dateArrivee = dateArrivee;
+    }
+    
+    
     public int getId() {
         return id;
     }

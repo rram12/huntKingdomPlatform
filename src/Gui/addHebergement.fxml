@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.web.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
@@ -66,5 +67,6 @@
             <Font name="Arial Black" size="22.0" />
          </font>
       </Label>
+      <Button fx:id="back" layoutX="83.0" layoutY="579.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="BACK" textAlignment="CENTER" textFill="ORANGE" textOverrun="CLIP" />
    </children>
 </AnchorPane>
