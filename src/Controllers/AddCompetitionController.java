@@ -11,13 +11,16 @@ import Utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -58,14 +61,98 @@ public class AddCompetitionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Categorie.setItems(list);
     }    
-    public void AddCompetition(ActionEvent event) throws IOException{
-    MyConnection mc =  MyConnection.getInstance();
+    public void AddCompetition(ActionEvent event) throws IOException, ParseException{
+        
+    if (validateFields()){
+        
     CompetitionService ps = new CompetitionService();
-    LocalDate dCompetition=dT.getValue();
-     LocalDate dComp=dP.getValue();
     int nbPartic=Integer.parseInt(NbParticipants.getText());
     Competition c = new Competition(Categorie.getValue(),Nom.getText(),Lieu.getText(),nbPartic,java.sql.Date.valueOf(dT.getValue().toString()),java.sql.Date.valueOf(dP.getValue().toString()));
-    ps.addCompetition(c);
+     if(ps.addCompetition(c)) {
+                showAlert(Alert.AlertType.INFORMATION, "Competition", null, "Competition succesfully added ");
+
+            }
+    }
+    }
+        public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+
+    }
+
+    private boolean validateFields() throws ParseException {
+
+        String format = "dd/MM/yyyy";
+
+        java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
+        java.util.Date date = new java.util.Date();
+
+        java.util.Date d = formater.parse(formater.format(date));
+        System.out.println(formater.format(d));
+        java.util.Date datee;
+        java.util.Date dateee;
+        datee = java.sql.Date.valueOf(dT.getValue());
+        
+        if (d.compareTo(datee) == 1) {
+            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Date > Date courante !");
+            dT.requestFocus();
+
+            return false;
+        } else {
+            dateee = java.sql.Date.valueOf(dP.getValue());
+            if (datee.compareTo(dateee) == 1) {
+            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Date Fin >Date Debut");
+            dP.requestFocus();
+
+            return false;
+        }
+        }
+           if (Nom.getText().isEmpty() || Categorie.getValue().isEmpty() 
+                || Lieu.getText().isEmpty() || NbParticipants.getText().isEmpty()) {
+            if (Nom.getText().isEmpty()){
+                Nom.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (Categorie.getValue().isEmpty()){
+                Categorie.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (Lieu.getText().isEmpty()){
+                Lieu.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (NbParticipants.getText().isEmpty()){
+                NbParticipants.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Please Fill all the fields !");
+            return false;
+        } 
+            if (!Pattern.matches("^\\d{1,2}$", NbParticipants.getText())) {
+                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify The price field!");
+                NbParticipants.requestFocus();
+                NbParticipants.selectEnd();
+                NbParticipants.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+              if (!Pattern.matches("^([a-zA-Z])[a-zA-Z_-]*[\\w_-]*[\\S]$|^([a-zA-Z])[0-9_-]*[\\S]$|^[a-zA-Z]*[\\S]$", Nom.getText())) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Name ! ");
+                Nom.requestFocus();
+                Nom.selectEnd();
+                Nom.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+                if (!Pattern.matches("^([a-zA-Z ÉéèÈêÊôÔ']*)$", Lieu.getText())) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Description must have more than 10 caracters ! ");
+                Lieu.requestFocus();
+                Lieu.selectEnd();
+                Lieu.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+            
+            
+            
+
+        return true;
 
     }
     

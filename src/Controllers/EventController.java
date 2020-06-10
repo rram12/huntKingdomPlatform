@@ -238,7 +238,6 @@ public class EventController implements Initializable {
     }
 
       public void updateCompetition(ActionEvent event) {
-          MyConnection mc = MyConnection.getInstance();
         CompetitionService ps = new CompetitionService();
         Date dateD=Date.valueOf(dt.getText());
         Date dateF=Date.valueOf(es.getText());

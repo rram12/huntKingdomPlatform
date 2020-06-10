@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.89" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddHebergementController">
+<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.99" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddHebergementController">
    <children>
       <Button fx:id="add" layoutX="170.0" layoutY="579.0" mnemonicParsing="false" onAction="#AddAccommodation" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
       <WebView fx:id="mapView" layoutX="572.0" layoutY="130.0" onMouseClicked="#coordonneesSelected" onTouchReleased="#coordonneesSelected" prefHeight="409.0" prefWidth="424.0" />

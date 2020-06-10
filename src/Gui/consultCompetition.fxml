@@ -23,6 +23,15 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab fx:id="competition1" text="My Competitions">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane fx:id="flow1" prefHeight="626.0" prefWidth="1080.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
             <Tab fx:id="participate" disable="true" text="Participate">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -81,6 +90,16 @@
                               <Font name="Arial Black" size="16.0" />
                            </font></Label>
                         <Label fx:id="errorparticipants" layoutX="469.0" layoutY="457.0" prefHeight="17.0" prefWidth="130.0" text="No more places" textFill="#da3e3e" visible="false">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="cancel" layoutX="316.0" layoutY="402.0" onAction="#cancelParticipation" prefHeight="45.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel Participation" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <Label fx:id="errorcancel" layoutX="169.0" layoutY="468.0" prefHeight="21.0" prefWidth="449.0" text="You cannot cancel Participation due to delay constraints" textFill="#da3e3e" visible="false">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>

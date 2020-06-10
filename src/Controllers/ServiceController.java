@@ -169,7 +169,7 @@ public class ServiceController implements Initializable {
         }
     }
 
-    MyConnection mc = MyConnection.getInstance();
+//    MyConnection mc = MyConnection.getInstance();
     HebergementService ps = new HebergementService();
     public ObservableList<Hebergement> obsl = FXCollections.observableArrayList(ps.afficher());
 
@@ -445,9 +445,9 @@ public class ServiceController implements Initializable {
     @FXML
     public void updateHebergement(ActionEvent event) {
         if (controleDeSaisie()) {
-            MyConnection mc = MyConnection.getInstance();
+//            MyConnection mc = MyConnection.getInstance();
             HebergementService ps = new HebergementService();
-            float price = Float.parseFloat(prixParJour.getText());
+//            float price = Float.parseFloat(prixParJour.getText());
             int nbch = Integer.parseInt(nbChambre.getText());
             int nblits = Integer.parseInt(capacite.getText());
             Hebergement mt = new Hebergement(current_id, type.getValue(), Float.parseFloat(prixParJour.getText()), absolutePath, adresse.getText(), nbch, nblits, nblits, description.getText());
