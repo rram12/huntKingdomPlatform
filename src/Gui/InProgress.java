@@ -38,6 +38,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -74,13 +75,13 @@ public class InProgress extends BaseForm {
     public InProgress(Resources res1, String id) {
         super("InProgress", BoxLayout.y());
         res = res1;
-
-        Toolbar tb = new Toolbar(true);
+       Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        getContentPane().setScrollVisible(false);
-        super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Form previous = Display.getInstance().getCurrent();
+        tb.setBackCommand("", e -> previous.showBack());
+        
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -94,7 +95,7 @@ public class InProgress extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("InProgress Piece"))
+                                        new Label(""))
                         )
                 )
         ));

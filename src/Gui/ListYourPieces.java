@@ -59,7 +59,7 @@ EncodedImage enc;
         getTitleArea().setUIID("Container");
         getContentPane().setScrollVisible(false);
         super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -74,11 +74,11 @@ EncodedImage enc;
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
                             FlowLayout.encloseCenter(
-                                new Label("List your pieces"))
+                                new Label(""))
                     )
                 )
         ));
-          
+        //  setTitle("ListYourPieces");
         TextField search = new TextField("");
         search.setUIID("TextFieldBlack");
         addStringValue("search", search);
@@ -156,7 +156,7 @@ EncodedImage enc;
         lid.setHidden(true);
         Button repareBtn = null;
         
-         int height = Display.getInstance().convertToPixels(8.5f);
+       int height = Display.getInstance().convertToPixels(8.5f);
         int width = Display.getInstance().convertToPixels(25f);
         
         if(c.isEtat()){

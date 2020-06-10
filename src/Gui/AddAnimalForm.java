@@ -7,11 +7,15 @@ package Gui;
 
 import Entities.Animal;
 import Services.AnimalService;
-import Services.TrainingService;
-import com.codename1.capture.Capture;
-import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.ext.filechooser.FileChooser;
+
+
+import com.codename1.io.FileSystemStorage;
+
 import com.codename1.io.Log;
+import com.codename1.io.Util;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.SOUTH;
 import com.codename1.ui.ComboBox;
@@ -19,9 +23,8 @@ import com.codename1.ui.Command;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -31,14 +34,21 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.validation.GroupConstraint;
 import com.codename1.ui.validation.LengthConstraint;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
 import com.codename1.util.regex.RE;
-import java.io.IOException;
-import java.util.List;
+
+
+
+import java.io.InputStream;
+import java.util.Random;
 
 /**
  *
@@ -46,17 +56,19 @@ import java.util.List;
  */
 public class AddAnimalForm extends BaseForm{
     String path = null;
+    String GlobalPath = "";
+    String GlobalExtension = "";
     ComboBox<String>categorie = new ComboBox<> ("Hunting","Fishing");
     ComboBox<String>Debut = new ComboBox<> ("January","February","March","April","May","June","July","August","September","October","November","December");
     ComboBox<String>Fin = new ComboBox<> ("January","February","March","April","May","June","July","August","September","October","November","December");
     TextField nom = new TextField();
     TextField description = new TextField();
     MultiButton photo = new MultiButton("");
-       
+    
 
-     public AddAnimalForm(Resources res) {
+     public AddAnimalForm(Resources res,int length) {
          
-        super("Ajout Animal", new BorderLayout());
+        super("Ajout Animal", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -66,9 +78,29 @@ public class AddAnimalForm extends BaseForm{
         super.addSideMenu(res);
 
         this.setScrollableY(true);
-        this.setLayout(new BorderLayout());
+        
+        Image img = res.getImage("bg-2.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
 
-        Container content = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(""))
+                        )
+                )
+        ));
+        
+        
+        
+       // Container content = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
         Label l1 = new Label("Categorie :");
         Label l2 = new Label("Nom :");
@@ -76,48 +108,72 @@ public class AddAnimalForm extends BaseForm{
         Label l4 = new Label("Debut Saison : ");
         Label l5 = new Label("Fin Saison : ");
         Label l6 = new Label("image : ");
+        Label limport = new Label("no file selected");
+       Button upload = new Button("");
+       Container photo1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+       photo1.addAll(limport,upload);
        
        
        
-       String url ="http://localhost/HuntKingdom/web/uploads/photos/choose.png";
-       EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth()/5, this.getHeight()/9 , 0xFFFFFFFF), true);
-                Image img = URLImage.createToStorage(placeholder, url, url , URLImage.RESIZE_SCALE_TO_FILL);
-        ImageViewer iv = new ImageViewer(img);
-        photo.addComponent(BorderLayout.WEST,iv);
-        photo.addActionListener(e -> {
-            path = Capture.capturePhoto();
-            try {
-                Image imgA = Image.createImage(path);
-                iv.setImage(imgA);
-                iv.refreshTheme();
-                photo.refreshTheme();
-                iv.setUIID("PreviewPhoto");
-                photo.setUIID("PreviewPhoto");
-                this.revalidate();
-            } catch (IOException ex) {
-                
+      upload.addPointerPressedListener((ei)->{
+            if (FileChooser.isAvailable()) {
+                FileChooser.showOpenDialog(".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg", e2-> {
+                    String file = (String)e2.getSource();
+                    if (file == null) {
+                        System.out.println("No file was selected");
+                    } else {
+                        String extension = null;
+                        if (file.lastIndexOf(".") > 0) {
+                            extension = file.substring(file.lastIndexOf(".")+1);
+                        }
+                        if ("txt".equals(extension)) {
+                            FileSystemStorage fs = FileSystemStorage.getInstance();
+                            try {
+                                InputStream fis = fs.openInputStream(file);
+                                System.out.println(Util.readToString(fis));
+                            } catch (Exception ex) {
+                                Log.e(ex);
+                            }
+                        } else {
+                            //moveFile(file,)
+                            String path = file.substring(7);
+                            System.out.println("Selected file :"+file.substring(40)+"\n"+"path :"+path);
+                            limport.setText("file imported");
+                            limport.getAllStyles().setFgColor(0x69E781);
+                            
+                            GlobalPath=path;
+                            GlobalExtension=file.substring(file.lastIndexOf(".")+1);
+                        }
+                    }
+                });
             }
-
         });
-        content.setScrollableY(true);
+       // content.setScrollableY(true);
 
         Button submit = new Button("Ajouter");
         FontImage.setMaterialIcon(submit, FontImage.MATERIAL_DONE);
       
-          
-        content.add(l1).add(categorie);
-        content.add(l2).add(nom);
-        content.add(l3).add(description);
-        content.add(l4).add(Debut);
-        content.add(l5).add(Fin);
-        content.add(l6).add(photo);
+         
+        add(l1);add(categorie);
+        add(l2);add(nom);
+        add(l3);add(description);
+       add(l4);add(Debut);
+        add(l5);add(Fin);
+        add(photo1);
         String nomA="";
        
       
-                      submit.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent evt) {
+                      submit.addActionListener((e)-> {
+            int subname = length+1;
+            Random rand = new Random();
+            int upperbound = 7483647;
+            int int_random = rand.nextInt(upperbound);
+            String Fullname = "MobileGenerated_"+subname+"_"+int_random+"."+GlobalExtension;
+            System.out.println(Fullname);
+            //boolean moving = moveFile(GlobalPath,"C:/wamp64/www/HuntKingdom/web/uploads/photos/"+Fullname);
+            //System.out.println("moved? :"+moving);
+           
+                
                    if ((nom.getText().length() == 0) || (description.getText().length() == 0)) {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } 
@@ -200,7 +256,7 @@ public class AddAnimalForm extends BaseForm{
     FS=12;
     break;
 }
-                 Animal a = new Animal(DS,FS,categorie.getSelectedItem(),nom.getText(),description.getText(),path);
+                 Animal a = new Animal(DS,FS,categorie.getSelectedItem(),nom.getText(),description.getText(),Fullname);
                  
                  Animal AnimalAjoutee = AnimalService.getInstance().add(a);
                   Dialog.show("ok", "Animal added !", "OK", "Cancel");
@@ -208,14 +264,16 @@ public class AddAnimalForm extends BaseForm{
              }
             
 
-                }
+                
 
             });
              
        
 
-        this.add(CENTER, content);
-        this.add(SOUTH, submit);
+       // this.add(CENTER, content);
+       
+        add(submit);
+        
         
         Validator val = new Validator();
         val.setShowErrorMessageForFocusedComponent(true);
@@ -230,5 +288,14 @@ public class AddAnimalForm extends BaseForm{
                         new RegexConstraint("^([a-zA-Z ÉéèÈêÊôÔ']*)$", "Alphabetic Field")));
    
 }
+//     public boolean moveFile(String sourcePath, String targetPath) {
+//        //File fileToMove = new File(sourcePath);
+//        File fileToMove=new File(sourcePath);
+//        boolean ftm=fileToMove.renameTo(new File(targetPath));
+//         System.out.println("source: "+sourcePath+" Target: "+targetPath);
+//        return ftm;
+//        
+//    }
       
 }
+

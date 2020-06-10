@@ -8,8 +8,10 @@ package Gui;
 import Entities.Animal;
 import Services.AnimalService;
 import com.codename1.components.MultiButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -22,6 +24,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.util.List;
 
@@ -32,9 +35,9 @@ import java.util.List;
 public class ListAnimalForm extends BaseForm{
     public ListAnimalForm(Resources res)
     {
-     
-      super(new BorderLayout());
-     
+          
+        super("ListAnimals", BoxLayout.y());
+
          Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -43,32 +46,61 @@ public class ListAnimalForm extends BaseForm{
         
         super.addSideMenu(res);
        
+        Image img1 = res.getImage("bg-2.jpg");
+        if (img1.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img1 = img1.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+
+        ScaleImageLabel sl = new ScaleImageLabel(img1);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(""))
+                        )
+                )
+        ));
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
      
      List<Animal> lb = AnimalService.getInstance().getAllAnimals();
      
      Container animals = new Container(BoxLayout.y());
      animals.setScrollableY(true);
      if (lb != null) {
-            Form hi = new Form("Animals",new GridLayout(2, 2));
+            Form hi = new Form(new GridLayout(2, 2));
             Button Add = new Button("Add Animal");
-     Add.addActionListener(b->new AddAnimalForm(res).show());
-     Button Stat = new Button("Stat");
+     Add.addActionListener(b->new AddAnimalForm(res,lb.size()).show());
+     
+     Button Stat = new Button("Statistics");
      Stat.addActionListener(b->new StatistiquePieForm().show());
             MultiButton mb = null;
              for (Animal a : lb) {
-      String url ="http://localhost/HuntKingdom/web/uploads/photos/Liza_saliens1.jpg";
+      String url ="http://localhost/HuntKingdom/web/uploads/photos/Liza_saliens2.jpg";
                   //System.out.println(e.getAnimalId().getId());
                   if(a.getId()==4)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/lieujaune1.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/lieujaune2.jpg";
                   }
                   if(a.getId()==1)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/ours_noir.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/ours_noir2.jpg";
                   }
                   if(a.getId()==3)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/smallgeme1.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/smallgeme2.jpg";
                   }
                    EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth()/2 , this.getHeight()/5 , 0xFFFFFFFF), true);
                 Image img = URLImage.createToStorage(placeholder, url, url , URLImage.RESIZE_SCALE_TO_FILL);
@@ -90,11 +122,11 @@ hi.add(LayeredLayout.encloseIn(imgC,
 modify.addActionListener(e->new ModifyAnimalForm(a,res).show());
 
     }
-             animals.add(FlowLayout.encloseRight(Add));
-             animals.add(FlowLayout.encloseRight(Stat));
-             animals.add(FlowLayout.encloseCenter(hi));
+              animals.add(FlowLayout.encloseCenter(hi));
+              animals.add(FlowLayout.encloseIn(Add,Stat));
+            
      }
-       this.add(CENTER, animals);
+       add(animals);
      
     }
      

@@ -2,7 +2,11 @@
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="back-command.png" type="multi"  />
+    <image name="bg-1.jpg"  />
+    <image name="bg-2.jpg"  />
+    <image name="BG1.jpg"  />
     <image name="bg1.jpg"  />
+    <image name="BG2.jpg"  />
     <image name="border.png"  />
     <image name="Button.borderBottom_2.png" type="multi"  />
     <image name="Button.borderBottomL_2.png" type="multi"  />
@@ -15,6 +19,7 @@
     <image name="Button.borderTopR_2.png" type="multi"  />
     <image name="cal_left_arrow.png" type="multi"  />
     <image name="cal_right_arrow.png" type="multi"  />
+    <image name="CaptureBG.JPG"  />
     <image name="chbox1.png" type="multi"  />
     <image name="chboxv1.png" type="multi"  />
     <image name="ComboBox.borderBottom_1.png" type="multi"  />
@@ -78,6 +83,7 @@
     <image name="sliderRedCenter.png" type="multi"  />
     <image name="sliderRedLeft.png" type="multi"  />
     <image name="sliderRedRight.png" type="multi"  />
+    <image name="slogon.JPG"  />
     <image name="switch_mask.png" type="multi"  />
     <image name="switch_off.png" type="multi"  />
     <image name="switch_on.png" type="multi"  />
@@ -265,7 +271,7 @@
         <val key="ComboBoxFocus.transparency" value="0" />
         <gradient key="ComboBoxItem.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
         <val key="ComboBoxItem.bgType" value="0" />
-        <val key="ComboBoxItem.fgColor" value="ffffff" />
+        <val key="ComboBoxItem.fgColor" value="0" />
         <font key="ComboBoxItem.font" type="ttf" face="0" style="1" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="3.0" />
         <val key="ComboBoxItem.press#fgColor" value="0" />
         <font key="ComboBoxItem.press#font" type="ttf" face="0" style="1" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="3.0" />
@@ -524,8 +530,8 @@
         <font key="MultiLine2.sel#font" type="ttf" face="0" style="1" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
         <val key="MultiLine2.sel#transparency" value="0" />
         <val key="MultiLine2.transparency" value="0" />
-        <val key="MultiLine3.fgColor" value="666666" />
-        <font key="MultiLine3.font" type="ttf" face="0" style="0" size="8" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="2.0" />
+        <val key="MultiLine3.fgColor" value="0" />
+        <font key="MultiLine3.font" type="ttf" face="0" style="1" size="8" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="2.5" />
         <val key="MultiLine3.press#fgColor" value="666666" />
         <font key="MultiLine3.press#font" type="ttf" face="0" style="0" size="8" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="2.0" />
         <val key="MultiLine3.press#transparency" value="0" />
@@ -533,8 +539,8 @@
         <font key="MultiLine3.sel#font" type="ttf" face="0" style="0" size="8" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="2.0" />
         <val key="MultiLine3.sel#transparency" value="0" />
         <val key="MultiLine3.transparency" value="0" />
-        <val key="MultiLine4.fgColor" value="666666" />
-        <font key="MultiLine4.font" type="ttf" face="0" style="0" size="8" name="native:ItalicThin" family="native:ItalicThin" sizeSettings="3" actualSize="2.0" />
+        <val key="MultiLine4.fgColor" value="0" />
+        <font key="MultiLine4.font" type="ttf" face="0" style="1" size="8" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="2.5" />
         <val key="MultiLine4.press#fgColor" value="666666" />
         <font key="MultiLine4.press#font" type="ttf" face="0" style="0" size="8" name="native:ItalicThin" family="native:ItalicThin" sizeSettings="3" actualSize="2.0" />
         <val key="MultiLine4.press#transparency" value="0" />

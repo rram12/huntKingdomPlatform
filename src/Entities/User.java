@@ -51,14 +51,19 @@ public class User {
         this.contract = contract;
     }
 
-    public User(String username) {
+    public User(int id,String username,String email,String roles,String address,long phoneNumber) {
+        this.id = id;
         this.username = username;
+        this.email = email;
+        this.roles = roles;   
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
     
 
-    public static User getInstace(String username) {
+    public static User getInstace(int id,String username,String email,String roles,String address,long phoneNumber) {
         if(instance == null) {
-            instance = new User(username);
+            instance = new User(id,username,email,roles,address,phoneNumber);
         }
         return instance;
     }

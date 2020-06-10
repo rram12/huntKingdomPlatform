@@ -113,7 +113,8 @@ public class CalendarForm extends BaseForm{
         c.setMultipleSelectionEnabled(true);
         c.setSelectedDays(selected,"CalendarSelectedDay");
         c.setChangesSelectedDateEnabled(false);
-//        c.highlightDates(selected);
+        SpanLabel l=new SpanLabel("Remember! You can only update your Booking if there is still more than one week for it to start", "CommandFocus");
+//        l.getAllStyles().setFgColor(0xFFFFFF, true);
         Container content = BoxLayout.encloseY(
                 new SpanLabel(""),
                 new SpanLabel(""),
@@ -121,8 +122,8 @@ public class CalendarForm extends BaseForm{
                 new SpanLabel(""),
                 c,
 //                new FloatingHint(code),
-//                createLineSeparator(),
-                new SpanLabel("We've sent the confirmation code to your email. Please check your inbox", "CenterLabel")
+                createLineSeparator(),
+                l
 //                ,resend,
 //                signUp,
 //                FlowLayout.encloseCenter(alreadHaveAnAccount, signIn)

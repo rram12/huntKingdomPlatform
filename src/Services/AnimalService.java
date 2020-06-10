@@ -197,40 +197,40 @@ public class AnimalService {
                 a.setCategorie(obj.get("categorie").toString());
                 a.setNom(obj.get("nom").toString());
                 a.setDescription(obj.get("description").toString());
-//                a.setImage_animal(obj.get("image_animal").toString());
+                a.setImage_animal(obj.get("imageAnimal").toString());
                 float ds = Float.parseFloat(obj.get("debutSaison").toString());
                 a.setDebutSaison((int)ds);
                 float fs = Float.parseFloat(obj.get("finSaison").toString());
                 a.setFinSaison((int)fs);
-            AddPhoto(a.getId(), a.getImage_animal());
+           
             
         } catch (IOException ex) {
            
         }
 return a;
     }
-     public Animal AddPhoto(int id, String filePath) {
-        Animal a=new Animal();
-        try {
-           
-            MultipartRequest r = new MultipartRequest();
-            r.setUrl(BASE_URL+"addImage/" + id);
-            r.setPost(true);
-            r.addData("path", filePath, "image/jpeg");
-
-            InfiniteProgress prog = new InfiniteProgress();
-            Dialog dlg = prog.showInifiniteBlocking();
-            r.setDisposeOnCompletion(dlg);
-            NetworkManager.getInstance().addToQueueAndWait(r);
-
-            Map<String, Object> response = (Map<String, Object>) new JSONParser().parseJSON(
-                    new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
-
-        } catch (IOException err) {
-            
-        }
-        return a ;
-    }
+//     public Animal AddPhoto(int id, String filePath) {
+//        Animal a=new Animal();
+//        try {
+//           
+//            MultipartRequest r = new MultipartRequest();
+//            r.setUrl(BASE_URL+"addImage/" + id);
+//            r.setPost(true);
+//            r.addData("path", filePath, "image/jpeg");
+//
+//            InfiniteProgress prog = new InfiniteProgress();
+//            Dialog dlg = prog.showInifiniteBlocking();
+//            r.setDisposeOnCompletion(dlg);
+//            NetworkManager.getInstance().addToQueueAndWait(r);
+//
+//            Map<String, Object> response = (Map<String, Object>) new JSONParser().parseJSON(
+//                    new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
+//
+//        } catch (IOException err) {
+//            
+//        }
+//        return a ;
+//    }
      
      public boolean modifyAnimal(Animal a)
      {

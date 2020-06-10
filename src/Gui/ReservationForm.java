@@ -9,6 +9,7 @@ import com.codename1.notifications.LocalNotification;
 import Entities.Hebergement;
 import Entities.Location;
 import Entities.Reservation;
+import Entities.User;
 import Services.HebergementService;
 import Services.ReservationService;
 import com.codename1.components.FloatingHint;
@@ -56,11 +57,10 @@ public class ReservationForm extends BaseForm {
         super(new BorderLayout());
         List<Reservation> rs = ReservationService.getInstance().getAllReservations(M.getId());
         LocalNotification n = new LocalNotification();
-        n.setId("demo-notification");
-        n.setAlertBody("It's time to take a break and look at me");
-        n.setAlertTitle("Break Time!");
+        n.setId("Huntkingdom-notification");
+        n.setAlertBody("Accommodation is ready Now it's time to go find a Mean of Transport");
+        n.setAlertTitle("Ready to go!");
         n.setAlertSound("/notification_sound_bells.mp3");
-
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -171,12 +171,12 @@ public class ReservationForm extends BaseForm {
                 if (validateFields(Days, tfArrival, rs)) {
                     try {
 
-                        Reservation t = new Reservation(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), 3, M.getId());
+                        Reservation t = new Reservation(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), User.getInstace(0,"","","","",0).getId(), M.getId());
 //                        System.out.println(t);
                         if (ReservationService.getInstance().addReservation(t)) {
                             Dialog.show("Success", "Reservation successfully Made", new Command("OK"));
-
-                            previous.showBack();
+                            Display.getInstance().scheduleLocalNotification(n, System.currentTimeMillis() + 10 * 1000, LocalNotification.REPEAT_NONE);
+                            new ServicesForm(res).show();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }

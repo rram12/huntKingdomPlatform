@@ -9,6 +9,7 @@ import java.util.Date;
 import Entities.Location;
 import Entities.MoyenDeTransport;
 import Entities.Reservation;
+import Entities.User;
 import Services.LocationService;
 import com.codename1.components.FloatingHint;
 import com.codename1.components.ImageViewer;
@@ -159,11 +160,11 @@ public class LocationForm extends BaseForm {
                 if (validateFields(Days, tfArrival, ls)) {
                     try {
 
-                        Location t = new Location(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), 3, M.getId());
+                        Location t = new Location(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), User.getInstace(0,"","","","",0).getId(), M.getId());
 //                        System.out.println(t);
                         if (LocationService.getInstance().addLocation(t)) {
                             Dialog.show("Success", "Rent successfully Made", new Command("OK"));
-                            previous.showBack();
+                            new ServicesForm(res).show();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
@@ -224,24 +225,4 @@ public class LocationForm extends BaseForm {
         }
         return inActiveDate;
     }
-//    public Date currentDate() {
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(this.date);
-//        Date date = c.getTime();
-//
-//        java.text.SimpleDateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd");
-//
-//        String date1 = format1.format(date);
-//
-//        Date inActiveDate = null;
-//
-//        try {
-//
-//            inActiveDate = format1.parse(date1);
-//
-//        } catch (ParseException e1) {
-//
-//        }
-//        return inActiveDate;
-//    }
 }

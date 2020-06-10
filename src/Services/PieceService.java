@@ -10,6 +10,7 @@ import Entities.Repairer;
 import Entities.PiecesDefectueuses;
 import Entities.Products;
 import Entities.Reparation;
+import Entities.User;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -160,7 +161,7 @@ public class PieceService {
 
     public ArrayList<PiecesDefectueuses> listyourPieces() {
         ConnectionRequest con = new ConnectionRequest();
-        String constId = "3";
+        String constId = Integer.toString(User.getInstace(0,"","","","",0).getId());
         String url = Statics.BASE_URL1 + "reparation/api/list_your_defective/" + constId;
         con.setUrl(url);
         con.addResponseListener((NetworkEvent evt) -> {
@@ -412,5 +413,7 @@ public class PieceService {
         return produits;
 
     }
+     
+    
 
 }

@@ -10,18 +10,28 @@ import Entities.MoyenDeTransport;
 import Services.HebergementService;
 import Services.MoyenDeTransportService;
 import com.codename1.components.MultiButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.util.List;
 
@@ -29,30 +39,74 @@ import java.util.List;
  *
  * @author ASUS1
  */
-public class ListTransportForm extends Form {
+public class ListTransportForm extends BaseForm {
 
     public ListTransportForm(Resources res) {
-        super("Accomodations", new BorderLayout());
-
+        super("Means Of Transport", BoxLayout.y());
+        
         List<MoyenDeTransport> lh = MoyenDeTransportService.getInstance().getAllTransports();
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        getContentPane().setScrollVisible(false);
 
-        Container Mts = new Container(BoxLayout.y());
-        Mts.setUIID("List");
-        Mts.setScrollableY(true);
+        super.addSideMenu(res);
+        
+        tb.addCommandToRightBar("Add", null, (e) -> new AddTransportForm(res).show());
+        Image img1 = res.getImage("bg-2.jpg");
+        if (img1.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img1 = img1.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+
+        ScaleImageLabel sl = new ScaleImageLabel(img1);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(""))
+                        )
+                )
+        ));
+        Container Mts = new Container();
         if (lh != null) {
             for (MoyenDeTransport h : lh) {
 
-                Container C1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-                Label lbMarque = new Label(h.getMarque());
-                Label lbPricePerDay = new Label(Float.toString(h.getPrixParJour()));
-                Button btnDel = new Button("delete");
+                addButton1(res, Mts, h);
+            }
+        } else {
+            System.out.println("ma7abech yekhdem");
+
+        }
+        add(LayeredLayout.encloseIn(Mts));
+    }
+    private void addButton1(Resources res, Container List, MoyenDeTransport mdt) {
+        System.out.println(mdt.getImage());
+        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
+        Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
+        int height = Display.getInstance().convertToPixels(11.5f);
+        int width = Display.getInstance().convertToPixels(14f);
+        Button image = new Button(img.fill(width, height));
+        image.setUIID("Label");
+        Container cnt = BorderLayout.west(image);
+        TextField ta = new TextField(mdt.getMarque());
+        ta.setUIID("NewsTitle");
+        ta.setEditable(false);
+
+        Label likes = new Label(" Category: " + mdt.getCategorie());
+        Label comments = new Label(" Type: " + mdt.getType());
+        Label price = new Label(" Price/Day: " + mdt.getPrixParJour() + "Dt");
+        Button btnDel = new Button("delete");
                 Button btnModif = new Button("Modify");
-                Button btnRent = new Button("Rent");
                 btnDel.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         try {
-                            if (MoyenDeTransportService.getInstance().deleteTransport(h.getId())) {
+                            if (MoyenDeTransportService.getInstance().deleteTransport(mdt.getId())) {
                                 Dialog.show("Success", "Mean of Transport successfully deleted", new Command("OK"));
                             } else {
                                 Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -62,25 +116,17 @@ public class ListTransportForm extends Form {
                         }
                     }
                 });
-                btnModif.addActionListener(e -> new ModifyTransport(h).show());
-//                btnRent.addActionListener(e -> new LocationForm(h).show());
-                lbMarque.addPointerPressedListener((ActionListener) (ActionEvent evt)
-                        -> Dialog.show("Transport", "Mark: " + h.getMarque() + "\nCategory: " + h.getCategorie() + "\nType: " + h.getType()+ "\nPricePerDay: " + h.getPrixParJour() + "Dt", new Command("OK")));
-                C1.add(lbMarque);
-                C1.add(lbPricePerDay);
-                C1.add(btnDel);
-                C1.add(btnModif);
-                C1.add(btnRent);
-//                C1.setLeadComponent(lbMarque);
-                //mb.add(LEFT, img);
-                Mts.add(FlowLayout.encloseCenter(C1));
-            }
+                btnModif.addActionListener(e -> new ModifyTransport(mdt,img,res).show());
+                image.addPointerPressedListener((ActionListener) (ActionEvent evt)
+                        -> Dialog.show("Transport", "Mark: " + mdt.getMarque() + "\nCategory: " + mdt.getCategorie() + "\nType: " + mdt.getType()+ "\nPricePerDay: " + mdt.getPrixParJour() + "Dt", new Command("OK")));
 
-            this.add(CENTER, Mts);
-
-        } else {
-            System.out.println("ma7abech yekhdem");
-
-        }
+        cnt.add(BorderLayout.CENTER,
+                BoxLayout.encloseY(
+                        ta,
+                        BoxLayout.encloseX(likes, comments), price
+                ));
+        cnt.add(BorderLayout.EAST,BoxLayout.encloseY(btnDel,btnModif));
+        List.add(cnt);
+        
     }
 }

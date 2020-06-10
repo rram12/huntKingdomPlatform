@@ -13,6 +13,7 @@ import Services.LocationService;
 import Services.ReservationService;
 import com.codename1.components.FloatingHint;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import static com.codename1.ui.Component.LEFT;
@@ -80,7 +81,7 @@ public class MaReservationForm extends BaseForm {
         lAddress.setTextPosition(LEFT);
         FontImage.setMaterialIcon(lAddress, FontImage.MATERIAL_LOCATION_CITY);
         Label lMark = new Label("Make Your Reservation");
-        Label oups =new Label("You cannot update your Reservation due to delay constraints ");
+        SpanLabel oups =new SpanLabel("You cannot update your Reservation due to delay constraints ", "Title");
         Label lType = new Label("Type");
         Label lDays = new Label("Days");
         Label lPricePerDay = new Label("Price Per Day");
@@ -228,7 +229,7 @@ public class MaReservationForm extends BaseForm {
 //                        System.out.println(t);
                         if (ReservationService.getInstance().modifyReservation(t)) {
                             Dialog.show("Success", "Reservation successfully updated", new Command("OK"));
-                            previous.showBack();
+                            new ServicesForm(res).show();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }

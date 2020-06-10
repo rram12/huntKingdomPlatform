@@ -48,6 +48,7 @@ public class UserService {
             Map<String,Object> tasksListJson = j.parseJSON(new CharArrayReader(json.toCharArray()));
             
             List<Map<String,Object>> list = (List<Map<String,Object>>)tasksListJson.get("root");
+            if(list.size()>0){
             for(Map<String,Object> obj : list){
                 User a = new User();
                
@@ -56,10 +57,14 @@ public class UserService {
                 
                 a.setUsername(obj.get("username").toString());
                 a.setFirstName(obj.get("firstName").toString());
-                
+                a.setEmail(obj.get("email").toString());
+                a.setRoles(obj.get("roles").toString());
+                a.setAddress(obj.get("address").toString());
+                float num = Float.parseFloat(obj.get("phoneNumber").toString());
+                a.setPhoneNumber((long)num);
                 users.add(a);
             }
-            
+            }
             
         } catch (IOException ex) {
             

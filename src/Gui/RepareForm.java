@@ -21,6 +21,7 @@ package Gui;
 
 import Entities.PiecesDefectueuses;
 import Entities.Reparation;
+import Entities.User;
 import Services.PieceService;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.io.FileSystemStorage;
@@ -78,7 +79,7 @@ public class RepareForm extends BaseForm {
 
         super.addSideMenu(res);
 
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -92,7 +93,7 @@ public class RepareForm extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("Add your defective piece"))
+                                        new Label(""))
                         )
                 )
         ));
@@ -115,11 +116,10 @@ public class RepareForm extends BaseForm {
 
         bt.addActionListener(e -> {
             if (validateFields(prix, description, dateTimePicker)) {
-                Reparation r = new Reparation(new Date(),(Date) dateTimePicker.getValue(), Double.parseDouble(prix.getText()), description.getText(), 16, Integer.parseInt(id));
-
+                Reparation r = new Reparation(new Date(),(Date) dateTimePicker.getValue(), Double.parseDouble(prix.getText()), description.getText(), User.getInstace(0,"","","","",0).getId(), Integer.parseInt(id));
                 if (PieceService.getInstance().repare(r)) {
                     Dialog.show("ok", "Piece repared ! ", "OK", "Cancel");
-                     new ListProductInPromotion(res).show();
+                     new ListDefective(res).show();
                     System.out.println("Piece repared ! ");
                 }
             }

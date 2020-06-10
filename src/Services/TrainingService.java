@@ -91,7 +91,8 @@ public class TrainingService {
     
 
     public ArrayList<Entrainement> getAllTrainingUser(int id){
-        String url = BASE_URL+"training_user/"+id;
+       
+        String url = BASE_URL+"training_user/"+Integer.toString(id);
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -139,8 +140,8 @@ public class TrainingService {
     public Entrainement add(Entrainement e) {
 
         ConnectionRequest r = new ConnectionRequest();
-        r.setPost(true);
-        r.setHttpMethod("GET");
+        r.setPost(false);
+        r.setHttpMethod("POST");
         r.setUrl(BASE_URL+"add_training");
         
         r.addArgument("categorie", e.getCategorie());
@@ -154,9 +155,7 @@ public class TrainingService {
         
         r.addArgument("accepter", e.getAccepter());
         
-        InfiniteProgress prog = new InfiniteProgress();
-        Dialog dlg = prog.showInifiniteBlocking();
-        r.setDisposeOnCompletion(dlg);
+       
         NetworkManager.getInstance().addToQueueAndWait(r);
         Entrainement en = new Entrainement();
         try {
@@ -220,8 +219,10 @@ public class TrainingService {
             List<String> content = (List<String>) response.get("root");
             System.out.println("content ====> " + content);
             for (String obj : content) {
+                if(obj!=null){
                 li.add(Integer.parseInt(obj));
                 System.out.println("li ====> " + li);
+                }
             }
             
         } catch (IOException err) {

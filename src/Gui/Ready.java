@@ -21,6 +21,7 @@ package Gui;
 import Entities.PiecesDefectueuses;
 import Entities.Repairer;
 import Entities.Reparation;
+import Entities.User;
 import Services.PieceService;
 import Utils.Statics;
 import com.codename1.components.ImageViewer;
@@ -37,6 +38,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -69,13 +71,12 @@ public class Ready extends BaseForm {
         super("ReadyPiece", BoxLayout.y());
         res = res1;
         
-        
-        Toolbar tb = new Toolbar(true);
+       Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        getContentPane().setScrollVisible(false);
-        super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Form previous = Display.getInstance().getCurrent();
+        tb.setBackCommand("", e -> previous.showBack());
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -89,7 +90,7 @@ public class Ready extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("Ready Piece"))
+                                        new Label(""))
                         )
                 )
         ));
@@ -126,7 +127,7 @@ public class Ready extends BaseForm {
         FisnishBtn.addActionListener(e->{
           System.out.println("Reparation : "+c);
               PieceService.getInstance().DeleteReparation(lidRep.getText(),lidPiece.getText());
-              PieceService.getInstance().sendMail("khalil.tourabi10@gmail.com");
+              PieceService.getInstance().sendMail(User.getInstace(0,"","","","",0).getEmail());
             new ListYourPieces(res).show();
            //new Payment(res,c).show();
         });
