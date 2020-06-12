@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainpane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PublicityController">
    <children>
-       <Button id="addCompetition" fx:id="addPublicity" layoutX="661.0" layoutY="513.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAddP" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="Add Publicity" textFill="WHITE">
+       <Button id="addCompetition" fx:id="addPublicity" layoutX="661.0" layoutY="512.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAddP" prefHeight="31.0" prefWidth="149.0" style="-fx-background-color: orange;" text="Add Publicity" textFill="WHITE">
          <styleClass>
             <String fx:value="success" />
             <String fx:value="btn" />
@@ -83,6 +83,6 @@
             <TextField fx:id="listView" layoutX="154.0" layoutY="394.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" />
          </children>
       </Group>
-         <TextField fx:id="search" layoutX="424.0" layoutY="37.0" promptText="Search For Publicity ..." />
+         <TextField fx:id="search" layoutX="424.0" layoutY="46.0" promptText="Search For Publicity ..." />
    </children>
 </AnchorPane>

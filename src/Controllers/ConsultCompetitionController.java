@@ -33,10 +33,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -44,6 +47,11 @@ import javafx.scene.layout.Pane;
  * @author User
  */
 public class ConsultCompetitionController implements Initializable {
+
+    @FXML
+    private AnchorPane anchor1;
+    @FXML
+    private AnchorPane anchor;
 
     @FXML
     private Label errorparticipants;
@@ -79,59 +87,104 @@ public class ConsultCompetitionController implements Initializable {
     private Label category;
 
     @FXML
-    private FlowPane flow;
-
-    @FXML
-    private FlowPane flow1;
-
-    @FXML
     private Label participant;
 
     @FXML
     private JFXTabPane tabCompetition;
     private int id;
     Competition cm;
-    private int idu;
     UserSession currentUser;
+    ArrayList<Competition> competitions = new ArrayList<>();
+    ArrayList<Competition> Mycompetitions = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Services.UserService SU = new UserService();
         currentUser = UserSession.getInstace("", 0, "", "", "", 0);
-        flow.getChildren().clear();
-        displayCompetition();
-        flow1.getChildren().clear();
-        displayMyCompetitions();
+
 
         tabCompetition.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (oldTab == participate) {
                 participate.setDisable(true);
             }
         });
+        CompetitionService cs = new CompetitionService();
+        competitions = (ArrayList<Competition>) cs.afficher();
+        /**
+         * ****** PAGINATION **********
+         */
+        Pagination pagination = new Pagination();
+
+        if (competitions.size() % 3 > 0) {
+            pagination.setPageCount((competitions.size() / 3) + 1);
+        } else {
+            pagination.setPageCount(competitions.size() / 3);
+        }
+
+        pagination.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {  // every time when you click pagination button this method will be called
+
+                return createPage(pageIndex, competitions);
+            }
+        });
+
+        AnchorPane.setTopAnchor(pagination, 10.0);
+        AnchorPane.setBottomAnchor(pagination, 10.0);
+        AnchorPane.setRightAnchor(pagination, 10.0);
+        AnchorPane.setLeftAnchor(pagination, 10.0);
+        anchor.getChildren().add(pagination);
+
+        /////////////////////////////////////////////////////////////
+        Mycompetitions = (ArrayList<Competition>) cs.MyCompetitions(currentUser.getId());
+        /**
+         * ****** PAGINATION **********
+         */
+        Pagination pagination1 = new Pagination();
+
+        if (Mycompetitions.size() % 3 > 0) {
+            pagination1.setPageCount((Mycompetitions.size() / 3) + 1);
+        } else {
+            pagination1.setPageCount(Mycompetitions.size() / 3);
+        }
+
+        pagination1.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {  // every time when you click pagination button this method will be called
+
+                return createPage1(pageIndex, Mycompetitions);
+            }
+        });
+
+        AnchorPane.setTopAnchor(pagination1, 10.0);
+        AnchorPane.setBottomAnchor(pagination1, 10.0);
+        AnchorPane.setRightAnchor(pagination1, 10.0);
+        AnchorPane.setLeftAnchor(pagination1, 10.0);
+        anchor1.getChildren().add(pagination1);
 
     }
 
-    private void displayCompetition() {
-//        ArrayList <Competition> trans = new ArrayList<>();
-        ArrayList<Competition> trans = new ArrayList<>();
-        CompetitionService ps = new CompetitionService();
-        trans = (ArrayList) ps.afficher();
-        ObservableList<Competition> obsl = FXCollections.observableArrayList(trans);
-        Node[] nodes = new Node[obsl.size()];
-        for (int i = 0; i < nodes.length; i++) {
+    public FlowPane createPage(int index, ArrayList<Competition> competitions) {
+        FlowPane flow = new FlowPane();
+        Node[] nodes = new Node[3];
+        int nbNode = -1;
+        index++;
+        int n = index + (index - 1) * 2 + 1;
+        // System.out.println("n : "+n);
+        int deb = n - 2;
+        for (int i = deb; i < deb + 3 && i != competitions.size(); i++) {
+            nbNode++;
+
             try {
 
                 FXMLLoader loader = new FXMLLoader();
 
                 Pane root = loader.load(getClass().getResource("/Gui/singleCompetition.fxml").openStream());
                 SingleCompetitionController single = (SingleCompetitionController) loader.getController();
-                single.getInfo(trans.get(i));
-                int id1 = single.getCurrentId();
-                Competition m = trans.get(i);
-
+                single.getInfo(competitions.get(i));
+                Competition m = competitions.get(i);
                 JFXButton button = single.getButton();
-                button.setText("Consult");
+
                 button.setOnAction(e -> {
                     cancel.setVisible(false);
                     errorcancel.setVisible(false);
@@ -146,7 +199,7 @@ public class ConsultCompetitionController implements Initializable {
                     participant.setText(Integer.toString(m.getNbParticipants()));
                     int participated = 0;
                     try {
-                        participated = checkparticipations(id1, currentUser.getId());
+                        participated = checkparticipations(cm.getId(), currentUser.getId());
                     } catch (SQLException ex) {
                         Logger.getLogger(ConsultCompetitionController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -162,6 +215,8 @@ public class ConsultCompetitionController implements Initializable {
                         particip.setStyle("-fx-background-color: red ; -fx-text-fill: white;");
                         particip.setText("No more places");
                     } else {
+                        particip.setStyle("-fx-background-color: green ; -fx-text-fill: white;");
+                        particip.setText("Participate");
                         particip.setOnAction(a -> {
                             ParticipationService pl = new ParticipationService();
                             Participation c = new Participation(currentUser.getId(), id);
@@ -175,51 +230,49 @@ public class ConsultCompetitionController implements Initializable {
                                 } catch (UnsupportedEncodingException ex) {
                                     Logger.getLogger(ConsultCompetitionController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-//                                System.out.println(maill);
-                                flow.getChildren().clear();
-                                displayCompetition();
-                                flow1.getChildren().clear();
-                                displayMyCompetitions();
+
+                                refresh();
                             }
                         });
-                        particip.setStyle("-fx-background-color: green ; -fx-text-fill: white;");
-                        particip.setText("Participate");
+
                     }
                     SingleSelectionModel<Tab> selectionModel = tabCompetition.getSelectionModel();
                     selectionModel.select(2); //select by index starting with 0
-                    this.id = id1;
-
+                    this.id = cm.getId();
                 });
 
-                nodes[i] = root;
-                flow.getChildren().add(nodes[i]);
-
+                nodes[nbNode] = root;
+                flow.getChildren().add(nodes[nbNode]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
+
+        return flow;
     }
 
-    private void displayMyCompetitions() {
-//        ArrayList <Competition> trans = new ArrayList<>();
-//        ArrayList<Competition> trans = new ArrayList<>();
-        CompetitionService ps = new CompetitionService();
-        ArrayList<Competition> trans = (ArrayList) ps.MyCompetitions(currentUser.getId());
-        ObservableList<Competition> obsl = FXCollections.observableArrayList(trans);
-        Node[] nodes = new Node[obsl.size()];
-        for (int i = 0; i < nodes.length; i++) {
+    public FlowPane createPage1(int index, ArrayList<Competition> Mycompetitions) {
+        FlowPane flow = new FlowPane();
+        Node[] nodes = new Node[4];
+        int nbNode = -1;
+        index++;
+        int n = index + (index - 1) * 2 + 1;
+        // System.out.println("n : "+n);
+        int deb = n - 2;
+        for (int i = deb; i < deb + 3 && i != Mycompetitions.size(); i++) {
+            nbNode++;
+
             try {
 
                 FXMLLoader loader = new FXMLLoader();
 
                 Pane root = loader.load(getClass().getResource("/Gui/singleCompetition.fxml").openStream());
                 SingleCompetitionController single = (SingleCompetitionController) loader.getController();
-                single.getInfo(trans.get(i));
-                int id1 = single.getCurrentId();
-                Competition m = trans.get(i);
-
+                single.getInfo(Mycompetitions.get(i));
+                Competition m = Mycompetitions.get(i);
                 JFXButton button = single.getButton();
-                button.setText("Consult");
+
                 button.setOnAction(e -> {
                     particip.setVisible(false);
                     cm = m;
@@ -231,50 +284,91 @@ public class ConsultCompetitionController implements Initializable {
                     place.setText(m.getLieu());
                     participant.setText(Integer.toString(m.getNbParticipants()));
                     Date date = new Date();
-        long diff = m.getDateDebut().getTime() - date.getTime();
-        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-        if (diffDays > 7) {
-            cancel.setVisible(true);
-            errorcancel.setVisible(false);
-        } else {
-            cancel.setVisible(false);
-                    errorcancel.setVisible(true);
-        }
+                    long diff = m.getDateDebut().getTime() - date.getTime();
+                    int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+                    if (diffDays > 4) {
+                        cancel.setVisible(true);
+                        errorcancel.setVisible(false);
+                    } else {
+                        cancel.setVisible(false);
+                        errorcancel.setVisible(true);
+                    }
 
                     SingleSelectionModel<Tab> selectionModel = tabCompetition.getSelectionModel();
                     selectionModel.select(2); //select by index starting with 0
-                    this.id = id1;
-
+                    this.id = cm.getId();
                 });
-
-                nodes[i] = root;
-                flow1.getChildren().add(nodes[i]);
-
+                nodes[nbNode] = root;
+                flow.getChildren().add(nodes[nbNode]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
+
+        return flow;
     }
 
-    @FXML
-    void addParticipation(ActionEvent event) throws UnsupportedEncodingException {
-        MyConnection mc = MyConnection.getInstance();
-        ParticipationService ps = new ParticipationService();
-        System.out.println(id);
-        Participation c = new Participation(currentUser.getId(), id);
-        if (ps.addParticipation(c)) {
-            participant.setText(Integer.toString(Integer.parseInt(participant.getText()) - 1));
-            ps.decrementerParticipants(id);
-            String maill = currentUser.getEmail();
-            Mailing ma = new Mailing();
-            ma.envoyer(currentUser, cm);
-            System.out.println(maill);
-            flow.getChildren().clear();
-            displayCompetition();
-            flow1.getChildren().clear();
-            displayMyCompetitions();
+    void refresh() {
+        anchor.getChildren().clear();
+        CompetitionService cs = new CompetitionService();
+        competitions = (ArrayList<Competition>) cs.afficher();
+        /**
+         * ****** PAGINATION **********
+         */
+        Pagination pagination = new Pagination();
+        // System.out.println("nbPieceReserved : "+pieces.size());
+
+        if (competitions.size() % 3 > 0) {
+            pagination.setPageCount((competitions.size() / 3) + 1);
+        } else {
+            pagination.setPageCount(competitions.size() / 3);
         }
 
+        pagination.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {  // every time when you click pagination button this method will be called
+
+                return createPage(pageIndex, competitions);
+            }
+        });
+
+        AnchorPane.setTopAnchor(pagination, 10.0);
+        AnchorPane.setBottomAnchor(pagination, 10.0);
+        AnchorPane.setRightAnchor(pagination, 10.0);
+        AnchorPane.setLeftAnchor(pagination, 10.0);
+        anchor.getChildren().add(pagination);
+    }
+
+    void refresh1() {
+        anchor1.getChildren().clear();
+        CompetitionService cs = new CompetitionService();
+
+        Mycompetitions = (ArrayList<Competition>) cs.MyCompetitions(currentUser.getId());
+        /**
+         * ****** PAGINATION **********
+         */
+        Pagination pagination1 = new Pagination();
+
+        if (Mycompetitions.size() % 3 > 0) {
+            pagination1.setPageCount((Mycompetitions.size() / 3) + 1);
+        } else {
+            pagination1.setPageCount(Mycompetitions.size() / 3);
+        }
+
+        pagination1.setPageFactory(new Callback<Integer, Node>() {
+            @Override
+            public Node call(Integer pageIndex) {  // every time when you click pagination button this method will be called
+
+                return createPage1(pageIndex, Mycompetitions);
+            }
+        });
+
+        AnchorPane.setTopAnchor(pagination1, 10.0);
+        AnchorPane.setBottomAnchor(pagination1, 10.0);
+        AnchorPane.setRightAnchor(pagination1, 10.0);
+        AnchorPane.setLeftAnchor(pagination1, 10.0);
+        anchor1.getChildren().add(pagination1);
     }
 
     @FXML
@@ -285,17 +379,11 @@ public class ConsultCompetitionController implements Initializable {
         if (ps.annulerParticipation(c)) {
             participant.setText(Integer.toString(Integer.parseInt(participant.getText()) + 1));
             ps.incrementerParticipants(id);
-            String maill = currentUser.getEmail();
-            Mailing ma = new Mailing();
-            ma.envoyer(currentUser, cm);
-            System.out.println(maill);
-            flow.getChildren().clear();
-            displayCompetition();
-            flow1.getChildren().clear();
-            displayMyCompetitions();
-                participate.setDisable(true);
-                SingleSelectionModel<Tab> selectionModel = tabCompetition.getSelectionModel();
-                selectionModel.select(1); //select by index starting with 0
+            refresh();
+            refresh1();
+            participate.setDisable(true);
+            SingleSelectionModel<Tab> selectionModel = tabCompetition.getSelectionModel();
+            selectionModel.select(1); //select by index starting with 0
         }
 
     }

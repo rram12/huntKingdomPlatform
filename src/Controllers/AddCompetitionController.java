@@ -128,7 +128,7 @@ public class AddCompetitionController implements Initializable {
             return false;
         } 
             if (!Pattern.matches("^\\d{1,2}$", NbParticipants.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify The price field!");
+                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify The remaining places field!");
                 NbParticipants.requestFocus();
                 NbParticipants.selectEnd();
                 NbParticipants.setStyle("-fx-border-color: red; -fx-background-color: white;");
@@ -142,7 +142,7 @@ public class AddCompetitionController implements Initializable {
                 return false;
             }
                 if (!Pattern.matches("^([a-zA-Z ÉéèÈêÊôÔ']*)$", Lieu.getText())) {
-               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Description must have more than 10 caracters ! ");
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Address ! ");
                 Lieu.requestFocus();
                 Lieu.selectEnd();
                 Lieu.setStyle("-fx-border-color: red; -fx-background-color: white;");

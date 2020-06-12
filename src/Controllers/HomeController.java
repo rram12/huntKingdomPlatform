@@ -175,9 +175,7 @@ public class HomeController implements Initializable {
 
             Pane root = loader.load(getClass().getResource("/Gui/AffichageHomePublicity.fxml").openStream());
             AffichageHomePublicityController single = (AffichageHomePublicityController) loader.getController();
-            single.getInfo(trans.get(i));
-            int id1 = single.getCurrentId();
-            Publicity m = trans.get(i);
+            single.getInfo(trans.get(i)); 
 
             nodes[i] = root;
             pane.getChildren().add(nodes[i]);

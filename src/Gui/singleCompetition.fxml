@@ -28,7 +28,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="30.0" prefWidth="111.0" text="Participants :" textFill="RED" GridPane.rowIndex="2">
+            <Label prefHeight="30.0" prefWidth="111.0" text="Places left:" textFill="RED" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>

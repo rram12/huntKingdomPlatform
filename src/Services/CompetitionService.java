@@ -103,7 +103,7 @@ public class CompetitionService {
         }
     }
 
-    public void updateCompetition(Competition c) {
+    public boolean updateCompetition(Competition c) {
         try {
             String requete = "UPDATE competition SET nom = ?, dateDebut = ?, dateFin = ?, categorie = ?, lieu = ?, nbParticipants = ? WHERE id = ?";
             PreparedStatement pst = cnx2.prepareStatement(requete);
@@ -116,9 +116,11 @@ public class CompetitionService {
             pst.setInt(7, c.getId());
             pst.executeUpdate();
             System.out.println("competition updated succesfully ! ");
+            return true;
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return false;
 
         }
 
