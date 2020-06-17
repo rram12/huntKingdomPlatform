@@ -12,10 +12,15 @@ import Services.ProduitService;
 import Services.PromotionService;
 import Services.PublicityService;
 import Services.UserService;
+import Utils.Marquee;
 import Utils.MyConnection;
+import Utils.ShowNotification;
 import Utils.UserSession;
+import Utils.topNews;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import huntkingdom.HuntKingdom;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -24,12 +29,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.util.Duration;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,14 +45,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -63,6 +77,23 @@ public class HomeController implements Initializable {
     public static int test;
     @FXML
     private ImageView logoimg;
+    
+    topNews tn = new topNews();
+    UserService us = new UserService();
+    
+    ArrayList topnews = new ArrayList();
+    @FXML
+    private MenuButton menu;
+    @FXML
+    private MenuItem profile;
+    @FXML
+    private MenuItem reclamation;
+    @FXML
+    private MenuItem logout;
+    @FXML
+    private MenuItem desactivate;
+    @FXML
+    private ImageView avatarUser;
 
     public HomeController() {
         cnx = MyConnection.getInstance().getCnx();
@@ -102,6 +133,11 @@ public class HomeController implements Initializable {
     private HBox hbox;
 
     @FXML
+    private Label lTopNews;
+    @FXML
+    private Pane pMarquee;
+    
+    @FXML
     private Pane pane;
     @FXML
     private Button btnreparateur;
@@ -112,14 +148,17 @@ public class HomeController implements Initializable {
     public ObservableList<Publicity> obsl = FXCollections.observableArrayList(trans);
     Node[] nodes = new Node[obsl.size()];
     int i = 0;
+    
+    User currentUser = LoginController.getInstance().getLoggedUser();
+String email = currentUser.getEmail() ;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
-        if(!role.equals("REPAIRER")){
+//         String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
+        if(!currentUser.getRoles().contains("REPAIRER")){
         btnreparateur.setVisible(false);
         btnreparateur.setDisable(true);
         }
@@ -166,6 +205,71 @@ public class HomeController implements Initializable {
 
             }
         });
+        
+        Image imageAvatar;
+        try {
+            imageAvatar = new Image(new FileInputStream("res\\uploadedImages\\"+currentUser.getPicture()));
+              avatarUser.setImage(imageAvatar);
+        avatarUser.setPreserveRatio(false);
+        
+        //System.out.println("uploadedImages/"+loggedUser.getPicture());
+        avatarUser.setFitHeight(60.0);
+        avatarUser.setFitWidth(80.0);
+        avatarUser.setY(12);
+        menu.setLayoutX(avatarUser.getLayoutX());
+        menu.setLayoutY(avatarUser.getLayoutY()+avatarUser.getFitHeight()+avatarUser.getY());
+        
+        //
+        
+
+        menu.setText(currentUser.getUsername());
+//        menu.setText("z");
+        
+//        MenuItem viewProfile = new MenuItem("View profile");
+//        MenuItem reclamations = new MenuItem("Reclamations");
+//        MenuItem logout = new MenuItem("Log out");
+        
+        menu.resize(menu.getWidth(), 500);
+        
+//        menu.getItems().add(viewProfile);
+//        menu.getItems().add(reclamations);
+//        menu.getItems().add(logout);
+//        
+     
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        String news="";
+        try {
+            topnews=tn.getTopNews();
+            for (Object  i : topnews) {
+                news+=i.toString();
+                news+="  ***  ";
+            
+        }news=news.substring(0, news.length()-6);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        FadeTransition ft = new FadeTransition(Duration.millis(3000), lTopNews);
+        ft.setAutoReverse(false);
+        ft.setCycleCount(Timeline.INDEFINITE);
+        ft.setFromValue(1);
+        ft.setToValue(0);
+        ft.setByValue(1);
+        ft.play();
+        
+        Marquee marquee = new Marquee(news);
+        marquee.setColor("black"); 
+        marquee.setStyle("-fx-font: bold 16 arial;"); 
+        marquee.setBoundsFrom(mainPane); 
+        marquee.moveDownBy(7);
+        marquee.setScrollDuration(60); 
+        
+        pMarquee.getChildren().add(marquee); 
+        marquee.run();
+        
     }
 
     private void displayPub(int i) {
@@ -313,16 +417,16 @@ public class HomeController implements Initializable {
         btntraining.setStyle("-fx-background-color:transparent");
         btnreparation.setStyle("-fx-background-color:transparent");
         btnservices.setStyle("-fx-background-color:transparent");
-        String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
-        System.out.println("role : "+role);
-        if ((role.equals("CLIENT") == true)) {
+//        String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
+//        System.out.println("role : "+role);
+        if ((currentUser.getRoles().contains("CLIENT") == true)) {
             System.out.println("CLIENT");
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
             this.next.setVisible(false);
         this.previous.setVisible(false);
-        } else if ((role.equals("TRAINER") == true)) {
+        } else if ((currentUser.getRoles().contains("TRAINER") == true)) {
             
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
             mainpane.getChildren().setAll(pane);
@@ -410,16 +514,23 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
-        UserSession.getInstace("",0,"","","", 0).cleanUserSession();
-        String query = "update fos_user set etat=0";
-
-        st = cnx.createStatement();
-
-        st.executeUpdate(query);
-
-        AnchorPane pane;
-        pane = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
-        mainPane.getChildren().setAll(pane);
+        ShowNotification notif = new ShowNotification();
+        notif.show("Good bye", "See You Soon ");
+ Stage stage = (Stage) btnLogout.getScene().getWindow();
+    // do what you have to do
+         LoginController.getInstance().setLoggedUser(new User());
+         
+         
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
+        Scene scene = new Scene(root);
+         scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+        primaryStage.setTitle("HuntKingdom");
+        Image ico = new Image("Uploads/logo2.png");
+        primaryStage.getIcons().add(ico);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        stage.close();
     }
 
      void decrementReady(){
@@ -427,10 +538,98 @@ public class HomeController implements Initializable {
         labelNotif.setText(Integer.toString(GlobJ));
          System.out.println("GlobJ : "+GlobJ);
     }
-    
-    
-    
-    
-    
+
+    @FXML
+    private void updateProfile(ActionEvent event) {
+//         FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateProfile.fxml"));
+//
+//            try {
+//                Parent root = loader.load();
+//                UpdateProfileController upc = loader.getController();
+//                menu.getScene().setRoot(root);
+//
+//            } catch (Exception ex) {
+//                System.err.println(ex.getMessage());
+//                System.err.println(ex.getCause());
+//                System.err.println(ex.getClass());
+//            }
+    }
+
+    @FXML
+    private void reclamation(ActionEvent event) {
+//         FXMLLoader loader = new FXMLLoader(getClass().getResource("ReclamationsList.fxml"));
+//
+//            try {
+//                Parent root = loader.load();
+//                //ReclamationsListController rc = loader.getController();
+//                menu.getScene().setRoot(root);
+//
+//            } catch (IOException ex) {
+//                System.err.println(ex.getMessage());
+//            }
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+        try {
+            ShowNotification notif = new ShowNotification();
+            notif.show("Good bye", "See You Soon ");
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+            // do what you have to do
+            LoginController.getInstance().setLoggedUser(new User());
+            
+            
+            Stage primaryStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+            primaryStage.setTitle("HuntKingdom");
+            Image ico = new Image("Uploads/logo2.png");
+            primaryStage.getIcons().add(ico);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            stage.close();
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void desactivate(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+alert.setTitle("Account desactivation");
+alert.setContentText("Are you sure to desactivate your account ?");
+ 
+Optional<ButtonType> result = alert.showAndWait();
+ 
+if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+         us.deleteUser(currentUser.getId());
+                 LoginController.getInstance().setLoggedUser(new User());
+
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Login.fxml"));
+
+            try {
+                Parent root = loader.load();
+                LoginController sic = loader.getController();
+                sic.setTextEmail(email);
+                menu.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+            ShowNotification notif = new ShowNotification();
+            notif.showInformation("Good bye", "Sorry to see you leave our family !");
+            
+}else if((result.isPresent()) && (result.get() == ButtonType.CANCEL)) {
     
 }
+        
+    }
+    }
+    
+    
+    
+    
+    
+    
+

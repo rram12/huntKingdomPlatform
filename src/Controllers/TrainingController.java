@@ -298,7 +298,7 @@ public class TrainingController implements Initializable {
                     });
                 }
             last.getChildren().add(supprimer);
-            List<Entrainement> e = SEntr.getTrainingsUser(SU.getConnectedUser());
+            List<Entrainement> e = SEntr.getTrainingsUser(LoginController.getInstance().getLoggedUser().getId());
             System.out.println(e);
             afficher(e);
 

@@ -248,26 +248,26 @@ public class RecruitmentsController implements Initializable {
         ButtonCell2() {
 
             //Action when the button is pressed
-            cellButton2.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent t) {
-                        User currentUser = (User) ButtonCell2.this.getTableView().getItems().get(ButtonCell2.this.getIndex());
-                        UserService us = new UserService();
-                        us.UpdateConfirmer(currentUser.getId());
-                        /**refresh table **/
-                        list.clear();
-                        list = FXCollections.observableArrayList(
-                                ps.showNotConfirmed()
-                        );
-                        table.setItems(list);
-                        try {
-                            JavaMail.sendMail(currentUser.getEmail(), 1);
-                        } catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                }
-            });
+//            cellButton2.setOnAction(new EventHandler<ActionEvent>() {
+//
+//                @Override
+//                public void handle(ActionEvent t) {
+//                        User currentUser = (User) ButtonCell2.this.getTableView().getItems().get(ButtonCell2.this.getIndex());
+//                        UserService us = new UserService();
+//                        us.UpdateConfirmer(currentUser.getId());
+//                        /**refresh table **/
+//                        list.clear();
+//                        list = FXCollections.observableArrayList(
+//                                ps.showNotConfirmed()
+//                        );
+//                        table.setItems(list);
+//                        try {
+//                            JavaMail.sendMail(currentUser.getEmail(), 1);
+//                        } catch (Exception ex) {
+//                            System.out.println(ex.getMessage());
+//                        }
+//                }
+//            });
 
         }
         //Display button if the row is not empty

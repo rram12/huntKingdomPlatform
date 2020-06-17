@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Entities;
-
-
 
 /**
  *
@@ -25,10 +22,9 @@ public class User {
     private String picture;
     private int gender;
     private String contract;
-
-    private boolean confirmed;
+    private int confirmed;
     private String last_login;
-    private int etat;
+    private int enabled=1;
 
     public User() {
     }
@@ -49,19 +45,8 @@ public class User {
         this.gender = gender;
         this.contract = contract;
     }
-
-
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
-
     
-    public User(String username, String email, String password, String roles, String firstName, String lastName, String address, long phoneNumber, String picture, int gender, String contract) {
+    public User(String username, String email, String password, String roles, String firstName, String lastName, String address, long phoneNumber, String picture, int gender, String contract, int confirmed) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -73,12 +58,28 @@ public class User {
         this.picture = picture;
         this.gender = gender;
         this.contract = contract;
+        this.confirmed = confirmed;
+    }
+    
+    public User(int id,String username, String email, String password, String roles, String firstName, String lastName, String address, long phoneNumber, String picture, int gender, String contract, int confirmed) {
+        this.id=id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.picture = picture;
+        this.gender = gender;
+        this.contract = contract;
+        this.confirmed = confirmed;
     }
 
     public User(int id) {
         this.id = id;
     }
-
     
     
 
@@ -183,10 +184,13 @@ public class User {
         this.contract = contract;
     }
 
+    public int getConfirmed() {
+        return confirmed;
+    }
 
-    
-
-
+    public void setConfirmed(int confirmed) {
+        this.confirmed = confirmed;
+    }
 
     public String getLast_login() {
         return last_login;
@@ -195,15 +199,13 @@ public class User {
     public void setLast_login(String last_login) {
         this.last_login = last_login;
     }
-
-    public int getEtat() {
-        return etat;
+    
+    public int getEnabled() {
+        return enabled;
     }
 
-    public void setEtat(int etat) {
-        this.etat = etat;
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
     
-
 }
-

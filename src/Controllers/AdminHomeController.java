@@ -5,9 +5,11 @@
  */
 package Controllers;
 
+import Entities.User;
 import Services.ProduitService;
 import Services.PromotionService;
 import Utils.MyConnection;
+import Utils.ShowNotification;
 import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +19,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,10 +49,36 @@ public class AdminHomeController implements Initializable {
     private ResultSet rs;
     public static int test;
 
-    public AdminHomeController() {
-        cnx = MyConnection.getInstance().getCnx();
-        
-    }
+        User currentUser = LoginController.getInstance().getLoggedUser();
+
+    ShowNotification notif = new ShowNotification();
+
+    int secPassed = 0;
+    final int MAX_SEC = 100;
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            secPassed++;
+            System.out.println(secPassed);
+            if (secPassed == MAX_SEC) {
+                timer.cancel();
+                try {
+                    btnLogoutAction(new ActionEvent());
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }
+
+    };
+    
+    
+//    public AdminHomeController() {
+//        cnx = MyConnection.getInstance().getCnx();
+//        
+//    }
     @FXML
     private AnchorPane mainpane;
     @FXML
@@ -78,6 +110,24 @@ public class AdminHomeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+
+        mainPane.setOnKeyTyped(e -> {
+            System.out.println("timer reinitialised by key pressed");
+            secPassed = 0;
+        });
+
+        mainPane.setOnMouseMoved(e -> {
+            System.out.println("timer reinitialised by Drag");
+            secPassed = 0;
+        });
+
+        mainPane.setOnMouseClicked(e -> {
+            System.out.println("timer reinitialised by mouse click");
+            secPassed = 0;
+        });
+        
         img.setImage(new Image("/Uploads/dash.jpg"));
         btnhome.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
@@ -92,6 +142,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnanimalsAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnanimals.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
         btnevents.setStyle("-fx-background-color: none;");
@@ -107,6 +158,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btneventsAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnevents.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -121,6 +173,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnpublicityAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnPub.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
         btnevents.setStyle("-fx-background-color: none;");
@@ -135,7 +188,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
-   
+   timer.cancel();
         btnshop.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -152,6 +205,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnhomeAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnhome.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnservices.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -167,6 +221,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnservicesAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnservices.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnhome.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -182,6 +237,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btntrainingAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btntraining.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnhome.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -197,6 +253,7 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     void btnRecruitmentsAction(ActionEvent event) throws IOException {
+        timer.cancel();
         btnRecruitments.setStyle("-fx-border-color: none; -fx-background-color: #a55446; -fx-opacity: 0.9;");
         btnhome.setStyle("-fx-background-color: none;");
         btnanimals.setStyle("-fx-background-color: none;");
@@ -212,10 +269,14 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
-        UserSession.getInstace("",0,"","","", 0).cleanUserSession();
-        String query = "update fos_user set etat=0";
-        st = cnx.createStatement();
-        st.executeUpdate(query);
+
+        timer.cancel();
+        LoginController.getInstance().setLoggedUser(new User());
+
+
+//        String query = "update fos_user set etat=0";
+//        st = cnx.createStatement();
+//        st.executeUpdate(query);
         AnchorPane pane;
         pane = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
         mainPane.getChildren().setAll(pane);

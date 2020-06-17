@@ -101,8 +101,8 @@ public class TrainingListController implements Initializable {
          like.setImage(new Image("Uploads/hearted.png"));
          dislike.setImage(new Image("Uploads/broken-heart.png"));
         try {
-            nbLike.setText(Integer.toString(ST.getNnLike(SU.getConnectedUser())));
-            nbdislike.setText(Integer.toString(ST.getNnDisLike(SU.getConnectedUser())));
+            nbLike.setText(Integer.toString(ST.getNnLike(LoginController.getInstance().getLoggedUser().getId())));
+            nbdislike.setText(Integer.toString(ST.getNnDisLike(LoginController.getInstance().getLoggedUser().getId())));
         } catch (SQLException ex) {
             Logger.getLogger(TrainingListController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,7 +172,7 @@ public class TrainingListController implements Initializable {
       });
         paneReminder.setVisible(false);
         try {
-            if(ST.getNnLike(SU.getConnectedUser())>=3)
+            if(ST.getNnLike(LoginController.getInstance().getLoggedUser().getId())>=3)
             {
             imgCertif.setImage(new Image("/Uploads/medal.png"));
             }

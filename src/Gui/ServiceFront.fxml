@@ -140,7 +140,6 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXTextField>
-<<<<<<< HEAD
                         <StackPane fx:id="stack1" layoutX="376.0" layoutY="403.0" prefHeight="220.0" prefWidth="427.0">
                            <children>
                               <JFXButton fx:id="cancelBtn1" onAction="#onCancelling" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel" textFill="WHITE">
@@ -154,7 +153,6 @@
                                  </font>
                               </JFXButton>
                            </children></StackPane>
-=======
                         <JFXButton fx:id="confirmBtn1" layoutX="535.0" layoutY="477.0" onAction="#onConfirmation" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Confirm" textFill="WHITE">
                            <font>
                               <Font name="Book Antiqua" size="12.0" />
@@ -170,7 +168,6 @@
                               <Font name="Book Antiqua" size="12.0" />
                            </font>
                         </JFXButton>
->>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                         <JFXTextField fx:id="type" focusColor="WHITE" labelFloat="true" layoutX="182.0" layoutY="205.0" prefHeight="34.0" prefWidth="184.0" promptText="Type" style="-fx-text-inner-color: White; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
                            <font>
                               <Font name="System Bold" size="17.0" />

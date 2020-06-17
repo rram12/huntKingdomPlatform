@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.User;
 import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,8 @@ public class WaitController implements Initializable {
          
          
          
-        UserSession.getInstace("",0,"","","", 0).cleanUserSession();
+                 LoginController.getInstance().setLoggedUser(new User());
+
        Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
         Scene scene = new Scene(root);

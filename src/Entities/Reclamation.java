@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.huntkingdom.entities;
+package Entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -17,12 +17,12 @@ public class Reclamation {
     Date dateRec;
     String title;
     int userId;
-    int handled;
+    boolean handled;
 
     public Reclamation() {
     }
 
-    public Reclamation(int id, String descriptionRec, Date dateRec, String title,int userId, int handled) {
+    public Reclamation(int id, String descriptionRec, Date dateRec, String title,int userId, boolean handled) {
         this.id = id;
         this.descriptionRec = descriptionRec;
         this.dateRec = dateRec;
@@ -76,11 +76,11 @@ public class Reclamation {
         this.userId = userId;
     }
 
-    public int getHandled() {
+    public boolean isHandled() {
         return handled;
     }
 
-    public void setHandled(int handled) {
+    public void setHandled(boolean handled) {
         this.handled = handled;
     }
     
