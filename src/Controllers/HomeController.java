@@ -8,9 +8,12 @@ package Controllers;
 import Entities.Publicity;
 import Entities.User;
 import Services.PieceService;
+import Services.ProduitService;
+import Services.PromotionService;
 import Services.PublicityService;
 import Services.UserService;
 import Utils.MyConnection;
+import Utils.UserSession;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import huntkingdom.HuntKingdom;
 import java.io.IOException;
@@ -98,7 +101,7 @@ public class HomeController implements Initializable {
     private Pane pane;
     @FXML
     private Button btnreparateur;
-
+    private int GlobJ;
     MyConnection mc = MyConnection.getInstance();
     PublicityService ps = new PublicityService();
     ArrayList<Publicity> trans = (ArrayList<Publicity>) ps.afficher();
@@ -111,6 +114,13 @@ public class HomeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
+        if(!role.equals("REPAIRER")){
+        btnreparateur.setVisible(false);
+        btnreparateur.setDisable(true);
+        }
+        
+        
         if (!HuntKingdom.isSplasheded) {
             loadSplashScreen();
         }
@@ -123,15 +133,15 @@ public class HomeController implements Initializable {
         PieceService ps = new PieceService();
         ps.updateEtat();
         int j = ps.countPieceReady();
-
-        String nb = Integer.toString(j);
+        GlobJ = j;
+        String nb = Integer.toString(GlobJ);
         labelNotif.setText(nb);
 
         Button b1 = new Button("", notif);
         b1.setStyle("-fx-background-color:transparent");
         hbox.getChildren().add(b1);
         b1.setOnAction(e -> {
-            if (j > 0) {
+            if (GlobJ > 0) {
 
                 Image img = new Image("/Uploads/accept.png");
                 ImageView imgV = new ImageView(img);
@@ -230,6 +240,12 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
+        /*** delete ended reductions **/
+        ProduitService ps = new ProduitService();
+        ps.deletePromotionFini();
+        PromotionService promos = new PromotionService();
+        promos.supprimerPromotionFini();
+        /*****/
         btnanimals.setStyle("-fx-background-color:transparent");
         btnshop.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
         btnevents.setStyle("-fx-background-color:transparent");
@@ -239,7 +255,7 @@ public class HomeController implements Initializable {
         btntraining.setStyle("-fx-background-color:transparent");
         btnreparation.setStyle("-fx-background-color:transparent");
         btnservices.setStyle("-fx-background-color:transparent");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Shop.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ProductsFront.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
     }
@@ -285,16 +301,15 @@ public class HomeController implements Initializable {
         btntraining.setStyle("-fx-background-color:transparent");
         btnreparation.setStyle("-fx-background-color:transparent");
         btnservices.setStyle("-fx-background-color:transparent");
-        Services.UserService SU = new UserService();
-        int idU = SU.getConnectedUser();
-        String role = SU.getUserByIdFos(idU);
+        String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
+        System.out.println("role : "+role);
         if ((role.equals("CLIENT") == true)) {
-
+            System.out.println("CLIENT");
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
         } else if ((role.equals("TRAINER") == true)) {
-
+            
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
@@ -328,6 +343,7 @@ public class HomeController implements Initializable {
         btnservices.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparateur.fxml"));
         mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
     }
 
     private void loadSplashScreen() {
@@ -374,6 +390,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
+        UserSession.getInstace("",0,"","","", 0).cleanUserSession();
         String query = "update fos_user set etat=0";
 
         st = cnx.createStatement();
@@ -385,4 +402,15 @@ public class HomeController implements Initializable {
         mainPane.getChildren().setAll(pane);
     }
 
+     void decrementReady(){
+        GlobJ--;
+        labelNotif.setText(Integer.toString(GlobJ));
+         System.out.println("GlobJ : "+GlobJ);
+    }
+    
+    
+    
+    
+    
+    
 }

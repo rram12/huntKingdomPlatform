@@ -82,7 +82,7 @@ public class ConsultCompetitionController implements Initializable {
     @FXML
     private JFXTabPane tabCompetition;
     private int id;
-    Competition m;
+    Competition cm;
     private int idu;
     User currentUser;
     
@@ -119,10 +119,12 @@ public class ConsultCompetitionController implements Initializable {
                 SingleCompetitionController single = (SingleCompetitionController) loader.getController();
                 single.getInfo(trans.get(i));
                 int id1 = single.getCurrentId();
-                m = trans.get(i);
+                Competition m = trans.get(i);
+                
                 JFXButton button = single.getButton();
                 button.setText("Consult");
                 button.setOnAction(e -> {
+                    cm = m;
                     participate.setDisable(false);
                     name.setText(m.getNom());
                     starts.setText(m.getDateDebut().toString());
@@ -168,12 +170,15 @@ public class ConsultCompetitionController implements Initializable {
         MyConnection mc = MyConnection.getInstance();
         ParticipationService ps = new ParticipationService();
         Participation c = new Participation(id, currentUser.getId());
-        ps.addParticipation(c);
+        if(ps.addParticipation(c)){
+        participant.setText(Integer.toString(Integer.parseInt(participant.getText())-1));
         ps.decrementerParticipants(id);
         String maill = currentUser.getEmail();
         Mailing ma = new Mailing();
-        ma.envoyer(maill,m);
+        ma.envoyer(currentUser,cm);
         System.out.println(maill);
+        }
+        
     }
 
     public int checkparticipations(int idcompetition, int iduser) throws SQLException {

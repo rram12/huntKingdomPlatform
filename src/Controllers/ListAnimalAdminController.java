@@ -252,7 +252,6 @@ public class ListAnimalAdminController implements Initializable {
 
     @FXML
     private void chooseFileAction(ActionEvent event) {
-       
         stage=(Stage) anchorPane.getScene().getWindow();
         file=fileChooser.showOpenDialog(stage);
         /*try {
@@ -266,9 +265,7 @@ public class ListAnimalAdminController implements Initializable {
             //imagev= new Image(file.getAbsoluteFile().toURI().toString());
            
             imagetxt.setText(file.getAbsolutePath());
-            
         }
-    
     }
 
     

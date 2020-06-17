@@ -23,12 +23,48 @@ public class Produits {
     private String image;
     private String type;
     private String marque;
+    private int qtt;
+
+    public int getQtt() {
+        return qtt;
+    }
+
+    public void setQtt(int qtt) {
+        this.qtt = qtt;
+    }
 
     public Produits() {
     }
 
     public Produits(int id, int promotion_id, String lib_prod, double prix, double prixFinale, String description, int qte_prod, Date date_ajout, String image, String type, String marque) {
         this.id = id;
+        this.promotion_id = promotion_id;
+        this.lib_prod = lib_prod;
+        this.prix = prix;
+        this.prixFinale = prixFinale;
+        this.description = description;
+        this.qte_prod = qte_prod;
+        this.date_ajout = date_ajout;
+        this.image = image;
+        this.type = type;
+        this.marque = marque;
+    }
+
+    @Override
+    public String toString() {
+        return "Produits{" + "id=" + id + ", promotion_id=" + promotion_id + ", lib_prod=" + lib_prod + ", prix=" + prix + ", prixFinale=" + prixFinale + ", description=" + description + ", qte_prod=" + qte_prod + ", date_ajout=" + date_ajout + ", image=" + image + ", type=" + type + ", marque=" + marque + '}';
+    }
+     public Produits(int id, String lib_prod, double prix, String description, int qte_prod, String image, String type, String marque) {
+        this.id = id;
+        this.lib_prod = lib_prod;
+        this.prix = prix;
+        this.description = description;
+        this.qte_prod = qte_prod;
+        this.image = image;
+        this.type = type;
+        this.marque = marque;
+    }
+      public Produits( int promotion_id ,String lib_prod, double prix,double prixFinale, String description, int qte_prod, Date date_ajout, String image, String type, String marque) {
         this.promotion_id = promotion_id;
         this.lib_prod = lib_prod;
         this.prix = prix;

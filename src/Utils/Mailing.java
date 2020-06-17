@@ -6,6 +6,7 @@
 package Utils;
 
 import Entities.Competition;
+import Entities.User;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import javax.mail.Message;
@@ -25,7 +26,7 @@ public class Mailing {
       private String username = "khaled.haguiga@esprit.tn";
       private String password = "Esprit2017E";
 
-    public void envoyer(String maill, Competition c) throws UnsupportedEncodingException {
+    public void envoyer(User usr, Competition c) throws UnsupportedEncodingException {
 
 // Etape 1 : Création de la session
         Properties props = new Properties();
@@ -47,7 +48,7 @@ public class Mailing {
 // Etape 2 : Création de l'objet Message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username,"HuntKingDom"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(maill));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(usr.getEmail()));
             message.setSubject("Competition's Participation");
             String html = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:v=\"urn:schemas-microsoft-com:vml\">\n" +
 "<head>\n" +
@@ -221,7 +222,7 @@ public class Mailing {
 "<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right: 35px; padding-left: 35px; padding-top: 35px; padding-bottom: 35px; font-family: Georgia, 'Times New Roman', serif\"><![endif]-->\n" +
 "<div style=\"color:#555555;font-family:'Droid Serif', Georgia, Times, 'Times New Roman', serif;line-height:2;padding-top:35px;padding-right:35px;padding-bottom:35px;padding-left:35px;\">\n" +
 "<div style=\"line-height: 2; font-size: 12px; color: #555555; font-family: 'Droid Serif', Georgia, Times, 'Times New Roman', serif; mso-line-height-alt: 24px;\">\n" +
-"<p style=\"text-align: center; line-height: 2; word-break: break-word; font-size: 30px; mso-line-height-alt: 60px; margin: 0;\"><span style=\"font-size: 30px;\">Hello Mr/Mrs,</span><br/><span style=\"font-size: 30px;\">You have successfully participated in the competition "+c.getNom()+" which will be held between "+c.getDateDebut()+" and "+c.getDateFin()+" in "+c.getLieu()+":)</span><br/></p>\n" +
+"<p style=\"text-align: center; line-height: 2; word-break: break-word; font-size: 30px; mso-line-height-alt: 60px; margin: 0;\"><span style=\"font-size: 30px;\">Hello Mr/Mrs "+usr.getFirstName()+" "+usr.getLastName()+",</span><br/><span style=\"font-size: 30px;\">You have successfully participated in the competition "+c.getNom()+" which will be held between "+c.getDateDebut()+" and "+c.getDateFin()+" in "+c.getLieu()+":)</span><br/></p>\n" +
 "</div>\n" +
 "</div>\n" +
 "<!--[if mso]></td></tr></table><![endif]-->\n" +

@@ -59,9 +59,9 @@ public class AnimalsController implements Initializable {
             pane.setPrefHeight(200);
             pane.setLayoutX(0);
             pane.setLayoutY(0);
-           
+                                              
             
-            ImageView img = new ImageView(new Image("file:/C:/Users/tibh/Desktop/Pidev2020/copieJava/huntkingdom/src/Uploads/"+animals.get(i).getImage_animal()));
+            ImageView img = new ImageView(new Image("Uploads/"+animals.get(i).getImage_animal()));
            
             img.setPreserveRatio(false);
             img.setLayoutX(0);

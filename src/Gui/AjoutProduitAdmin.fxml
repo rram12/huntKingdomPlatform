@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="668.0" prefWidth="1055.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controllers.AjoutProduitAdminController">
+   <children>
+      <Label layoutX="58.0" layoutY="147.0" prefHeight="38.0" prefWidth="72.0" text="Libelle : " textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="194.0" prefHeight="38.0" prefWidth="72.0" text="Price : " textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="245.0" prefHeight="38.0" prefWidth="100.0" text="Description :" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="297.0" prefHeight="38.0" prefWidth="100.0" text="Quantity :" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="349.0" prefHeight="38.0" prefWidth="72.0" text="Type :" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="395.0" prefHeight="38.0" prefWidth="72.0" text="Marque :" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="440.0" prefHeight="38.0" prefWidth="72.0" text="Image : " textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listView" layoutX="143.0" layoutY="490.0" prefHeight="27.0" prefWidth="168.0" />
+      <JFXButton layoutX="58.0" layoutY="547.0" onAction="#ajouertAction" prefHeight="53.0" prefWidth="124.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="ADD" textFill="WHITE" />
+      <TextField fx:id="libelleTxt" layoutX="152.0" layoutY="154.0" />
+      <TextField fx:id="prixTxt" layoutX="152.0" layoutY="201.0" />
+      <TextField fx:id="descriptionTxt" layoutX="152.0" layoutY="252.0" />
+      <TextField fx:id="QttTxt" layoutX="152.0" layoutY="304.0" />
+      <TextField fx:id="marqueTxt" layoutX="152.0" layoutY="402.0" />
+      <ComboBox fx:id="typeTxt" layoutX="152.0" layoutY="356.0" prefWidth="150.0" />
+      <Button fx:id="choseBtn" layoutX="152.0" layoutY="447.0" mnemonicParsing="false" onAction="#ChooseImageAction" prefHeight="25.0" prefWidth="149.0" text="Choose image.." />
+      <ImageView fx:id="imageView" fitHeight="121.0" fitWidth="157.0" layoutX="25.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton layoutX="492.0" layoutY="616.0" onAction="#returnAction" prefHeight="38.0" prefWidth="72.0" ripplerFill="WHITE" style="-fx-background-color: orange;" text="Return" textFill="WHITE" />
+      <TableView fx:id="table" layoutX="376.0" layoutY="27.0" opacity="0.89" prefHeight="476.0" prefWidth="678.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="lib_prod" prefWidth="75.0" text="LIBELLE" />
+            <TableColumn fx:id="prix" prefWidth="75.0" text="PRICE" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="DESC" />
+            <TableColumn fx:id="qte_prod" prefWidth="75.0" text="QUANTITY" />
+            <TableColumn fx:id="date_ajout" prefWidth="75.0" text="ADDdate" />
+            <TableColumn fx:id="type" prefWidth="75.0" text="TYPE" />
+            <TableColumn fx:id="marque" prefWidth="75.0" text="MARQUE" />
+            <TableColumn fx:id="action_col" prefWidth="75.0" text="Action" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="editBtn" layoutX="193.0" layoutY="547.0" onAction="#ModifiertAction" prefHeight="53.0" prefWidth="124.0" ripplerFill="WHITE" style="-fx-background-color: chocolate;" text="Edit" textFill="WHITE" visible="false" />
+   </children>
+</AnchorPane>

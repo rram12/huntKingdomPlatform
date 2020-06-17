@@ -342,7 +342,7 @@ public class ServiceController implements Initializable {
                             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                             alert1.setTitle("Accommodation");
                             alert1.setHeaderText(null);
-                            alert1.setContentText("Accommodation succesfully updated");
+                            alert1.setContentText("Accommodation succesfully deleted");
                             alert1.showAndWait();
                             //remove it from the tableView
                             obsl.remove(selectedH);

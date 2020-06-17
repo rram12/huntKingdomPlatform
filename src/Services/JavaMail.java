@@ -6,6 +6,7 @@
 package Services;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +53,7 @@ public class JavaMail {
     {
         try {
             Message message= new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccount));
+            message.setFrom(new InternetAddress(myAccount,"HuntKingDom"));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Admin message");
             String htmlCode = "";
@@ -1053,6 +1054,8 @@ public class JavaMail {
             message.setContent(htmlCode, "text/html");
             return message;
         } catch (MessagingException ex) {
+            Logger.getLogger(JavaMail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(JavaMail.class.getName()).log(Level.SEVERE, null, ex);
         }
           return null;

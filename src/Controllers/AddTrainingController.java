@@ -12,6 +12,7 @@ import Services.AnimalService;
 import Services.ProduitService;
 import Services.TrainingService;
 import Services.UserService;
+import Utils.UserSession;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
@@ -140,8 +141,8 @@ public class AddTrainingController implements Initializable {
         Services.TrainingService SEntr = new TrainingService();
         Services.AnimalService SA = new AnimalService();
         Services.ProduitService SP = new ProduitService();
-        Services.UserService SU = new UserService();
-        int idU = SU.getConnectedUser();
+        //Services.UserService SU = new UserService();
+        int UserId =  UserSession.getInstace("",0, "", "", "", 0).getId();
 
         //String categorieComb=categorie.valueProperty().addListener(observable -> System.out.printf("Valeur sélectionnée: %s", categorie.getValue()).println());
         if (controleDeSaisi()) {
@@ -156,7 +157,7 @@ public class AddTrainingController implements Initializable {
             String answer = String.valueOf(p * (Integer.parseInt(nh.getText().trim())));
             prix.setText(answer);
 
-            Entrainement e = new Entrainement(categorieComb, parseInt(nh.getText()), java.sql.Date.valueOf(dT.getValue().toString()), Double.parseDouble(prix.getText()), comboPlace.getValue(), idU, idAnimal, idProduit);
+            Entrainement e = new Entrainement(categorieComb, parseInt(nh.getText()), java.sql.Date.valueOf(dT.getValue().toString()), Double.parseDouble(prix.getText()), comboPlace.getValue(), UserId, idAnimal, idProduit);
             showAlert(Alert.AlertType.INFORMATION, "", "", "Training Added Successfully !");
             try {
                 SEntr.addTraining(e);
@@ -250,8 +251,8 @@ catch (ParseException ex) {
             animalImage.setLayoutY(21);
             animalImage.setFitHeight(157);
             animalImage.setFitWidth(251);
-
-            Image animal = new Image("file:C:/Users/tibh/Desktop/Pidev2020/copieJava/copie12/HuntKingdom/src/Uploads/" + current.getImage_animal());
+                                       
+            Image animal = new Image("file:E:/roadToInfini/java/projet/FinalGit/HuntKingdom/src/Uploads/" + current.getImage_animal());
             animalImage.setImage(animal);
 
             pane.getChildren().add(animalImage);

@@ -72,4 +72,47 @@ public class LocationService {
         System.out.println(myList);
         return myList;
     }
+    
+    
+    public List<Location> afficherMesLocations(int id) {
+        List<Location> myList = new ArrayList();
+        try {
+            String requete = "SELECT * FROM Location where UserId=? order by dateArrivee";
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Location r = new Location();
+
+                r.setId(rs.getInt(1));
+                r.setNbJours(rs.getInt(2));
+                r.setDateArrivee(rs.getDate(3));
+                r.setPrixTot(rs.getFloat(4));
+                r.setUserId(rs.getInt(5));
+                r.setMoyenDeTransportId(rs.getInt(6));
+                myList.add(r);
+
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("error d affichage");
+
+        }
+        System.out.println(myList);
+        return myList;
+    }
+    public boolean supprimerLocation(int idl) {
+        String requete = "DELETE FROM Location where id=?";
+        try {
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, idl);
+            pst.executeUpdate();
+            System.out.println("Rent succesfully cancelled ! ");
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+    }
 }

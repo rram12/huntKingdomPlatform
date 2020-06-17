@@ -31,6 +31,15 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab fx:id="MyPane" text="My Reservations">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane fx:id="flow2" prefHeight="626.0" prefWidth="1080.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
             <Tab fx:id="ReservePane" disable="true" text="Reserve">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -113,6 +122,11 @@
                         </JFXTextField>
                         <StackPane fx:id="stack1" layoutX="376.0" layoutY="403.0" prefHeight="220.0" prefWidth="427.0">
                            <children>
+                              <JFXButton fx:id="cancelBtn1" onAction="#onCancelling" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel" textFill="WHITE">
+                                 <font>
+                                    <Font name="Book Antiqua" size="12.0" />
+                                 </font>
+                              </JFXButton>
                               <JFXButton fx:id="confirmBtn1" layoutX="352.0" layoutY="80.0" onAction="#onConfirmation" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Confirm" textFill="WHITE">
                                  <font>
                                     <Font name="Book Antiqua" size="12.0" />

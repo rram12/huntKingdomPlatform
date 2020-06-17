@@ -15,6 +15,8 @@ import Services.MoyenDeTransportService;
 import Services.ReservationService;
 import Services.UserService;
 import Utils.MyConnection;
+import Utils.Session;
+import Utils.UserSession;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
@@ -28,9 +30,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -56,25 +60,25 @@ import static javafx.scene.paint.Color.rgb;
  * @author ASUS1
  */
 public class ServiceFrontController implements Initializable {
-
+    
     private String absolutePath;
 
     /*Hebergement*/
     @FXML
     private JFXTextField prixParJourHeb;
-
+    
     @FXML
     private JFXTextField typeHeb;
-
+    
     @FXML
     private JFXTextField nbChambreHeb;
-
+    
     @FXML
     private ImageView imageHeb;
-
+    
     @FXML
     private JFXTextField capaciteHeb;
-
+    
     @FXML
     private JFXTextField adresseHeb;
 
@@ -82,16 +86,16 @@ public class ServiceFrontController implements Initializable {
  /*Moyen De Transport*/
     @FXML
     private ImageView images;
-
+    
     @FXML
     private JFXTextField categorie;
-
+    
     @FXML
     private JFXTextField type;
-
+    
     @FXML
     private JFXTextField marque;
-
+    
     @FXML
     private JFXTextField prixParJour;
     /*Moyen de Transport end*/
@@ -99,72 +103,93 @@ public class ServiceFrontController implements Initializable {
  /*Location Fields*/
     @FXML
     private JFXTextField prixTot1;
-
+    
     @FXML
     private JFXTextField nbJours1;
-
+    
     @FXML
     private DatePicker dateArrivee1;
+
+    @FXML
+    private JFXButton confirmBtn1;
+    
+    @FXML
+    private JFXButton cancelBtn1;
     /*Location Fields end*/
 
  /*Reservation Fields*/
     @FXML
     private JFXTextField prixTot;
-
+    
     @FXML
     private JFXTextField nbJours;
-
+    
     @FXML
     private DatePicker dateArrivee;
+    
+    @FXML
+    private JFXButton confirmBtn;
     /*Reservation Fields end*/
-
+    
     @FXML
     private FlowPane flow1;
-
+    
     @FXML
     private Tab TransportPane;
-
+    
     @FXML
     private Tab AccommodationsPane;
-
+    
+    @FXML
+    private Tab MyPane;
+    
+    @FXML
+    private FlowPane flow2;
+    
     @FXML
     private JFXTabPane tabPane;
-
+    
     @FXML
     private FlowPane flow;
-
+    
     @FXML
     private Tab ReservePane;
-
+    
     @FXML
     private Tab RentPane;
-
+    
     private int id;
-
+    
     @FXML
     private JFXListView<Reservation> listReservations;
-
+    
     @FXML
     private JFXListView<Location> listLocations;
     private int idU;
+    private int id2;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Services.UserService SU = new UserService();
-        try {
-            idU = SU.getConnectedUser();
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceFrontController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Services.UserService SU = new UserService();
+//        try {
+//            idU = SU.getConnectedUser();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ServiceFrontController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        idU = UserSession.getInstace("", 0, "", "", "", 0).getId();
+        System.out.println(idU);
         flow.getChildren().clear();
         displayAccommodations();
         flow1.getChildren().clear();
         displayTransports();
+        flow2.getChildren().clear();
+        displayMy();
         // ListPane.onSelectionChangedProperty();
         tabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (oldTab == ReservePane) {
@@ -188,7 +213,7 @@ public class ServiceFrontController implements Initializable {
             });
         });
         nbJours.setOnKeyReleased(e -> {
-
+            
             nbJours.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
                 //System.out.println(newValue);
                 if (!Pattern.matches("^[1-9][0-9]*$", nbJours.getText())) {
@@ -199,11 +224,11 @@ public class ServiceFrontController implements Initializable {
                 } else {
                     prixTot.setText(Float.toString(Float.parseFloat(newValue) * Float.parseFloat(prixParJourHeb.getText())));
                 }
-
+                
             });
         });
     }
-
+    
     private void displayAccommodations() {
         ArrayList<Hebergement> Hebs = new ArrayList<>();
         HebergementService ps = new HebergementService();
@@ -253,14 +278,14 @@ public class ServiceFrontController implements Initializable {
                      * ********
                      */
                     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-                    selectionModel.select(2); //select by index starting with 0
+                    selectionModel.select(3); //select by index starting with 0
                     this.id = id1;
-
+                    
                 });
-
+                
                 nodes[i] = root;
                 flow.getChildren().add(nodes[i]);
-
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -285,9 +310,9 @@ public class ServiceFrontController implements Initializable {
         Node[] nodes = new Node[obsl.size()];
         for (int i = 0; i < nodes.length; i++) {
             try {
-
+                
                 FXMLLoader loader = new FXMLLoader();
-
+                
                 Pane root = loader.load(getClass().getResource("/Gui/SingleMoyenDeTransport.fxml").openStream());
                 SingleMoyenDeTransportController single = (SingleMoyenDeTransportController) loader.getController();
                 single.getInfo(trans.get(i));
@@ -296,6 +321,8 @@ public class ServiceFrontController implements Initializable {
                 JFXButton button = single.getButton();
                 button.setText("Consult");
                 button.setOnAction(e -> {
+                    cancelBtn1.setVisible(false);
+                    confirmBtn1.setVisible(true);
                     MyConnection mc = MyConnection.getInstance();
                     LocationService ls = new LocationService();
                     ObservableList<Location> obsal = FXCollections.observableArrayList(ls.afficherLocations(id1));
@@ -327,20 +354,96 @@ public class ServiceFrontController implements Initializable {
                      * ********
                      */
                     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-                    selectionModel.select(3); //select by index starting with 0
+                    selectionModel.select(4); //select by index starting with 0
                     this.id = id1;
-
+                    
                 });
-
+                
                 nodes[i] = root;
                 flow1.getChildren().add(nodes[i]);
-
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+    
+    private void displayMy() {
+        MoyenDeTransportService ps = new MoyenDeTransportService();
+        ArrayList<MoyenDeTransport> trans = (ArrayList) ps.afficher();
+//        ArrayList<Location> MyLoc = new ArrayList<>();
+        LocationService myLs = new LocationService();
+        ArrayList<Location> MyLoc = (ArrayList) myLs.afficherMesLocations(idU);
+        System.out.println("aaaaaaaaa" + MyLoc);
+        MyLoc = validListLocation(MyLoc, trans);
+        System.out.println("bbbbbbbbbb" + MyLoc);
+        ObservableList<Location> obsl = FXCollections.observableArrayList(MyLoc);
+        Node[] nodes = new Node[obsl.size()];
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+                
+                FXMLLoader loader = new FXMLLoader();
+                
+                Pane root = loader.load(getClass().getResource("/Gui/SingleLocation.fxml").openStream());
+                SingleLocationController single = (SingleLocationController) loader.getController();
+                Location l = MyLoc.get(i);
+                MoyenDeTransport m = getTransport(l, trans);
+                single.getInfo(m, l);
+                int id1 = single.getCurrentId();
+                id2 = single.getCurrentLocationId();
+                
+                JFXButton button = single.getButton();
+                button.setText("Consult");
+                button.setOnAction(e -> {
+                    cancelBtn1.setVisible(true);
+                    confirmBtn1.setVisible(false);
+                    MyConnection mc = MyConnection.getInstance();
+                    LocationService ls = new LocationService();
+                    ObservableList<Location> obsal = FXCollections.observableArrayList(ls.afficherLocations(id1));
+                    listLocations.setItems(obsal);
+                    RentPane.setDisable(false);
+                    prixParJour.setText(Float.toString(m.getPrixParJour()));
+                    marque.setText(m.getMarque());
+                    categorie.setText(m.getCategorie());
+                    absolutePath = m.getImage();
+                    type.setText(m.getType());
+                    try {
+                        Image image = new Image(new FileInputStream(absolutePath));
+                        images.setImage(image);
+                    } catch (FileNotFoundException ex) {
+                        System.out.println(ex);
+                    }
+                    prixParJour.setEditable(false);
+                    marque.setEditable(false);
+                    categorie.setEditable(false);
+                    type.setEditable(false);
 
+                    /**
+                     * vider les champs*
+                     */
+                    nbJours1.setText(Integer.toString(l.getNbJours()));
+                    prixTot1.setText(Float.toString(l.getPrixTot()));
+                    dateArrivee1.setValue(l.Arrivaldate().toInstant()
+      .atZone(ZoneId.systemDefault())
+      .toLocalDate());
+                    /**
+                     * ********
+                     */
+                    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+                    selectionModel.select(4); //select by index starting with 0
+                    this.id = id1;
+
+                });
+
+                nodes[i] = root;
+                flow2.getChildren().add(nodes[i]);
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     @FXML
     void onConfirmation(ActionEvent event) {
         if (controleDeSaisieRent()) {
@@ -363,9 +466,28 @@ public class ServiceFrontController implements Initializable {
                 selectionModel.select(1); //select by index starting with 0
             }
         }
-
+        
     }
-
+    @FXML
+    void onCancelling(ActionEvent event) {
+            LocationService ps = new LocationService();
+            if (ps.supprimerLocation(id2)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Rent Cancelling");
+                alert.setHeaderText(null);
+                alert.setContentText("Your Rent has been succesfully cancelled ");
+                alert.showAndWait();
+                flow.getChildren().clear();
+                displayAccommodations();
+                flow1.getChildren().clear();
+                displayTransports();
+                RentPane.setDisable(true);
+                SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+                selectionModel.select(1); //select by index starting with 0
+            }
+        
+    }
+    
     @FXML
     void onConfirmation1(ActionEvent event) {
         if (controleDeSaisieReservation()) {
@@ -390,18 +512,18 @@ public class ServiceFrontController implements Initializable {
             }
         }
     }
-
+    
     public static void showAlert(Alert.AlertType type, String title, String header, String text) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();
-
+        
     }
-
+    
     private boolean controleDeSaisieReservation() {
-
+        
         if (prixTot.getText().isEmpty() || nbJours.getText().isEmpty()
                 || dateArrivee.getValue() == null) {
             if (prixTot.getText().isEmpty()) {
@@ -420,11 +542,11 @@ public class ServiceFrontController implements Initializable {
         } else {
             MyConnection mc = MyConnection.getInstance();
             ReservationService rs = new ReservationService();
-
+            
             for (Reservation e : rs.afficherReservations(id)) {
                 //Date parcours = null;
                 for (int i = 0; i < Integer.parseInt(nbJours.getText()); i++) {
-
+                    
                     if (e.Arrivaldate().compareTo(datePlusOne(i, java.sql.Date.valueOf(dateArrivee.getValue().toString()))) * datePlusOne(i, java.sql.Date.valueOf(dateArrivee.getValue().toString())).compareTo(e.finaldate()) >= 0) {
                         showAlert(Alert.AlertType.ERROR, "Invalid date", "", "Please check the list of reservation for available date !");
                         return false;
@@ -435,9 +557,9 @@ public class ServiceFrontController implements Initializable {
         }
         return true;
     }
-
+    
     private boolean controleDeSaisieRent() {
-
+        
         if (prixTot1.getText().isEmpty() || nbJours1.getText().isEmpty()
                 || dateArrivee1.getValue() == null) {
             if (prixTot1.getText().isEmpty()) {
@@ -456,10 +578,10 @@ public class ServiceFrontController implements Initializable {
         } else {
             MyConnection mc = MyConnection.getInstance();
             LocationService ls = new LocationService();
-
+            
             for (Location e : ls.afficherLocations(id)) {
                 for (int i = 0; i < Integer.parseInt(nbJours1.getText()); i++) {
-
+                    
                     if (e.Arrivaldate().compareTo(datePlusOne(i, java.sql.Date.valueOf(dateArrivee1.getValue().toString()))) * datePlusOne(i, java.sql.Date.valueOf(dateArrivee1.getValue().toString())).compareTo(e.finaldate()) >= 0) {
                         showAlert(Alert.AlertType.ERROR, "Invalid date", "", "Please check the list of Rent for available date !");
                         return false;
@@ -469,7 +591,7 @@ public class ServiceFrontController implements Initializable {
         }
         return true;
     }
-
+    
     public Date datePlusOne(int i, Date d) {
 //        String oldDate = "2017-01-29";  
 //	System.out.println("Date before Addition: "+oldDate);
@@ -479,23 +601,53 @@ public class ServiceFrontController implements Initializable {
         //Incrementing the date by 1 day
         c.add(Calendar.DAY_OF_MONTH, i);
         Date date = c.getTime();
-
+        
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-
+        
         String date1 = format1.format(date);
-
+        
         Date inActiveDate = null;
-
+        
         try {
-
+            
             inActiveDate = format1.parse(date1);
-
+            
         } catch (ParseException e1) {
 
             // TODO Auto-generated catch block
             e1.printStackTrace();
-
+            
         }
         return inActiveDate;
+    }
+    
+    public ArrayList<Location> validListLocation(ArrayList<Location> MyLoc, ArrayList<MoyenDeTransport> trans) {
+        ArrayList<Location> MyLoc1 = new ArrayList<>();;
+        boolean exist = false;
+        if (MyLoc != null) {
+            for (int j = 0; j < MyLoc.size(); j++) {
+                Iterator<MoyenDeTransport> it = trans.iterator();
+                while (it.hasNext() && exist == false) {
+                    if (it.next().getId() == MyLoc.get(j).getMoyenDeTransportId()) {
+                        exist = true;
+                    }
+                }
+                if (exist == true) {
+                    MyLoc1.add(MyLoc.get(j));
+                    exist = false;
+                }
+            }
+        }
+        return MyLoc1;
+    }
+    
+    public MoyenDeTransport getTransport(Location l, ArrayList<MoyenDeTransport> trans) {
+        MoyenDeTransport m = new MoyenDeTransport();
+        for (int i = 0; i < trans.size(); i++) {
+            if (trans.get(i).getId() == l.getMoyenDeTransportId()) {
+                return trans.get(i);
+            }
+        }
+        return m;
     }
 }

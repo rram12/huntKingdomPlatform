@@ -10,6 +10,7 @@ import Services.JavaMail;
 import Services.PieceService;
 import Services.ReparationService;
 import Utils.MyConnection;
+import Utils.UserSession;
 import Utils.copyFiles;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,9 +37,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,7 +52,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -57,6 +59,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -72,6 +76,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.imageio.ImageIO;
 
@@ -82,6 +87,18 @@ import javax.imageio.ImageIO;
  */
 public class ReparationController implements Initializable {
 
+    @FXML
+    private Label lDateDebut;
+
+    @FXML
+    private AnchorPane mainPane;
+    @FXML
+    private StackPane stackCancel;
+
+    @FXML
+    private JFXButton cancelBtn;
+    @FXML
+    private Label lpourcentage;
     @FXML
     private Label labelPirx;
 
@@ -130,9 +147,11 @@ public class ReparationController implements Initializable {
     private JFXTabPane tabPane;
     @FXML
     private AnchorPane anchor;
+    @FXML
+    private JFXButton payBtn;
 
     private String absolutePath = "";
-
+    private Date dateDeb;
     @FXML
     private Pane listPane;
     private PiecesDefectueuses current_piece;
@@ -181,6 +200,7 @@ public class ReparationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         categorie.setItems(list);
         tabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
             if (oldTab == readyPane) {
@@ -193,6 +213,8 @@ public class ReparationController implements Initializable {
                 annee_exp.setText("");
                 cvc.setText("");
 
+            } else if (oldTab == progressPane) {
+                progressPane.setDisable(true);
             }
         });
         ObservableList<PiecesDefectueuses> obsl = FXCollections.observableArrayList(pieces);
@@ -267,6 +289,8 @@ public class ReparationController implements Initializable {
                             SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
                             selectionModel.select(3); //select by index starting with 0
                             System.out.println("not ready");
+                            progressPane.setDisable(false);
+
                             //String str1 = this.current_piece.getNom();
                             // labelProgress.setText(labelProgress.getText() + str1);
                             System.out.println(p1.getNom());
@@ -275,16 +299,36 @@ public class ReparationController implements Initializable {
                             LocalDate currentDate = currentDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                             ReparationService rs = new ReparationService();
                             Date dateFin1 = rs.getDateFin(p1.getId());
-
+                            Date dateDebut1 = rs.getDateDebut(p1.getId());
+                            dateDeb = dateDebut1;
                             LocalDate dateFin = dateFin1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                             System.out.println("current_date : " + currentDate + "datefin : " + dateFin);
-
                             Period diff = Period.between(currentDate, dateFin);
                             System.out.printf("Difference is %d years, %d months and %d days old",
                                     diff.getYears(), diff.getMonths(), diff.getDays());
                             labelYear.setText(Integer.toString(diff.getYears()));
                             labelMonth.setText(Integer.toString(diff.getMonths()));
                             labelDays.setText(Integer.toString(diff.getDays()));
+
+                            /**
+                             * *** taux ***
+                             */
+                            Date now = new Date();
+                            long debSec = dateDebut1.getTime() / (24 * 60 * 60 * 1000);
+                            long difference = dateFin1.getTime() - now.getTime();
+
+                            long nowSec = now.getTime() / (24 * 60 * 60 * 1000);
+                            long finSec = dateFin1.getTime() / (24 * 60 * 60 * 1000);
+                            long diffTotale = finSec - debSec;
+                            int diffDays = (int) (difference / (24 * 60 * 60 * 1000));
+
+                            double taux = ((double) 100 - (diffDays * 100 / diffTotale));
+                            System.out.println("\ntaux : " + taux);
+                            lpourcentage.setText("progress percentage : " + Double.toString(taux) + "%");
+
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                            String dateDeb = simpleDateFormat.format(new Date());
+                            lDateDebut.setText(dateDeb);
 
                         });
 
@@ -319,9 +363,10 @@ public class ReparationController implements Initializable {
         if (selectedFile != null) {
             listView.getItems().add(selectedFile.getName());
             String oldPath = selectedFile.getAbsolutePath();
-
-            absolutePath = "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + selectedFile.getName();
-            copyFiles.deplacerVers(oldPath, "E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\");
+            String DynamicPath = System.getProperty("user.dir");
+            System.out.println("DynamicPath : " + DynamicPath);
+            absolutePath = DynamicPath + "\\src\\Uploads\\" + selectedFile.getName();
+            copyFiles.deplacerVers(oldPath, DynamicPath + "\\src\\Uploads\\");
 
         } else {
             System.out.println("file is not valid !");
@@ -362,25 +407,19 @@ public class ReparationController implements Initializable {
         return true;
     }
 
-    @FXML
-    void addPiece(ActionEvent event) {
-        if (validateFields()) {
-            MyConnection mc = MyConnection.getInstance();
-            PieceService ps = new PieceService();
-            PiecesDefectueuses p = new PiecesDefectueuses(nom.getText(), categorie.getValue(), description.getText(), absolutePath, 1);
-            ps.ajouterPiece(p);
+    public boolean validateUnique(PiecesDefectueuses p) {
+
+        PieceService ps = new PieceService();
+        if (ps.exists(p)) {
             JFXDialogLayout message = new JFXDialogLayout();
-            Label label = new Label("Piece added seccessfully !");
-            label.setStyle("-fx-font-size: 12px;"
-                    + "    -fx-font-weight: bold;"
-                    + "    -fx-text-fill: green;");
-            message.setHeading(label);
+            message.setHeading(new Text("error!"));
+            message.setBody(new Text("this piece already exists!"));
             JFXDialog msg = new JFXDialog(stack, message, JFXDialog.DialogTransition.CENTER);
-            JFXButton button = new JFXButton("ok");
+            JFXButton button = new JFXButton("close");
             button.setStyle("-fx-padding: 0.7em 0.57em;"
                     + "    -fx-font-size: 14px;"
                     + "    -jfx-button-type: RAISED;"
-                    + "    -fx-background-color: blue;"
+                    + "    -fx-background-color: red;"
                     + "    -fx-pref-width: 100;"
                     + "    -fx-text-fill: WHITE;");
             button.setOnAction(new EventHandler<ActionEvent>() {
@@ -391,13 +430,54 @@ public class ReparationController implements Initializable {
             });
             message.setActions(button);
             msg.show();
-            nom.setText("");
-            categorie.setValue(null);
-            description.setText("");
-            listView.getItems().clear();
-            imageView.setImage(null);
 
+            return false;
         }
+
+        return true;
+    }
+
+    @FXML
+    void addPiece(ActionEvent event) {
+        if (validateFields()) {
+            MyConnection mc = MyConnection.getInstance();
+            PieceService ps = new PieceService();
+            int UserId = UserSession.getInstace("", 0, "", "", "", 0).getId();
+            PiecesDefectueuses p = new PiecesDefectueuses(nom.getText(), categorie.getValue(), description.getText(), absolutePath, UserId);
+            if (validateUnique(p)) {
+
+                ps.ajouterPiece(p);
+                JFXDialogLayout message = new JFXDialogLayout();
+                Label label = new Label("Piece added seccessfully !");
+                label.setStyle("-fx-font-size: 12px;"
+                        + "    -fx-font-weight: bold;"
+                        + "    -fx-text-fill: green;");
+                message.setHeading(label);
+                JFXDialog msg = new JFXDialog(stack, message, JFXDialog.DialogTransition.CENTER);
+                JFXButton button = new JFXButton("ok");
+                button.setStyle("-fx-padding: 0.7em 0.57em;"
+                        + "    -fx-font-size: 14px;"
+                        + "    -jfx-button-type: RAISED;"
+                        + "    -fx-background-color: blue;"
+                        + "    -fx-pref-width: 100;"
+                        + "    -fx-text-fill: WHITE;");
+                button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        msg.close();
+                    }
+                });
+                message.setActions(button);
+                msg.show();
+                nom.setText("");
+                categorie.setValue(null);
+                description.setText("");
+                listView.getItems().clear();
+                imageView.setImage(null);
+
+            }
+        }
+
     }
 
     public boolean validateFieldsPay() {
@@ -431,17 +511,16 @@ public class ReparationController implements Initializable {
     @FXML
     void onPayAction(ActionEvent event) throws StripeException {
         if (validateFieldsPay()) {
-
             ReparationService rs = new ReparationService();
             Double prixRep = rs.getPrixReparation(current_piece.getId());
             int prix = prixRep.intValue();
             //String price = Double.toString(prix);
             /* add a customer */
-            String EmailStatique = "khalil.tourabi10@gmail.com";
+            String EmailUser = UserSession.getInstace("", 0, "", "", "", 0).getEmail();
             Stripe.apiKey = "sk_test_0sHcDNkGs9s7se1ifivPl6Vb00WBmw7K82";
             try {
                 Map<String, Object> options = new HashMap<>();
-                options.put("email", EmailStatique);
+                options.put("email", EmailUser);
                 List<Customer> customers = Customer.list(options).getData();
                 Customer customer;
                 if (customers.size() > 0) {
@@ -450,7 +529,7 @@ public class ReparationController implements Initializable {
                 } else {
 
                     Map<String, Object> customerParameter = new HashMap<String, Object>();
-                    customerParameter.put("email", EmailStatique);
+                    customerParameter.put("email", EmailUser);
                     customer = Customer.create(customerParameter);
                     System.out.println("customer ajouté");
                 }
@@ -535,10 +614,38 @@ public class ReparationController implements Initializable {
                         selectionModel.select(1); //select by index starting with 0
                         readyPane.setDisable(true);
                         try {
-                            JavaMail.sendMail(EmailStatique, 3);
+                            JavaMail.sendMail(EmailUser, 3);
                         } catch (Exception ex) {
                             System.out.println(ex.getMessage());
                         }
+                        /* FXMLLoader loader = new FXMLLoader();
+                        try {
+                        Pane root = loader.load(getClass().getResource("/Gui/Home.fxml").openStream());
+                        HomeController single = (HomeController) loader.getController();
+                        single.decrementReady();
+                        } catch (IOException ex) {
+                            System.out.println("errorHome.fxml : "+ex.getMessage());
+                        }
+                         */
+
+                        try {
+                            Stage stage = (Stage) payBtn.getScene().getWindow();
+                            // do what you have to do
+
+                            Stage primaryStage = new Stage();
+                            Parent root = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+                            Scene scene = new Scene(root);
+                            scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+                            primaryStage.setTitle("HuntKingdom");
+                            Image ico = new Image("Uploads/logo2.png");
+                            primaryStage.getIcons().add(ico);
+                            primaryStage.setScene(scene);
+                            primaryStage.show();
+                            stage.close();
+                        } catch (IOException ex) {
+
+                        }
+
                     }
                 });
                 message.setActions(button);
@@ -569,6 +676,47 @@ public class ReparationController implements Initializable {
 
             }
 
+        }
+    }
+
+    @FXML
+    void cancel(ActionEvent event) {
+        //checking the begin date to disable canceling reparation
+        System.out.println("btn clicked.");
+        Date now = new Date();
+        long differenceDays = (now.getTime() - dateDeb.getTime()) / (24 * 60 * 60 * 1000);
+        if (differenceDays > 7) {
+            JFXDialogLayout message = new JFXDialogLayout();
+            message.setHeading(new Text("error!"));
+            message.setBody(new Text("sorry you can't cancel this reparation any more (7 days after reparation)!"));
+            JFXDialog msg = new JFXDialog(stackCancel, message, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("close");
+            button.setStyle("-fx-padding: 0.7em 0.57em;"
+                    + "    -fx-font-size: 14px;"
+                    + "    -jfx-button-type: RAISED;"
+                    + "    -fx-background-color: red;"
+                    + "    -fx-pref-width: 100;"
+                    + "    -fx-text-fill: WHITE;");
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    msg.close();
+                }
+            });
+            message.setActions(button);
+            msg.show();
+
+        } else {
+
+            ReparationService rs = new ReparationService();
+            rs.deleteReparation(current_piece.getId());
+            PieceService ps = new PieceService();
+            ps.deletePiece(current_piece.getId());
+            anchor.getChildren().clear();
+            refresh();
+            SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+            selectionModel.select(1); //select by index starting with 0
+            progressPane.setDisable(true);
         }
     }
 

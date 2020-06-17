@@ -84,7 +84,7 @@ public class AddPublicityController implements Initializable {
 
     private void copyFile(File file) {
         try {
-            File dest = new File("E:\\roadToInfini\\java\\projet\\final\\git\\HuntKingdom\\src\\Uploads\\" + file.getName()); //any location
+            File dest = new File("C:\\Users\\User\\Desktop\\integration 2\\huntkingdom\\src\\Uploads\\" + file.getName()); //any location
             Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             System.out.println(ex);

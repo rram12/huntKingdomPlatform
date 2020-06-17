@@ -15,8 +15,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +53,7 @@ import javafx.stage.Stage;
  * @author asus_pc
  */
 public class AdminProductController implements Initializable {
- 
+
     @FXML
     private JFXTextField search;
     @FXML
@@ -77,7 +79,7 @@ public class AdminProductController implements Initializable {
     @FXML
     TableColumn<Produits, String> marque;
     private String absolutePath;
-      @FXML
+    @FXML
     private TextField rate;
     @FXML
     private DatePicker endDate;
@@ -89,14 +91,14 @@ public class AdminProductController implements Initializable {
     ProduitService ps = new ProduitService();
     List<Produits> mylist = new ArrayList();
     public ObservableList<Produits> list;
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         list = FXCollections.observableArrayList(
-            ps.afficherProduits()
+                ps.afficherProduits()
         );
-                FilteredList<Produits> filteredData = new FilteredList<>(list, e -> true);
-         search.setOnKeyReleased(e -> {
+        FilteredList<Produits> filteredData = new FilteredList<>(list, e -> true);
+        search.setOnKeyReleased(e -> {
             search.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
                 filteredData.setPredicate((Predicate<? super Produits>) produits -> {
                     if (newValue == null || newValue.isEmpty()) {
@@ -114,15 +116,17 @@ public class AdminProductController implements Initializable {
             sortedData.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedData);
         });
-        /*** delete ended reductions **/
+        /**
+         * * delete ended reductions *
+         */
         ProduitService ps = new ProduitService();
         ps.deletePromotionFini();
         PromotionService promos = new PromotionService();
         promos.supprimerPromotionFini();
         list = FXCollections.observableArrayList(
-            ps.afficherProduits()
-    );
-        
+                ps.afficherProduits()
+        );
+
         id.setCellValueFactory(new PropertyValueFactory<Produits, Integer>("id"));
         lib_prod.setCellValueFactory(new PropertyValueFactory<Produits, String>("lib_prod"));
         prix.setCellValueFactory(new PropertyValueFactory<Produits, Double>("prix"));
@@ -149,97 +153,119 @@ public class AdminProductController implements Initializable {
                     } catch (FileNotFoundException ex) {
                         System.out.println(ex);
                     }
-                    
+
                 }
             });
             return row;
         });
     }
-    public boolean validateFields(){
-       boolean numeric = true;
+
+    public boolean validateFields() {
+        boolean numeric = true;
         try {
             Double num = Double.parseDouble(rate.getText());
         } catch (NumberFormatException e) {
             numeric = false;
         }
-        if(numeric){
+        if (numeric) {
             Double num = Double.parseDouble(rate.getText());
-            if(num>1||num<0)numeric = false;
+            if (num > 1 || num < 0) {
+                numeric = false;
+            }
         }
-    if(rate.getText().isEmpty()||endDate.getValue()==null){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Validate Fields");
-        alert.setHeaderText(null);
-        alert.setContentText("please enter all the information ! ");
-        alert.showAndWait();
-        return false;
-    }else{
-    if(numeric==false){
-    Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Incorrect field");
-        alert.setHeaderText(null);
-        alert.setContentText("please enter a number for rate(Between 0 and 1)  ");
-        alert.showAndWait();
-        return false;
-    }       
-    
-}
-    return true;
+        if (rate.getText().isEmpty() || endDate.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Fields");
+            alert.setHeaderText(null);
+            alert.setContentText("please enter all the information ! ");
+            alert.showAndWait();
+            return false;
+        } else {
+            if (numeric == false) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Incorrect field");
+                alert.setHeaderText(null);
+                alert.setContentText("please enter a number for rate(Between 0 and 1)  ");
+                alert.showAndWait();
+                return false;
+            }
+            Date d1 = new Date();
+            LocalDate d2 = endDate.getValue();
+            Calendar debut = Calendar.getInstance();
+            Calendar now = Calendar.getInstance();
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+		
+	
+        
+        //local date + atStartOfDay() + default time zone + toInstant() = Date
+        Date date = Date.from(d2.atStartOfDay(defaultZoneId).toInstant());
+            now.setTime(d1);
+            debut.setTime(date);
+            if (debut.before(now) || debut.equals(now)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Incorrect field");
+                alert.setHeaderText(null);
+                alert.setContentText("please enter a date after the current date  ");
+                alert.showAndWait();
+                return false;
+            }
+
+        }
+        return true;
     }
-    public void OnConfirmAction(){
+
+    public void OnConfirmAction() {
         Produits p = table.getSelectionModel().getSelectedItem();
-        if(p==null){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        if (p == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate selection");
             alert.setHeaderText(null);
             alert.setContentText("please select a product ! ");
             alert.showAndWait();
-            
-        }
-        else{
-            if(validateFields()){
-                boolean ok=true;
-                if(p.getPromotion_id()!=-1){
+
+        } else if (validateFields()) {
+            boolean ok = true;
+            if (p.getPromotion_id() != -1) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("overwrite reduction");
                 alert.setHeaderText(null);
                 alert.setContentText("product already has a reduction, do you want to overwite it?");
-                
+
                 Optional<ButtonType> action = alert.showAndWait();
-                    if (action.get() != ButtonType.OK) {
-                        ok = false;
-                    }
-                } 
-                    
-                    if(ok){
-                
-                
-                
-               
+                if (action.get() != ButtonType.OK) {
+                    ok = false;
+                }
+            }
+
+            if (ok) {
+
                 Date current_date = new Date();
                 ZoneId defaultZoneId = ZoneId.systemDefault();
                 Date finaDate = Date.from(endDate.getValue().atStartOfDay(defaultZoneId).toInstant());
-                Promotion promo = new Promotion(Double.parseDouble(rate.getText()),current_date,finaDate);
+                Promotion promo = new Promotion(Double.parseDouble(rate.getText()), current_date, finaDate);
                 PromotionService Spromo = new PromotionService();
-                Spromo.ajouterPromotion(promo,p.getId());
+                Spromo.ajouterPromotion(promo, p.getId());
                 ProduitService ps = new ProduitService();
-                ps.ReductPiece(p.getId(),promo.getTaux());
+                ps.ReductPiece(p.getId(), promo.getTaux());
                 list.clear();
                 list = FXCollections.observableArrayList(
-                    ps.afficherProduits()
+                        ps.afficherProduits()
                 );
                 table.setItems(list);
-                }
             }
-        
         }
     }
-    
-    public void OnShowReductionAction()throws IOException{
-      AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ListReductionsAdmin.fxml"));
+
+    public void OnShowReductionAction() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ListReductionsAdmin.fxml"));
         mainPane.getChildren().setAll(pane);
-       
+
     }
-    
-    
+
+    public void OnAjouterAction() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AjoutProduitAdmin.fxml"));
+        mainPane.getChildren().setAll(pane);
+
+    }
+
 }
