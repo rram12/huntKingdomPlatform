@@ -132,7 +132,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnPub" layoutX="10.0" layoutY="444.0" mnemonicParsing="false" onAction="#btnpublicityAction" prefHeight="62.0" prefWidth="309.0" style="-fx-background-color: none;" text="Publicity" textFill="WHITE">
+            <Button fx:id="btnPub" layoutX="10.0" layoutY="444.0" mnemonicParsing="false" onAction="#btnpublicityAction" prefHeight="62.0" prefWidth="309.0" style="-fx-background-color: none;" text="Publicities" textFill="WHITE">
                <font>
                   <Font name="Monospaced Regular" size="25.0" />
                </font>

@@ -31,6 +31,15 @@ public class Reservation {
     public Reservation() {
     }
 
+    public Reservation(int id, int nbJours, float prixTot, Date dateArrivee) {
+        this.id = id;
+        this.nbJours = nbJours;
+        this.prixTot = prixTot;
+        this.dateArrivee = dateArrivee;
+    }
+    
+    
+
     public Reservation(int nbJours, float prixTot, Date dateArrivee, int userId, int HebergementId) {
         this.nbJours = nbJours;
         this.prixTot = prixTot;

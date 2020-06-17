@@ -8,6 +8,7 @@ package Controllers;
 import Services.ProduitService;
 import Services.PromotionService;
 import Utils.MyConnection;
+import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -211,12 +212,10 @@ public class AdminHomeController implements Initializable {
 
     @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
+        UserSession.getInstace("",0,"","","", 0).cleanUserSession();
         String query = "update fos_user set etat=0";
-
         st = cnx.createStatement();
-
         st.executeUpdate(query);
-
         AnchorPane pane;
         pane = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
         mainPane.getChildren().setAll(pane);

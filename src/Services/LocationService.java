@@ -32,7 +32,7 @@ public class LocationService {
         try {
             PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1, l.getNbJours());
-            pst.setDouble(2, l.getPrixTot());
+            pst.setFloat(2, l.getPrixTot());
             pst.setDate(3, (Date) l.getDateArrivee());
             pst.setInt(4, l.getUserId());
             pst.setInt(5, l.getMoyenDeTransportId());
@@ -45,6 +45,25 @@ public class LocationService {
         }
 
     }
+
+    public boolean updateLocation(Location l) {
+        try {
+            String requete = "UPDATE Location SET nbJours = ?, prixTot = ?, dateArrivee = ? WHERE id = ?";
+            PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1, l.getNbJours());
+            pst.setFloat(2, l.getPrixTot());
+            pst.setDate(3, (Date) l.getDateArrivee());
+            pst.setInt(4, l.getId());
+            pst.executeUpdate();
+            System.out.println("Rent succesfully updated ! ");
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+    }
+
     public List<Location> afficherLocations(int id) {
         List<Location> myList = new ArrayList();
         try {
@@ -72,8 +91,6 @@ public class LocationService {
         System.out.println(myList);
         return myList;
     }
-    
-    
     public List<Location> afficherMesLocations(int id) {
         List<Location> myList = new ArrayList();
         try {

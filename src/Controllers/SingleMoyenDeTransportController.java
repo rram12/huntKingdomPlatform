@@ -46,7 +46,7 @@ public class SingleMoyenDeTransportController implements Initializable {
     void getInfo(MoyenDeTransport Mt){
         labelMark.setText(Mt.getMarque());
         labelCategory.setText(Mt.getCategorie());
-        labelPricePerDay.setText(Float.toString(Mt.getPrixParJour()));
+        labelPricePerDay.setText(Float.toString(Mt.getPrixParJour())+"dt");
         Tran = Mt;
         try {
             Image image = new Image(new FileInputStream(Mt.getImage()));

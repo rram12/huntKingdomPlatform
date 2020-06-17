@@ -54,6 +54,7 @@ public class SingleLocationController implements Initializable {
         labelMark.setText(dDate);
         labelCategory.setText(fDate);
         labelPricePerDay.setText(Float.toString(l.getPrixTot()));
+        labelPricePerDay.setText(Float.toString(l.getPrixTot())+"dt");
         Tran = Mt;
         Loc=l;
         try {

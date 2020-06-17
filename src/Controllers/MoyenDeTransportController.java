@@ -5,9 +5,11 @@
  */
 package Controllers;
 
+import Entities.Hebergement;
 import Entities.MoyenDeTransport;
 import Services.MoyenDeTransportService;
 import Utils.MyConnection;
+import Utils.Session;
 import com.sun.prism.impl.Disposer;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -114,6 +118,9 @@ public class MoyenDeTransportController implements Initializable {
     
     @FXML
     TableColumn col_action;
+    
+    @FXML
+    TableColumn col_action1;
 
     @FXML
     private TextField marque;
@@ -209,6 +216,25 @@ public class MoyenDeTransportController implements Initializable {
             @Override
             public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
                 return new ButtonCell();
+            }
+
+        });
+        col_action1.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Disposer.Record, Boolean>, ObservableValue<Boolean>>() {
+
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Disposer.Record, Boolean> p) {
+                return new SimpleBooleanProperty(p.getValue() != null);
+            }
+        });
+
+        //Adding the Button to the cell
+        col_action1.setCellFactory(
+                new Callback<TableColumn<Disposer.Record, Boolean>, TableCell<Disposer.Record, Boolean>>() {
+
+            @Override
+            public TableCell<Disposer.Record, Boolean> call(TableColumn<Disposer.Record, Boolean> p) {
+                return new ButtonCell2();
             }
 
         });
@@ -318,12 +344,55 @@ public class MoyenDeTransportController implements Initializable {
         protected void updateItem(Boolean t, boolean empty) {
             super.updateItem(t, empty);
             if (!empty) {
+                cellButton.setStyle("-fx-background-color: crimson;"
+                    + "    -fx-text-fill: WHITE;");
                 setGraphic(cellButton);
             } else {
                 setGraphic(null);
             }
         }
     }
+    
+    private class ButtonCell2 extends TableCell<Disposer.Record, Boolean> {
+
+        final Button cellButton2 = new Button("Show");
+
+        ButtonCell2() {
+
+            //Action when the button is pressed
+            cellButton2.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent t) {
+                    
+                        // get Selected Item
+                        MoyenDeTransport selectedH = (MoyenDeTransport) ButtonCell2.this.getTableView().getItems().get(ButtonCell2.this.getIndex());
+                        Session.current_moyenDeTransport=selectedH;
+                        AnchorPane pane;
+                    try {
+                        pane = FXMLLoader.load(getClass().getResource("/Gui/UnMoyenDeTransport.fxml"));
+                        mainpane.getChildren().setAll(pane);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ServiceController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                }
+            });
+        }
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                cellButton2.setStyle("-fx-background-color: lightblue;"
+                    + "    -fx-text-fill: WHITE;");
+                setGraphic(cellButton2);
+            } else {
+                setGraphic(null);
+            }
+        }
+        }
+    
     @FXML
     public void goToAdd(ActionEvent event) throws IOException {
           AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addMoyenDeTransport.fxml"));
@@ -393,14 +462,14 @@ public class MoyenDeTransportController implements Initializable {
             return false;
         } 
 
-           if (!Pattern.matches("^[\\p{L} .'-]+$", marque.getText()) ) {
-               showAlert(Alert.AlertType.ERROR,"Invalid data", "Verify your fields", "Verify the field Mark ! ");
-                marque.requestFocus();
-                marque.selectEnd();
-                marque.setStyle("-fx-border-color: red; -fx-background-color: white;");
-//                marque.setFocusColor(color);
-                return false;
-            }
+//           if (!Pattern.matches("^[\\p{L} .'-]+$", marque.getText()) ) {
+//               showAlert(Alert.AlertType.ERROR,"Invalid data", "Verify your fields", "Verify the field Mark ! ");
+//                marque.requestFocus();
+//                marque.selectEnd();
+//                marque.setStyle("-fx-border-color: red; -fx-background-color: white;");
+////                marque.setFocusColor(color);
+//                return false;
+//            }
             if (!Pattern.matches("^[0-9]*\\.?[0-9]+$", prixParJour.getText())) {
                 showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Vérifiez The price Per Day field!");
                 prixParJour.requestFocus();

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="752.0" prefWidth="1086.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ServiceFrontController">
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="752.0" prefWidth="1086.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ServiceFrontController">
    <children>
       <JFXTabPane fx:id="tabPane" layoutY="-1.0" prefHeight="752.0" prefWidth="1090.0">
          <tabs>
@@ -101,6 +101,26 @@
                               <Font name="Arial Black" size="19.0" />
                            </font>
                         </Label>
+                        <Label fx:id="sorry4" layoutX="422.0" layoutY="506.0" prefHeight="31.0" prefWidth="390.0" text="reservation due to delay constraint!" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sorry3" layoutX="422.0" layoutY="478.0" prefHeight="31.0" prefWidth="390.0" text="You cannot update or cancel" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="19.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="cancelBtn" layoutX="617.0" layoutY="466.0" onAction="#onCancelling1" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="updateBtn" layoutX="475.0" layoutY="466.0" onAction="#onUpdating1" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </content>
@@ -120,6 +140,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <StackPane fx:id="stack1" layoutX="376.0" layoutY="403.0" prefHeight="220.0" prefWidth="427.0">
                            <children>
                               <JFXButton fx:id="cancelBtn1" onAction="#onCancelling" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel" textFill="WHITE">
@@ -133,6 +154,23 @@
                                  </font>
                               </JFXButton>
                            </children></StackPane>
+=======
+                        <JFXButton fx:id="confirmBtn1" layoutX="535.0" layoutY="477.0" onAction="#onConfirmation" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Confirm" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="updateBtn1" layoutX="465.0" layoutY="477.0" onAction="#onUpdating" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="cancelBtn1" layoutX="607.0" layoutY="477.0" onAction="#onCancelling" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                         <JFXTextField fx:id="type" focusColor="WHITE" labelFloat="true" layoutX="182.0" layoutY="205.0" prefHeight="34.0" prefWidth="184.0" promptText="Type" style="-fx-text-inner-color: White; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
                            <font>
                               <Font name="System Bold" size="17.0" />
@@ -165,6 +203,16 @@
                            </font>
                         </Label>
                         <JFXListView fx:id="listLocations" layoutX="717.0" layoutY="89.0" prefHeight="544.0" prefWidth="358.0" showTooltip="true" style="-fx-background-color: none;" />
+                        <Label fx:id="sorry1" layoutX="412.0" layoutY="489.0" prefHeight="31.0" prefWidth="390.0" text="You cannot update or cancel" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sorry2" layoutX="412.0" layoutY="517.0" prefHeight="31.0" prefWidth="390.0" text="reservation due to delay constraint!" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="19.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>

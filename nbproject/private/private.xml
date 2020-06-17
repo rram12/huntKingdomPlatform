@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Controllers/AddCompetitionController.java</file>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Controllers/AddPublicityController.java</file>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Controllers/EventController.java</file>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Utils/MyConnection.java</file>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Controllers/ConsultCompetitionController.java</file>
+            <file>file:/C:/Users/User/Desktop/walidDesktop/huntkingdom/src/Services/CompetitionService.java</file>
+        </group>
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
     </open-files>
 </project-private>

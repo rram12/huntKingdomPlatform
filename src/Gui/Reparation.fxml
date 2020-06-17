@@ -18,15 +18,29 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+<<<<<<< HEAD
                         <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffffff40" height="585.0" layoutX="48.0" layoutY="13.0" stroke="WHITE" strokeType="INSIDE" width="394.0" />
                         <StackPane fx:id="stack" layoutX="540.0" layoutY="198.0" prefHeight="193.0" prefWidth="427.0" />
                         <JFXTextField fx:id="nom" focusColor="WHITE" labelFloat="true" layoutX="134.0" layoutY="53.0" prefHeight="45.0" prefWidth="206.0" promptText="Name" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <StackPane fx:id="stack" layoutX="562.0" layoutY="235.0" prefHeight="193.0" prefWidth="427.0">
+                           <children>
+                              <JFXButton fx:id="addBtn" buttonType="RAISED" onAction="#addPiece" prefHeight="52.0" prefWidth="147.0" ripplerFill="#ffdd88" style="-fx-background-color: green;" text="Add" textFill="WHITE" />
+                           </children>
+                        </StackPane>
+                        <JFXTextField fx:id="nom" focusColor="WHITE" labelFloat="true" layoutX="145.0" layoutY="111.0" prefHeight="45.0" prefWidth="206.0" promptText="Name" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <JFXComboBox fx:id="categorie" focusColor="WHITE" layoutX="132.0" layoutY="133.0" prefHeight="36.0" prefWidth="210.0" promptText="Select cayegory" unFocusColor="YELLOW" />
                         <JFXTextArea fx:id="description" focusColor="WHITE" labelFloat="true" layoutX="134.0" layoutY="213.0" prefHeight="162.0" prefWidth="221.0" promptText="Description" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXComboBox fx:id="categorie" focusColor="WHITE" layoutX="142.0" layoutY="189.0" prefHeight="36.0" prefWidth="210.0" promptText="Select cayegory" unFocusColor="YELLOW" />
+                        <JFXTextArea fx:id="description" focusColor="WHITE" labelFloat="true" layoutX="137.0" layoutY="285.0" prefHeight="162.0" prefWidth="221.0" promptText="Description" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -58,32 +72,59 @@
                               <Image url="@../Uploads/ready.JPG" />
                            </image>
                         </ImageView>
+<<<<<<< HEAD
                         <JFXTextField fx:id="cvc" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="326.0" prefHeight="45.0" prefWidth="206.0" promptText="cvc" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextField fx:id="cvc" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="366.0" prefHeight="45.0" prefWidth="206.0" promptText="cvc" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <JFXTextField fx:id="annee_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="249.0" prefHeight="45.0" prefWidth="206.0" promptText="expired year" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextField fx:id="annee_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="279.0" prefHeight="45.0" prefWidth="206.0" promptText="expired year" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <JFXTextField fx:id="moix_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="170.0" prefHeight="45.0" prefWidth="206.0" promptText="expired month" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextField fx:id="moix_exp" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="204.0" prefHeight="45.0" prefWidth="206.0" promptText="expired month" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <JFXTextField fx:id="num_carte" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="89.0" prefHeight="45.0" prefWidth="206.0" promptText="credit card number" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextField fx:id="num_carte" focusColor="WHITE" labelFloat="true" layoutX="138.0" layoutY="129.0" prefHeight="45.0" prefWidth="206.0" promptText="credit card number" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </JFXTextField>
+<<<<<<< HEAD
                         <JFXButton fx:id="payBtn" buttonType="RAISED" layoutX="171.0" layoutY="416.0" onAction="#onPayAction" prefHeight="46.0" prefWidth="141.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Pay" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
                         <StackPane fx:id="stackPay" layoutX="584.0" layoutY="389.0" prefHeight="173.0" prefWidth="448.0" />
+=======
+                        <StackPane fx:id="stackPay" layoutX="35.0" layoutY="433.0" prefHeight="173.0" prefWidth="448.0">
+                           <children>
+                              <JFXButton fx:id="payBtn" buttonType="RAISED" onAction="#onPayAction" prefHeight="46.0" prefWidth="141.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Pay" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></StackPane>
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                         <Label layoutX="587.0" layoutY="80.0" prefHeight="62.0" prefWidth="72.0" text="Price : ">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
@@ -146,6 +187,7 @@
                            <children>
                               <JFXButton fx:id="cancelBtn" onAction="#cancel" prefHeight="44.0" prefWidth="124.0" ripplerFill="WHITE" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
                            </children></StackPane>
+<<<<<<< HEAD
                         <Label fx:id="lDateDebut" layoutX="587.0" layoutY="523.0" prefHeight="45.0" prefWidth="490.0" textFill="WHITE">
                            <font>
                               <Font name="Arial Black" size="26.0" />
@@ -156,6 +198,8 @@
                               <Font name="Arial Black" size="26.0" />
                            </font>
                         </Label>
+=======
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
                      </children></AnchorPane>
               </content>
             </Tab>

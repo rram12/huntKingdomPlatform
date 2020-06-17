@@ -173,5 +173,10 @@ public class AddMoyenDeTransportController implements Initializable {
 
         return true;
     }
+    
+    public void goBack(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/MoyenDeTransport.fxml"));
+        mainpane.getChildren().setAll(pane);
+    }
 
 }

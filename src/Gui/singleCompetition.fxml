@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="260.0" style="-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SingleCompetitionController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="260.0" style="-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SingleCompetitionController">
    <children>
-      <GridPane layoutX="29.0" layoutY="45.0" prefHeight="271.0" prefWidth="200.0">
+      <GridPane layoutX="29.0" layoutY="30.0" prefHeight="174.0" prefWidth="200.0">
          <children>
             <Label prefHeight="98.0" prefWidth="100.0" text="Category :" textFill="RED" GridPane.rowIndex="1">
                <font>
@@ -28,7 +28,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="30.0" prefWidth="111.0" text="Participants :" textFill="RED" GridPane.rowIndex="2">
+            <Label prefHeight="30.0" prefWidth="111.0" text="Places left:" textFill="RED" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
@@ -54,7 +54,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Separator layoutX="7.0" layoutY="334.0" prefHeight="1.0" prefWidth="210.0" />
-      <JFXButton fx:id="showBtn" layoutX="53.0" layoutY="343.0" prefHeight="38.0" prefWidth="119.0" ripplerFill="#463a1f" style="-fx-background-color: orange;" text="Consult" textFill="WHITE" />
+      <Separator layoutX="7.0" layoutY="219.0" prefHeight="0.0" prefWidth="247.0" />
+      <JFXButton fx:id="showBtn" layoutX="71.0" layoutY="228.0" prefHeight="38.0" prefWidth="119.0" ripplerFill="#463a1f" style="-fx-background-color: orange;" text="Consult" textFill="WHITE" />
    </children>
 </AnchorPane>

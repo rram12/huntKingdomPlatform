@@ -27,8 +27,26 @@ public class ParticipationService {
             String requete="INSERT INTO competition_user(competition_id,user_id) "
                     + "values(?,?)";
             PreparedStatement pst=cnx2.prepareStatement(requete);
-            pst.setInt(1, p.getUser_id());
-            pst.setInt(2, p.getCompetition_id());
+            pst.setInt(2, p.getUser_id());
+            pst.setInt(1, p.getCompetition_id());
+            
+          
+            pst.executeUpdate();
+            System.out.println("Participation added succesfully");
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+        
+    }
+    
+    public boolean annulerParticipation(Participation p){
+        try {
+            String requete="DELETE FROM competition_user WHERE competition_id=? AND user_id=? ";
+            PreparedStatement pst=cnx2.prepareStatement(requete);
+            pst.setInt(2, p.getUser_id());
+            pst.setInt(1, p.getCompetition_id());
             
           
             pst.executeUpdate();
@@ -43,6 +61,19 @@ public class ParticipationService {
     public void decrementerParticipants(int id){
         try {
             String requete = "UPDATE competition SET nbParticipants = nbParticipants -1  WHERE id = ?";
+               PreparedStatement pst = cnx2.prepareStatement(requete);
+            pst.setInt(1,id);   
+            pst.executeUpdate();
+            System.out.println("Number of participants updated succesfully ! ");
+        
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+    public void incrementerParticipants(int id){
+        try {
+            String requete = "UPDATE competition SET nbParticipants = nbParticipants +1  WHERE id = ?";
                PreparedStatement pst = cnx2.prepareStatement(requete);
             pst.setInt(1,id);   
             pst.executeUpdate();

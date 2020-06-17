@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.89" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddMoyenDeTransportController">
+<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.92" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddMoyenDeTransportController">
    <children>
-      <TextField fx:id="listView" disable="true" layoutX="586.0" layoutY="431.0" prefHeight="25.0" prefWidth="150.0" visible="false">
+      <TextField fx:id="listView" disable="true" layoutX="490.0" layoutY="433.0" prefHeight="25.0" prefWidth="150.0" visible="false">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>
@@ -52,5 +52,6 @@
             <Font name="Arial Black" size="22.0" />
          </font>
       </Label>
+      <Button fx:id="back" layoutX="286.0" layoutY="528.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: white;" text="BACK" textAlignment="CENTER" textOverrun="CLIP" />
     </children>
 </AnchorPane>

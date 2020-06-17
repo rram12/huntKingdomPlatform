@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import static Controllers.AddPublicityController.showAlert;
 import Entities.Competition;
 import Services.CompetitionService;
 import Utils.MyConnection;
@@ -16,12 +17,19 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,6 +47,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -56,13 +65,13 @@ import javafx.util.Callback;
  * @author tibh
  */
 public class EventController implements Initializable {
-    
+
     @FXML
     private AnchorPane mainpane;
-    
+
     @FXML
     private TextField search;
-    
+
     @FXML
     private TableColumn<Competition, String> Categorie;
 
@@ -88,10 +97,9 @@ public class EventController implements Initializable {
 
     @FXML
     private TableView<Competition> table;
-     @FXML
+    @FXML
     private Button addCompetition;
-     
-     
+
     @FXML
     private TextField np;
 
@@ -102,26 +110,24 @@ public class EventController implements Initializable {
     private TextField lu;
 
     @FXML
-    private TextField es;
+    private DatePicker es;
 
     @FXML
-    private TextField dt;
+    private DatePicker dt;
 
     @FXML
     private ComboBox<String> cy;
-    ObservableList<String>list = FXCollections.observableArrayList("Hunting","Fishing");
+    ObservableList<String> list = FXCollections.observableArrayList("Hunting", "Fishing");
 
     @FXML
     private TextField nm;
     private int current_id;
 
-    MyConnection mc = MyConnection.getInstance();
     CompetitionService ps = new CompetitionService();
-    List<Competition> mylist = new ArrayList();
     public ObservableList<Competition> c = FXCollections.observableArrayList(
             ps.afficher()
     );
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         FilteredList<Competition> filteredData = new FilteredList<>(c, e -> true);
@@ -132,7 +138,7 @@ public class EventController implements Initializable {
                         return true;
                     }
                     String lower = newValue.toLowerCase();
-                    if (Competition.getLieu().toLowerCase().contains(lower)||Competition.getNom().toLowerCase().contains(lower)||String.valueOf(Competition.getNbParticipants()).contains(lower)) {
+                    if (Competition.getLieu().toLowerCase().contains(lower) || Competition.getNom().toLowerCase().contains(lower) || String.valueOf(Competition.getNbParticipants()).contains(lower)) {
                         return true;
                     }
 
@@ -143,13 +149,13 @@ public class EventController implements Initializable {
             sortedData.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(sortedData);
         });
-        
+
         cy.setItems(list);
 //        CompetitionService ps= new CompetitionService();
 //        ArrayList<Competition> c = new ArrayList<>();
 //        c=(ArrayList<Competition>) ps.afficher();
 //        ObservableList<Competition> obsl = FXCollections.observableArrayList(c);
-       
+
         table.setItems(c);
         Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         Categorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
@@ -158,7 +164,7 @@ public class EventController implements Initializable {
         Lieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
         nbParticipants.setCellValueFactory(new PropertyValueFactory<>("nbParticipants"));
         Nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
-        
+
         action.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Record, Boolean>, ObservableValue<Boolean>>() {
 
@@ -178,24 +184,30 @@ public class EventController implements Initializable {
             }
 
         });
-        
-        
+
         table.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN) {
                 Competition rowData = table.getSelectionModel().getSelectedItem();
                 /**
                  * fill the fields with the selected data *
                  */
-                
+
                 nm.setText(rowData.getNom());
-                dt.setText(rowData.getDateDebut().toString());
-                es.setText(rowData.getDateFin().toString());
+                
                 cy.setValue(rowData.getCategorie());
                 lu.setText(rowData.getLieu());
-                String nbPart=Integer.toString(rowData.getNbParticipants());
+                String nbPart = Integer.toString(rowData.getNbParticipants());
+                SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+                String date1 = format1.format(rowData.getDateDebut());
+                String date2 = format1.format(rowData.getDateFin());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate localDate1 = LocalDate.parse(date1, formatter);
+                LocalDate localDate2 = LocalDate.parse(date2, formatter);
+                dt.setValue(localDate1);
+                    es.setValue(localDate2);
                 np.setText(nbPart);
                 current_id = rowData.getId();
-                 edit.setVisible(true);
+                edit.setVisible(true);
 
             }
         });
@@ -211,20 +223,28 @@ public class EventController implements Initializable {
                      * fill the fields with the selected data *
                      */
                     nm.setText(rowData.getNom());
-                dt.setText(rowData.getDateDebut().toString());
-                es.setText(rowData.getDateFin().toString());
-                cy.setValue(rowData.getCategorie());
-                lu.setText(rowData.getLieu());
-                String nbPart=Integer.toString(rowData.getNbParticipants());
-                np.setText(nbPart);
-                current_id = rowData.getId();
-                 edit.setVisible(true);
+                    
+                    cy.setValue(rowData.getCategorie());
+                    lu.setText(rowData.getLieu());
+                    String nbPart = Integer.toString(rowData.getNbParticipants());
+                    np.setText(nbPart);
+                    SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+                String date1 = format1.format(rowData.getDateDebut());
+                String date2 = format1.format(rowData.getDateFin());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate localDate1 = LocalDate.parse(date1, formatter);
+                LocalDate localDate2 = LocalDate.parse(date2, formatter);
+                dt.setValue(localDate1);
+                    es.setValue(localDate2);
+                    current_id = rowData.getId();
+                    edit.setVisible(true);
                 }
             });
             return row;
         });
-    }    
-      public void goToAdd(ActionEvent event) throws IOException {
+    }
+
+    public void goToAdd(ActionEvent event) throws IOException {
 //          Stage primaryStage = new Stage();
 //          Parent root = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
 //           Scene scene = new Scene(root);
@@ -233,29 +253,32 @@ public class EventController implements Initializable {
 //           primaryStage.show();
 //            Stage stage = (Stage) addCompetition.getScene().getWindow();
 //        stage.close();
-          AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addCompetition.fxml"));
-          mainpane.getChildren().setAll(pane);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/addCompetition.fxml"));
+        mainpane.getChildren().setAll(pane);
     }
 
-      public void updateCompetition(ActionEvent event) {
-          MyConnection mc = MyConnection.getInstance();
-        CompetitionService ps = new CompetitionService();
-        Date dateD=Date.valueOf(dt.getText());
-        Date dateF=Date.valueOf(es.getText());
-        Competition p = new Competition(current_id, cy.getValue(), nm.getText(), lu.getText(), parseInt(np.getText()),dateD,dateF);
-        ps.updateCompetition(p);
-        /**
-         * refreshing the table view *
-         */
-        
-         c.clear();
-        c = FXCollections.observableArrayList(
-                ps.afficher()
-        );
-        table.setItems(c);
+    public void updateCompetition(ActionEvent event) throws IOException, ParseException {
+        if (validateFields()) {
+            CompetitionService ps = new CompetitionService();
+            Competition p = new Competition(current_id, cy.getValue(), nm.getText(), lu.getText(), parseInt(np.getText()), java.sql.Date.valueOf(dt.getValue().toString()), java.sql.Date.valueOf(es.getValue().toString()));
 
-    } 
-          private class ButtonCell extends TableCell<Disposer.Record, Boolean> {
+            if (ps.updateCompetition(p)) {
+                showAlert(Alert.AlertType.INFORMATION, "Competition", null, "Competition succesfully updated ");
+
+            }
+            /**
+             * refreshing the table view *
+             */
+
+            c.clear();
+            c = FXCollections.observableArrayList(
+                    ps.afficher()
+            );
+            table.setItems(c);
+        }
+    }
+
+    private class ButtonCell extends TableCell<Disposer.Record, Boolean> {
 
         final Button cellButton = new Button("Delete");
 
@@ -282,11 +305,9 @@ public class EventController implements Initializable {
                         //MyConnection mc = MyConnection.getInstance();
                         CompetitionService ps = new CompetitionService();
                         ps.deleteCompetition(currentComp.getId());
-         
-                        
 
-                  }
-                    
+                    }
+
                 }
             });
         }
@@ -302,9 +323,59 @@ public class EventController implements Initializable {
             }
         }
     }
-      
 
-      
-    }    
-    
+    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
 
+    }
+
+    private boolean validateFields() throws ParseException {
+
+        if (nm.getText().isEmpty() || cy.getValue().isEmpty()
+                || lu.getText().isEmpty() || np.getText().isEmpty()) {
+            if (nm.getText().isEmpty()) {
+                nm.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (cy.getValue().isEmpty()) {
+                cy.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (lu.getText().isEmpty()) {
+                lu.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            if (np.getText().isEmpty()) {
+                np.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            }
+            showAlert(Alert.AlertType.ERROR, "Invalid data", "Verify your fields", "Please Fill all the fields !");
+            return false;
+        }
+        if (!Pattern.matches("^\\d{1,2}$", np.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify The remaining places field!");
+            np.requestFocus();
+            np.selectEnd();
+            np.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            return false;
+        }
+        if (!Pattern.matches("^([a-zA-Z])[a-zA-Z_-]*[\\w_-]*[\\S]$|^([a-zA-Z])[0-9_-]*[\\S]$|^[a-zA-Z]*[\\S]$", nm.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Name ! ");
+            nm.requestFocus();
+            nm.selectEnd();
+            nm.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            return false;
+        }
+        if (!Pattern.matches("^([a-zA-Z ÉéèÈêÊôÔ']*)$", lu.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Address ! ");
+            lu.requestFocus();
+            lu.selectEnd();
+            lu.setStyle("-fx-border-color: red; -fx-background-color: white;");
+            return false;
+        }
+
+        return true;
+
+    }
+
+}

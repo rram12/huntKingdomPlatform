@@ -53,7 +53,7 @@ public class SingleHebergementController implements Initializable {
     void getInfo(Hebergement h){
         labelNbRooms.setText(h.getAdresse());
         labelCapacity.setText(Integer.toString(h.getCapacite()));
-        labelPricePerDay.setText(Float.toString(h.getPrixParJour()));
+        labelPricePerDay.setText(Float.toString(h.getPrixParJour())+"dt");
         Heb = h;
         try {
             Image image = new Image(new FileInputStream(h.getImage()));

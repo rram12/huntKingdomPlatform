@@ -67,13 +67,6 @@ public class AddPublicityController implements Initializable {
     @FXML
     private DatePicker dpE;
 
-    MyConnection mc = MyConnection.getInstance();
-    PublicityService ps = new PublicityService();
-    List<Publicity> mylist = new ArrayList();
-    public ObservableList<Publicity> pub = FXCollections.observableArrayList(
-            ps.afficher()
-    );
-
     /**
      * Initializes the controller class.
      */
@@ -84,7 +77,8 @@ public class AddPublicityController implements Initializable {
 
     private void copyFile(File file) {
         try {
-            File dest = new File("C:\\Users\\User\\Desktop\\integration 2\\huntkingdom\\src\\Uploads\\" + file.getName()); //any location
+            String DynamicPath =System.getProperty("user.dir");
+            File dest = new File(DynamicPath+"\\src\\Uploads\\"+ file.getName()); //any location
             Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             System.out.println(ex);
@@ -114,22 +108,14 @@ public class AddPublicityController implements Initializable {
     public void AddPublicity(ActionEvent event) throws IOException, ParseException {
 
         if (validateFields()) {
-            MyConnection mc = MyConnection.getInstance();
             PublicityService ps = new PublicityService();
-            LocalDate dPub = dpS.getValue();
-            LocalDate dPubli = dpE.getValue();
             float price = Float.parseFloat(prix.getText());
             Publicity p = new Publicity(java.sql.Date.valueOf(dpS.getValue().toString()), java.sql.Date.valueOf(dpE.getValue().toString()), compagnie.getText(), titre.getText(), price, descriptionn.getText(), absolutePath);
           
                if(ps.addPublicity(p)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Publicity");
-                alert.setHeaderText(null);
-                alert.setContentText("Publicity succesfully added ");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.INFORMATION, "Publicity", null, "Publicity succesfully added ");
+
             }
-            pub.clear();
-            pub = FXCollections.observableArrayList(ps.afficher());
         }
 
     }
@@ -191,11 +177,11 @@ public class AddPublicityController implements Initializable {
             return false;
         } 
 
-           if (!Pattern.matches("^[\\p{L} .'-]+$", titre.getText())) {
-               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field title ! ");
-                titre.requestFocus();
-                titre.selectEnd();
-                titre.setStyle("-fx-border-color: red; -fx-background-color: white;");
+           if (!Pattern.matches("(www\\.)?([^\\.]+)\\.(\\w{2}|(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum))$", compagnie.getText())) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Company ! ");
+                compagnie.requestFocus();
+                compagnie.selectEnd();
+                compagnie.setStyle("-fx-border-color: red; -fx-background-color: white;");
                 return false;
             }
             if (!Pattern.matches("^[0-9]*\\.?[0-9]+$", prix.getText())) {
@@ -205,6 +191,22 @@ public class AddPublicityController implements Initializable {
                 prix.setStyle("-fx-border-color: red; -fx-background-color: white;");
                 return false;
             }
+              if (!Pattern.matches("^[\\p{L} .'-]+$", titre.getText())) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field title ! ");
+                titre.requestFocus();
+                titre.selectEnd();
+                titre.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+                if (descriptionn.getText().length()<10) {
+               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Description must have more than 10 caracters ! ");
+                descriptionn.requestFocus();
+                descriptionn.selectEnd();
+                descriptionn.setStyle("-fx-border-color: red; -fx-background-color: white;");
+                return false;
+            }
+            
+            
             
 
         return true;

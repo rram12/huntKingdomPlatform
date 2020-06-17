@@ -437,6 +437,10 @@ public class ReparationController implements Initializable {
         return true;
     }
 
+  
+  
+    
+
     @FXML
     void addPiece(ActionEvent event) {
         if (validateFields()) {
@@ -632,6 +636,7 @@ public class ReparationController implements Initializable {
                             Stage stage = (Stage) payBtn.getScene().getWindow();
                             // do what you have to do
 
+                            
                             Stage primaryStage = new Stage();
                             Parent root = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
                             Scene scene = new Scene(root);

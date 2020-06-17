@@ -5,6 +5,8 @@
  */
 package Utils;
 
+import Entities.Hebergement;
+import Entities.MoyenDeTransport;
 import Entities.User;
 
 /**
@@ -13,4 +15,6 @@ import Entities.User;
  */
 public class Session {
     public static User current_user=null;
+    public static Hebergement current_hebergement=null;
+    public static MoyenDeTransport current_moyenDeTransport=null;
 }

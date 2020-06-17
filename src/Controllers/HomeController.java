@@ -89,6 +89,10 @@ public class HomeController implements Initializable {
     @FXML
     private Button btnreparation;
     @FXML
+    private Button next;
+    @FXML
+    private Button previous;
+    @FXML
     private AnchorPane mainPane;
     @FXML
     private ImageView img;
@@ -171,9 +175,7 @@ public class HomeController implements Initializable {
 
             Pane root = loader.load(getClass().getResource("/Gui/AffichageHomePublicity.fxml").openStream());
             AffichageHomePublicityController single = (AffichageHomePublicityController) loader.getController();
-            single.getInfo(trans.get(i));
-            int id1 = single.getCurrentId();
-            Publicity m = trans.get(i);
+            single.getInfo(trans.get(i)); 
 
             nodes[i] = root;
             pane.getChildren().add(nodes[i]);
@@ -220,6 +222,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Animals.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
@@ -236,6 +240,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/consultCompetition.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
@@ -258,6 +264,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ProductsFront.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
@@ -272,7 +280,9 @@ public class HomeController implements Initializable {
         btnreparation.setStyle("-fx-background-color:transparent");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
         mainPane.getChildren().setAll(pane);
-        this.pane.setVisible(false);
+        this.pane.setVisible(true);
+        this.next.setVisible(true);
+        this.previous.setVisible(true);
     }
 
     @FXML
@@ -288,6 +298,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ServiceFront.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
@@ -308,11 +320,15 @@ public class HomeController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Training.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
+            this.next.setVisible(false);
+        this.previous.setVisible(false);
         } else if ((role.equals("TRAINER") == true)) {
             
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
+            this.next.setVisible(false);
+        this.previous.setVisible(false);
         }
     }
 
@@ -329,6 +345,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparation.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
@@ -344,6 +362,8 @@ public class HomeController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Reparateur.fxml"));
         mainpane.getChildren().setAll(pane);
         this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     private void loadSplashScreen() {
