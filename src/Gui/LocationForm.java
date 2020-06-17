@@ -9,6 +9,7 @@ import java.util.Date;
 import Entities.Location;
 import Entities.MoyenDeTransport;
 import Entities.Reservation;
+import Entities.User;
 import Services.LocationService;
 import com.codename1.components.FloatingHint;
 import com.codename1.components.ImageViewer;
@@ -159,7 +160,7 @@ public class LocationForm extends BaseForm {
                 if (validateFields(Days, tfArrival, ls)) {
                     try {
 
-                        Location t = new Location(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), 3, M.getId());
+                        Location t = new Location(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), User.getInstace(0,"","","","",0).getId(), M.getId());
 //                        System.out.println(t);
                         if (LocationService.getInstance().addLocation(t)) {
                             Dialog.show("Success", "Rent successfully Made", new Command("OK"));

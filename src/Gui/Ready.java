@@ -21,6 +21,7 @@ package Gui;
 import Entities.PiecesDefectueuses;
 import Entities.Repairer;
 import Entities.Reparation;
+import Entities.User;
 import Services.PieceService;
 import Utils.Statics;
 import com.codename1.components.ImageViewer;
@@ -31,14 +32,17 @@ import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
@@ -64,18 +68,19 @@ import java.util.Map;
  * @author Shai Almog
  */
 public class Ready extends BaseForm {
+
     Resources res;
-    public Ready(Resources res1,String id) {
+
+    public Ready(Resources res1, String id) {
         super("ReadyPiece", BoxLayout.y());
         res = res1;
-        
-        
+
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        getContentPane().setScrollVisible(false);
-        super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Form previous = Display.getInstance().getCurrent();
+        tb.setBackCommand("", e -> previous.showBack());
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -89,17 +94,14 @@ public class Ready extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("Ready Piece"))
+                                        new Label(""))
                         )
                 )
         ));
 
         Reparation r = PieceService.getInstance().listyourReparation(id);
-         
-         
-       
-            add(addItem(r));
-        
+
+        add(addItem(r));
 
     }
 
@@ -119,38 +121,58 @@ public class Ready extends BaseForm {
         Label des = new Label("Description: " + c.getDescription());
         Label lidRep = new Label(Integer.toString(c.getId()));
         Label lidPiece = new Label(Integer.toString(c.getPiecesdefectueuses_id()));
+        TextArea ta = new TextArea();
+        ta.setUIID("TextFieldBlack");
+        ta.setHint("SMS Message content..");
         lidRep.setHidden(true);
         lidPiece.setHidden(true);
         Container c3 = new Container(new BoxLayout(BoxLayout.X_AXIS));
         Button FisnishBtn = new Button("Finish");
-        FisnishBtn.addActionListener(e->{
-          System.out.println("Reparation : "+c);
-              PieceService.getInstance().DeleteReparation(lidRep.getText(),lidPiece.getText());
-              PieceService.getInstance().sendMail("khalil.tourabi10@gmail.com");
-            new ListYourPieces(res).show();
-           //new Payment(res,c).show();
+        FisnishBtn.addActionListener(e -> {
+            
+                System.out.println("Reparation : " + c);
+                PieceService.getInstance().DeleteReparation(lidRep.getText(), lidPiece.getText());
+                 PieceService.getInstance().sendMail(User.getInstace(0, "", "", "", "", 0).getEmail());
+                Dialog.show("ok", "reparation is finished !\nPlease check your email ", new Command("OK"));
+                /////////////
+                if(!ta.getText().isEmpty())
+                try {
+                    Repairer r = PieceService.getInstance().getRepairer(c.getUserId());
+                Display.getInstance().sendSMS("+216"+Integer.toString(r.getPhone()), ta.getText());
+                 } catch (IOException ex) {
+                     System.out.println("error sms : "+ex.getMessage());
+            }
+                /////////////
+                new ListYourPieces(res).show();
+           
         });
         Button RepairerBtn = new Button("repairer details");
-         RepairerBtn.addActionListener(e->{
-                    System.out.println("Reparation : "+c);
-                  Repairer r =  PieceService.getInstance().getRepairer(c.getUserId());
-                Dialog.show("Contact","First name : "+r.getFirstName()+"\n Last name  : "+r.getLastName()+"\nEmail : "+r.getEmail()+"\nPhone number : "+r.getPhone(), "OK", "Cancel");
+        RepairerBtn.addActionListener(e -> {
+            System.out.println("Reparation : " + c);
+            Repairer r = PieceService.getInstance().getRepairer(c.getUserId());
+            Dialog.show("Contact", "First name : " + r.getFirstName() + "\n Last name  : " + r.getLastName() + "\nEmail : " + r.getEmail() + "\nPhone number : " + r.getPhone(), new Command("Cancel"));
 
         });
-      
 
+       
         c2.add(lprix);
         c2.add(des);
         c2.add(lidRep);
         c2.add(lidPiece);
+        c2.add(ta);
         c3.add(FisnishBtn);
         c3.add(RepairerBtn);
         
+
         //c1.add(img);
         c1.add(c2);
         c2.add(c3);
         refreshTheme();
         return c1;
     }
-
+private void addStringValue(String s, Component v) {
+        add(BorderLayout.west(new Label(s, "PaddedLabel")).
+                add(BorderLayout.CENTER, v));
+        add(createLineSeparator(0xeeeeee));
+    }
 }

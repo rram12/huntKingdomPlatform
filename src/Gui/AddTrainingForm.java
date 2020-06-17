@@ -13,6 +13,7 @@ import Services.AnimalService;
 import Services.ProduitService;
 import Services.TrainingService;
 import Services.UserService;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.SOUTH;
@@ -22,11 +23,16 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 import java.util.ArrayList;
@@ -50,7 +56,7 @@ public class AddTrainingForm extends BaseForm{
        String TrainingDate="";
     
      public AddTrainingForm(Resources res) {
-        super("Add Training", new BorderLayout());
+        super("AddTraining", BoxLayout.y());
         
          Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -61,9 +67,32 @@ public class AddTrainingForm extends BaseForm{
         super.addSideMenu(res);
 
         this.setScrollableY(true);
-        this.setLayout(new BorderLayout());
+            
+          Image img = res.getImage("bg-2.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
 
-        Container content = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(""))
+                        )
+                )
+        ));
+
+        
+        
+        
+        
+        
+        
         
          List<Animal> lb = AnimalService.getInstance().getAllAnimals();
          for (Animal a : lb) {
@@ -82,20 +111,21 @@ public class AddTrainingForm extends BaseForm{
         Label l5 = new Label("Place : ");
         Label l6 = new Label("Animals : ");
         Label l7 = new Label("Products : ");
-          content.setScrollableY(true);
+         // content.setScrollableY(true);
 
         Button submit = new Button("Add");
         FontImage.setMaterialIcon(submit, FontImage.MATERIAL_DONE);
       
           
-        content.add(l1).add(categorie);
-        content.add(l2).add(nbHeures);
-        content.add(l3).add(dateEnt);
-        content.add(l4).add(prix);
-        content.add(l5).add(lieu);
-        content.add(l6).add(animal);
-        content.add(l7).add(produit);
-        
+        add(l1).add(categorie);
+        add(l2).add(nbHeures);
+        add(l3).add(dateEnt);
+        add(l4).add(prix);
+        add(l5).add(lieu);
+        add(l6).add(animal);
+        add(l7).add(produit);
+        add(submit);
+
         dateEnt.setType(Display.PICKER_TYPE_DATE);
         dateEnt.setDate(new Date());
         dateEnt.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
@@ -121,17 +151,16 @@ public class AddTrainingForm extends BaseForm{
                 
                 Entrainement b = new Entrainement(categorie.getSelectedItem(),Integer.parseInt(nbHeures.getText()),TrainingDate,Double.valueOf(prix.getText()),lieu.getSelectedItem(),user,a.getId(),p.getId(),"encours");
                 Entrainement EntrainementAjoutee = TrainingService.getInstance().add(b);
-                
+                if(EntrainementAjoutee!=null)
+                {
                Dialog.show("ok", "Training added !", "OK", "Cancel");
-              
-
                 new ListTrainingForm(res).show();
+                }
              }
             
         });
-
-        this.add(CENTER, content);
-        this.add(SOUTH, submit);
+       // add(content);
+        
      
 
 
@@ -171,14 +200,7 @@ public class AddTrainingForm extends BaseForm{
     }
       private int RecupereUser()
       {
-      User u =User.getInstace("dhbjd");
-                 System.out.println("User connecte: "+u.getUsername());
-                 ArrayList<User> lu = UserService.getInstance().getUserConnected(u.getUsername());
-         User user = lu.get(0);
-         System.out.println("User bkollou :"+user);
-         System.out.println("Id user : "+user.getId());
-         return user.getId();
-      
+       return User.getInstace(0,"","","","",0).getId();
       }
     
 }

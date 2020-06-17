@@ -68,14 +68,14 @@ Resources res;
     Image imgs;
     ImageViewer imgv;
     public ListDefective(Resources res1) {
-        super("ListPieces", BoxLayout.y());
+      //  super("ListPieces", BoxLayout.y());
         res = res1;
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
         getContentPane().setScrollVisible(false);
         super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -83,18 +83,17 @@ Resources res;
         ScaleImageLabel sl = new ScaleImageLabel(img);
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-
        
           add(LayeredLayout.encloseIn(
                 sl,
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
                             FlowLayout.encloseCenter(
-                                new Label("List all defective pieces"))
+                                new Label(""))
                     )
                 )
         ));
-
+        setTitle("ListPieces");
          List<PiecesDefectueuses> pieces = PieceService.getInstance().listAll();
          System.out.println("pieces : "+pieces); 
          
@@ -125,7 +124,6 @@ Resources res;
         if(imgs.getHeight() > Display.getInstance().getDisplayHeight() / 5) {
             imgs = imgs.scaledHeight(Display.getInstance().getDisplayHeight() / 5);
         }
-  
        
         ScaleImageLabel sl = new ScaleImageLabel(imgs);
         sl.setUIID("BottomPad");

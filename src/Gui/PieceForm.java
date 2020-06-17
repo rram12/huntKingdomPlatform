@@ -20,12 +20,17 @@
 package Gui;
 
 import Entities.PiecesDefectueuses;
+import Entities.User;
 import Services.PieceService;
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Log;
+import com.codename1.io.Util;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
@@ -46,9 +51,11 @@ import com.codename1.ui.list.MultiList;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * The user profile form
@@ -57,9 +64,10 @@ import java.util.Map;
  */
 public class PieceForm extends BaseForm {
 private String absolute_path;
-
+ String GlobalPath = "";
+    String GlobalExtension = "";
     public PieceForm(Resources res) {
-        super("AddPiece", BoxLayout.y());
+       super("", BoxLayout.y());
       
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -72,7 +80,7 @@ private String absolute_path;
         
         
        
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -87,11 +95,11 @@ private String absolute_path;
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
                             FlowLayout.encloseCenter(
-                                new Label("Add your defective piece"))
+                                new Label(""))
                     )
                 )
         ));
-
+        setTitle("AddPiece");
         TextField nom = new TextField("");
         nom.setUIID("TextFieldBlack");
         addStringValue("Name", nom);
@@ -104,6 +112,44 @@ private String absolute_path;
         TextField description = new TextField("");
         description.setUIID("TextFieldBlack");
         addStringValue("Decription", description);
+       /* Label limport = new Label("no file selected");
+        Button upload = new Button("Choose Image..");
+        
+        upload.addPointerPressedListener((ei)->{
+            if (FileChooser.isAvailable()) {
+                FileChooser.showOpenDialog(".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg", e2-> {
+                    String file = (String)e2.getSource();
+                    if (file == null) {
+                        System.out.println("No file was selected");
+                    } else {
+                        String extension = null;
+                        if (file.lastIndexOf(".") > 0) {
+                            extension = file.substring(file.lastIndexOf(".")+1);
+                        }
+                        if ("txt".equals(extension)) {
+                            FileSystemStorage fs = FileSystemStorage.getInstance();
+                            try {
+                                InputStream fis = fs.openInputStream(file);
+                                System.out.println(Util.readToString(fis));
+                            } catch (Exception ex) {
+                                Log.e(ex);
+                            }
+                        } else {
+                            //moveFile(file,)
+                            String path = file.substring(7);
+                            System.out.println("Selected file :"+file.substring(40)+"\n"+"path :"+path);
+                            limport.setText("file imported");
+                            limport.getAllStyles().setFgColor(0x69E781);
+                            
+                            GlobalPath=path;
+                            GlobalExtension=file.substring(file.lastIndexOf(".")+1);
+                        }
+                    }
+                });
+            }
+        });
+        */
+        
         Button ChooseBtn = new Button("Choose Image");
         ChooseBtn.addActionListener(e->{
         Display.getInstance().openGallery(new ActionListener() {
@@ -113,7 +159,7 @@ private String absolute_path;
                      absolute_path = (String) ev.getSource();
                     int fileNameIndex = absolute_path.lastIndexOf("/") + 1;
                     String fileName = absolute_path.substring(fileNameIndex);
-                    System.out.println("absolute_path : "+absolute_path);
+                    System.out.println("fileName : "+fileName);
                     Image img = null;
                     try {
                         img = Image.createImage(FileSystemStorage.getInstance().openInputStream(absolute_path));
@@ -127,32 +173,43 @@ private String absolute_path;
         });
         
         
-      /* TextField image = new TextField("image");
-        image.setUIID("TextFieldBlack");
-        addStringValue("Image", image);*/
+     
         
        Button bt = new Button("add");
        
          bt.addActionListener(e->{
              if(validateFields(nom,description)){
-            PiecesDefectueuses p = new PiecesDefectueuses(nom.getText(), combo.getSelectedItem(), description.getText(), absolute_path,3);
-           if( PieceService.getInstance().addPiece(p)){
-               Dialog.show("ok", "Piece added !", "OK", "Cancel");
-               System.out.println("Piece added ! ");
+           /*  int subname = 18;
+            Random rand = new Random();
+            int upperbound = 7483647;
+            int int_random = rand.nextInt(upperbound);
+            String Fullname = "MobileGenerated_"+subname+"_"+int_random+"."+GlobalExtension;
+            System.out.println(Fullname);*/
+          // boolean moving = moveFile(GlobalPath,"C:\\wamp\\www\\HuntKingdom\\web\\uploads\\photos\\"+Fullname);
+          //  System.out.println("moved? :"+moving);
+          String logoPath = "32ee29789ebac5d68c11228b3e6e6889.png";
+            PiecesDefectueuses p = new PiecesDefectueuses(nom.getText(), combo.getSelectedItem(), description.getText(), logoPath,User.getInstace(0,"","","","",0).getId());
+          if(!PieceService.getInstance().exists(p)){
+            if( PieceService.getInstance().addPiece(p)){
+               Dialog.show("OK", "Piece added !", new Command("OK"));
            }
+            }else{
+              Dialog.show("Error", "Piece exists !", new Command("OK"));
+                }
            }
-              
-             
         });
-       addStringValue("Image :",ChooseBtn);
+     //  addStringValue("Image :",ChooseBtn);
+       // addStringValue("",limport);
+       // addStringValue("",upload);
+        addStringValue("",ChooseBtn);
         addStringValue("",bt);
         
         
         
     }
     private boolean validateFields(TextField nom,TextField description){
-    if(nom.getText().isEmpty()||description.getText().isEmpty()||absolute_path==null){
-    Dialog.show("Error", "Please fill all the fields !", "OK", "Cancel");
+    if(nom.getText().isEmpty()||description.getText().isEmpty()){
+    Dialog.show("Error", "Please fill all the fields !",new Command("OK"));
     return false;
     }
     return true;}
@@ -162,6 +219,12 @@ private String absolute_path;
                 add(BorderLayout.CENTER, v));
         add(createLineSeparator(0xeeeeee));
     }
-    
+   /*   public boolean moveFile(String sourcePath, String targetPath) {
+        //File fileToMove = new File(sourcePath);
+        File fileToMove=new File(sourcePath);
+        boolean ftm=fileToMove.renameTo(new File(targetPath));
+         System.out.println("source: "+sourcePath+" Target: "+targetPath);
+        return ftm;
+    }*/
     
 }

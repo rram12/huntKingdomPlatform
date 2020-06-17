@@ -32,12 +32,14 @@ import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -74,13 +76,13 @@ public class InProgress extends BaseForm {
     public InProgress(Resources res1, String id) {
         super("InProgress", BoxLayout.y());
         res = res1;
-
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        getContentPane().setScrollVisible(false);
-        super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Form previous = Display.getInstance().getCurrent();
+        tb.setBackCommand("", e -> previous.showBack());
+
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -94,7 +96,7 @@ public class InProgress extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("InProgress Piece"))
+                                        new Label(""))
                         )
                 )
         ));
@@ -127,43 +129,55 @@ public class InProgress extends BaseForm {
         lidRep.setHidden(true);
         lidPiece.setHidden(true);
         Container c3 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        Button FisnishBtn = new Button("Show Progress Details");
-        FisnishBtn.addActionListener(e -> {
+        Button ProgressBtn = new Button("ProgressDetails");
+        ProgressBtn.addActionListener(e -> {
             System.out.println("Reparation : " + c);
             DateCustom d = PieceService.getInstance().ShowProgress(c.getPiecesdefectueuses_id());
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String strDate = dateFormat.format(c.getDateFin());
-            Dialog.show("Please wait until: " + strDate, "years: " + d.getYears() + "\nMonths  : " + d.getMonths() + "\nDays : " + d.getDays() + "\nHours : " + d.getHours() + "\nMinutes : " + d.getMinutes(), "OK", "Cancel");
+            Dialog.show("Please wait until: " + strDate, "years: " + d.getYears() + "\nMonths  : " + d.getMonths() + "\nDays : " + d.getDays() + "\nHours : " + d.getHours() + "\nMinutes : " + d.getMinutes(), new Command("Cancel"));
 
         });
-        Button RepairerBtn = new Button("repairer details");
+        Button RepairerBtn = new Button("repairerDetails");
         RepairerBtn.addActionListener(e -> {
             System.out.println("Reparation : " + c);
             Repairer r = PieceService.getInstance().getRepairer(c.getUserId());
-            Dialog.show("Contact", "First name : " + r.getFirstName() + "\n Last name  : " + r.getLastName() + "\nEmail : " + r.getEmail() + "\nPhone number : " + r.getPhone(), "OK", "Cancel");
+            Dialog.show("Contact", "First name : " + r.getFirstName() + "\n Last name  : " + r.getLastName() + "\nEmail : " + r.getEmail() + "\nPhone number : " + r.getPhone(), new Command("Cancel"));
 
         });
-          Date now = new Date();
-            long debSec = c.getDateDebut().getTime() / (24 * 60 * 60 * 1000);
+        Date now = new Date();
+        long debSec = c.getDateDebut().getTime() / (24 * 60 * 60 * 1000);
 
-            long diff = c.getDateFin().getTime() - now.getTime();
-            
-            long nowSec = now.getTime() / (24 * 60 * 60 * 1000);
-            long finSec = c.getDateFin().getTime() / (24 * 60 * 60 * 1000);
-            long diffTotale = finSec-debSec;
-            int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-            
-            double taux = ((double) 100-(diffDays*100/diffTotale)  );
+        long diff = c.getDateFin().getTime() - now.getTime();
 
-            System.out.println("debDays : "+debSec+"\nnowDays : " + nowSec + "\nfinDays : " + finSec + "\ntaux : " + taux + "\ndiffTotale : " + diffTotale + "\ndiffDays : " + diffDays);
-        percentage.setText("progress percentage : "+Double.toString(taux)+"%");
+        long nowSec = now.getTime() / (24 * 60 * 60 * 1000);
+        long finSec = c.getDateFin().getTime() / (24 * 60 * 60 * 1000);
+        long diffTotale = finSec - debSec;
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+
+        double taux = ((double) 100 - (diffDays * 100 / diffTotale));
+
+        System.out.println("debDays : " + debSec + "\nnowDays : " + nowSec + "\nfinDays : " + finSec + "\ntaux : " + taux + "\ndiffTotale : " + diffTotale + "\ndiffDays : " + diffDays);
+        Button CancelBtn = new Button("Cancel");
+        CancelBtn.addActionListener(e -> {
+            long differenceDays = (now.getTime() - c.getDateDebut().getTime()) / (24 * 60 * 60 * 1000);
+            if (differenceDays > 7) {
+                Dialog.show("ERROR", "Sorry, you can't cancel this reparation any more.\n(7 days after reparation)", new Command("OK"));
+            } else {
+                PieceService.getInstance().DeleteReparation(Integer.toString(c.getId()), Integer.toString(c.getPiecesdefectueuses_id()));
+                new ListYourPieces(res).show();
+            }
+        });
+
+        percentage.setText("progress percentage : " + Double.toString(taux) + "%");
         c2.add(percentage);
         c2.add(lprix);
         c2.add(des);
         c2.add(lidRep);
         c2.add(lidPiece);
-        c3.add(FisnishBtn);
+        c3.add(ProgressBtn);
         c3.add(RepairerBtn);
+        c3.add(CancelBtn);
 
         //c1.add(img);
         c1.add(c2);

@@ -10,6 +10,7 @@ import Entities.Repairer;
 import Entities.PiecesDefectueuses;
 import Entities.Products;
 import Entities.Reparation;
+import Entities.User;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -40,6 +41,7 @@ public class PieceService {
     Repairer reparateur;
     DateCustom dateDiff;
     int count;
+    String reponseBool;
     ArrayList<Products> listProduits = new ArrayList<>();
 
     private PieceService() {
@@ -160,7 +162,7 @@ public class PieceService {
 
     public ArrayList<PiecesDefectueuses> listyourPieces() {
         ConnectionRequest con = new ConnectionRequest();
-        String constId = "3";
+        String constId = Integer.toString(User.getInstace(0,"","","","",0).getId());
         String url = Statics.BASE_URL1 + "reparation/api/list_your_defective/" + constId;
         con.setUrl(url);
         con.addResponseListener((NetworkEvent evt) -> {
@@ -412,5 +414,18 @@ public class PieceService {
         return produits;
 
     }
+       public boolean exists(PiecesDefectueuses p) {
+        
+        ConnectionRequest con = new ConnectionRequest();
+        String url = Statics.BASE_URL1 + "reparation/api/isExists?nom=" + p.getNom() + "&categorie=" + p.getCategorie() + "&description=" + p.getDescription() + "&image=" + p.getImage() + "&user=" + Integer.toString(p.getUserId());
+        con.setUrl(url);
+        con.addResponseListener((NetworkEvent evt) -> {
+            PieceService ser = new PieceService();
+            reponseBool = new String(con.getResponseData());
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return reponseBool.contains("exists");
+    }
+    
 
 }

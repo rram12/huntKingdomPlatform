@@ -10,6 +10,7 @@ import Entities.Location;
 import Entities.MoyenDeTransport;
 import Services.LocationService;
 import Entities.Reservation;
+import Entities.User;
 import Services.HebergementService;
 import Services.ReservationService;
 import Services.MoyenDeTransportService;
@@ -56,8 +57,8 @@ public class ServicesForm extends BaseForm {
 //    EncodedImage enc;
     public ServicesForm(Resources res) {
         super("Services", BoxLayout.y());
-        List<Reservation> rs = ReservationService.getInstance().getMyReservations(3);
-        List<Location> ls = LocationService.getInstance().getMyLocations(3);
+        List<Reservation> rs = ReservationService.getInstance().getMyReservations(User.getInstace(0,"","","","",0).getId());
+        List<Location> ls = LocationService.getInstance().getMyLocations(User.getInstace(0,"","","","",0).getId());
         List<MoyenDeTransport> lM = MoyenDeTransportService.getInstance().getAllTransports();
         List<Hebergement> lh = HebergementService.getInstance().getAllAccommodations();
         Calendar now = Calendar.getInstance();

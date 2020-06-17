@@ -9,6 +9,7 @@ import com.codename1.notifications.LocalNotification;
 import Entities.Hebergement;
 import Entities.Location;
 import Entities.Reservation;
+import Entities.User;
 import Services.HebergementService;
 import Services.ReservationService;
 import com.codename1.components.FloatingHint;
@@ -171,7 +172,7 @@ public class ReservationForm extends BaseForm {
                 if (validateFields(Days, tfArrival, rs)) {
                     try {
 
-                        Reservation t = new Reservation(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), 3, M.getId());
+                        Reservation t = new Reservation(Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate(), User.getInstace(0,"","","","",0).getId(), M.getId());
 //                        System.out.println(t);
                         if (ReservationService.getInstance().addReservation(t)) {
                             Dialog.show("Success", "Reservation successfully Made", new Command("OK"));

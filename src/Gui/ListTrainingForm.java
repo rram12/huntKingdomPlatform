@@ -13,18 +13,26 @@ import Services.AnimalService;
 import Services.TrainingService;
 import Services.UserService;
 import com.codename1.components.MultiButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.util.Resources;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +44,8 @@ import java.util.List;
 public class ListTrainingForm  extends BaseForm {
 
     public ListTrainingForm(Resources res)   {
-       
-        super("Trainings",new BorderLayout()); 
+               super("Trainings", BoxLayout.y());
+
          Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -45,6 +53,29 @@ public class ListTrainingForm  extends BaseForm {
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
+        Image img1 = res.getImage("bg-2.jpg");
+        if (img1.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img1 = img1.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+
+        ScaleImageLabel sl = new ScaleImageLabel(img1);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(""))
+                        )
+                )
+        ));
+        
+        
+        
+        
+        
         int user = RecupereUser();
         List<Entrainement> lb = TrainingService.getInstance().getAllTrainingUser(user);
      
@@ -61,15 +92,15 @@ public class ListTrainingForm  extends BaseForm {
                 
                   if(e.getAnimalId()==4)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/lieujaune1.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/lieujaune2.jpg";
                   }
                   if(e.getAnimalId()==1)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/ours_noir.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/ours_noir2.jpg";
                   }
                   if(e.getAnimalId()==3)
                   {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/smallgeme1.jpg";
+                      url ="http://localhost/HuntKingdom/web/uploads/photos/smallgeme2.jpg";
                   }
                   
                   
@@ -82,6 +113,7 @@ public class ListTrainingForm  extends BaseForm {
                      mb.setUIID("ListItem");  
                      mb.setTextLine2(e.getLieu());
                      mb.setTextLine3(e.getDateEnt());
+                     mb.setTextLine4("Accept : "+e.getAccepter());
                      
                      
                      Button bouton2 = new Button("Delete");
@@ -90,6 +122,7 @@ public class ListTrainingForm  extends BaseForm {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     TrainingService.getInstance().DeleteT(e);
+                     Dialog.show("OK", "training deleted successfully ! ", new Command("OK"));
                     new ListTrainingForm(res).show();
 
                 }
@@ -102,7 +135,7 @@ public class ListTrainingForm  extends BaseForm {
                       entrainements.add(FlowLayout.encloseCenter(bouton2));
              }
             
-            this.add(CENTER, entrainements);
+            this.add(entrainements);
            
              
         } else {
@@ -110,16 +143,9 @@ public class ListTrainingForm  extends BaseForm {
         
         }
         }
-    private int RecupereUser()
+     private int RecupereUser()
       {
-      User u =User.getInstace("dhbjd");
-                 System.out.println("User connecte: "+u.getUsername());
-                 ArrayList<User> lu = UserService.getInstance().getUserConnected(u.getUsername());
-         User user = lu.get(0);
-         System.out.println("User bkollou :"+user);
-         System.out.println("Id user : "+user.getId());
-         return user.getId();
-      
+       return User.getInstace(0,"","","","",0).getId();
       }
             
 }

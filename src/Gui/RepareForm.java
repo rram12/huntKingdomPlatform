@@ -21,12 +21,14 @@ package Gui;
 
 import Entities.PiecesDefectueuses;
 import Entities.Reparation;
+import Entities.User;
 import Services.PieceService;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
@@ -78,7 +80,7 @@ public class RepareForm extends BaseForm {
 
         super.addSideMenu(res);
 
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -92,7 +94,7 @@ public class RepareForm extends BaseForm {
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
                                 FlowLayout.encloseCenter(
-                                        new Label("Add your defective piece"))
+                                        new Label(""))
                         )
                 )
         ));
@@ -107,7 +109,7 @@ public class RepareForm extends BaseForm {
         Picker dateTimePicker = new Picker();
         dateTimePicker.setType(Display.PICKER_TYPE_DATE_AND_TIME);
         dateTimePicker.setDate(null);
-        addStringValue("Finish date", dateTimePicker);
+        addStringValue("Estimated finish date", dateTimePicker);
 
         Button bt = new Button("Repare");
         /* SimpleDateFormat  formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
@@ -115,12 +117,10 @@ public class RepareForm extends BaseForm {
 
         bt.addActionListener(e -> {
             if (validateFields(prix, description, dateTimePicker)) {
-                Reparation r = new Reparation(new Date(),(Date) dateTimePicker.getValue(), Double.parseDouble(prix.getText()), description.getText(), 16, Integer.parseInt(id));
-
+                Reparation r = new Reparation(new Date(),(Date) dateTimePicker.getValue(), Double.parseDouble(prix.getText()), description.getText(), User.getInstace(0,"","","","",0).getId(), Integer.parseInt(id));
                 if (PieceService.getInstance().repare(r)) {
-                    Dialog.show("ok", "Piece repared ! ", "OK", "Cancel");
-                     new ListProductInPromotion(res).show();
-                    System.out.println("Piece repared ! ");
+                    Dialog.show("ok", "Piece repared ! ", new Command("OK"));
+                     new ListDefective(res).show();
                 }
             }
         });
@@ -130,7 +130,7 @@ public class RepareForm extends BaseForm {
 
     private boolean validateFields(TextField prix, TextField description, Picker dateTimePicker) {
         if (prix.getText().isEmpty() || description.getText().isEmpty() || dateTimePicker.getDate() == null) {
-            Dialog.show("Error", "Please fill all the fields !", "OK", "Cancel");
+            Dialog.show("Error", "Please fill all the fields !", new Command("OK"));
             return false;
         }
         Date d1 = new Date();
@@ -140,14 +140,14 @@ public class RepareForm extends BaseForm {
                     now.setTime(d1);
                     debut.setTime(d2);
                     if (debut.before(now)||debut.equals(now)) {
-                        Dialog.show("Invalid date", "Oups !!\nPlease check the End date of reparation\n(must be after the current date)!", "OK", "Cancel");
+                        Dialog.show("Invalid date", "Oups !!\nPlease check the End date of reparation\n(must be after the current date)!",new Command("OK"));
                         return false;
          }
                     
         try {
             double d = Double.parseDouble(prix.getText());
         } catch (NumberFormatException nfe) {
-            Dialog.show("Error", "Price must be numeric !", "OK", "Cancel");
+            Dialog.show("Error", "Price must be numeric !", new Command("OK"));
             return false;
         }
         return true;

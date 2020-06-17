@@ -76,7 +76,7 @@ Resources res;
         getTitleArea().setUIID("Container");
         getContentPane().setScrollVisible(false);
         super.addSideMenu(res);
-        Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("bg-2.jpg");
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
@@ -91,7 +91,7 @@ Resources res;
                 BorderLayout.south(
                     GridLayout.encloseIn(3, 
                             FlowLayout.encloseCenter(
-                                new Label("ListProductInPromotion"))
+                                new Label(""))
                     )
                 )
         ));

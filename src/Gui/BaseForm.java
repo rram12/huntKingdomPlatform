@@ -40,7 +40,6 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseForm extends Form {
-
     public BaseForm() {
     }
 
@@ -85,28 +84,39 @@ public class BaseForm extends Form {
                         new Label(res.getImage("logosite.png"), "PictureWhiteBackgrond"))
         ));
         
-tb.addMaterialCommandToSideMenu("Services", FontImage.MATERIAL_APARTMENT, e -> new ServicesForm(res).show());
-        tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
-        tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
-        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
-        tb.addMaterialCommandToSideMenu("reparation", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
-         User u =User.getInstace("dhbjd");
-        if(u.getUsername().equals("khaled"))
+        tb.addMaterialCommandToSideMenu("Services", FontImage.MATERIAL_APARTMENT, e -> new ServicesForm(res).show());
+      
+         User u =User.getInstace(0,"","","","",0);
+        if(User.getInstace(0,"","","","",0).getRoles().contains("ROLE_CLIENT"))
         {
         tb.addMaterialCommandToSideMenu("Add Training", FontImage.MATERIAL_ADD, e -> new AddTrainingForm(res).show());
         tb.addMaterialCommandToSideMenu("Training", FontImage.MATERIAL_BOOK, e -> new ListTrainingForm(res).show());
         tb.addMaterialCommandToSideMenu("ListAnimal", FontImage.MATERIAL_ALBUM, e -> new ListAnimalClient(res).show());
-        
         }
-        else 
+        else if(User.getInstace(0,"","","","",0).getRoles().contains("ROLE_TRAINER"))
         {
-        tb.addMaterialCommandToSideMenu("ListAnimal", FontImage.MATERIAL_ALBUM, e -> new ListAnimalForm(res).show());
+        tb.addMaterialCommandToSideMenu("ListAnimalTrainer", FontImage.MATERIAL_ALBUM, e -> new ListAnimalForm(res).show());
         tb.addMaterialCommandToSideMenu("ListTrainer", FontImage.MATERIAL_BOOK, e -> new ListTrainer(res).show());
         }
-        tb.addMaterialCommandToSideMenu("List defective Parts", FontImage.MATERIAL_ALBUM, e -> new ListDefective(res).show());
-        tb.addMaterialCommandToSideMenu("List your pieces", FontImage.MATERIAL_ALBUM, e -> new ListYourPieces(res).show());
-        tb.addMaterialCommandToSideMenu("reparation", FontImage.MATERIAL_ADD, e -> new PieceForm(res).show());
-        tb.addMaterialCommandToSideMenu("List Product in Promotion", FontImage.MATERIAL_ALBUM, e -> new ListProductInPromotion(res).show());
         
+        
+        
+        if(User.getInstace(0,"","","","",0).getRoles().contains("ROLE_REPAIRER"))
+        tb.addMaterialCommandToSideMenu("List defective Parts", FontImage.MATERIAL_ALBUM, e -> new ListDefective(res).show());
+        
+      
+       
+        tb.addMaterialCommandToSideMenu("List your pieces", FontImage.MATERIAL_ALBUM, e -> new ListYourPieces(res).show());
+        tb.addMaterialCommandToSideMenu("Add Piece", FontImage.MATERIAL_ADD, e -> new PieceForm(res).show());
+        tb.addMaterialCommandToSideMenu("List All Products", FontImage.MATERIAL_ALBUM, e -> new ListProducts(res).show());
+        tb.addMaterialCommandToSideMenu("List Product in Promotion", FontImage.MATERIAL_ALBUM, e -> new ListProductInPromotion(res).show());
+    
+        
+        
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e ->{
+         User.getInstace(0,"","","","",0).cleanUserSession();
+         new SignInForm(res).show();
+        });
+    
     }
 }
