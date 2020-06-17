@@ -7,15 +7,18 @@ package Gui;
 
 import Entities.Competition;
 import Services.CompetitionService;
-import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
-import static com.codename1.ui.Component.CENTER;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -63,29 +66,96 @@ public class ConsultandParticipate extends BaseForm{
                 )
         ));
         Competitions.setScrollableY(true);
+         Container List = new Container();
         if (lh != null) {
              for (Competition h : lh) {
                  
-                     Container C1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));               
-                     MultiButton mb = new MultiButton(h.getNom());
-                     mb.setUIID("ListItem");
-                     Button btnConsult = new Button("Consult");
-                   
-                     mb.setTextLine3(h.getCategorie());
-                      //mb.add(LEFT, img);
-                     Competitions.add(FlowLayout.encloseCenter(mb));
-                     btnConsult.addActionListener(e -> new ParticipateForm(h,res).show());
-                     C1.add(btnConsult);
-                     Competitions.add(FlowLayout.encloseCenter(C1));
+//                     Container C1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));               
+//                     MultiButton mb = new MultiButton(h.getNom());
+//                     mb.setUIID("ListItem");
+//                     Button btnConsult = new Button("Consult");
+//                   
+//                     mb.setTextLine3(h.getCategorie());
+//                      //mb.add(LEFT, img);
+//                     Competitions.add(FlowLayout.encloseCenter(mb));
+//                     btnConsult.addActionListener(e -> new ParticipateForm(h,res).show());
+//                     C1.add(btnConsult);
+//                     Competitions.add(FlowLayout.encloseCenter(C1));
+              addButton1(res,List, h);
 
                  }
-             
-            this.add( Competitions);
              
         } else {
             System.out.println("ma7abech yekhdem");
         
         }
+                tb.addSearchCommand(e -> {
+            String text = (String) e.getSource();
+                if (text == null || text.length() == 0) {
+                    // clear search
+                    List.removeAll();
+
+                if (lh != null) {
+                    for (Competition h : lh) {
+                        addButton1(res, List, h);
+                        System.out.println(h);
+                    }
+                } else {
+                    System.out.println("No Accommodations available\nPlease Try later !! ");
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n     for new Accommodations   !! ");
+
+                }
+                refreshTheme();
+                } else {
+                    List.removeAll();
+                    text = text.toLowerCase();
+        List<Competition> sh = CompetitionService.getInstance().getSearched(text);
+                if (sh != null) {
+                    for (Competition h : sh) {
+                        addButton1(res, List, h);
+                        System.out.println(h);
+                    }
+                } else {
+                    System.out.println("No Accommodations available\nPlease Try later !! ");
+                    List.add("\n\n\tNo Accommodations available\n\tPlease feel free to check later \n     for new Accommodations   !! ");
+
+                }
+                refreshTheme();
+                }
+
+        });
+         add(LayeredLayout.encloseIn(List));
      }
+             private void addButton1(Resources res, Container List, Competition mdt) {
+                Image img;
+                if(mdt.getCategorie().toLowerCase().equals("fishing"))
+                {img= res.getImage("c700x420.jpg");}
+                else
+                {
+                   img= res.getImage("images.jpg"); 
+                }
+
+        int height = Display.getInstance().convertToPixels(11.5f);
+        int width = Display.getInstance().convertToPixels(14f);
+        Button image = new Button(img.fill(width, height));
+        image.setUIID("Label");
+        Container cnt = BorderLayout.west(image);
+        TextField ta = new TextField(mdt.getNom());
+        ta.setUIID("PopupDialogTitle");
+        ta.setEditable(false);
+        Button btnConsult = new Button("Consult");
+       
+        btnConsult.addActionListener(e -> new ParticipateForm(mdt,res).show());
+                image.addPointerPressedListener((ActionListener) (ActionEvent evt)
+                        -> Dialog.show("Competition", "Category: " + mdt.getCategorie()+ "\nLieu: " + mdt.getLieu()+ "\nParticipants: " + mdt.getNbParticipants()+ "\nStarts: " + mdt.getDateDebut()+ "\nEnds: " + mdt.getDateFin()+"\nName: " + mdt.getNom()+  "Dt", new Command("OK")));
+
+        cnt.add(BorderLayout.CENTER,
+                BoxLayout.encloseY(
+                        ta
+                ));
+        cnt.add(BorderLayout.EAST,BoxLayout.encloseY(btnConsult));
+        List.add(cnt);
+        
+    }
     
 }

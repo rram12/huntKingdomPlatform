@@ -71,7 +71,6 @@ public class AddCompetitionForm extends BaseForm{
                         )
                 )
         ));
-        List<Participation> lh = ParticipationService.getInstance().getAllParticipations(8);
         Label nom = new Label("Name");
         TextField tNom= new TextField("", "Name..");
         Label categorie = new Label("Category");
@@ -81,16 +80,12 @@ public class AddCompetitionForm extends BaseForm{
         Label participant = new Label("Participant");
         TextField tParticipant= new TextField("", "participant..");
         Label likes = new Label(" From: ");
-        TextField start = new TextField("", "Debute date", 20, TextField.ANY);
-        start.setEditable(false);
         Picker tfArrival = new Picker();
         tfArrival.setText("Debute date");
         tfArrival.setType(Display.PICKER_TYPE_DATE);
         tfArrival.setDate(new Date());
         tfArrival.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
         Label comments = new Label(" To: " );
-        TextField end = new TextField("", "End date", 20, TextField.ANY);
-        end.setEditable(false);
         Picker tEnd = new Picker();
         tEnd.setText("End date");
         tEnd.setType(Display.PICKER_TYPE_DATE);
@@ -161,15 +156,6 @@ public class AddCompetitionForm extends BaseForm{
                         return false;
                             
                         }
-                        
-                    
-                    
-//        try {
-//            int p = Integer.parseInt(participants.getText());
-//        } catch (NumberFormatException nfe) {
-//            Dialog.show("Error", " must be numeric !", "OK", "Cancel");
-//            return false;
-//        }
         return true;
     }
     }

@@ -292,3 +292,4 @@ public class NewsfeedForm extends BaseForm {
         });
     }
 }
+
