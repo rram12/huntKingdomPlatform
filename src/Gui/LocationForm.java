@@ -164,7 +164,7 @@ public class LocationForm extends BaseForm {
 //                        System.out.println(t);
                         if (LocationService.getInstance().addLocation(t)) {
                             Dialog.show("Success", "Rent successfully Made", new Command("OK"));
-                            previous.showBack();
+                            new ServicesForm(res).show();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
@@ -225,24 +225,4 @@ public class LocationForm extends BaseForm {
         }
         return inActiveDate;
     }
-//    public Date currentDate() {
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(this.date);
-//        Date date = c.getTime();
-//
-//        java.text.SimpleDateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd");
-//
-//        String date1 = format1.format(date);
-//
-//        Date inActiveDate = null;
-//
-//        try {
-//
-//            inActiveDate = format1.parse(date1);
-//
-//        } catch (ParseException e1) {
-//
-//        }
-//        return inActiveDate;
-//    }
 }

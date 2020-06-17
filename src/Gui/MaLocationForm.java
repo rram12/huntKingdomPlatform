@@ -10,6 +10,7 @@ import Entities.MoyenDeTransport;
 import Entities.Reservation;
 import Services.LocationService;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
@@ -70,7 +71,7 @@ public class MaLocationForm extends BaseForm {
 //        tfArrival.setType(Display.PICKER_TYPE_DATE);
         tfArrival.setDate(r.Arrivaldate());
 //        tfArrival.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
-        Label oups =new Label("You cannot update your Rent due to delay constraints ");
+        SpanLabel oups =new SpanLabel("You cannot update your Rent due to delay constraints ", "Title");
         Label lMark = new Label("Make Your Rent");
         Label lDays = new Label("Days");
         Label lCategory = new Label("Category:");
@@ -211,8 +212,8 @@ public class MaLocationForm extends BaseForm {
                         Location t = new Location(r.getId(),Integer.parseInt(Days.getText()), Float.parseFloat(Days.getText()) * M.getPrixParJour(), tfArrival.getDate());
 //                        System.out.println(t);
                         if (LocationService.getInstance().modifyLocation(t)) {
-                            Dialog.show("Success", "Rent successfully modified", new Command("OK"));
-                            previous.showBack();
+                            Dialog.show("Success", "Rent successfully updated", new Command("OK"));
+                            new ServicesForm(res).show();
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }

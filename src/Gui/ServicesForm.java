@@ -53,8 +53,6 @@ import java.util.List;
  * @author ASUS1
  */
 public class ServicesForm extends BaseForm {
-
-//    EncodedImage enc;
     public ServicesForm(Resources res) {
         super("Services", BoxLayout.y());
         List<Reservation> rs = ReservationService.getInstance().getMyReservations(User.getInstace(0,"","","","",0).getId());
@@ -136,9 +134,6 @@ public class ServicesForm extends BaseForm {
         accommodations.setSelected(true);
         arrow.setVisible(false);
         Container List = new Container();
-//        Image imgs = res.getImage("bg1.jpg");
-//        getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-//        getAllStyles().setBgImage(imgs);
         if (lh != null) {
             for (Hebergement h : lh) {
                 addButton(res, List, h);
@@ -256,12 +251,6 @@ public class ServicesForm extends BaseForm {
                     System.out.println("No Means of Transport available\nPlease Try later !! ");
 
                 }
-//                List.add(BoxLayout.encloseY(new Label("\t\t!!Newest!!")));
-//                List.add(BoxLayout.encloseY(NewReserv));
-//                List.add(BoxLayout.encloseY(NewLocat));
-//                List.add(BoxLayout.encloseY(new Label("\t\t!!Recent!!")));
-//                List.add(BoxLayout.encloseY(OldReserv));
-//                List.add(BoxLayout.encloseY(OldLocat));
                 refreshTheme();
             }
         });
@@ -352,25 +341,15 @@ public class ServicesForm extends BaseForm {
         String url = "http://localhost/HuntKingdom/web/uploads/" + h.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
-//        if (img.getHeight() < size) {
-//            System.out.println("height asgher");
-//            img = img.scaledHeight(size);
-//        }
-        Label likes = new Label(h.getNbChambre() + " Rooms ");
-        likes.getAllStyles().setFgColor(0xFFFFFF, true);
+        Label likes = new Label(h.getNbChambre() + " Rooms ", "CommandFocus");
         Style heartStyle = new Style(likes.getUnselectedStyle());
         heartStyle.setFgColor(0xff2d55);
         FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_NEW_RELEASES, heartStyle);
         likes.setIcon(heartImage);
         likes.setTextPosition(RIGHT);
 
-        Label comments = new Label(h.getCapacite() + " People Max");
-        comments.getAllStyles().setFgColor(0xFFFFFF, true);
+        Label comments = new Label(h.getCapacite() + " People Max", "CommandFocus");
         FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
-//        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-//            System.out.println("akber ");
-//            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
-//        }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
         image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FIT);
@@ -382,7 +361,7 @@ public class ServicesForm extends BaseForm {
                         overlay,
                         BorderLayout.south(
                                 BoxLayout.encloseY(
-                                        new SpanLabel(h.getAdresse(), "LargeWhiteText"),
+                                        new SpanLabel(h.getAdresse(), "CommandFocus"),
                                         FlowLayout.encloseIn(likes, comments),
                                         spacer
                                 )
@@ -397,23 +376,15 @@ public class ServicesForm extends BaseForm {
         String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
-//        if (img.getHeight() < size) {
-//            img = img.scaledHeight(size);
-//        }
-        Label likes = new Label(mdt.getType() + " ");
-        likes.getAllStyles().setFgColor(0xFFFFFF, true);
+        Label likes = new Label(mdt.getType() + " ", "CommandFocus");
         Style heartStyle = new Style(likes.getUnselectedStyle());
         heartStyle.setFgColor(0xff2d55);
         FontImage heartImage = FontImage.createMaterial(FontImage.MATERIAL_RECOMMEND, heartStyle);
         likes.setIcon(heartImage);
         likes.setTextPosition(RIGHT);
 
-        Label comments = new Label(mdt.getCategorie());
-        comments.getAllStyles().setFgColor(0xFFFFFF, true);
+        Label comments = new Label(mdt.getCategorie(), "CommandFocus");
         FontImage.setMaterialIcon(comments, FontImage.MATERIAL_CHAT);
-//        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-//            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
-//        }
         ScaleImageLabel image = new ScaleImageLabel(img);
         image.setUIID("Container");
         image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FIT);
@@ -425,7 +396,7 @@ public class ServicesForm extends BaseForm {
                         overlay,
                         BorderLayout.south(
                                 BoxLayout.encloseY(
-                                        new SpanLabel(mdt.getMarque(), "LargeWhiteText"),
+                                        new SpanLabel(mdt.getMarque(), "CommandFocus"),
                                         FlowLayout.encloseIn(likes, comments),
                                         spacer
                                 )
@@ -452,8 +423,6 @@ public class ServicesForm extends BaseForm {
         Label likes = new Label(" Rooms: " + h.getNbChambre());
         Label comments = new Label(" Capacity: " + h.getCapacite());
         Label price = new Label(" Price/Day: " + h.getPrixParJour() + "Dt");
-//        price.setTextPosition(LEFT);
-//        FontImage.setMaterialIcon(price, FontImage.MATERIAL_MONEY);
 
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(
@@ -511,8 +480,6 @@ public class ServicesForm extends BaseForm {
         Label likes = new Label(" From : " + r.Arrivaldate());
         Label comments = new Label(" To: " + r.finaldate());
         Label price = new Label(" For: " + r.getPrixTot() + "Dt");
-//        price.setTextPosition(LEFT);
-//        FontImage.setMaterialIcon(price, FontImage.MATERIAL_MONEY);
 
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(
@@ -540,8 +507,6 @@ public class ServicesForm extends BaseForm {
         Label likes = new Label(" From : " + l.Arrivaldate());
         Label comments = new Label(" To: " + l.finaldate());
         Label price = new Label(" For: " + l.getPrixTot() + "Dt");
-//        price.setTextPosition(LEFT);
-//        FontImage.setMaterialIcon(price, FontImage.MATERIAL_MONEY);
 
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(

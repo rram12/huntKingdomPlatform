@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package Gui;
 
 import Entities.User;
@@ -50,14 +49,13 @@ public class BaseForm extends Form {
     public BaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
-    
-    
+
     public Component createLineSeparator() {
         Label separator = new Label("", "WhiteSeparator");
         separator.setShowEvenIfBlank(true);
         return separator;
     }
-    
+
     public Component createLineSeparator(int color) {
         Label separator = new Label("", "WhiteSeparator");
         separator.getUnselectedStyle().setBgColor(color);
@@ -67,8 +65,7 @@ public class BaseForm extends Form {
     }
 
     protected void addSideMenu(Resources res) {
-        
-        
+
         Toolbar tb = getToolbar();
 //        Image img = res.getImage("profile-background.jpg");
 //        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
@@ -77,9 +74,8 @@ public class BaseForm extends Form {
 //        ScaleImageLabel sl = new ScaleImageLabel(img);
 //        sl.setUIID("BottomPad");
 //        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        
+
         tb.addComponentToSideMenu(LayeredLayout.encloseIn(
-                
                 FlowLayout.encloseCenterBottom(
                         new Label(res.getImage("logosite.png"), "PictureWhiteBackgrond"))
         ));
@@ -97,6 +93,25 @@ public class BaseForm extends Form {
         {
         tb.addMaterialCommandToSideMenu("ListAnimalTrainer", FontImage.MATERIAL_ALBUM, e -> new ListAnimalForm(res).show());
         tb.addMaterialCommandToSideMenu("ListTrainer", FontImage.MATERIAL_BOOK, e -> new ListTrainer(res).show());
+
+        tb.addMaterialCommandToSideMenu("Services", FontImage.MATERIAL_APARTMENT, e -> new ServicesForm(res).show());
+
+        if (User.getInstace(0, "", "", "", "", 0).getRoles().contains("ROLE_CLIENT")) {
+            tb.addMaterialCommandToSideMenu("Competitions", FontImage.MATERIAL_ADD, e -> new ConsultandParticipate(res).show());
+
+            tb.addMaterialCommandToSideMenu("Add Training", FontImage.MATERIAL_ADD, e -> new AddTrainingForm(res).show());
+            tb.addMaterialCommandToSideMenu("Training", FontImage.MATERIAL_BOOK, e -> new ListTrainingForm(res).show());
+            tb.addMaterialCommandToSideMenu("ListAnimal", FontImage.MATERIAL_ALBUM, e -> new ListAnimalClient(res).show());
+        } else if (User.getInstace(0, "", "", "", "", 0).getRoles().contains("ROLE_TRAINER")) {
+            tb.addMaterialCommandToSideMenu("Publicities", FontImage.MATERIAL_ALBUM, e -> new AffichagePublicity(res).show());
+            tb.addMaterialCommandToSideMenu("Competitions", FontImage.MATERIAL_ALBUM, e -> new AffichageCompetition(res).show());
+
+            tb.addMaterialCommandToSideMenu("ListAnimalTrainer", FontImage.MATERIAL_ALBUM, e -> new ListAnimalForm(res).show());
+            tb.addMaterialCommandToSideMenu("ListTrainer", FontImage.MATERIAL_BOOK, e -> new ListTrainer(res).show());
+        }
+
+        if (User.getInstace(0, "", "", "", "", 0).getRoles().contains("ROLE_REPAIRER")) {
+            tb.addMaterialCommandToSideMenu("Means Of Transport", FontImage.MATERIAL_ALBUM, e -> new ListTransportForm(res).show());
         }
         
         
@@ -106,11 +121,13 @@ public class BaseForm extends Form {
         
       
        
+
+        tb.addMaterialCommandToSideMenu("Competitions", FontImage.MATERIAL_ADD, e -> new ConsultandParticipate(res).show());
+
         tb.addMaterialCommandToSideMenu("List your pieces", FontImage.MATERIAL_ALBUM, e -> new ListYourPieces(res).show());
         tb.addMaterialCommandToSideMenu("Add Piece", FontImage.MATERIAL_ADD, e -> new PieceForm(res).show());
         tb.addMaterialCommandToSideMenu("List All Products", FontImage.MATERIAL_ALBUM, e -> new ListProducts(res).show());
         tb.addMaterialCommandToSideMenu("List Product in Promotion", FontImage.MATERIAL_ALBUM, e -> new ListProductInPromotion(res).show());
-    
         
         
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e ->{
@@ -118,5 +135,12 @@ public class BaseForm extends Form {
          new SignInForm(res).show();
         });
     
+
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            User.getInstace(0, "", "", "", "", 0).cleanUserSession();
+            new SignInForm(res).show();
+        });
+
     }
+}
 }
