@@ -540,19 +540,20 @@ String email = currentUser.getEmail() ;
     }
 
     @FXML
-    private void updateProfile(ActionEvent event) {
-//         FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateProfile.fxml"));
-//
-//            try {
-//                Parent root = loader.load();
-//                UpdateProfileController upc = loader.getController();
-//                menu.getScene().setRoot(root);
-//
-//            } catch (Exception ex) {
-//                System.err.println(ex.getMessage());
-//                System.err.println(ex.getCause());
-//                System.err.println(ex.getClass());
-//            }
+    private void updateProfile(ActionEvent event) throws IOException {
+        btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/UpdateProfile.fxml"));
+        mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML

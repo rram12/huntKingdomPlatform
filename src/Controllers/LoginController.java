@@ -140,7 +140,7 @@ public class LoginController implements Initializable {
         
         
         
-        User u = us.selectUserByEmail(txtusername.getText());
+         User u = us.selectUserByEmail(txtusername.getText());
         System.out.println(u);
         if (u.getId() == 0) {
             
@@ -321,17 +321,28 @@ public class LoginController implements Initializable {
 
     @FXML
     private void signUp(ActionEvent event) {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
+
+        
+        try {
+//            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
+//            mainPane.getChildren().setAll(pane);
+            
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/SignUp.fxml"));
 //
-//        try {
-//            Parent root = loader.load();
-//            SignUpController suc = loader.getController();
 //
-//            tfUsername.getScene().setRoot(root);
+//            try {
+                Parent root = loader.load();
+
+                txtusername.getScene().setRoot(root);
 //
-//        } catch (IOException ex) {
-//            System.err.println(ex.getMessage());
-//        }
+//            } catch (IOException ex) {
+//                System.err.println(ex.getMessage());
+//                System.err.println(ex.getCause());
+//                System.err.println(ex.getClass());
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
