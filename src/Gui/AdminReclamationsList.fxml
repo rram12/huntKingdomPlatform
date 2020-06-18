@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="768" prefWidth="1366" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminReclamationsListController">
+   <children>
+      <ImageView fx:id="bg" fitHeight="768.0" fitWidth="1366.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../res/images/hunting-and-fishing-wallpaper_2719072.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="4.0" layoutY="7.0" prefHeight="619.0" prefWidth="270.0">
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffffff40" height="618.0" stroke="WHITE" strokeType="INSIDE" width="254.0" />
+            <Label layoutX="13.0" prefHeight="20.0" prefWidth="90.0" text="Title">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="99.0" prefHeight="20.0" prefWidth="90.0" text="Description">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfTitle" layoutX="8.0" layoutY="33.0" prefHeight="25.0" prefWidth="240.0" promptText="Title" />
+            <TextArea fx:id="taDescription" layoutX="9.0" layoutY="137.0" prefHeight="200.0" prefWidth="240.0" promptText="Description" wrapText="true" />
+            <Label fx:id="lErrorTitle" layoutX="7.0" layoutY="69.0" prefHeight="17.0" prefWidth="240.0" />
+            <Label fx:id="lErrorDescription" layoutX="9.0" layoutY="348.0" prefHeight="17.0" prefWidth="240.0" />
+            <TextArea fx:id="taResponse" editable="false" layoutX="9.0" layoutY="419.0" prefHeight="200.0" prefWidth="240.0" promptText="Response" />
+            <Label layoutX="13.0" layoutY="378.0" prefHeight="20.0" prefWidth="90.0" text="Response">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="cbResponse" layoutX="88.0" layoutY="378.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="Respond to client" textAlignment="CENTER" textFill="ORANGE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <CheckBox fx:id="cbOnlyActiveRec" layoutX="750.0" layoutY="-62.0" mnemonicParsing="false" selected="true" text="Show Only Active Reclamations" />
+      <Label fx:id="lID" layoutX="147.0" layoutY="51.0" />
+      <HBox alignment="CENTER" layoutX="286.0" layoutY="584.0" prefHeight="100.0" prefWidth="960.0" spacing="50.0">
+         <children>
+            <Button fx:id="btHandle" mnemonicParsing="false" onAction="#handleRec" prefHeight="31.0" prefWidth="84.0" style="-fx-background-color: orange;" text="Handle" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+            <Button fx:id="btUpdate" mnemonicParsing="false" onAction="#updateRec" prefHeight="31.0" prefWidth="84.0" style="-fx-background-color: orange;" text="Update" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+            <Button fx:id="btDeleteRec" mnemonicParsing="false" onAction="#deleteRec" prefWidth="84.0" style="-fx-background-color: orange;" text="Delete" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+            <Button fx:id="btClear" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: orange;" text="Clear" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </opaqueInsets>
+      </HBox>
+      <ChoiceBox fx:id="cbCriteria" layoutX="101.0" layoutY="-65.0" prefWidth="150.0" />
+      <TextField fx:id="tfSearch" layoutX="278.0" layoutY="-65.0" prefHeight="25.0" prefWidth="187.0" promptText="Type to search" />
+      <Label layoutX="18.0" layoutY="-65.0" prefHeight="20.0" prefWidth="66.0" text="Criteria" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="cbCriteria1" layoutX="568.0" layoutY="-65.0" prefWidth="150.0" />
+      <Label layoutX="482.0" layoutY="-65.0" prefHeight="20.0" prefWidth="79.0" text="Order by" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Pagination fx:id="pagination" layoutX="268.0" layoutY="2.0" prefHeight="583.0" prefWidth="950.0" />
+      <TableView fx:id="table" focusTraversable="false" layoutX="285.0" layoutY="15.0" pickOnBounds="false" prefHeight="515.0" prefWidth="896.0" style="-fx-background-color: white;" />
+      <Button fx:id="btBack" layoutX="100.0" layoutY="702.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: transparent; -fx-border-color: black;" text="Back" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -62,6 +62,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
@@ -152,11 +153,15 @@ public class ReparationController implements Initializable {
 
     private String absolutePath = "";
     private Date dateDeb;
-    @FXML
-    private Pane listPane;
     private PiecesDefectueuses current_piece;
     ObservableList<String> list = FXCollections.observableArrayList("Hunting", "Fishing");
     ArrayList<PiecesDefectueuses> pieces = new ArrayList<>();
+    @FXML
+    private Button chooseBtn;
+    @FXML
+    private JFXButton addBtn;
+    @FXML
+    private Label lDateDebut1;
 
     public ReparationController() {
         PieceService ps = new PieceService();

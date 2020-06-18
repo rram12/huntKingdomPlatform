@@ -23,7 +23,7 @@
             <Image url="@../Uploads/2.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="mainpane" layoutX="293.0" layoutY="2.0" prefHeight="686.0" prefWidth="1075.0" />
+      <AnchorPane fx:id="mainpane" layoutX="293.0" layoutY="2.0" prefHeight="734.0" prefWidth="1075.0" />
       <VBox layoutX="14.0" layoutY="146.0" prefHeight="550.0" prefWidth="304.0">
          <children>
             <Button fx:id="btnhome" mnemonicParsing="false" onAction="#btnhomeAction" prefHeight="73.0" prefWidth="378.0" style="-fx-background-color: none;" text="Home" textFill="WHITE">
@@ -130,8 +130,8 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <ImageView fx:id="avatarUser" fitHeight="70.0" fitWidth="80.0" layoutX="1286.0" pickOnBounds="true" y="12.0" />
-      <MenuButton fx:id="menu" layoutX="1286.0" layoutY="82.0" maxWidth="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" scaleShape="false" text="ramm">
+      <ImageView fx:id="avatarUser" fitHeight="70.0" fitWidth="80.0" layoutX="1270.0" pickOnBounds="true" y="12.0" />
+      <MenuButton fx:id="menu" layoutX="1270.0" layoutY="82.0" maxWidth="80.0" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" scaleShape="false" style="-fx-background-color: orange; -fx-focus-traversable: black;" stylesheets="@../StyleSheets/menu.css" text="ramm">
          <items>
             <MenuItem fx:id="profile" mnemonicParsing="false" onAction="#updateProfile" text="Update profile" />
             <MenuItem fx:id="reclamation" mnemonicParsing="false" onAction="#reclamation" text="Reclamations" />

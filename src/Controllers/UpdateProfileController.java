@@ -174,9 +174,9 @@ public class UpdateProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
 
+//        HomeController.getInstance().getMainPane().setStyle("-fx-background-color:white");
+//        HomeController.getInstance().getMainPane().setOpacity(0.2);
         cbGender.getItems().add("Male");
         cbGender.getItems().add("Female");
         if (currentUser.getGender() == 1) {
@@ -206,8 +206,7 @@ public class UpdateProfileController implements Initializable {
 //        avatar1.setVisible(test);
 //        pdfPath.setVisible(test);
 
-  //      cbRole.setVisible(false);
-
+        //      cbRole.setVisible(false);
         tfAddress.setText(currentUser.getAddress());
         tfEmail.setText(currentUser.getEmail());
         tfFirstName.setText(currentUser.getFirstName());
@@ -269,7 +268,6 @@ public class UpdateProfileController implements Initializable {
 //                }
 //            }
 //        });
-
         btUpdate.setDisable(!fnRules || !lnRules || !emRules || !unRules || !pwRules || !rpwRules || !adRules || !pnRules);
 
         tfFirstName.textProperty().addListener(new ChangeListener<String>() {
@@ -402,7 +400,7 @@ public class UpdateProfileController implements Initializable {
                     lMatchedPw.setText("Passwords don't match");
                     rpwRules = false;
                 } else {
-                    lMatchedPw.setTextFill(Color.web("#1500ff"));
+                    lMatchedPw.setTextFill(Color.web("white"));
                     lMatchedPw.setText("Passwords match");
                     rpwRules = true;
                 }
@@ -417,7 +415,7 @@ public class UpdateProfileController implements Initializable {
                 if (!s2.isEmpty()) {
                     if (s2.equals(passwordField.getText())) {
                         lMatchedPw.setText("Passwords match");
-                        lMatchedPw.setTextFill(Color.web("#1500ff"));
+                        lMatchedPw.setTextFill(Color.web("white"));
                         rpwRules = true;
                     } else {
                         lMatchedPw.setTextFill(Color.web("#ff0000"));
@@ -515,14 +513,37 @@ public class UpdateProfileController implements Initializable {
 
             LoginController.getInstance().setLoggedUser(u);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+                HomeController.getInstance().setUpdatedUser(new Image(new FileInputStream("res\\uploadedImages\\" + u.getPicture())), u.getUsername());
+
+try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/Home.fxml"));
+
                 Parent root = loader.load();
-                HomeController sic = loader.getController();
 
                 tfAddress.getScene().setRoot(root);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+                System.err.println(ex.getCause());
+                System.err.println(ex.getClass());
             }
+
+//        this.pane.setVisible(true);
+//        this.next.setVisible(true);
+//        this.previous.setVisible(true);
+//            try {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+//                Parent root = loader.load();
+//                HomeController sic = loader.getController();
+//
+//                tfAddress.getScene().setRoot(root);
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else if (!BCrypt.checkpw(tfOldPw.getText(), currentUser.getPassword())) {
             notif.showError("Error!", "Please verify your password");
         }
@@ -576,7 +597,7 @@ public class UpdateProfileController implements Initializable {
         Matcher m = p.matcher(pw);
         result.set(3, m.find());
         if (m.find()) {
-            lSymbol.setTextFill(Color.web("#1500ff"));
+            lSymbol.setTextFill(Color.web("white"));
         } else {
             lSymbol.setTextFill(Color.web("#ff0000"));
         }
@@ -606,17 +627,17 @@ public class UpdateProfileController implements Initializable {
         }
 
         if (result.get(0)) {
-            lUpperCase.setTextFill(Color.web("#1500ff"));
+            lUpperCase.setTextFill(Color.web("white"));
         } else {
             lUpperCase.setTextFill(Color.web("#ff0000"));
         }
         if (result.get(1)) {
-            lLowerCase.setTextFill(Color.web("#1500ff"));
+            lLowerCase.setTextFill(Color.web("white"));
         } else {
             lLowerCase.setTextFill(Color.web("#ff0000"));
         }
         if (result.get(2)) {
-            lNumber.setTextFill(Color.web("#1500ff"));
+            lNumber.setTextFill(Color.web("white"));
         } else {
             lNumber.setTextFill(Color.web("#ff0000"));
         }
@@ -626,7 +647,7 @@ public class UpdateProfileController implements Initializable {
             lErrorPw.setText("short password");
         }
         if (pw.length() > 4) {
-            lErrorPw.setTextFill(Color.web("#1500ff"));
+            lErrorPw.setTextFill(Color.web("white"));
             lErrorPw.setText("good password");
         }
 
@@ -719,7 +740,6 @@ public class UpdateProfileController implements Initializable {
 //        }
 //
 //    }
-
     public String generateImageName(String location) {
 
         boolean test = true;

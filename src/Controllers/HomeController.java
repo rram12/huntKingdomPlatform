@@ -50,6 +50,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -77,10 +78,10 @@ public class HomeController implements Initializable {
     public static int test;
     @FXML
     private ImageView logoimg;
-    
+
     topNews tn = new topNews();
     UserService us = new UserService();
-    
+
     ArrayList topnews = new ArrayList();
     @FXML
     private MenuButton menu;
@@ -95,10 +96,25 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView avatarUser;
 
-    public HomeController() {
-        cnx = MyConnection.getInstance().getCnx();
-
+    public AnchorPane getMainPane() {
+        return mainpane;
     }
+
+    private static HomeController instance;
+
+    public HomeController() {
+        instance = this;
+    }
+
+    public static HomeController getInstance() {
+        return instance;
+    }
+
+    public void setUpdatedUser(Image img, String username) {
+        avatarUser.setImage(img);
+        menu.setText(username);
+    }
+
     @FXML
     private FontAwesomeIcon notif;
     @FXML
@@ -136,7 +152,7 @@ public class HomeController implements Initializable {
     private Label lTopNews;
     @FXML
     private Pane pMarquee;
-    
+
     @FXML
     private Pane pane;
     @FXML
@@ -148,9 +164,9 @@ public class HomeController implements Initializable {
     public ObservableList<Publicity> obsl = FXCollections.observableArrayList(trans);
     Node[] nodes = new Node[obsl.size()];
     int i = 0;
-    
+
     User currentUser = LoginController.getInstance().getLoggedUser();
-String email = currentUser.getEmail() ;
+    String email = currentUser.getEmail();
 
     /**
      * Initializes the controller class.
@@ -158,12 +174,12 @@ String email = currentUser.getEmail() ;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //         String role =  UserSession.getInstace("",0, "", "", "", 0).getRoles();
-        if(!currentUser.getRoles().contains("REPAIRER")){
-        btnreparateur.setVisible(false);
-        btnreparateur.setDisable(true);
+
+        if (!currentUser.getRoles().contains("REPAIRER")) {
+            btnreparateur.setVisible(false);
+            btnreparateur.setDisable(true);
         }
-        
-        
+
         if (!HuntKingdom.isSplasheded) {
             loadSplashScreen();
         }
@@ -205,50 +221,46 @@ String email = currentUser.getEmail() ;
 
             }
         });
-        
+
         Image imageAvatar;
         try {
-            imageAvatar = new Image(new FileInputStream("res\\uploadedImages\\"+currentUser.getPicture()));
-              avatarUser.setImage(imageAvatar);
-        avatarUser.setPreserveRatio(false);
-        
-        //System.out.println("uploadedImages/"+loggedUser.getPicture());
-        avatarUser.setFitHeight(60.0);
-        avatarUser.setFitWidth(80.0);
-        avatarUser.setY(12);
-        menu.setLayoutX(avatarUser.getLayoutX());
-        menu.setLayoutY(avatarUser.getLayoutY()+avatarUser.getFitHeight()+avatarUser.getY());
-        
-        //
-        
+            imageAvatar = new Image(new FileInputStream("res\\uploadedImages\\" + currentUser.getPicture()));
+            avatarUser.setImage(imageAvatar);
+            avatarUser.setPreserveRatio(false);
 
-        menu.setText(currentUser.getUsername());
+            //System.out.println("uploadedImages/"+loggedUser.getPicture());
+            avatarUser.setFitHeight(60.0);
+            avatarUser.setFitWidth(80.0);
+            avatarUser.setY(12);
+            menu.setLayoutX(avatarUser.getLayoutX());
+            menu.setLayoutY(avatarUser.getLayoutY() + avatarUser.getFitHeight() + avatarUser.getY());
+
+            //
+            menu.setText(currentUser.getUsername());
 //        menu.setText("z");
-        
+
 //        MenuItem viewProfile = new MenuItem("View profile");
 //        MenuItem reclamations = new MenuItem("Reclamations");
 //        MenuItem logout = new MenuItem("Log out");
-        
-        menu.resize(menu.getWidth(), 500);
-        
+            menu.resize(menu.getWidth(), 500);
+
 //        menu.getItems().add(viewProfile);
 //        menu.getItems().add(reclamations);
 //        menu.getItems().add(logout);
 //        
-     
         } catch (FileNotFoundException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        String news="";
+
+        String news = "";
         try {
-            topnews=tn.getTopNews();
-            for (Object  i : topnews) {
-                news+=i.toString();
-                news+="  ***  ";
-            
-        }news=news.substring(0, news.length()-6);
+            topnews = tn.getTopNews();
+            for (Object i : topnews) {
+                news += i.toString();
+                news += "  ***  ";
+
+            }
+            news = news.substring(0, news.length() - 6);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -259,17 +271,17 @@ String email = currentUser.getEmail() ;
         ft.setToValue(0);
         ft.setByValue(1);
         ft.play();
-        
+
         Marquee marquee = new Marquee(news);
-        marquee.setColor("black"); 
-        marquee.setStyle("-fx-font: bold 16 arial;"); 
-        marquee.setBoundsFrom(mainPane); 
+        marquee.setColor("black");
+        marquee.setStyle("-fx-font: bold 16 arial;");
+        marquee.setBoundsFrom(mainPane);
         marquee.moveDownBy(7);
-        marquee.setScrollDuration(60); 
-        
-        pMarquee.getChildren().add(marquee); 
+        marquee.setScrollDuration(60);
+
+        pMarquee.getChildren().add(marquee);
         marquee.run();
-        
+
     }
 
     private void displayPub(int i) {
@@ -279,7 +291,7 @@ String email = currentUser.getEmail() ;
 
             Pane root = loader.load(getClass().getResource("/Gui/AffichageHomePublicity.fxml").openStream());
             AffichageHomePublicityController single = (AffichageHomePublicityController) loader.getController();
-            single.getInfo(trans.get(i)); 
+            single.getInfo(trans.get(i));
 
             nodes[i] = root;
             pane.getChildren().add(nodes[i]);
@@ -350,12 +362,16 @@ String email = currentUser.getEmail() ;
 
     @FXML
     private void btnshopAction(ActionEvent event) throws IOException {
-        /*** delete ended reductions **/
+        /**
+         * * delete ended reductions *
+         */
         ProduitService ps = new ProduitService();
         ps.deletePromotionFini();
         PromotionService promos = new PromotionService();
         promos.supprimerPromotionFini();
-        /*****/
+        /**
+         * **
+         */
         btnanimals.setStyle("-fx-background-color:transparent");
         btnshop.setStyle("-fx-background-color:transparent;-fx-text-fill:#E38450");
         btnevents.setStyle("-fx-background-color:transparent");
@@ -425,14 +441,14 @@ String email = currentUser.getEmail() ;
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
             this.next.setVisible(false);
-        this.previous.setVisible(false);
+            this.previous.setVisible(false);
         } else if ((currentUser.getRoles().contains("TRAINER") == true)) {
-            
+
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/TrainingList.fxml"));
             mainpane.getChildren().setAll(pane);
             this.pane.setVisible(false);
             this.next.setVisible(false);
-        this.previous.setVisible(false);
+            this.previous.setVisible(false);
         }
     }
 
@@ -516,15 +532,14 @@ String email = currentUser.getEmail() ;
     private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
         ShowNotification notif = new ShowNotification();
         notif.show("Good bye", "See You Soon ");
- Stage stage = (Stage) btnLogout.getScene().getWindow();
-    // do what you have to do
-         LoginController.getInstance().setLoggedUser(new User());
-         
-         
+        Stage stage = (Stage) btnLogout.getScene().getWindow();
+        // do what you have to do
+        LoginController.getInstance().setLoggedUser(new User());
+
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
         Scene scene = new Scene(root);
-         scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
         primaryStage.setTitle("HuntKingdom");
         Image ico = new Image("Uploads/logo2.png");
         primaryStage.getIcons().add(ico);
@@ -533,10 +548,10 @@ String email = currentUser.getEmail() ;
         stage.close();
     }
 
-     void decrementReady(){
+    void decrementReady() {
         GlobJ--;
         labelNotif.setText(Integer.toString(GlobJ));
-         System.out.println("GlobJ : "+GlobJ);
+        System.out.println("GlobJ : " + GlobJ);
     }
 
     @FXML
@@ -557,8 +572,8 @@ String email = currentUser.getEmail() ;
     }
 
     @FXML
-    private void reclamation(ActionEvent event) {
-//         FXMLLoader loader = new FXMLLoader(getClass().getResource("ReclamationsList.fxml"));
+    private void reclamation(ActionEvent event) throws IOException {
+//         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/ReclamationsList.fxml"));
 //
 //            try {
 //                Parent root = loader.load();
@@ -568,18 +583,31 @@ String email = currentUser.getEmail() ;
 //            } catch (IOException ex) {
 //                System.err.println(ex.getMessage());
 //            }
+btnhome.setStyle("-fx-background-color:transparent");
+        btnreparateur.setStyle("-fx-background-color:transparent");
+        btnevents.setStyle("-fx-background-color:transparent");
+        btnanimals.setStyle("-fx-background-color:transparent");
+        btnreparation.setStyle("-fx-background-color:transparent");
+        btnshop.setStyle("-fx-background-color:transparent");
+        btntraining.setStyle("-fx-background-color:transparent");
+        btnservices.setStyle("-fx-background-color:transparent");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/ReclamationsList.fxml"));
+        mainpane.getChildren().setAll(pane);
+        this.pane.setVisible(false);
+        this.next.setVisible(false);
+        this.previous.setVisible(false);
     }
 
     @FXML
     private void logout(ActionEvent event) {
         try {
             ShowNotification notif = new ShowNotification();
-            notif.show("Good bye", "See You Soon ");
+            notif.show("Good bye", "See You Soon ");           
+            LoginController.getInstance().setLoggedUser(new User());
+
             Stage stage = (Stage) btnLogout.getScene().getWindow();
             // do what you have to do
-            LoginController.getInstance().setLoggedUser(new User());
-            
-            
+
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
             Scene scene = new Scene(root);
@@ -598,39 +626,38 @@ String email = currentUser.getEmail() ;
     @FXML
     private void desactivate(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-alert.setTitle("Account desactivation");
-alert.setContentText("Are you sure to desactivate your account ?");
- 
-Optional<ButtonType> result = alert.showAndWait();
- 
-if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-         us.deleteUser(currentUser.getId());
-                 LoginController.getInstance().setLoggedUser(new User());
+        alert.setTitle("Account desactivation");
+        alert.setContentText("Are you sure to desactivate your account ?");
 
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Login.fxml"));
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
             try {
-                Parent root = loader.load();
-                LoginController sic = loader.getController();
-                sic.setTextEmail(email);
-                menu.getScene().setRoot(root);
-
+                us.deleteUser(currentUser.getId());
+                LoginController.getInstance().setLoggedUser(new User());
+                
+                Stage stage = (Stage) btnLogout.getScene().getWindow();
+                // do what you have to do
+                
+                Stage primaryStage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/Gui/Login.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getResource("/Style/bootstrap3.css").toExternalForm());
+                primaryStage.setTitle("HuntKingdom");
+                Image ico = new Image("Uploads/logo2.png");
+                primaryStage.getIcons().add(ico);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+                stage.close();
+                ShowNotification notif = new ShowNotification();
+                notif.showInformation("Good bye", "Sorry to see you leave our family !");
             } catch (IOException ex) {
-                System.err.println(ex.getMessage());
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ShowNotification notif = new ShowNotification();
-            notif.showInformation("Good bye", "Sorry to see you leave our family !");
-            
-}else if((result.isPresent()) && (result.get() == ButtonType.CANCEL)) {
-    
-}
-        
-    }
-    }
-    
-    
-    
-    
-    
-    
 
+        } else if ((result.isPresent()) && (result.get() == ButtonType.CANCEL)) {
+
+        }
+
+    }
+}

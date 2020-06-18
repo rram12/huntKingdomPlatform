@@ -7,7 +7,9 @@ package Controllers;
 
 import Entities.Competition;
 import Services.CompetitionService;
+import Utils.GoogleMapsAPI;
 import Utils.MyConnection;
+import Utils.ReverseGeoCoding;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -19,12 +21,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebView;
 
 /**
  * FXML Controller class
@@ -53,27 +59,60 @@ public class AddCompetitionController implements Initializable {
 
     @FXML
     private TextField Nom;
+    
+        @FXML
+    private WebView mapView;
+    private String gouvernorat;
+    
+      GoogleMapsAPI gma;
+    ReverseGeoCoding rgc;
+    @FXML
+    private AnchorPane mainpane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+            gma = new GoogleMapsAPI(mapView);
+        rgc = new ReverseGeoCoding();
+        gma.initMap();
         Categorie.setItems(list);
     }    
+    @FXML
     public void AddCompetition(ActionEvent event) throws IOException, ParseException{
         
     if (validateFields()){
         
     CompetitionService ps = new CompetitionService();
     int nbPartic=Integer.parseInt(NbParticipants.getText());
-    Competition c = new Competition(Categorie.getValue(),Nom.getText(),Lieu.getText(),nbPartic,java.sql.Date.valueOf(dT.getValue().toString()),java.sql.Date.valueOf(dP.getValue().toString()));
+    Competition c = new Competition(Categorie.getValue(),Nom.getText(),gouvernorat,nbPartic,java.sql.Date.valueOf(dT.getValue().toString()),java.sql.Date.valueOf(dP.getValue().toString()));
      if(ps.addCompetition(c)) {
                 showAlert(Alert.AlertType.INFORMATION, "Competition", null, "Competition succesfully added ");
 
             }
+     //AdminHomeController.getInstance().btneventsAction(event);
+     AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Event.fxml"));
+        mainpane.getChildren().setAll(pane);
+
+
     }
     }
+    
+    @FXML
+    private void coordonneesSelected(MouseEvent event) {
+        System.out.println(String.valueOf(gma.getLatitude()));
+        System.out.println(String.valueOf(gma.getLongitude()));
+//        gouvernorat = rgc.getGouvernorat(String.valueOf(gma.getLatitude()), String.valueOf(gma.getLongitude()));
+        try {
+            gouvernorat = rgc.getGouvernorat(String.valueOf(gma.getLatitude()), String.valueOf(gma.getLongitude()));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        Lieu.setText(gouvernorat);
+        Lieu.setEditable(false);
+    }
+
         public static void showAlert(Alert.AlertType type, String title, String header, String text) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -139,13 +178,6 @@ public class AddCompetitionController implements Initializable {
                 Nom.requestFocus();
                 Nom.selectEnd();
                 Nom.setStyle("-fx-border-color: red; -fx-background-color: white;");
-                return false;
-            }
-                if (!Pattern.matches("^([a-zA-Z ÉéèÈêÊôÔ']*)$", Lieu.getText())) {
-               showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Address ! ");
-                Lieu.requestFocus();
-                Lieu.selectEnd();
-                Lieu.setStyle("-fx-border-color: red; -fx-background-color: white;");
                 return false;
             }
             

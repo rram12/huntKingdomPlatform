@@ -13,7 +13,7 @@
    <children>
       <GridPane layoutX="29.0" layoutY="30.0" prefHeight="174.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="98.0" prefWidth="100.0" text="Category :" textFill="RED" GridPane.rowIndex="1">
+            <Label prefHeight="98.0" prefWidth="100.0" text="Category :" textFill="CHOCOLATE" GridPane.rowIndex="1">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
@@ -28,12 +28,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="30.0" prefWidth="111.0" text="Places left:" textFill="RED" GridPane.rowIndex="2">
+            <Label prefHeight="30.0" prefWidth="111.0" text="Places left:" textFill="CHOCOLATE" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="25.0" prefWidth="100.0" text="Name :" textFill="RED">
+            <Label prefHeight="25.0" prefWidth="100.0" text="Name :" textFill="CHOCOLATE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>

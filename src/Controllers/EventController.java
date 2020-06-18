@@ -55,6 +55,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -239,6 +240,20 @@ public class EventController implements Initializable {
                     current_id = rowData.getId();
                     edit.setVisible(true);
                 }
+                final int index = row.getIndex();
+                        if (index > table.getItems().size()) {
+                            table.getSelectionModel().clearSelection();
+                            edit.setVisible(!true);
+                            np.clear();
+                            lu.clear();
+                            nm.clear();
+                            cy.setItems(list);
+                            
+                            
+                        }
+                   
+            
+        
             });
             return row;
         });
@@ -364,13 +379,6 @@ public class EventController implements Initializable {
             nm.requestFocus();
             nm.selectEnd();
             nm.setStyle("-fx-border-color: red; -fx-background-color: white;");
-            return false;
-        }
-        if (!Pattern.matches("^([a-zA-Z ÉéèÈêÊôÔ']*)$", lu.getText())) {
-            showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Verify the field Address ! ");
-            lu.requestFocus();
-            lu.selectEnd();
-            lu.setStyle("-fx-border-color: red; -fx-background-color: white;");
             return false;
         }
 

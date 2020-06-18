@@ -58,13 +58,12 @@ import org.controlsfx.control.textfield.TextFields;
  * @author tibh
  */
 public class LoginController implements Initializable {
-  
+
     @FXML
     private Button btnLogin;
     @FXML
     private ImageView imglogin;
-    
-    
+
     UserService us = new UserService();
     ShowNotification notif = new ShowNotification();
 
@@ -74,12 +73,11 @@ public class LoginController implements Initializable {
     private CheckBox cbRememberMe;
     @FXML
     private Button btSignUp;
-    
-    
+
     public LoginController() {
         instance = this;
     }
-    
+
     public static LoginController getInstance() {
         return instance;
     }
@@ -87,9 +85,11 @@ public class LoginController implements Initializable {
     public User getLoggedUser() {
         return loggedUser;
     }
+
     public void setLoggedUser(User u) {
-        this.loggedUser=u;
+        this.loggedUser = u;
     }
+
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -101,7 +101,7 @@ public class LoginController implements Initializable {
      * Initializes the controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         cbRememberMe.setSelected(true);
 
         BufferedReader br;
@@ -130,38 +130,32 @@ public class LoginController implements Initializable {
             System.out.println(ex.getMessage());
         }
         TextFields.bindAutoCompletion(txtusername, allEmails);
-        
-        
 
     }
 
     @FXML
     private void btnLoginAction(ActionEvent event) {
-        
-        
-        
-         User u = us.selectUserByEmail(txtusername.getText());
+
+        User u = us.selectUserByEmail(txtusername.getText());
         System.out.println(u);
         if (u.getId() == 0) {
-            
+
             notif.showError("Not existing account!", "Not existing account! Please verify the entred credentials ! ");
-            
+
             System.out.println("email wrong");
         } else if (BCrypt.checkpw(txtpassword.getText(), u.getPassword()) && u.getConfirmed() == 1) {
-            
-            
-            
-        notif.show("Welcome back", "It's good to see you again "+u.getUsername());
+
+            notif.show("Welcome back", "It's good to see you again " + u.getUsername());
 
             loggedUser = u;
-            
+
             addEmail(cbRememberMe.isSelected(), u.getEmail());
 
             rememberCredentials(cbRememberMe.isSelected(), u.getEmail());
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/Home.fxml"));
-            
-            if(u.getRoles().contains("ADMIN")){
+
+            if (u.getRoles().contains("ADMIN")) {
                 loader = new FXMLLoader(getClass().getResource("/Gui/AdminHome.fxml"));
             }
 
@@ -176,14 +170,14 @@ public class LoginController implements Initializable {
                 System.err.println(ex.getClass());
             }
         } else if (u.getConfirmed() == 0) {
-            
+
             try {
 //                notif.showError("Error!", "This account is not confirmed yet");
                 /* AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Wait.fxml"));
                 mainPane.getChildren().setAll(pane);    */
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 // do what you have to do
-                
+
                 Stage primaryStage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("/Gui/Wait.fxml"));
                 Scene scene = new Scene(root);
@@ -198,8 +192,7 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
-       
-       
+
         } else {
             notif.showError("Error!", "Please verify your password");
         }
@@ -228,7 +221,6 @@ public class LoginController implements Initializable {
 //            System.err.println(ex.getMessage());
 //        }
 //    }
-
     @FXML
     private void passwordRecovery(ActionEvent event) {
         User u = us.selectUserByEmail(txtusername.getText());
@@ -292,27 +284,27 @@ public class LoginController implements Initializable {
     public void addEmail(boolean test1, String email) {
         if (test1) {
             Writer output;
-            List<String> emails=new ArrayList<>();
- try {
-      File myObj = new File("res/registredEmails.txt");
-      Scanner myReader = new Scanner(myObj);  
-      while (myReader.hasNextLine()) {
-        String data = myReader.nextLine();
-        emails.add(data);
-      }
-      myReader.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
+            List<String> emails = new ArrayList<>();
+            try {
+                File myObj = new File("res/registredEmails.txt");
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    emails.add(data);
+                }
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             try {
                 output = new BufferedWriter(new FileWriter("res/registredEmails.txt", true));
 //                System.out.println(emails.contains(email));
 //                System.out.println("************"+emails);
-                    if (!emails.contains(email)) {
-                        output.append("\n" + email);
-                    }
-                    output.close();
-                
+                if (!emails.contains(email)) {
+                    output.append("\n" + email);
+                }
+                output.close();
+
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -322,18 +314,17 @@ public class LoginController implements Initializable {
     @FXML
     private void signUp(ActionEvent event) {
 
-        
         try {
 //            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/AdminHome.fxml"));
 //            mainPane.getChildren().setAll(pane);
-            
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/SignUp.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/SignUp.fxml"));
 //
 //
 //            try {
-                Parent root = loader.load();
+            Parent root = loader.load();
 
-                txtusername.getScene().setRoot(root);
+            txtusername.getScene().setRoot(root);
 //
 //            } catch (IOException ex) {
 //                System.err.println(ex.getMessage());
@@ -344,6 +335,5 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
 }
