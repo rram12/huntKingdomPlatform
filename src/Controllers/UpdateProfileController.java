@@ -755,12 +755,12 @@ public class UpdateProfileController implements Initializable {
 
     @FXML
     private void backToHome(ActionEvent event) {
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
-            mainpane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            AnchorPane pane = FXMLLoader.load(getClass().getResource("/Gui/Home.fxml"));
+//            mainpane.getChildren().setAll(pane);
+//        } catch (IOException ex) {
+//            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
 }
