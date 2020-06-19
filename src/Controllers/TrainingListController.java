@@ -9,11 +9,11 @@ package Controllers;
 
 import static Controllers.AddTrainingController.showAlert;
 import Entities.Entrainement;
+import Entities.User;
 import Services.AnimalService;
 import Services.JavaMail;
 import Services.TrainingService;
 import Services.UserService;
-import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -80,6 +80,8 @@ public class TrainingListController implements Initializable {
     @FXML
     private Label nbdislike;
     
+    User currentUser = LoginController.getInstance().getLoggedUser();
+
    
     /**
      * Initializes the controller class.
@@ -207,7 +209,7 @@ public class TrainingListController implements Initializable {
             UserService SU = new UserService();
             AnimalService SA = new AnimalService();
            
-            int idU=UserSession.getInstace("",0, "", "", "", 0).getId();
+            int idU=currentUser.getId();
             String nomA= SA.getById(current.getAnimalId()).getNom();
             String usernameUser = SU.getUsername(current.getUserId());
             Pane pane = new Pane();

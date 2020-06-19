@@ -9,14 +9,13 @@ import Entities.Hebergement;
 import Entities.Location;
 import Entities.MoyenDeTransport;
 import Entities.Reservation;
+import Entities.User;
 import Services.HebergementService;
 import Services.LocationService;
 import Services.MoyenDeTransportService;
 import Services.ReservationService;
 import Utils.MyConnection;
 import Utils.Session;
-import Utils.UserSession;
-import Utils.UserSession;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -219,6 +218,9 @@ public class ServiceFrontController implements Initializable {
     private int id2;
     Location loc;
     Reservation res;
+    
+    User currentUser = LoginController.getInstance().getLoggedUser();
+
 
     /**
      * Initializes the controller class.
@@ -234,7 +236,7 @@ public class ServiceFrontController implements Initializable {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(ServiceFrontController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        idU = UserSession.getInstace("", 0, "", "", "", 0).getId();
+        idU =currentUser.getId();
         System.out.println(idU);
         flow.getChildren().clear();
         displayAccommodations();

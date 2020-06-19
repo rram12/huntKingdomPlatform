@@ -6,11 +6,11 @@
 package Controllers;
 
 import Entities.PiecesDefectueuses;
+import Entities.User;
 import Services.JavaMail;
 import Services.PieceService;
 import Services.ReparationService;
 import Utils.MyConnection;
-import Utils.UserSession;
 import Utils.copyFiles;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -162,6 +162,9 @@ public class ReparationController implements Initializable {
     private JFXButton addBtn;
     @FXML
     private Label lDateDebut1;
+    
+    User currentUser = LoginController.getInstance().getLoggedUser();
+
 
     public ReparationController() {
         PieceService ps = new PieceService();
@@ -451,7 +454,7 @@ public class ReparationController implements Initializable {
         if (validateFields()) {
             MyConnection mc = MyConnection.getInstance();
             PieceService ps = new PieceService();
-            int UserId = UserSession.getInstace("", 0, "", "", "", 0).getId();
+            int UserId = currentUser.getId();
             PiecesDefectueuses p = new PiecesDefectueuses(nom.getText(), categorie.getValue(), description.getText(), absolutePath, UserId);
             if (validateUnique(p)) {
 
@@ -525,7 +528,7 @@ public class ReparationController implements Initializable {
             int prix = prixRep.intValue();
             //String price = Double.toString(prix);
             /* add a customer */
-            String EmailUser = UserSession.getInstace("", 0, "", "", "", 0).getEmail();
+            String EmailUser = currentUser.getEmail();
             Stripe.apiKey = "sk_test_0sHcDNkGs9s7se1ifivPl6Vb00WBmw7K82";
             try {
                 Map<String, Object> options = new HashMap<>();

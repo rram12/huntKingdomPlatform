@@ -12,7 +12,6 @@ import Services.AnimalService;
 import Services.ProduitService;
 import Services.TrainingService;
 import Services.UserService;
-import Utils.UserSession;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
@@ -142,7 +141,7 @@ public class AddTrainingController implements Initializable {
         Services.AnimalService SA = new AnimalService();
         Services.ProduitService SP = new ProduitService();
         //Services.UserService SU = new UserService();
-        int UserId =  UserSession.getInstace("",0, "", "", "", 0).getId();
+        int UserId =  LoginController.getInstance().getLoggedUser().getId();
 
         //String categorieComb=categorie.valueProperty().addListener(observable -> System.out.printf("Valeur sélectionnée: %s", categorie.getValue()).println());
         if (controleDeSaisi()) {

@@ -7,10 +7,10 @@ package Controllers;
 
 import Entities.PiecesDefectueuses;
 import Entities.Reparation;
+import Entities.User;
 import Services.PieceService;
 import Services.ProduitService;
 import Services.ReparationService;
-import Utils.UserSession;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -71,7 +71,7 @@ public class ReparateurController implements Initializable {
     private FlowPane flow;
    private int id;
    
-
+User currentUser = LoginController.getInstance().getLoggedUser();
     
    
    void afficherPieces(){
@@ -142,7 +142,7 @@ public class ReparateurController implements Initializable {
                       ZoneId defaultZoneId = ZoneId.systemDefault();
                     Date date = Date.from( endDateText.getValue().atStartOfDay(defaultZoneId).toInstant());
                     Double price = Double.parseDouble(priceText.getText());
-                           int UserId =  UserSession.getInstace("",0, "", "", "", 0).getId();
+                           int UserId =  currentUser.getId();
                     Reparation rep = new Reparation(new Date(),date,price,descriptionText.getText(),UserId,id);
                     ps.ajouterReparation(rep);
                     PieceService prs = new PieceService();

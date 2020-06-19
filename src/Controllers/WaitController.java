@@ -6,7 +6,6 @@
 package Controllers;
 
 import Entities.User;
-import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

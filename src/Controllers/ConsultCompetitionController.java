@@ -13,7 +13,6 @@ import Services.ParticipationService;
 import Services.UserService;
 import Utils.Mailing;
 import Utils.MyConnection;
-import Utils.UserSession;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -95,14 +94,13 @@ public class ConsultCompetitionController implements Initializable {
     Competition cm;
     private int idu;
     
-    UserSession currentUser;
+    User currentUser = LoginController.getInstance().getLoggedUser();
     ArrayList<Competition> competitions = new ArrayList<>();
     ArrayList<Competition> Mycompetitions = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        currentUser = UserSession.getInstace("", 0, "", "", "", 0);
 
 
         tabCompetition.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {

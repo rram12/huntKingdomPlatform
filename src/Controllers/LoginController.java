@@ -13,7 +13,6 @@ import Utils.EmailBody;
 import Utils.MailSender;
 import Utils.Session;
 import Utils.ShowNotification;
-import Utils.UserSession;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

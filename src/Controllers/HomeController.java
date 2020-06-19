@@ -15,7 +15,6 @@ import Services.UserService;
 import Utils.Marquee;
 import Utils.MyConnection;
 import Utils.ShowNotification;
-import Utils.UserSession;
 import Utils.topNews;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import huntkingdom.HuntKingdom;

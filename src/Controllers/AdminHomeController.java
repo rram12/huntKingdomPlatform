@@ -10,7 +10,6 @@ import Services.ProduitService;
 import Services.PromotionService;
 import Utils.MyConnection;
 import Utils.ShowNotification;
-import Utils.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
