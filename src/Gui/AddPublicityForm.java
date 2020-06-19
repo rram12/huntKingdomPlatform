@@ -161,7 +161,7 @@ public class AddPublicityForm extends Form{
         addConstraint(tCompagnie,
                 new GroupConstraint(
                         new LengthConstraint(5, "Minimum 5 caracters"),
-                        new RegexConstraint("^([a-zA-Z ÉéèÈêÊôÔ']*)$", "Alphabetic Field"))).
+                        new RegexConstraint("(www\\.)?([^\\.]+)\\.(\\w{2}|(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum))$", "Alphabetic Field"))).
        
         addConstraint(tDescription,
                 

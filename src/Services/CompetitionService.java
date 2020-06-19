@@ -55,22 +55,16 @@ public class CompetitionService {
                 Competition h = new Competition();
                 float id = Float.parseFloat(obj.get("id").toString());
                 h.setId((int) id);
-//                h.setCompagnie(obj.get("compagnie").toString());
-//                h.setPrix((Float.parseFloat(obj.get("prix").toString())));
-//                h.setTitre(obj.get("titre").toString());
-//                h.setImage(obj.get("image").toString());
                 h.setNom(obj.get("nom").toString());
                 h.setNbParticipants(((int) Float.parseFloat(obj.get("nbParticipants").toString())));
                 h.setCategorie(obj.get("categorie").toString());
                 h.setLieu(obj.get("lieu").toString());
                 HashMap<String, Double> hm = (HashMap<String, Double>) obj.get("dateDebut");
                 long l = (long) (hm.get("timestamp") * 1000);
-                long t = (long) l * 10000;
                 Date d = new Date(l);
                 h.setDateDebut(d);
                 HashMap<String, Double> hm1 = (HashMap<String, Double>) obj.get("dateFin");
                 long l1 = (long) (hm1.get("timestamp") * 1000);
-                long t1 = (long) l1 * 10000;
                 Date d1 = new Date(l1);
                 h.setDateFin(d1);
                 Competitions.add(h);
@@ -220,5 +214,18 @@ public class CompetitionService {
         System.out.println(Competitions);
         return Competitions;
     }
+        public ArrayList<Competition> getSearched(String search) {
+        String url = BASE_URL + "search/" + search;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                Competitions = parseCompetition(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return Competitions;
+    } 
 
 }

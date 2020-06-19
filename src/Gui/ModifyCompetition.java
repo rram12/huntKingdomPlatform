@@ -44,10 +44,7 @@ public class ModifyCompetition extends BaseForm{
     
     public ModifyCompetition(Competition P,Resources res){
         
-        super("", BoxLayout.y());
-
-        setTitle("Modify Competition");
-        setLayout(BoxLayout.y());
+        super("Modify Competition", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -73,28 +70,25 @@ public class ModifyCompetition extends BaseForm{
         ));
         Label nom = new Label("Name");
 
-        TextField tNom= new TextField("", "Name");
+        TextField tNom= new TextField(P.getNom(), "Name");
         Label categorie = new Label("Category");
         ComboBox<String> Categorie = new ComboBox<> ("Hunting","Fishing");
+        Categorie.setSelectedItem(P.getCategorie());
         Label address = new Label("Address");
-        TextField tLieu= new TextField("", "address");
+        TextField tLieu= new TextField(P.getLieu(), "address");
         Label participant = new Label("Participant");
-        TextField tParticipant= new TextField("", "participant");
+        TextField tParticipant= new TextField(Integer.toString(P.getNbParticipants()), "participant");
         Label likes = new Label(" From: ");
-        TextField start = new TextField("", "Debute date", 20, TextField.ANY);
-        start.setEditable(false);
         Picker tfArrival = new Picker();
         tfArrival.setText("Debute date");
         tfArrival.setType(Display.PICKER_TYPE_DATE);
-        tfArrival.setDate(new Date());
+        tfArrival.setDate(P.getDateDebut());
         tfArrival.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
         Label comments = new Label(" To: " );
-        TextField end = new TextField("", "End date", 20, TextField.ANY);
-        end.setEditable(false);
         Picker tEnd = new Picker();
         tEnd.setText("End date");
         tEnd.setType(Display.PICKER_TYPE_DATE);
-        tEnd.setDate(new Date());
+        tEnd.setDate(P.getDateFin());
         tEnd.setFormatter(new SimpleDateFormat("yyyy-MM-dd"));
         Button btnValider = new Button("Confirm");
         btnValider.addActionListener(new ActionListener() {
@@ -157,15 +151,6 @@ public class ModifyCompetition extends BaseForm{
                         return false;
                             
                         }
-                        
-                    
-                    
-//        try {
-//            int p = Integer.parseInt(participants.getText());
-//        } catch (NumberFormatException nfe) {
-//            Dialog.show("Error", " must be numeric !", "OK", "Cancel");
-//            return false;
-//        }
         return true;
     }
     }

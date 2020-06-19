@@ -83,10 +83,10 @@ public class AffichageCompetition extends BaseForm{
         private void addButton1(Resources res, Container List, Competition mdt) {
                 Image img;
                 if(mdt.getCategorie().toLowerCase().equals("fishing"))
-                {img= res.getImage("news-item.jpg");}
+                {img= res.getImage("c700x420.jpg");}
                 else
                 {
-                   img= res.getImage("news-item-3.jpg"); 
+                   img= res.getImage("images.jpg"); 
                 }
 
         int height = Display.getInstance().convertToPixels(11.5f);
@@ -95,7 +95,7 @@ public class AffichageCompetition extends BaseForm{
         image.setUIID("Label");
         Container cnt = BorderLayout.west(image);
         TextField ta = new TextField(mdt.getNom());
-        ta.setUIID("NewsTitle");
+        ta.setUIID("PopupDialogTitle");
         ta.setEditable(false);
 
         Label likes = new Label(" From : " + mdt.getDateDebut());

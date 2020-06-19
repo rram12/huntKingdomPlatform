@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+<resource majorVersion="1" minorVersion="10" useXmlUI="false">
     <image name="back-command.png" type="multi"  />
     <image name="bg-1.jpg"  />
     <image name="bg-2.jpg"  />
@@ -17,6 +17,7 @@
     <image name="Button.borderTop_2.png" type="multi"  />
     <image name="Button.borderTopL_2.png" type="multi"  />
     <image name="Button.borderTopR_2.png" type="multi"  />
+    <image name="c700x420.jpg"  />
     <image name="cal_left_arrow.png" type="multi"  />
     <image name="cal_right_arrow.png" type="multi"  />
     <image name="CaptureBG.JPG"  />
@@ -52,6 +53,7 @@
     <image name="Dialog.borderTopR_1.png" type="multi"  />
     <image name="dog.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
+    <image name="images.jpg"  />
     <image name="Logo.png"  />
     <image name="logosite.png"  />
     <image name="logositenoir.png"  />
