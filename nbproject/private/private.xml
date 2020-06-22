@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wampserver/www/WorkShopHuntKingdom/WorkShopHuntKingdom/src/Services/UserService.java</file>
-            <file>file:/D:/wampserver/www/WorkShopHuntKingdom/WorkShopHuntKingdom/src/Gui/SignInForm.java</file>
+<<<<<<< HEAD
+            <file>file:/E:/roadToInfini/mobile/WorkShopHuntKingdomFinale/WorkShopHuntKingdom/src/Gui/Ready.java</file>
+            <file>file:/E:/roadToInfini/mobile/WorkShopHuntKingdomFinale/WorkShopHuntKingdom/src/Gui/RepareForm.java</file>
+            <file>file:/E:/roadToInfini/mobile/WorkShopHuntKingdomFinale/WorkShopHuntKingdom/src/Services/PieceService.java</file>
+            <file>file:/E:/roadToInfini/mobile/WorkShopHuntKingdomFinale/WorkShopHuntKingdom/src/Gui/NewsfeedForm.java</file>
+            <file>file:/E:/roadToInfini/mobile/WorkShopHuntKingdomFinale/WorkShopHuntKingdom/src/Gui/PieceForm.java</file>
+=======
+            <file>file:/C:/Users/User/Desktop/finalmobileee/HunKingdomMobile/src/Gui/BaseForm.java</file>
+            <file>file:/C:/Users/User/Desktop/finalmobileee/HunKingdomMobile/src/Gui/AffichageCompetition.java</file>
+>>>>>>> b4ad6caee92c23bd2567cb9830a191d9cd40b7c2
         </group>
     </open-files>
 </project-private>

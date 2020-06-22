@@ -11,5 +11,5 @@ package Utils;
  */
 public class Statics {
     public static final String BASE_URL="http://localhost/web/HuntKingdom/web/app_dev.php/api/";
-    public static final String BASE_URL1="http://localhost/HuntKingdom/web/app_dev.php/";
+    public static final String BASE_URL1="http://localhost/web/HuntKingdom/web/app_dev.php/";
 }

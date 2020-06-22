@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resource majorVersion="1" minorVersion="10" useXmlUI="false">
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="back-command.png" type="multi"  />
     <image name="bg-1.jpg"  />
     <image name="bg-2.jpg"  />
@@ -79,6 +79,7 @@
     <image name="profile-background.jpg"  />
     <image name="profile-pic.jpg" type="multi"  />
     <image name="signin-background.jpg"  />
+    <image name="signUp (2).jpg"  />
     <image name="sliderEmpty.png" type="multi"  />
     <image name="sliderEmptyLeft.png" type="multi"  />
     <image name="sliderEmptyRight.png" type="multi"  />

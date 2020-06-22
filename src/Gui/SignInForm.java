@@ -76,7 +76,7 @@ public class SignInForm extends BaseForm {
         password.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
-        Label lbUser = new Label("Email");
+        Label lbUser = new Label("Username");
         Label lbpass = new Label("password");
         lbUser.getAllStyles().setFgColor(0xFFFFFF, true);
         lbpass.getAllStyles().setFgColor(0xFFFFFF, true);
@@ -97,7 +97,7 @@ public class SignInForm extends BaseForm {
         );
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
-        signIn.requestFocus();
+        username.requestFocus();
         
         
         signIn.addActionListener(new ActionListener() {
@@ -116,6 +116,14 @@ public class SignInForm extends BaseForm {
                 }
               }
             });
+        
+        signUp.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent evt) {
+                 new SignUpForm(res).show();
+             }
+            }
+);
+        
     }
     public boolean validateFields(String username,String pass){
     if(username.isEmpty()||pass.isEmpty()){

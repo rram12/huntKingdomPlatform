@@ -23,7 +23,6 @@ import Entities.PiecesDefectueuses;
 import Entities.User;
 import Services.PieceService;
 import com.codename1.components.ScaleImageLabel;
-import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.io.Util;

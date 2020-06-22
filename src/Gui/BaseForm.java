@@ -74,6 +74,7 @@ public class BaseForm extends Form {
                         new Label(res.getImage("logosite.png"), "PictureWhiteBackgrond"))
         ));
 
+        tb.addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_WATCH, e -> new ReclamationForm(res).show());
         tb.addMaterialCommandToSideMenu("Services", FontImage.MATERIAL_APARTMENT, e -> new ServicesForm(res).show());
 
         User u = User.getInstace(0, "", "", "", "", 0);
@@ -105,6 +106,7 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("List Product in Promotion", FontImage.MATERIAL_ALBUM, e -> new ListProductInPromotion(res).show());
 
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            System.out.println(User.getInstace(0, "", "", "", "", 0));
             User.getInstace(0, "", "", "", "", 0).cleanUserSession();
             new SignInForm(res).show();
         });

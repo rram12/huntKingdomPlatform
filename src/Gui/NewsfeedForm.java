@@ -68,12 +68,12 @@ public class NewsfeedForm extends BaseForm {
         
           List<Publicity> lp = PubliciteService.getInstance().getAllPublicities();
         int constId = User.getInstace(0, "", "", "", "", 0).getId();
-        //int nbReady = PieceService.getInstance().getYourReady(constId);
-       // System.out.println("nbReady : " + nbReady);
+//        int nbReady = PieceService.getInstance().getYourReady(constId);
+//        System.out.println("nbReady : " + nbReady);
 
         LocalNotification n = new LocalNotification();
-        n.setId("demo-notification");
-       // n.setAlertBody("you have " + Integer.toString(nbReady) + " ready pieces");
+        n.setId("Welcome");
+        n.setAlertBody("Welcome Again"+ User.getInstace(0, "", "", "", "", 0).getUsername());
         n.setAlertTitle("check them out !");
         n.setAlertSound("/notification_sound_bells.mp3"); //file name must begin with notification_sound
  
@@ -83,7 +83,7 @@ public class NewsfeedForm extends BaseForm {
                 LocalNotification.REPEAT_MINUTE // Whether to repeat and what frequency
         );
 
-       // PieceService.getInstance().deleteFinishedPromotion();
+        PieceService.getInstance().deleteFinishedPromotion();
 
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -226,7 +226,7 @@ public class NewsfeedForm extends BaseForm {
 
     private void addTab1(Tabs swipe, Publicity mdt) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
+        String url = "http://localhost/web/huntkingdom/web/uploads/96e2bff03c1bdcad03f7fa15248f9874.jpeg";
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         Label likes = new Label(mdt.getDescription() + " ", "CommandFocus");

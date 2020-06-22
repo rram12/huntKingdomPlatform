@@ -9,7 +9,7 @@ import Entities.Animal;
 import Services.AnimalService;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
-import com.codename1.ext.filechooser.FileChooser;
+//import com.codename1.ext.filechooser.FileChooser;
 
 
 import com.codename1.io.FileSystemStorage;
@@ -115,39 +115,39 @@ public class AddAnimalForm extends BaseForm{
        
        
        
-      upload.addPointerPressedListener((ei)->{
-            if (FileChooser.isAvailable()) {
-                FileChooser.showOpenDialog(".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg", e2-> {
-                    String file = (String)e2.getSource();
-                    if (file == null) {
-                        System.out.println("No file was selected");
-                    } else {
-                        String extension = null;
-                        if (file.lastIndexOf(".") > 0) {
-                            extension = file.substring(file.lastIndexOf(".")+1);
-                        }
-                        if ("txt".equals(extension)) {
-                            FileSystemStorage fs = FileSystemStorage.getInstance();
-                            try {
-                                InputStream fis = fs.openInputStream(file);
-                                System.out.println(Util.readToString(fis));
-                            } catch (Exception ex) {
-                                Log.e(ex);
-                            }
-                        } else {
-                            //moveFile(file,)
-                            String path = file.substring(7);
-                            System.out.println("Selected file :"+file.substring(40)+"\n"+"path :"+path);
-                            limport.setText("file imported");
-                            limport.getAllStyles().setFgColor(0x69E781);
-                            
-                            GlobalPath=path;
-                            GlobalExtension=file.substring(file.lastIndexOf(".")+1);
-                        }
-                    }
-                });
-            }
-        });
+//      upload.addPointerPressedListener((ei)->{
+//            if (FileChooser.isAvailable()) {
+//                FileChooser.showOpenDialog(".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg", e2-> {
+//                    String file = (String)e2.getSource();
+//                    if (file == null) {
+//                        System.out.println("No file was selected");
+//                    } else {
+//                        String extension = null;
+//                        if (file.lastIndexOf(".") > 0) {
+//                            extension = file.substring(file.lastIndexOf(".")+1);
+//                        }
+//                        if ("txt".equals(extension)) {
+//                            FileSystemStorage fs = FileSystemStorage.getInstance();
+//                            try {
+//                                InputStream fis = fs.openInputStream(file);
+//                                System.out.println(Util.readToString(fis));
+//                            } catch (Exception ex) {
+//                                Log.e(ex);
+//                            }
+//                        } else {
+//                            //moveFile(file,)
+//                            String path = file.substring(7);
+//                            System.out.println("Selected file :"+file.substring(40)+"\n"+"path :"+path);
+//                            limport.setText("file imported");
+//                            limport.getAllStyles().setFgColor(0x69E781);
+//                            
+//                            GlobalPath=path;
+//                            GlobalExtension=file.substring(file.lastIndexOf(".")+1);
+//                        }
+//                    }
+//                });
+//            }
+//        });
        // content.setScrollableY(true);
 
         Button submit = new Button("Ajouter");
