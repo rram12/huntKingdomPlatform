@@ -338,7 +338,7 @@ public class ServicesForm extends BaseForm {
 
     private void addTab(Tabs swipe, Hebergement h, Label spacer) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-        String url = "http://localhost/HuntKingdom/web/uploads/" + h.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + h.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         Label likes = new Label(h.getNbChambre() + " Rooms ", "CommandFocus");
@@ -373,7 +373,7 @@ public class ServicesForm extends BaseForm {
 
     private void addTab1(Tabs swipe, MoyenDeTransport mdt, Label spacer) {
         int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth(), this.getHeight() / 3, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         Label likes = new Label(mdt.getType() + " ", "CommandFocus");
@@ -407,7 +407,7 @@ public class ServicesForm extends BaseForm {
     }
 
     private void addButton(Resources res, Container List, Hebergement h) {
-        String url = "http://localhost/HuntKingdom/web/uploads/" + h.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + h.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         int height = Display.getInstance().convertToPixels(11.5f);
@@ -435,7 +435,7 @@ public class ServicesForm extends BaseForm {
 
     private void addButton1(Resources res, Container List, MoyenDeTransport mdt) {
         System.out.println(mdt.getImage());
-        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         int height = Display.getInstance().convertToPixels(11.5f);
@@ -464,7 +464,7 @@ public class ServicesForm extends BaseForm {
     }
 
     private void addButton2(Resources res, Container a, Reservation r, Hebergement h) {
-        String url = "http://localhost/HuntKingdom/web/uploads/" + h.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + h.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         int height = Display.getInstance().convertToPixels(11.5f);
@@ -491,7 +491,7 @@ public class ServicesForm extends BaseForm {
 
     private void addButton3(Resources res, Container a, Location l, MoyenDeTransport mdt) {
         System.out.println(mdt.getImage());
-        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         int height = Display.getInstance().convertToPixels(11.5f);

@@ -374,6 +374,8 @@ public class PieceService {
         con.setUrl(url);
         con.addResponseListener((NetworkEvent evt) -> {
             PieceService ser = new PieceService();
+            /*String rep = new String(con.getResponseData());
+            if(rep)*/
             listProduits = ser.parseListProductsJson(new String(con.getResponseData()));
         });
         NetworkManager.getInstance().addToQueueAndWait(con);
@@ -385,15 +387,16 @@ public class PieceService {
 
         try {
             JSONParser j = new JSONParser();// Instanciation d'un objet JSONParser permettant le parsing du résultat json
-
+            
             Map<String, Object> tasks = j.parseJSON(new CharArrayReader(json.toCharArray()));
-
+if(!tasks.isEmpty()){
             
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasks.get("root");
 
             for (Map<String, Object> obj : list) {
                 Products p = new Products();
                Map<String, Object> promotion = (Map<String, Object>) obj.get("promotion");
+               if(promotion!=null){
                 p.setTaux(Double.parseDouble(promotion.get("taux").toString()));
                 p.setDescription(obj.get("description").toString());
                 p.setId((int)Float.parseFloat(obj.get("id").toString()));
@@ -405,9 +408,9 @@ public class PieceService {
                 p.setType(obj.get("type").toString());
                 p.setLibProd(obj.get("libProd").toString());
                 produits.add(p);
-
+                }
             }
-
+}
         } catch (IOException ex) {
         }
 

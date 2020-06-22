@@ -10,6 +10,6 @@ package Utils;
  * @author tibh
  */
 public class Statics {
-    public static final String BASE_URL="http://localhost/HuntKingdom/web/app_dev.php/api/";
+    public static final String BASE_URL="http://localhost/web/HuntKingdom/web/app_dev.php/api/";
     public static final String BASE_URL1="http://localhost/HuntKingdom/web/app_dev.php/";
 }

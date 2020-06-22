@@ -71,15 +71,17 @@ public class UserService {
         }
         return users;
     }
-     public ArrayList<User> getUserConnected(String name){
+     public ArrayList<User> getUserConnected(String email){
         
-        String url = BASE_URL+"UserConnected/"+name;
+        String url = BASE_URL+"find/"+email;
         req.setUrl(url);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
+                System.out.println("aaaa");
                 users= parseUser(new String(req.getResponseData()));
+                System.out.println(users);
                 req.removeResponseListener(this);
             }
         });

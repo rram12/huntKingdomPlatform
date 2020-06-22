@@ -79,10 +79,11 @@ public class StatistiquePieForm extends Form {
 
         List<Integer> li = TrainingService.getInstance().Stati();
         String valeur1 = Double.toString(li.get(0).doubleValue() / li.get(2));
-        String role = valeur1.substring(0, 5);
+        System.out.println("valeur1 : "+valeur1);
+        String role = valeur1.substring(0, 4);
         Double v1 = Double.parseDouble(role);
         String valeur2 = Double.toString(li.get(1).doubleValue() / li.get(2));
-        String role2 = valeur2.substring(0, 5);
+        String role2 = valeur2.substring(0, 4);
         Double v2 = Double.parseDouble(role2);
 
         // Generate the values

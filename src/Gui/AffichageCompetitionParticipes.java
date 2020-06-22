@@ -85,10 +85,10 @@ public class AffichageCompetitionParticipes extends BaseForm {
             private void addButton1(Resources res, Container List, Competition mdt) {
                 Image img;
                 if(mdt.getCategorie().toLowerCase().equals("fishing"))
-                {img= res.getImage("news-item.jpg");}
+                {img= res.getImage("c700x420.jpg");}
                 else
                 {
-                   img= res.getImage("news-item-3.jpg"); 
+                   img= res.getImage("images.jpg"); 
                 }
 
         int height = Display.getInstance().convertToPixels(11.5f);

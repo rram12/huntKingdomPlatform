@@ -86,20 +86,7 @@ public class ListAnimalClient extends BaseForm{
             
             MultiButton mb = null;
              for (Animal a : lb) {
-      String url ="http://localhost/HuntKingdom/web/uploads/photos/Liza_saliens2.jpg";
-                  //System.out.println(e.getAnimalId().getId());
-                  if(a.getId()==4)
-                  {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/lieujaune2.jpg";
-                  }
-                  if(a.getId()==1)
-                  {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/ours_noir2.jpg";
-                  }
-                  if(a.getId()==3)
-                  {
-                      url ="http://localhost/HuntKingdom/web/uploads/photos/smallgeme2.jpg";
-                  }
+                  String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + a.getImage_animal();
                    EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth()/2 , this.getHeight()/5 , 0xFFFFFFFF), true);
                 Image img = URLImage.createToStorage(placeholder, url, url , URLImage.RESIZE_SCALE_TO_FILL);
                 Container imgC = new Container();

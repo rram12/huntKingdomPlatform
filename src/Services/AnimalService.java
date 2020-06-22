@@ -68,8 +68,8 @@ public class AnimalService {
                 a.setCategorie(obj.get("categorie").toString());
                 a.setNom(obj.get("nom").toString());
                 a.setDescription(obj.get("description").toString());
-                //a.setImage_animal(obj.get("image_animal").toString());
-              
+                a.setImage_animal(obj.get("imageAnimal").toString());
+                
                 animals.add(a);
             }
             

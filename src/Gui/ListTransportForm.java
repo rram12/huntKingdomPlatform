@@ -85,7 +85,7 @@ public class ListTransportForm extends BaseForm {
     }
     private void addButton1(Resources res, Container List, MoyenDeTransport mdt) {
         System.out.println(mdt.getImage());
-        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
         int height = Display.getInstance().convertToPixels(11.5f);

@@ -50,7 +50,7 @@ public class AffichageCompetition extends BaseForm{
 
         super.addSideMenu(res);
         tb.addCommandToOverflowMenu("Add", null,(e) -> new AddCompetitionForm(res).show());
-        Image img1 = res.getImage("news-item.jpg");
+        Image img1 = res.getImage("bg-2.jpg");
         if (img1.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img1 = img1.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }

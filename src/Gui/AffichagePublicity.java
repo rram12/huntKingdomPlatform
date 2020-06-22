@@ -91,7 +91,7 @@ public class AffichagePublicity extends BaseForm {
                   ImageViewer imgV = null;
 
       
-        String url = "http://localhost/HuntKingdom/web/uploads/" + mdt.getImage();
+        String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/" + mdt.getImage();
         EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth() / 2, this.getHeight() / 5, 0xFFFFFFFF), true);
         Image img = URLImage.createToStorage(placeholder, url, url, URLImage.RESIZE_SCALE);
           if(img.getHeight() > Display.getInstance().getDisplayHeight() / 5) {

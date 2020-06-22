@@ -161,8 +161,8 @@ public class InProgress extends BaseForm {
         Button CancelBtn = new Button("Cancel");
         CancelBtn.addActionListener(e -> {
             long differenceDays = (now.getTime() - c.getDateDebut().getTime()) / (24 * 60 * 60 * 1000);
-            if (differenceDays > 7) {
-                Dialog.show("ERROR", "Sorry, you can't cancel this reparation any more.\n(7 days after reparation)", new Command("OK"));
+            if (differenceDays > 4) {
+                Dialog.show("ERROR", "Sorry, you can't cancel this reparation any more.\n(4 days after reparation)", new Command("OK"));
             } else {
                 PieceService.getInstance().DeleteReparation(Integer.toString(c.getId()), Integer.toString(c.getPiecesdefectueuses_id()));
                 new ListYourPieces(res).show();

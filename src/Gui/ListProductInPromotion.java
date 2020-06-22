@@ -29,6 +29,7 @@ import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import static com.codename1.ui.Component.BOTTOM;
 import com.codename1.ui.Container;
@@ -115,7 +116,7 @@ Resources res;
         c1.setSize(new Dimension(20, 20));
   
      
-         String url = "http://localhost/HuntKingdom/web/uploads/"+c.getImage();
+         String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/"+c.getImage();
      EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth()/2, this.getHeight() / 5, 0xFFFFFFFF), true);
         imgs = URLImage.createToStorage(placeholder,url,url,URLImage.RESIZE_SCALE );
         if(imgs.getHeight() > Display.getInstance().getDisplayHeight() / 5) {
@@ -141,7 +142,7 @@ Resources res;
         Label lid= new Label(Integer.toString(c.getId()));
         lid.setHidden(true);
         repareBtn.addActionListener(e->{
-                Dialog.show("Product : ","Libelle : "+lNom.getText()+"\ncategorie :"+Categorie.getText()+"\nPrice : "+Double.toString(c.getPrix())+"\nFinal Price : "+Double.toString(c.getPrixFinale()), "OK", "Cancel");
+                Dialog.show("Product : ","Libelle : "+lNom.getText()+"\ncategorie :"+Categorie.getText()+"\nPrice : "+Double.toString(c.getPrix())+"\nFinal Price : "+Double.toString(c.getPrixFinale()), new Command("Cancel"));
         });
         c2.add(lNom);
         c2.add(Categorie);

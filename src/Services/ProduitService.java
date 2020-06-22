@@ -156,10 +156,10 @@ public class ProduitService {
             JSONParser j = new JSONParser();// Instanciation d'un objet JSONParser permettant le parsing du résultat json
 
             Map<String, Object> tasks = j.parseJSON(new CharArrayReader(json.toCharArray()));
-
+                
             
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasks.get("root");
-
+            
             for (Map<String, Object> obj : list) {
                 Products p = new Products();
                 p.setDescription(obj.get("description").toString());

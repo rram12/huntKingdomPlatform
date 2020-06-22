@@ -76,7 +76,7 @@ public class SignInForm extends BaseForm {
         password.setSingleLineTextArea(false);
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
-        Label lbUser = new Label("Username");
+        Label lbUser = new Label("Email");
         Label lbpass = new Label("password");
         lbUser.getAllStyles().setFgColor(0xFFFFFF, true);
         lbpass.getAllStyles().setFgColor(0xFFFFFF, true);

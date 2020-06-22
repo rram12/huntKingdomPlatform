@@ -118,7 +118,7 @@ Resources res;
         c1.setSize(new Dimension(20, 20));
   
      
-         String url = "http://localhost/HuntKingdom/web/uploads/photos/"+c.getImage();
+         String url = "http://localhost/HuntKingdom/web/java/huntkingdom/src/Uploads/"+c.getImage();
      EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(this.getWidth()/2, this.getHeight() / 5, 0xFFFFFFFF), true);
         imgs = URLImage.createToStorage(placeholder,url,url,URLImage.RESIZE_SCALE );
         if(imgs.getHeight() > Display.getInstance().getDisplayHeight() / 5) {
