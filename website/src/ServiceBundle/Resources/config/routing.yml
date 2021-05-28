@@ -1,0 +1,20 @@
+list_locations:
+    path:     /location
+    defaults: { _controller: ServiceBundle:Default:location }
+list_accommodation:
+    path:     /hebergement
+    defaults: { _controller: ServiceBundle:Service:afficherhebergement }
+list_transport:
+    path:     /transport
+    defaults: { _controller: ServiceBundle:Default:transport }
+
+location_front:
+    path:     /location_front
+    defaults: { _controller: ServiceBundle:Default:frontlocation }
+accommodation_front:
+    path:     /accommodation_front
+    defaults: { _controller: ServiceBundle:Default:fronthebergement }
+transport_front:
+    path:     /transport_front
+    defaults: { _controller: ServiceBundle:Default:fronttransport }
+

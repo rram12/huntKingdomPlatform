@@ -1,0 +1,43 @@
+list_reparation:
+    path:     /reparation
+    defaults: { _controller: ReparationBundle:Default:reparation }
+
+
+reparation_front_add_defective:
+    path:     /add_defective
+    defaults: { _controller: ReparationBundle:Default:add_defective }
+reparation_front_list_defective:
+    path:     /consult_defective
+    defaults: { _controller: ReparationBundle:Default:list_defective }
+
+promotion_front:
+    path:     /promotion_front
+    defaults: { _controller: ReparationBundle:Default:frontpromotion }
+
+reparation_front_repare:
+    path:     /repare/{idP}/{idR}
+    defaults: { _controller: ReparationBundle:Default:repare }
+
+
+reparation_front_list_your_defective:
+    path:     /consult_your_defective/{idUser}
+    defaults: { _controller: ReparationBundle:Default:list_you_defective }
+
+
+reparation_front_show_progress:
+    path:     /consult_your_progress/{idP}
+    defaults: { _controller: ReparationBundle:Default:show_progress }
+
+
+reparation_front_show_ready:
+    path:     /ready/{idP}
+    defaults: { _controller: ReparationBundle:Default:show_ready }
+
+show_repairer_profile:
+    path:     /show_repairer_profile/{idR}
+    defaults: { _controller: ReparationBundle:Default:show_repairer_profile }
+
+
+finish_reparation:
+    path:     /finish_reparation/{idR}/{idP}
+    defaults: { _controller: ReparationBundle:Default:finish_reparation }

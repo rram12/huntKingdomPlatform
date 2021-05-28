@@ -1,0 +1,165 @@
+{% extends 'front/layout.html.twig' %}
+
+
+{% block title %}
+listDefective
+{% endblock %}
+
+{% block titlePage %}
+    Defective parts
+{% endblock %}
+
+{% block namePage %}
+    list
+{% endblock %}
+
+
+    {% block content %}
+
+
+
+
+<section class="shop-page section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="sibebar">
+                    <div class="wighet search">
+                        <form>
+                            <input type="search" placeholder="Search here">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="wighet categories">
+                        <h3>categ<span>ories</span></h3>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Bitcoin Investment <span>12</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Crypto currencies <span>78</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Bitcoin Mining <span>45</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Exchange Crypto <span>47</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Escrow Service <span>68</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Services  <span>288</span></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Bitcoin Wallet <span>54</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="wighet filter">
+                        <h3>Filter by  <span>Price</span></h3>
+                        <div class="price-range">
+                            <div class="range">
+                                <div id="range-price" class="range-box"></div>
+                                <span>Form :</span>
+                                <input type="text" id="price" class="price-box" readonly/>
+
+                            </div>
+                            <button type="submit" class="btn1">FILTER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 pd-0">
+                <div class="col-sm-12">
+                    <div class="filter-area">
+                        <select id="selection">
+                            <option value="All">All Categories</option>
+                            <option value="Hunting">Hunting</option>
+                            <option value="Fiching">Fiching</option>
+                        </select>
+
+                        <div class="list-grid">
+                            <ul class="list-inline">
+                                <li><a href="#" id="gridview"><i class="fa fa-th"></i></a></li>
+                                <li><a href="#" id="listview"><i class="fa fa-list"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="showpro">
+                            <p><span>Showing 1-9</span> of 256 Results</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 pd-0">
+                    {% for piece in pieces %}
+                    <div class="col-sm-4 products">
+                        <figure><<img src="{{ asset('uploads/photos/' ~ piece.image) }}"></figure>
+                        <div class="contents">
+                            <h3>{{ piece.nom }}</h3>
+                            <p>{{ piece.description }}</p>
+                            <a href="{{ path('reparation_front_repare',{'idP': piece.id,'idR': app.user.id}) }} " class="btn4" >repare</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       {# <div class="cart-head">
+            <div class="nav-shop-cart">
+                <div class="widget_shopping_cart_content">
+                    {% for piece in pieces %}
+                        <ul class="product_list_widget ">
+                        <li class="mini_cart_item">
+
+                                <img src="{{ asset('uploads/photos/' ~ piece.image) }}" height="250px" width="250px">
+                                <p class="product-name">{{ piece.nom }}</p>
+                                <p>{{ piece.nom }}</p>
+                                <p>{{ piece.description }}</p>
+                        <a href="{{ path('reparation_front_repare',{'idP': piece.id,'idR': app.user.id}) }} " class="btn2" >repare</a>
+                        </li>
+
+
+                    </ul>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+
+#}
+
+
+
+
+
+
+
+
+
+        {#   <h1>List pieces</h1>
+           {% for piece in pieces %}
+               <ul>
+                   <li>{{ piece.nom }}</li>
+                   <li>{{ piece.categorie }}</li>
+                   <li>{{ piece.description }}</li>
+                   <img src="{{ asset('uploads/photos/' ~ piece.image) }}" height="250px" width="250px">
+                   <li><a href="{{ path('reparation_front_repare',{'idP': piece.id,'idR': app.user.id}) }}">repare</a></li>
+               </ul>
+           {% endfor %}
+       #}
+{% endblock %}
+
+
+

@@ -1,0 +1,15 @@
+
+list_training:
+    path:     /training
+    defaults: { _controller: TrainingBundle:Default:training }
+list_animals:
+    path:     /animals
+    defaults: { _controller: TrainingBundle:Default:animals }
+
+
+training_front:
+    path:     /training_front
+    defaults: { _controller: TrainingBundle:Default:fronttraining }
+animals_front:
+    path:     /animals_front
+    defaults: { _controller: TrainingBundle:Default:frontanimals }
