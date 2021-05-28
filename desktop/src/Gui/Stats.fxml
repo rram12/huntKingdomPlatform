@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="apMain" prefHeight="768" prefWidth="1366" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StatsController">
+   <children>
+      <ImageView fx:id="bg" fitHeight="668.0" fitWidth="1055.0" opacity="0.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../res/images/hunting-and-fishing-wallpaper_2719072.jpg" />
+         </image>
+      </ImageView>
+      <ChoiceBox fx:id="cbCriteria" layoutX="123.0" layoutY="185.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: orange;" stylesheets="@../StyleSheets/menu.css" />
+      <Button fx:id="btExportPDF" layoutX="126.0" layoutY="368.0" mnemonicParsing="false" onAction="#exportToPDF" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: orange;" text="Export to PDF" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btBack" layoutX="214.0" layoutY="432.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-border-color: black;" text="Back" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="123.0" layoutY="142.0" prefHeight="20.0" prefWidth="66.0" text="Criteria" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="pchartNode" layoutX="357.0" layoutY="38.0" opacity="0.74" prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: white;">
+         <children>
+            <PieChart fx:id="pchart" prefHeight="530.0" prefWidth="600.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="668.0" prefWidth="1053.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ListAnimalAdminController">
+   <children>
+      <Pane layoutX="310.0" layoutY="90.0" opacity="0.35" prefHeight="540.0" prefWidth="667.0" style="-fx-background-color: #f55e57;" />
+      <TableView id="table-view" fx:id="tableAnimal" layoutX="324.0" layoutY="204.0" prefHeight="200.0" prefWidth="635.0" stylesheets="@../StyleSheets/style.css">
+        <columns>
+          <TableColumn fx:id="categorie" prefWidth="75.0" text="Categorie" />
+          <TableColumn fx:id="nom" prefWidth="75.0" text="NOM" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="image" prefWidth="75.0" text="Image" />
+            <TableColumn fx:id="debut_saison" prefWidth="109.0" text="Debut Saison" />
+            <TableColumn fx:id="fin_saison" prefWidth="93.0" text="Fin Saison" />
+            <TableColumn fx:id="action" prefWidth="93.0" text="Action" />
+        </columns>
+      </TableView>
+      <Pane layoutX="7.0" layoutY="90.0" prefHeight="537.0" prefWidth="290.0">
+         <children>
+            <Label layoutX="6.0" layoutY="111.0" prefHeight="51.0" prefWidth="99.0" text="Name : " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nomtxt" layoutX="121.0" layoutY="126.0" />
+            <Label layoutX="3.0" layoutY="58.0" prefHeight="51.0" prefWidth="99.0" text="Category : " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="categorietxt" layoutX="121.0" layoutY="72.0" prefWidth="150.0" />
+            <Label layoutX="3.0" layoutY="157.0" prefHeight="51.0" prefWidth="107.0" text="Description : " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="263.0" prefHeight="51.0" prefWidth="99.0" text="Image : " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="editButton" layoutX="132.0" layoutY="456.0" mnemonicParsing="false" onAction="#EditAnimal" prefHeight="46.0" prefWidth="134.0" style="-fx-background-color: #f55e57;" text="Edit" textFill="WHITE" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="chooserFile" layoutX="134.0" layoutY="318.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="107.0" text="Choose Image..." />
+            <TextArea fx:id="descriptiontxt" layoutX="121.0" layoutY="170.0" prefHeight="90.0" prefWidth="154.0" />
+            <Label layoutX="7.0" layoutY="354.0" prefHeight="51.0" prefWidth="111.0" text="Debut Saison :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="debut_saisontxt" layoutX="125.0" layoutY="364.0" />
+            <Label layoutX="6.0" layoutY="386.0" prefHeight="51.0" prefWidth="111.0" text="Fin Saison :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fin_saisontxt" layoutX="126.0" layoutY="400.0" />
+            <TextField fx:id="imagetxt" layoutX="121.0" layoutY="276.0" />
+            <Button fx:id="btnAddAnimal" layoutX="132.0" layoutY="456.0" mnemonicParsing="false" onAction="#AddAnimalAction" prefHeight="46.0" prefWidth="134.0" style="-fx-background-color: #f55e57;" text="Add" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <TextField id="search" fx:id="search" layoutX="310.0" layoutY="58.0" promptText="Search..." stylesheets="@../StyleSheets/style.css" />
+   </children>
+</AnchorPane>

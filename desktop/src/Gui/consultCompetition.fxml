@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ConsultCompetitionController">
+   <children>
+      <JFXTabPane fx:id="tabCompetition" layoutX="10.0" layoutY="9.0" prefHeight="674.0" prefWidth="1090.0">
+         <tabs>
+            <Tab fx:id="competition" text="Competition">
+               <content>
+                  <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="competition1" text="My Competitions">
+               <content>
+                  <AnchorPane fx:id="anchor1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="participate" disable="true" text="Participate">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="particip" layoutX="316.0" layoutY="402.0" prefHeight="45.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Participate" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <Label layoutX="211.0" layoutY="116.0" prefHeight="28.0" prefWidth="88.0" text="Name : " textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="210.0" layoutY="162.0" prefHeight="20.0" prefWidth="84.0" text="Starts : " textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="210.0" layoutY="209.0" prefHeight="22.0" prefWidth="67.0" text="Ends :  " textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="208.0" layoutY="255.0" prefHeight="22.0" prefWidth="95.0" text="Category : " textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="208.0" layoutY="302.0" prefHeight="22.0" prefWidth="78.0" text="Address: " textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="209.0" layoutY="347.0" prefHeight="22.0" prefWidth="92.0" text=" Places left:" textFill="#b8c449">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="name" layoutX="314.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="starts" layoutX="314.0" layoutY="161.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="ends" layoutX="314.0" layoutY="207.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="category" layoutX="314.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="place" layoutX="314.0" layoutY="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="participant" layoutX="314.0" layoutY="346.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="149.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="errorparticipants" layoutX="469.0" layoutY="457.0" prefHeight="17.0" prefWidth="130.0" text="No more places" textFill="#da3e3e" visible="false">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="cancel" layoutX="316.0" layoutY="402.0" onAction="#cancelParticipation" prefHeight="45.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Cancel Participation" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <Label fx:id="errorcancel" layoutX="169.0" layoutY="468.0" prefHeight="21.0" prefWidth="449.0" text="You cannot cancel Participation due to delay constraints" textFill="#da3e3e" visible="false">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

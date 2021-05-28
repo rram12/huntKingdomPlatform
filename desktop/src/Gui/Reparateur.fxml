@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<<<<<<< HEAD
+<?import javafx.scene.shape.*?>
+=======
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
+<?import com.jfoenix.validation.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="752.0" prefWidth="1086.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ReparateurController">
+   <children>
+      <JFXTabPane fx:id="tabPane" prefHeight="663.0" prefWidth="1080.0">
+         <tabs>
+            <Tab fx:id="ListPane" text="List">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <FlowPane fx:id="flow" prefHeight="626.0" prefWidth="1080.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="reparePane" disable="true" text="Repare">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+<<<<<<< HEAD
+                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffffff40" height="526.0" layoutX="72.0" layoutY="21.0" stroke="WHITE" strokeType="INSIDE" width="394.0" />
+                        <JFXTextArea fx:id="descriptionText" focusColor="WHITE" labelFloat="true" layoutX="160.0" layoutY="141.0" prefHeight="95.0" prefWidth="261.0" promptText="Description" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextArea fx:id="descriptionText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="187.0" prefHeight="95.0" prefWidth="261.0" promptText="Description" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextArea>
+<<<<<<< HEAD
+                        <JFXTextField fx:id="priceText" focusColor="WHITE" labelFloat="true" layoutX="160.0" layoutY="67.0" prefHeight="34.0" prefWidth="184.0" promptText="Price" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+=======
+                        <JFXTextField fx:id="priceText" focusColor="WHITE" labelFloat="true" layoutX="304.0" layoutY="106.0" prefHeight="34.0" prefWidth="184.0" promptText="Price" style="-fx-text-inner-color: white; -fx-prompt-text-fill: black;" unFocusColor="YELLOW">
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </JFXTextField>
+<<<<<<< HEAD
+                        <DatePicker fx:id="endDateText" layoutX="165.0" layoutY="313.0" promptText="Estimated finish date.." />
+                        <JFXButton fx:id="confirmBtn" layoutX="194.0" layoutY="410.0" onAction="#onConfirmAction" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Confirm" textFill="WHITE">
+                           <font>
+                              <Font name="Book Antiqua" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <StackPane fx:id="stack" layoutX="497.0" layoutY="206.0" prefHeight="187.0" prefWidth="363.0" />
+=======
+                        <DatePicker fx:id="endDateText" layoutX="305.0" layoutY="364.0" promptText="End date..." />
+                        <StackPane fx:id="stack" layoutX="179.0" layoutY="406.0" prefHeight="220.0" prefWidth="427.0">
+                           <children>
+                              <JFXButton fx:id="confirmBtn" onAction="#onConfirmAction" prefHeight="55.0" prefWidth="117.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Confirm" textFill="WHITE">
+                                 <font>
+                                    <Font name="Book Antiqua" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></StackPane>
+>>>>>>> 66e31e3a33a788d8cca95aa20803e727cfcaafa8
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

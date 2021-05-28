@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="260.0" style="-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SingleCompetitionController">
+   <children>
+      <GridPane layoutX="29.0" layoutY="30.0" prefHeight="174.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="98.0" prefWidth="100.0" text="Category :" textFill="CHOCOLATE" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="categ" prefHeight="110.0" prefWidth="87.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="particip" prefHeight="110.0" prefWidth="87.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="111.0" text="Places left:" textFill="CHOCOLATE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="100.0" text="Name :" textFill="CHOCOLATE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="nam" prefHeight="102.0" prefWidth="87.0" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="87.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Separator layoutX="7.0" layoutY="219.0" prefHeight="0.0" prefWidth="247.0" />
+      <JFXButton fx:id="showBtn" layoutX="71.0" layoutY="228.0" prefHeight="38.0" prefWidth="119.0" ripplerFill="#463a1f" style="-fx-background-color: orange;" text="Consult" textFill="WHITE" />
+   </children>
+</AnchorPane>

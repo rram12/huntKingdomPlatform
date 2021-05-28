@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane id="AnchorPane" fx:id="mainpane" focusTraversable="true" opacity="0.89" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddCompetitionController">
+    <children>
+       <Label layoutX="49.0" layoutY="119.0" text="Name" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <TextField fx:id="Nom" layoutX="181.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Label layoutX="50.0" layoutY="239.0" prefHeight="20.0" prefWidth="47.0" text="Ends" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Label layoutX="49.0" layoutY="177.0" prefHeight="20.0" prefWidth="56.0" text="Starts" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Label layoutX="50.0" layoutY="363.0" text="Category" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+         <ComboBox fx:id="Categorie" layoutX="181.0" layoutY="358.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" promptText="Select.." style="-fx-background-color: white;" />
+      <Label layoutX="50.0" layoutY="300.0" prefHeight="22.0" prefWidth="112.0" text="Address" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <TextField fx:id="Lieu" layoutX="181.0" layoutY="298.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Label layoutX="51.0" layoutY="415.0" prefHeight="22.0" prefWidth="122.0" text="Places left" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <TextField fx:id="NbParticipants" layoutX="182.0" layoutY="412.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Button fx:id="Add" layoutX="181.0" layoutY="472.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AddCompetition" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+      <DatePicker fx:id="dP" layoutX="181.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <DatePicker fx:id="dT" layoutX="182.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <WebView fx:id="mapView" layoutX="572.0" layoutY="130.0" onMouseClicked="#coordonneesSelected" prefHeight="409.0" prefWidth="424.0" />
+    </children>
+</AnchorPane>

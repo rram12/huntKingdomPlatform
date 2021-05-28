@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.testapps.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminProductController">
+   <children>
+      <Label layoutX="66.0" layoutY="91.0" prefHeight="67.0" prefWidth="233.0" text="assign a reduction : " textFill="WHITE">
+         <font>
+            <Font name="Bernard MT Condensed" size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rate" layoutX="59.0" layoutY="334.0" prefHeight="30.0" prefWidth="246.0" promptText="Rate..." />
+      <DatePicker fx:id="endDate" layoutX="60.0" layoutY="412.0" prefHeight="25.0" prefWidth="246.0" promptText="End Date" />
+      <TableView fx:id="table" layoutX="336.0" layoutY="74.0" opacity="0.89" prefHeight="476.0" prefWidth="676.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="lib_prod" prefWidth="75.0" text="LIBELLE" />
+            <TableColumn fx:id="prix" prefWidth="75.0" text="PRICE" />
+            <TableColumn fx:id="prixFinale" prefWidth="75.0" text="FINAL" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="DESC" />
+            <TableColumn fx:id="qte_prod" prefWidth="75.0" text="QUANTITY" />
+            <TableColumn fx:id="date_ajout" prefWidth="75.0" text="ADDdate" />
+            <TableColumn fx:id="type" prefWidth="75.0" text="TYPE" />
+            <TableColumn fx:id="marque" prefWidth="75.0" text="MARQUE" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="82.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="reductionBtn" buttonType="RAISED" layoutX="183.0" layoutY="478.0" onAction="#OnShowReductionAction" prefHeight="46.0" prefWidth="107.0" ripplerFill="#feffaf" style="-fx-background-color: orange;" text="Reduction" textFill="WHITE" />
+      <JFXButton fx:id="reductionBtn1" buttonType="RAISED" layoutX="66.0" layoutY="478.0" onAction="#OnConfirmAction" prefHeight="46.0" prefWidth="107.0" ripplerFill="#feffaf" style="-fx-background-color: green;" text="Confirm" textFill="WHITE" />
+      <JFXTextField fx:id="search" focusColor="BLACK" labelFloat="true" layoutX="757.0" layoutY="-60.0" prefHeight="30.0" prefWidth="200.0" promptText="Search by libelle" unFocusColor="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <FontAwesomeIcon iconName="SEARCH" layoutX="973.0" layoutY="-35.0" size="2em" text="" wrappingWidth="25.0" />
+      <JFXButton fx:id="ajouterBtn2" buttonType="RAISED" layoutX="904.0" layoutY="567.0" onAction="#OnAjouterAction" prefHeight="46.0" prefWidth="107.0" ripplerFill="#feffaf" style="-fx-background-color: blue;" text="Product" textFill="WHITE" />
+   </children>
+</AnchorPane>

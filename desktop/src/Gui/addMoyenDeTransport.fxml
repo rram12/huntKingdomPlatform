@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mainpane" opacity="0.92" prefHeight="668.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddMoyenDeTransportController">
+   <children>
+      <TextField fx:id="listView" disable="true" layoutX="490.0" layoutY="433.0" prefHeight="25.0" prefWidth="150.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+         <Button fx:id="add" layoutX="490.0" layoutY="528.0" mnemonicParsing="false" onAction="#AddTransport" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+      <Label layoutX="286.0" layoutY="410.0" text="Image" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="categorie" layoutX="489.0" layoutY="338.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Select..." style="-fx-background-color: white;" />
+      <Label layoutX="286.0" layoutY="340.0" text="Category" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="chooserFile" layoutX="489.0" layoutY="408.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="choose a file" />
+      <Label layoutX="286.0" layoutY="200.0" text="Price Per Day" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="marque" layoutX="489.0" layoutY="268.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+      <ComboBox fx:id="type" layoutX="489.0" layoutY="128.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" prefHeight="25.0" prefWidth="150.0" promptText="Select.." style="-fx-background-color: white;" />
+      <Label layoutX="286.0" layoutY="130.0" text="Type" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="286.0" layoutY="270.0" text="Mark" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prixParJour" layoutX="489.0" layoutY="198.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="284.0" layoutY="51.0" text="ADD A MEAN OF TRANSPORT">
+         <font>
+            <Font name="Arial Black" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="286.0" layoutY="528.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: white;" text="BACK" textAlignment="CENTER" textOverrun="CLIP" />
+    </children>
+</AnchorPane>

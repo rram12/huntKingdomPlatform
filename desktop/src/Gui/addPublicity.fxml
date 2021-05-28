@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddPublicityController">
+   <children>
+       <Label layoutX="189.0" layoutY="119.0" text="Starts" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <TextField fx:id="compagnie" layoutX="300.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Label layoutX="500.0" layoutY="119.0" text="Ends" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Label layoutX="186.0" layoutY="188.0" text="Company" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Label layoutX="500.0" layoutY="188.0" text="Price" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Label layoutX="185.0" layoutY="260.0" text="Description" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <TextField fx:id="descriptionn" layoutX="300.0" layoutY="247.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Label layoutX="499.0" layoutY="260.0" text="Image" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font></Label>
+      <Button fx:id="Add" layoutX="583.0" layoutY="310.0" mnemonicParsing="false" onAction="#AddPublicity" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: orange;" text="CONFIRM" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+      <DatePicker fx:id="dpE" layoutX="582.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <DatePicker fx:id="dpS" layoutX="301.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <TextField fx:id="prix" layoutX="583.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <TextField fx:id="listView" disable="true" layoutX="587.0" layoutY="277.0" prefHeight="25.0" prefWidth="149.0" visible="false" />
+      <Button fx:id="chooserFile" layoutX="586.0" layoutY="247.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#chooseFileAction" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: white;" text="choose a file" />
+      <TextField fx:id="titre" layoutX="300.0" layoutY="310.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="165.0" />
+      <Label layoutX="185.0" layoutY="318.0" prefHeight="20.0" prefWidth="51.0" text="Title" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Label>
+    </children> 
+</AnchorPane>

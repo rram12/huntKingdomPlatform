@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F6EAE4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+   <children>
+      <ImageView fx:id="imglogin" fitHeight="768.0" fitWidth="1372.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Uploads/2020-04-14.jpg" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.72" prefHeight="768.0" prefWidth="1372.0" style="-fx-background-color: black;" />
+      <Pane layoutX="269.0" layoutY="162.0" prefHeight="446.0" prefWidth="829.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="452.0" layoutY="209.0" text="Password : ">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtusername" layoutX="626.0" layoutY="140.0" prefHeight="37.0" prefWidth="181.0" />
+            <Button fx:id="btnLogin" layoutX="693.0" layoutY="356.0" mnemonicParsing="false" onAction="#btnLoginAction" style="-fx-background-color: Black;" text="Login" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="452.0" layoutY="136.0" prefHeight="34.0" prefWidth="121.0" text="Email : ">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="326.0" layoutX="468.0" layoutY="44.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Uploads/login.PNG" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="446.0" prefWidth="415.0" style="-fx-background-color: fea526;">
+               <children>
+                  <ImageView fitHeight="203.0" fitWidth="206.0" layoutX="106.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Uploads/logo2.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="130.0" layoutY="225.0" text="Enjoy The Best">
+                     <font>
+                        <Font name="Andalus" size="27.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="33.0" layoutY="276.0" text="Hunting &amp; Fishing Experience.">
+                     <font>
+                        <Font name="Andalus" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <PasswordField fx:id="txtpassword" layoutX="628.0" layoutY="207.0" prefHeight="37.0" prefWidth="181.0" />
+            <CheckBox fx:id="cbRememberMe" layoutX="429.0" layoutY="265.0" mnemonicParsing="false" text="Remember me">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="437.0" layoutY="363.0" prefHeight="27.0" prefWidth="146.0" text="Not registred yet, " textFill="#070707">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btSignUp" alignment="CENTER" layoutX="568.0" layoutY="358.0" mnemonicParsing="false" onAction="#signUp" prefHeight="37.0" prefWidth="79.0" style="-fx-background-color: transparent;" text="sign up" textFill="#fea526">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button graphicTextGap="0.0" layoutX="621.0" layoutY="269.0" mnemonicParsing="false" onAction="#passwordRecovery" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: transparent;" text="Forgot your password ?" textFill="#fea526">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
