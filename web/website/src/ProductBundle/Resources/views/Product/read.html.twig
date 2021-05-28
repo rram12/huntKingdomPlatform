@@ -1,0 +1,55 @@
+<html>
+<head>
+    <center> *****  Affichage des Produits  ***** </center><br><br><br><br>
+</head>
+<body>
+<center>
+    <table border="2">
+        <tr>
+            <th> Libelle </th>
+            <th> Prix   </th>
+            <th> Description   </th>
+            <th> qte_prod   </th>
+            <th> date_ajout  </th>
+            <th> image  </th>
+            <th> type   </th>
+        </tr>
+        {% for pr in produit  %}
+            <tr>
+                <td>
+                    {{ pr.libprod }}
+                </td>
+                <td>
+                    {{ pr.prix }}
+                </td>
+                <td>
+                    {{ pr.description }}
+                </td>
+                <td>
+                    {{ pr.qteprod }}
+                </td>
+                <td>
+                    {{ pr.dateajout|date }}
+                </td>
+                <td>
+                    <img src="{{ asset('uploads/photos/' ~ pr.image) }}" height="100px" width="250px">
+                </td>
+                <td>
+                    {{ pr.type }}
+                </td>
+               <td>
+                    <a href="{{ path('deletepr', { 'id': pr.id }) }}"> Remove </a>
+                </td>
+                <td>
+                    <a href="{{ path('updatepr', { 'id': pr.id }) }}"> Update </a>
+                </td>
+                <td>
+                    <a href="{{ path('addtopanierpr', { 'id': pr.id }) }}"> Add To Cart </a>
+                </td>
+                <td>
+            </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>
+</html>

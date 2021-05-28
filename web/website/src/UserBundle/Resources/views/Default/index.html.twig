@@ -1,0 +1,12 @@
+hello user !
+<a href="{{ path('fos_user_security_login') }}">{{ 'Logout'|trans({}, 'FOSUserBundle') }}</a>
+
+
+{% if is_granted('ROLE_REPAIRER') %}
+    hello repairer !
+{% endif %}
+
+{% if is_granted('ROLE_TRAINER') %}
+    hello trainer !
+{% endif %}
+

@@ -1,0 +1,37 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block titre %} update post {% endblock %}
+
+{% block content %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Add your Post
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {{ form_start(Form) }}
+
+                                {{ form_widget(Form.title,{'attr':{'type':'text','class':'form-control','placeholder':'Title...'}}) }}
+                                <br> <br> <br>
+                                {{ form_widget(Form.description,{'attr':{'type':'textarea','class':'form-control','placeholder':'Description...'}}) }}
+                                <br> <br> <br>
+                                {{ form_widget(Form.image) }}
+                                <br> <br> <br>
+                                <center> {{ form_widget(Form.validate,{'attr':{'class':'btn btn-danger'}}) }}        </center>
+                                <br> <br> <br>
+                                {{ form_end(Form) }}
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </section>
+
+
+
+    {% endif %}
+{% endblock %}

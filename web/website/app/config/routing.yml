@@ -1,0 +1,52 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+main_dashboard:
+    path:     /dashboard
+    defaults: { _controller: AppBundle:Default:dashboard }
+
+reparation:
+    resource: "@ReparationBundle/Resources/config/routing.yml"
+    prefix:   /reparation
+
+product:
+    resource: "@ProductBundle/Resources/config/routing.yml"
+    prefix:   /product
+
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
+
+events:
+    resource: "@EventsBundle/Resources/config/routing.yml"
+    prefix:   /events
+
+service:
+    resource: "@ServiceBundle/Resources/config/routing.yml"
+    prefix:   /service
+
+training:
+    resource: "@TrainingBundle/Resources/config/routing.yml"
+    prefix:   /training
+
+main_front:
+    path:     /front
+    defaults: { _controller: AppBundle:Default:front }
+
+about:
+    path:     /about
+    defaults: { _controller: AppBundle:Default:about }
+
+
+please_wait:
+    path:     /please_wait
+    defaults: { _controller: AppBundle:Default:please_wait }

@@ -1,0 +1,15 @@
+list_competition:
+    path:     /competition
+    defaults: { _controller: EventsBundle:Default:competition }
+list_publicity:
+    path:     /publicity
+    defaults: { _controller: EventsBundle:Default:publicity }
+
+
+list_event:
+    path:     /list-event
+    defaults: { _controller: EventsBundle:Default:frontevent }
+event-single:
+    path:     /event-single
+    defaults: { _controller: EventsBundle:Default:fronteventsingle }
+

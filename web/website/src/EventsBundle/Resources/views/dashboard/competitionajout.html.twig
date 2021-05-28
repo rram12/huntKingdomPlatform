@@ -1,0 +1,72 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content %}
+
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Form validations
+                        </header>
+                        <div class="panel-body">
+                            <div class="form">
+                                <div class="form-validate form-horizontal" id="feedback_form" method="get" action="">
+                                    {{ form_start(form) }}
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Name <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.nom,{'attr':{'type':'text','class':'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Start Date <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.dateDebut,{'attr':{'type':'text','class':'form-control','value':'28-10-2013','id':'dp1','size':'16'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="control-label col-lg-2">End Date <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.dateFin,{'attr':{'type':'text','class':'form-control','value':'28-10-2013','id':'dp1','size':'16'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Category <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.categorie,{'attr':{'type':'text','class':'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Place <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.lieu,{'attr':{'type':'text','class':'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-2">Nombre of participants <span class="required">*</span></label>
+                                        <div class="col-lg-10">
+                                            {{ form_widget(form.nbParticipants,{'attr':{'type':'number','class':'form-control','placeholder':'nbParticipants...'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            {{ form_widget(form.Submit, {'attr': {'class': 'btn btn-primary'}})}}
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+{% endblock %}

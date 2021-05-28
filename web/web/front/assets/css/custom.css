@@ -1,0 +1,75 @@
+a {
+    transition: all 0.3s;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+    color: #096b89;
+}
+a:active {
+    outline: 0 none;
+    text-decoration: none;
+}
+a:focus {
+    outline: 0px solid;
+    text-decoration: none;
+}
+
+
+
+.btnReady {
+    display: inline-block;
+    position: relative;
+    padding: 0 60px;
+    line-height: 46px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #10bd2d;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+    text-transform: capitalize;
+    -webkit-clip-path: polygon(12% 0%, 100% 0, 88% 100%, 0% 100%);
+    clip-path: polygon(12% 0%, 100% 0, 88% 100%, 0% 100%);
+}
+@media only screen and (max-width: 320px) {
+    .btnReady {
+        clip-path: none;
+        padding: 0 30px;
+    }
+}
+.btnReady:after {
+    content: '';
+    position: absolute;
+    right: 11px;
+    top: -5px;
+    bottom: -5px;
+    width: 2px;
+    transform: rotate(27deg);
+    background: #10bd2d;
+}
+@media only screen and (max-width: 320px) {
+    .btnReady:after {
+        display: none;
+    }
+}
+.btnReady:before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: -5px;
+    bottom: -5px;
+    width: 2px;
+    transform: rotate(27.8deg);
+    background: #10bd2d;
+}
+@media only screen and (max-width: 320px) {
+    .btnReady:before {
+        display: none;
+    }
+}
+.btnReady:hover {
+    background: #10bd2d;
+    color: #fff;
+}

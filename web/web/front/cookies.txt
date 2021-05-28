@@ -1,0 +1,8 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.myshopify.com	TRUE	/	FALSE	1999999999	__cfduid	d42b1daf9b86294632530caf99d4121bb1581010354
+theme489-hunting.myshopify.com	TRUE	/	FALSE	1999999999	SameSite	Lax
+theme489-hunting.myshopify.com	TRUE	/	FALSE	1999999999	_landing_page	%2F
+theme489-hunting.myshopify.com	TRUE	/	FALSE	1999999999	_shopify_y	5ad5c666-0c89-4b25-a013-f98a4853df0f
+theme489-hunting.myshopify.com	TRUE	/	FALSE	1999999999	cart_currency	USD
+

@@ -1,0 +1,103 @@
+{% extends 'dashboard/base.html.twig' %}
+
+
+{% block content %}
+
+    <section id="main-content">
+        <section class="wrapper">
+
+            <!-- page start-->
+            <div class="content-center">
+
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <div class="heading">
+
+        <!-- Title -->
+        <h1 class="mt-4">{{ post.title|upper }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+
+            <a href="{{ path('list_publication') }}">Back to Posts List</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{ post.PublishedAt|date }}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{ asset('uploads/' ~ post.image) }}" alt="{{ post.title }}">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ post.description }}</p>
+
+
+
+        <hr>
+                                <div class="content">
+                                    <a href="{{ path('blog_add') }}"><button type="button" class="btn btn-sm btn-outline-danger">Add a new Post</button></a>
+                                    {% if post.user.id == app.user.id or is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('blog_update',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                        <a href="{{ path('blog_delete',{'id': post.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                    {% endif %}
+                                </div>
+
+        <!-- Comments Form -->
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form action="{{ path('add_comment') }}" method="post" id="comment">
+                    <div class="form-group">
+
+                        <textarea class="form-control" rows="3" name="comment" placeholder="Comment here"></textarea>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- Single Comment -->
+        {% for comment in post.comments %}
+
+                                <div class="act-time">
+                                    <div class="activity-body act-in">
+                                        <span class="arrow"></span>
+                                        <div class="text">
+                                            <p class="attribution"><a href="#">{{ comment.getUser().getUsername() }}</a> </p>
+                                            <p>{{ comment.getContent() }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ path('delete_comment',{'id': comment.id}) }}"><button type="button" class="btn btn-primary">Delete Comment</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+            </div>
+            {% endfor %}
+            <!-- Comment with nested comments -->
+
+
+        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+{% endblock %}
