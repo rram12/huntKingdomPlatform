@@ -27,8 +27,12 @@ Website, desktop software, and native mobile application sharing the same Databa
 - Sqlite
 - git
 - UML
-=======
-Symfony Standard Edition
+
+
+
+
+
+### Symfony Standard Edition
 ========================
 
 **WARNING**: This distribution does not support Symfony 4. See the
